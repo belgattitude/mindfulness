@@ -7,9 +7,11 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
+import { defaultSeoConfig } from '../config/seo.config';
 
 type MyAppProps = AppProps & {
   emotionCache?: EmotionCache;
@@ -53,6 +55,7 @@ const MyApp = (appProps: MyAppProps) => {
           <div
             className={`${inter.variable} ${crimson.variable} ${yanone.variable} font-sans`}
           >
+            <DefaultSeo {...defaultSeoConfig} />
             <Component {...pageProps} />
           </div>
         </CacheProvider>

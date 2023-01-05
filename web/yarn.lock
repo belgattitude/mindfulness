@@ -7216,6 +7216,7 @@ __metadata:
     graphql: "npm:16.6.0"
     graphql-request: "npm:5.1.0"
     next: "npm:13.1.1"
+    next-seo: "npm:5.15.0"
     postcss: "npm:8.4.20"
     prettier: "npm:2.8.1"
     react: "npm:18.2.0"
@@ -7229,6 +7230,17 @@ __metadata:
     typescript: "npm:4.9.4"
   languageName: unknown
   linkType: soft
+
+"next-seo@npm:5.15.0":
+  version: 5.15.0
+  resolution: "next-seo@npm:5.15.0"
+  peerDependencies:
+    next: ^8.1.1-canary.54 || >=9.0.0
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 5cd6e1fd403f63d960b9b0c960184eb7814aa6e5c402b4eb847b16273ca7931f4566349e3265d0e5d7d8a2747b3aa4cb1386e6978c95e125254ebf11605534a4
+  languageName: node
+  linkType: hard
 
 "next@npm:13.1.1":
   version: 13.1.1

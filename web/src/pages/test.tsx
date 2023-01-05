@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
 import { RetraiteCard } from '@/components/RetraiteCard';
 import { eventsApi } from '@/features/events/events.api';
@@ -75,6 +76,7 @@ export default function TestPage(
   //  'https://images.unsplash.com/photo-1666457383842-a2e6a748dcac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80';
   return (
     <>
+      <NextSeo robotsProps={{}} />
       <TailwindPage />
       <div className="w-full">
         <div
