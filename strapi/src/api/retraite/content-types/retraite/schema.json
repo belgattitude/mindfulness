@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "retraites",
+  "info": {
+    "singularName": "retraite",
+    "pluralName": "retraites",
+    "displayName": "Retraites",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "summary": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "start_at": {
+      "type": "datetime"
+    },
+    "end_at": {
+      "type": "datetime"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "participants": {
+      "type": "string"
+    },
+    "dyna": {
+      "type": "dynamiczone",
+      "components": [
+        "test.price",
+        "test.testcomp"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::event-type.event-type"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_test_prices",
+  "info": {
+    "displayName": "price",
+    "icon": "deaf"
+  },
+  "options": {},
+  "attributes": {
+    "price": {
+      "type": "integer"
+    }
+  }
+}

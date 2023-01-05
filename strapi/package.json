@@ -1,0 +1,38 @@
+{
+  "name": "strapi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "clean": "rimraf '**/node_modules' '.cache' 'build'"
+  },
+  "dependencies": {
+    "@strapi/plugin-graphql": "4.5.5",
+    "@strapi/plugin-i18n": "4.5.5",
+    "@strapi/plugin-users-permissions": "4.5.5",
+    "@strapi/strapi": "4.5.5",
+    "better-sqlite3": "7.6.2",
+    "pg": "8.8.0"
+  },
+  "devDependencies": {
+    "@belgattitude/eslint-config-bases": "1.13.0",
+    "eslint": "8.31.0",
+    "rimraf": "3.0.2"
+  },
+  "author": {
+    "name": "Sébastien Vanvelthem"
+  },
+  "strapi": {
+    "uuid": "ef7a525d-01bc-487a-bbe8-0dfaeb05faaa"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "packageManager": "yarn@4.0.0-rc.34",
+  "license": "MIT"
+}

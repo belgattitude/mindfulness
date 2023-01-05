@@ -1,0 +1,18 @@
+# Git folder does not need to live in the image
+.git
+
+# Docker files does not need to live in the image
+*Dockerfile*
+*docker-compose*
+
+# These folders should be handled in the image, not shared/copied from host
+node_modules
+.yarn
+
+# Specific to strapi
+build
+.cache
+
+
+
+

@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "tests",
+  "info": {
+    "singularName": "test",
+    "pluralName": "tests",
+    "displayName": "test"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "retraites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::retraite.retraite"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}
