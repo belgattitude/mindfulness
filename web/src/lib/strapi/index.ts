@@ -1,0 +1,1 @@
+export { getStrapiMedia } from './getStrapiMedia';

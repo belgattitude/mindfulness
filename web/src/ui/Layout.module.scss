@@ -1,0 +1,116 @@
+.textSans {
+  font-family: var(--crimson-font);
+}
+.mainCtn {
+  font-family: var(--inter-font);
+  font-size: 2em;
+  //font-weight: 400;
+  padding:0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.mainHeader {
+  //height: 50px;
+  background:#aaa;
+  border: 4px solid red;
+  display: block;
+}
+.mainContent {
+  min-height:1000px;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+
+.topNav {
+  ul {
+    // background: darkorange;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    li {
+      font-family: var(--crimson-font);
+      //background: darkorange;
+      display: block;
+      text-decoration: none;
+      float: left;
+      padding: 1rem;
+      position: relative;
+      transition-duration: 0.5s;
+      transition: all 500ms ease-in-out;
+      &:hover {
+        background-color: lightblue;
+      }
+      &:focus-within {
+        background: red;
+        cursor: pointer;
+        a {
+          outline: none;
+        }
+      }
+      ul {
+       // background: orange;
+        visibility: hidden;
+        opacity: 0;
+        min-width: 5rem;
+        position: absolute;
+        transition: all 0.5s ease;
+        margin-top: 1rem;
+        left: 0;
+        display: none;
+      }
+      &:hover > ul, &:focus-within > ul, ul:hover, ul:focus {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+      }
+    }
+
+  }
+}
+
+.test {
+  border: 5px solid red;
+  background-color: aqua;
+  ul {
+    padding: 30px;
+    li {
+      border: 1px solid blue;
+      padding: 12px;
+    }
+  }
+}
+
+
+.card {
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  background: rgba(var(--card-rgb), 0);
+  //border: 1px solid rgba(var(--card-border-rgb), 0);
+  border: 12px solid red;
+  transition: background 200ms, border 200ms;
+  span {
+    display: inline-block;
+    transition: transform 200ms;
+    border: 12px solid red;
+  }
+  h2 {
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+  p {
+    margin: 0;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 30ch;
+  }
+}
+
+
+

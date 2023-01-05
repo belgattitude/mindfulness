@@ -15,8 +15,7 @@
     "@strapi/plugin-i18n": "4.5.5",
     "@strapi/plugin-users-permissions": "4.5.5",
     "@strapi/strapi": "4.5.5",
-    "better-sqlite3": "7.6.2",
-    "pg": "8.8.0"
+    "better-sqlite3": "8.0.1"
   },
   "devDependencies": {
     "@belgattitude/eslint-config-bases": "1.13.0",

@@ -1,0 +1,30 @@
+query GetRetraites {
+    retraites {
+        data {
+            id
+            attributes {
+                summary
+                description
+                start_at
+                end_at
+                participants
+                cover {
+                    data {
+                        id
+                        attributes {
+                            url
+                        }
+                    }
+                }
+            }
+        }
+        meta {
+            pagination {
+                page
+                pageSize
+                total
+                pageCount
+            }
+        }
+    }
+}

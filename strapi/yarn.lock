@@ -5381,14 +5381,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:7.6.2":
-  version: 7.6.2
-  resolution: "better-sqlite3@npm:7.6.2"
+"better-sqlite3@npm:8.0.1":
+  version: 8.0.1
+  resolution: "better-sqlite3@npm:8.0.1"
   dependencies:
     bindings: "npm:^1.5.0"
     node-gyp: "npm:latest"
     prebuild-install: "npm:^7.1.0"
-  checksum: 4e6ebb512d19e315017935b9607399d341996d2f5c3829d366716141596dd0d92203dd071de6892b51d31f970f588b79a30179a3216d029618a2f85d70b7cbdd
+  checksum: 11e195a59cd9e066070573c40666692a0af11028f612fecb4ddd9398c0a077ba1edea2bd0c738c3df2eb15ef16c127194d202ed762ace1892cdc00b5a8393f21
   languageName: node
   linkType: hard
 
@@ -5669,13 +5669,6 @@ __metadata:
   version: 1.1.2
   resolution: "buffer-from@npm:1.1.2"
   checksum: 2d8a264381325ee41959bb21bae76dc85b486f253e227a3fa70082c83f14c41665ce227ccda79e93ea2fc12e37a678fe956a6fa01b1876e6142eaf6554585ea4
-  languageName: node
-  linkType: hard
-
-"buffer-writer@npm:2.0.0":
-  version: 2.0.0
-  resolution: "buffer-writer@npm:2.0.0"
-  checksum: b8657f4ddafb0803fa5459282fb478c8d72dcde200e690b491f6d23b6247918c0eb17421eb18258765a12a95d7b65213475aebb6c87c7a3df14c064b534e1ead
   languageName: node
   linkType: hard
 
@@ -13411,13 +13404,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"packet-reader@npm:1.0.0":
-  version: 1.0.0
-  resolution: "packet-reader@npm:1.0.0"
-  checksum: 47e38c5b952cf3096c6625db4d655bbf484a267f46d941566079dad556b580047fe0a668b103013d16171e93b2025382cb3ffd4203c18a3a4532cc34d49a5dde
-  languageName: node
-  linkType: hard
-
 "pako@npm:~1.0.5":
   version: 1.0.11
   resolution: "pako@npm:1.0.11"
@@ -13695,75 +13681,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg-connection-string@npm:2.5.0, pg-connection-string@npm:^2.5.0":
+"pg-connection-string@npm:2.5.0":
   version: 2.5.0
   resolution: "pg-connection-string@npm:2.5.0"
   checksum: 3a751060f9517ccc1484b42439cfd4ef758273a0954d41d71e15b5a671845ab4706b82de1a9181f2f858369ec362638f741dbea415c85d530845b634e10f1069
-  languageName: node
-  linkType: hard
-
-"pg-int8@npm:1.0.1":
-  version: 1.0.1
-  resolution: "pg-int8@npm:1.0.1"
-  checksum: 14d707f7b2274737e2976f531994fa72d46cef0bce62104d087d4e6ef1e2d0759076c83de7e7dd0c659c6bc179acb714cc16a9e88a0a005a61e36fc2f02b1f8d
-  languageName: node
-  linkType: hard
-
-"pg-pool@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "pg-pool@npm:3.5.2"
-  peerDependencies:
-    pg: ">=8.0"
-  checksum: 6fd6f417451b7a6ea288ad276316652dd72822cb99ab3a0555eeb9a6d178d334c0ac83a90fd51393685b3a81502186dd0cfb96be0a3ae3c0668f1453f603038b
-  languageName: node
-  linkType: hard
-
-"pg-protocol@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "pg-protocol@npm:1.5.0"
-  checksum: dc16e2408fbe1bbd4c46018a12695f8fc2261fc43a877f7db160bae1c64aad8a1b607813f5ef3cea862b6698e48b581ac4d8475d7dd5800fbb648a9336b8c56a
-  languageName: node
-  linkType: hard
-
-"pg-types@npm:^2.1.0":
-  version: 2.2.0
-  resolution: "pg-types@npm:2.2.0"
-  dependencies:
-    pg-int8: "npm:1.0.1"
-    postgres-array: "npm:~2.0.0"
-    postgres-bytea: "npm:~1.0.0"
-    postgres-date: "npm:~1.0.4"
-    postgres-interval: "npm:^1.1.0"
-  checksum: ea3a80075a6afced377c84e21a3e74c061f6c9531596323a465d1a30c9073921f8e2a4272f94a0a5d1da942ad99bd69ddcb4bc1506bf51c3809701dfddd72d6d
-  languageName: node
-  linkType: hard
-
-"pg@npm:8.8.0":
-  version: 8.8.0
-  resolution: "pg@npm:8.8.0"
-  dependencies:
-    buffer-writer: "npm:2.0.0"
-    packet-reader: "npm:1.0.0"
-    pg-connection-string: "npm:^2.5.0"
-    pg-pool: "npm:^3.5.2"
-    pg-protocol: "npm:^1.5.0"
-    pg-types: "npm:^2.1.0"
-    pgpass: "npm:1.x"
-  peerDependencies:
-    pg-native: ">=3.0.1"
-  peerDependenciesMeta:
-    pg-native:
-      optional: true
-  checksum: af391038edd2e97b80a8354c7a76cb35f30f51e7ebbf55ffcd452d7ff5291bd9a5f47fbbb73238c3116875556b15387068f0e7390ab0690f11936804b58c86c3
-  languageName: node
-  linkType: hard
-
-"pgpass@npm:1.x":
-  version: 1.0.5
-  resolution: "pgpass@npm:1.0.5"
-  dependencies:
-    split2: "npm:^4.1.0"
-  checksum: 561b5f5a7bf575913434d6b3ac1340bac26d0835c103baf9bb1d1abe2029852191ee8ba4d2ce23930881add326998bb44f2a8974562c5191b888f23f9776afea
   languageName: node
   linkType: hard
 
@@ -13958,36 +13879,6 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
   checksum: bdc074b44b690f08c0496d78e0777bb2072633c6facbb6a987ae4cb1041333bcbd592e81244293ba1cf888ececc8dd224a1162751e84d173305aaed6f8f82957
-  languageName: node
-  linkType: hard
-
-"postgres-array@npm:~2.0.0":
-  version: 2.0.0
-  resolution: "postgres-array@npm:2.0.0"
-  checksum: b8333121aa88ba002398a8c350a8109626b3fcbc18e26841f4a0394bccc89d07a061f50207bb1ed21cb1993e24f2c2b830555e336507a4b2a43c6463e27179d9
-  languageName: node
-  linkType: hard
-
-"postgres-bytea@npm:~1.0.0":
-  version: 1.0.0
-  resolution: "postgres-bytea@npm:1.0.0"
-  checksum: ee1de514befe320a2707d0c386fc8f88b2ab4b9a8ad8f76eec1d6cf5c0c49ac37e7f0ee66ad9b726d7df0f7c57c9a3a5e3631bd71d57356b61eeeea987ec6591
-  languageName: node
-  linkType: hard
-
-"postgres-date@npm:~1.0.4":
-  version: 1.0.7
-  resolution: "postgres-date@npm:1.0.7"
-  checksum: ff805074d6327f9b233cf19982247006201178484f600afa6ed6f352ddc98bc43d01cecfbe5f62637726870b554617480b1a4ba13abab8237320206e9f00bb03
-  languageName: node
-  linkType: hard
-
-"postgres-interval@npm:^1.1.0":
-  version: 1.2.0
-  resolution: "postgres-interval@npm:1.2.0"
-  dependencies:
-    xtend: "npm:^4.0.0"
-  checksum: 27bbffa14dd0a8bffcc76614de24833a9ee84a7233fb7bb29618bed7c466a3ad266e4d4d3466def7aa61738dd8f33fc7cf87658986851666ab13b760b5e5e1a2
   languageName: node
   linkType: hard
 
@@ -15904,13 +15795,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"split2@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "split2@npm:4.1.0"
-  checksum: 9f5fcdc441f3de25900eb2dde17debef7fc41c4e0075693a4e807bd228a1f4a099484eadedbc9e36350aa207376934b5c28d6750225207ff0d2e3df3332e9cb9
-  languageName: node
-  linkType: hard
-
 "sprintf-js@npm:~1.0.2":
   version: 1.0.3
   resolution: "sprintf-js@npm:1.0.3"
@@ -16011,9 +15895,8 @@ __metadata:
     "@strapi/plugin-i18n": "npm:4.5.5"
     "@strapi/plugin-users-permissions": "npm:4.5.5"
     "@strapi/strapi": "npm:4.5.5"
-    better-sqlite3: "npm:7.6.2"
+    better-sqlite3: "npm:8.0.1"
     eslint: "npm:8.31.0"
-    pg: "npm:8.8.0"
     rimraf: "npm:3.0.2"
   languageName: unknown
   linkType: soft
@@ -17712,7 +17595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xtend@npm:^4.0.0, xtend@npm:^4.0.2":
+"xtend@npm:^4.0.2":
   version: 4.0.2
   resolution: "xtend@npm:4.0.2"
   checksum: 3d5d245e44d76b4eaf8a357199541347da8ce522bc0573fdb89b01ff6594b33364569d1dba02ccfe3ee86b384c0d61c06fda1b0cff71f382029e2a18e2f592f7
