@@ -7216,6 +7216,7 @@ __metadata:
     graphql: "npm:16.6.0"
     graphql-request: "npm:5.1.0"
     next: "npm:13.1.1"
+    next-secure-headers: "npm:2.2.0"
     next-seo: "npm:5.15.0"
     postcss: "npm:8.4.20"
     prettier: "npm:2.8.1"
@@ -7230,6 +7231,13 @@ __metadata:
     typescript: "npm:4.9.4"
   languageName: unknown
   linkType: soft
+
+"next-secure-headers@npm:2.2.0":
+  version: 2.2.0
+  resolution: "next-secure-headers@npm:2.2.0"
+  checksum: db5ce968c5dc9f82d6a3db0d5e7b2b4c25fd067aa4af3faf911d12a7463035c8bd1c92efb81c1a350b30191f665a1b20a741a10a8a372f4cb56c842a9226e645
+  languageName: node
+  linkType: hard
 
 "next-seo@npm:5.15.0":
   version: 5.15.0
