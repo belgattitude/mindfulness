@@ -27,7 +27,7 @@ const secureHeaders = createSecureHeaders({
         connectSrc: [
           "'self'",
           'https://vitals.vercel-insights.com',
-          'http://mindfulness.failwell.be',
+          'http://mindfulness.failwell.be:1337',
           'https://mindfulness.failwell.be',
         ],
         imgSrc: ["'self'", 'https:', 'http:', 'data:'],
