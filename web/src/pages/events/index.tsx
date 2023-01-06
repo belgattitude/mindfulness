@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
@@ -9,14 +9,20 @@ type Props = {
   // Add whatever extra you need
 };
 
+const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
+const getEvents = async (params: { limit: number }) => {
+  return request(url, eventsApi.allRetraites, params);
+};
+
+const limit = 10;
+
 export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
-  const { data, error } = useQuery(
-    ['retraites', { limit: 10 }] as const,
-    async ({ queryKey }) => request(url, eventsApi.allRetraites, queryKey[1])
-  );
+  const { data, error } = useQuery({
+    queryKey: ['allEvents', limit],
+    queryFn: async () => getEvents({ limit }),
+  });
 
   return (
     <>
@@ -43,7 +49,15 @@ export default function TestPage(
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['allEvents', limit],
+    queryFn: async () => getEvents({ limit }),
+  });
   return {
-    props: {},
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 };
