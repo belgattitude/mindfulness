@@ -1,60 +1,17 @@
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
-import type { FC } from 'react';
 import { RetraiteCard } from '@/components/RetraiteCard';
 import { eventsApi } from '@/features/events/events.api';
-
-const TailwindPage: FC = (_props) => {
-  return (
-    <>
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white bg-opacity-90 backdrop-blur backdrop-filter dark:border-gray-800 dark:bg-gray-950">
-        {/* Navbar */}
-        <nav className="relative container mx-auto p-6">
-          {/* Flex container */}
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="pt-2">
-              <img
-                src={
-                  'http://www.sandrinerauter.be/uploads/4/3/7/7/43775673/id-simple-copy.jpg'
-                }
-              />
-            </div>
-            {/* Menu items */}
-            <div className="hidden md:flex text-xl space-x-12">
-              <a href={'#'} className="hover:text-amber-300">
-                Accueil
-              </a>
-
-              <a href={'#'}>Mindfulness</a>
-              <a href={'#'}>Yoga</a>
-              <a href={'#'}>Agenda</a>
-              <a href={'#'}>Contact</a>
-            </div>
-            {/* Button */}
-            <a
-              href="#"
-              className="p-3 px-6 pt-2 text-white bg-amber-500 rounded-full baseline hover:bg-amber-700"
-            >
-              Contact
-            </a>
-          </div>
-        </nav>
-      </header>
-    </>
-  );
-};
 
 type Props = {
   // Add whatever extra you need
 };
 
 export default function TestPage(
-  _props: InferGetServerSidePropsType<typeof getServerSideProps>
+  _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
   const { data, error } = useQuery(
@@ -76,8 +33,8 @@ export default function TestPage(
   //  'https://images.unsplash.com/photo-1666457383842-a2e6a748dcac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80';
   return (
     <>
-      <NextSeo robotsProps={{}} />
-      <TailwindPage />
+      <NextSeo />
+
       <div className="w-full">
         <div
           className="w-full relative"
@@ -219,9 +176,7 @@ export default function TestPage(
   );
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<Props> = async (_context) => {
   return {
     props: {},
   };

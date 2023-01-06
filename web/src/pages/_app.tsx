@@ -10,6 +10,7 @@ import {
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
+import { Layout } from '@/components/layout/Layout';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
 import { defaultSeoConfig } from '../config/seo.config';
 
@@ -56,7 +57,9 @@ const MyApp = (appProps: MyAppProps) => {
             className={`${inter.variable} ${crimson.variable} ${yanone.variable} font-sans`}
           >
             <DefaultSeo {...defaultSeoConfig} />
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </div>
         </CacheProvider>
       </Hydrate>

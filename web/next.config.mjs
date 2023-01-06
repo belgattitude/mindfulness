@@ -11,40 +11,30 @@ const secureHeaders = createSecureHeaders({
   contentSecurityPolicy: {
     directives: enableCSP
       ? {
-        defaultSrc: "'self'",
-        styleSrc: [
-          "'self'",
-          "'unsafe-inline'",
-        ],
-        scriptSrc: [
-          "'self'",
-          "'unsafe-eval'",
-          "'unsafe-inline'",
-        ],
-        frameSrc: [
-          "'self'",
-        ],
-        connectSrc: [
-          "'self'",
-          'https://vitals.vercel-insights.com',
-          'https://mindfulness.failwell.be',
-        ],
-        imgSrc: ["'self'", 'https:', 'http:', 'data:'],
-        workerSrc: ['blob:'],
-      }
+          defaultSrc: "'self'",
+          styleSrc: ["'self'", "'unsafe-inline'"],
+          scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
+          frameSrc: ["'self'"],
+          connectSrc: [
+            "'self'",
+            'https://vitals.vercel-insights.com',
+            'https://mindfulness.failwell.be',
+          ],
+          imgSrc: ["'self'", 'https:', 'http:', 'data:'],
+          workerSrc: ['blob:'],
+        }
       : {},
   },
   ...(enableCSP
     ? {
-      forceHTTPSRedirect: [
-        true,
-        { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true },
-      ],
-    }
+        forceHTTPSRedirect: [
+          true,
+          { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true },
+        ],
+      }
     : {}),
   referrerPolicy: 'same-origin',
 });
-
 
 /** @type {import('next').NextConfig} */
 let nextConfig = {
@@ -87,7 +77,6 @@ let nextConfig = {
       },
     ];
   },
-
 
   experimental: {
     // https://nextjs.org/docs/messages/google-fonts-missing-subsets
