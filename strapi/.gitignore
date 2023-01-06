@@ -1,4 +1,17 @@
 ############################
+# STRAPI                   #
+############################
+
+.env
+data
+build
+exports
+*.cache
+dist
+.strapi-updater.json
+
+
+############################
 # OS X
 ############################
 
@@ -102,14 +115,3 @@ node_modules
 testApp
 coverage
 
-############################
-# Strapi
-############################
-
-.env
-license.txt
-exports
-*.cache
-dist
-build
-.strapi-updater.json

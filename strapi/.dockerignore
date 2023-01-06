@@ -4,6 +4,7 @@
 # Docker files does not need to live in the image
 *Dockerfile*
 *docker-compose*
+docker
 
 # These folders should be handled in the image, not shared/copied from host
 node_modules

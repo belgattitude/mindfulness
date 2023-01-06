@@ -38,10 +38,10 @@ services:
     depends_on:
       - mindfulness-strapi
     restart: unless-stopped
+    env_file: ./.env
     environment:
       SERVER_NAME: ${CADDY_SERVER_NAME:-localhost}, caddy:80
-      #EMAIL: ${CADDY_ACME_EMAIL:-user@example.com}      # The email address to use for ACME registration.
-      EMAIL: ${CADDY_ACME_EMAIL:-internal}
+      TLS_EMAIL: ${CADDY_TLS_EMAIL:-internal}
     ports:
       # HTTPS
       - target: 443
@@ -53,7 +53,7 @@ services:
         protocol: udp
 
     volumes:
-      - ./docker/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - mindfulness-caddy-data:/data
       - mindfulness-caddy-config:/config
 
@@ -69,9 +69,9 @@ services:
     env_file: ./.env
     image: postgres:15.1-alpine3.17
     environment:
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME:-strapi}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-strapi}
+      POSTGRES_DB: ${DATABASE_NAME:-mindfulness-strapi}
     volumes:
       - mindfulness-strapi-vlm-db-data:/var/lib/postgresql/data/
     ports:

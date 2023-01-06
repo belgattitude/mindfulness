@@ -5,7 +5,7 @@
 {$SERVER_NAME}
 
 # tls internal
-tls {$EMAIL}
+tls {$TLS_EMAIL}
 
 reverse_proxy mindfulness-strapi-internal:1337
 encode gzip
