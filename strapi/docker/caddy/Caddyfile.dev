@@ -1,0 +1,11 @@
+{
+    admin 0.0.0.0:8020
+}
+
+{$SERVER_NAME}
+
+# tls internal
+tls {$EMAIL}
+
+reverse_proxy mindfulness-strapi-internal:1337
+encode gzip

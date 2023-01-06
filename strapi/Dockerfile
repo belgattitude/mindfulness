@@ -1,5 +1,5 @@
-ARG NODE_VERSION=16
-ARG ALPINE_VERSION=3.16
+ARG NODE_VERSION=18
+ARG ALPINE_VERSION=3.17
 ARG NODE_ENV=development
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as deps
@@ -19,6 +19,7 @@ RUN --mount=type=cache,target=/app/.yarn-cache \
 
 WORKDIR /app
 COPY ./ .
+RUN yarn build
 EXPOSE 1337
 CMD ["yarn", "develop"]
 #CMD ["./node_modules/.bin/strapi", "develop"]

@@ -1,19 +1,17 @@
 services:
   mindfulness-strapi:
     container_name: mindfulness-strapi
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      #target: develop
     image: mindfulness-strapi:latest
     restart: unless-stopped
-    env_file: .env
+    hostname: mindfulness-strapi-internal
+    env_file: ./.env
     environment:
-      DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_HOST: mindfulness-strapiDB
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PORT: ${DATABASE_PORT}
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       NODE_ENV: ${NODE_ENV}
 
     volumes:
@@ -23,42 +21,92 @@ services:
       #- strapi-vlm-uploads:/app/public/uploads
       # For install, build and development use volumes
       # to prevent platform/ownership issues between host and container
-      - strapi-vlm-install:/app/.yarn/docker
-      - strapi-vlm-build:/app/build
-      - strapi-vlm-cache:/app/.cache
-      - strapi-vlm-nm:/app/node_modules
+      - mindfulness-strapi-vlm-install:/app/.yarn/docker
+      - mindfulness-strapi-vlm-build:/app/build
+      - mindfulness-strapi-vlm-cache:/app/.cache
+      - mindfulness-strapi-vlm-nm:/app/node_modules
     ports:
       - '1337:1337'
     networks:
-      - mindfulness-strapi
+      - mindfulness-net
+
+  mindfulness-caddy:
+    container_name: mindfulness-caddy
+    image: caddy:2.6-alpine
+    profiles:
+      - donotstart
     depends_on:
-      - mindfulness-strapiDB
-      
-  mindfulness-strapiDB:
-    container_name: mindfulness-strapiDB
+      - mindfulness-strapi
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ${CADDY_SERVER_NAME:-localhost}, caddy:80
+      #EMAIL: ${CADDY_ACME_EMAIL:-user@example.com}      # The email address to use for ACME registration.
+      EMAIL: ${CADDY_ACME_EMAIL:-internal}
+    ports:
+      # HTTPS
+      - target: 443
+        published: ${HTTPS_PORT:-443}
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: ${HTTP3_PORT:-443}
+        protocol: udp
+
+    volumes:
+      - ./docker/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+      - mindfulness-caddy-data:/data
+      - mindfulness-caddy-config:/config
+
+    networks:
+      - mindfulness-net
+
+  mindfulness-postgresql:
+    container_name: mindfulness-postgresql
+    profiles:
+      - donotstart
     platform: linux/amd64 #for platform error on Apple M1 chips
     restart: unless-stopped
-    env_file: .env
-    image: postgres:14.5-alpine
+    env_file: ./.env
+    image: postgres:15.1-alpine3.17
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
-      - strapi-vlm-db-data:/var/lib/postgresql/data/
+      - mindfulness-strapi-vlm-db-data:/var/lib/postgresql/data/
     ports:
       - '5432:5432'
     networks:
+      - mindfulness-net
+    depends_on:
       - mindfulness-strapi
 
 volumes:
-  strapi-vlm-db-data:
-  strapi-vlm-install:
-  strapi-vlm-nm:
-  strapi-vlm-build:
-  strapi-vlm-cache:
-  strapi-vlm-uploads:
+  mindfulness-strapi-vlm-db-data:
+    labels:
+      type: 'db-data'
+  mindfulness-strapi-vlm-install:
+    labels:
+      type: 'removable'
+  mindfulness-strapi-vlm-nm:
+    labels:
+      type: 'removable'
+  mindfulness-strapi-vlm-build:
+    labels:
+      type: 'removable'
+  mindfulness-strapi-vlm-cache:
+    labels:
+      type: 'removable'
+  mindfulness-strapi-vlm-uploads:
+    labels:
+      type: 'medias'
+  mindfulness-caddy-data:
+    labels:
+      type: 'webserver'
+  mindfulness-caddy-config:
+    labels:
+      type: 'webserver'
 
 networks:
-  mindfulness-strapi:
+  mindfulness-net:
     driver: bridge
