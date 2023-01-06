@@ -27,7 +27,6 @@ const secureHeaders = createSecureHeaders({
         connectSrc: [
           "'self'",
           'https://vitals.vercel-insights.com',
-          'http://mindfulness.failwell.be:1337',
           'https://mindfulness.failwell.be',
         ],
         imgSrc: ["'self'", 'https:', 'http:', 'data:'],
@@ -64,9 +63,10 @@ let nextConfig = {
   // transpilePackages: isProd ? ['ky'] : [],
 
   images: {
+    domains: ['mindfulness.failwell.be'],
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: '**.failwell.be',
         port: '1337',
         pathname: '/uploads/**',
