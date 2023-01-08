@@ -3,25 +3,20 @@ import request from 'graphql-request';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 import { RetraiteCard } from '@/components/RetraiteCard';
-import { eventsApi } from '@/features/events/events.api';
+import { eventsApi, fetchEvents } from '@/features/events/events.api';
 
 type Props = {
   // Add whatever extra you need
 };
 
-const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
-const getEvents = async (params: { limit: number }) => {
-  return request(url, eventsApi.allRetraites, params);
-};
-
 const limit = 10;
 
-export default function TestPage(
+export default function EventsPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { data, error } = useQuery({
     queryKey: ['allEvents', limit],
-    queryFn: async () => getEvents({ limit }),
+    queryFn: async () => fetchEvents({ limit }),
   });
 
   return (
@@ -53,7 +48,7 @@ export const getStaticProps: GetStaticProps<Props> = async (_context) => {
 
   await queryClient.prefetchQuery({
     queryKey: ['allEvents', limit],
-    queryFn: async () => getEvents({ limit }),
+    queryFn: async () => fetchEvents({ limit }),
   });
   return {
     props: {

@@ -1,3 +1,4 @@
+import request from 'graphql-request';
 import { graphql } from '@/gql/gql';
 
 const retraiteFragment = graphql(/* GraphQL */ `
@@ -52,4 +53,10 @@ const allRetraites = graphql(/* GraphQL */ `
 export const eventsApi = {
   retraiteFragment,
   allRetraites,
+};
+
+const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
+
+export const fetchEvents = async (params: { limit?: number }) => {
+  return request(url, eventsApi.allRetraites, params);
 };

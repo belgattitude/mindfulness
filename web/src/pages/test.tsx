@@ -4,7 +4,7 @@ import request from 'graphql-request';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 import { RetraiteCard } from '@/components/RetraiteCard';
-import { eventsApi } from '@/features/events/events.api';
+import { eventsApi, fetchEvents } from '@/features/events/events.api';
 
 type Props = {
   // Add whatever extra you need
@@ -14,10 +14,10 @@ export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
-  const { data, error } = useQuery(
-    ['retraites', { limit: 10 }] as const,
-    async ({ queryKey }) => request(url, eventsApi.allRetraites, queryKey[1])
-  );
+  const { data, error } = useQuery({
+    queryKey: ['allEvents'],
+    queryFn: async () => fetchEvents({}),
+  });
 
   // const img =
   //  'https://zenyoga.be/wp-content/uploads/2022/04/zen-yoga-paper-background-large.jpg';
