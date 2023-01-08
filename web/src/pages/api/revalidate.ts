@@ -34,6 +34,7 @@ export default async function revalidateHandler(
    */
   try {
     await res.revalidate(`/events`);
+    await res.revalidate(`/event/test`);
     return res.json({ revalidated: true });
   } catch (e) {
     return res.status(500).json({

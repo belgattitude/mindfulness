@@ -1,5 +1,4 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import request from 'graphql-request';
 import type {
   GetStaticPaths,
   GetStaticProps,
@@ -7,7 +6,7 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { RetraiteCard } from '@/components/RetraiteCard';
-import { eventsApi, fetchEvents } from '@/features/events/events.api';
+import { fetchEvents } from '@/features/events/events.api';
 
 type Props = {
   // Add whatever extra you need
