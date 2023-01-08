@@ -39,7 +39,9 @@ export default async function revalidateHandler(
   } catch (e) {
     return res.status(500).json({
       revalidated: false,
-      message: `Revalidation failed: ${(e as Error).message}`,
+      message: `Revalidation failed: ${
+        (e as Error)?.message ?? 'Unknown error'
+      }`,
     });
   }
 }
