@@ -13,18 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  fragment RetraiteItem on Retraite {\n    createdAt\n    updatedAt\n    publishedAt\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n": types.RetraiteItemFragmentDoc,
-    "\n  query allRetraites($limit: Int = 100) {\n    retraites(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: \"2022-02-28T03:00:00.000Z\" } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...RetraiteItem\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n": types.AllRetraitesDocument,
+    "\n  fragment FullEventFragment on Event {\n    createdAt\n    updatedAt\n    publishedAt\n    slug\n    title\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n": types.FullEventFragmentFragmentDoc,
+    "\n  query getEvent($slug: String) {\n    events(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n    }\n  }\n": types.GetEventDocument,
+    "\n  query searchEvents(\n    $limit: Int = 100\n    $dateMin: DateTime = \"2020-02-28T03:00:00.000Z\"\n  ) {\n    events(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: $dateMin } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n": types.SearchEventsDocument,
 };
-
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment RetraiteItem on Retraite {\n    createdAt\n    updatedAt\n    publishedAt\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment RetraiteItem on Retraite {\n    createdAt\n    updatedAt\n    publishedAt\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query allRetraites($limit: Int = 100) {\n    retraites(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: \"2022-02-28T03:00:00.000Z\" } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...RetraiteItem\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query allRetraites($limit: Int = 100) {\n    retraites(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: \"2022-02-28T03:00:00.000Z\" } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...RetraiteItem\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -39,6 +31,19 @@ export function graphql(source: "\n  query allRetraites($limit: Int = 100) {\n  
  * Please regenerate the types.
 **/
 export function graphql(source: string): unknown;
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment FullEventFragment on Event {\n    createdAt\n    updatedAt\n    publishedAt\n    slug\n    title\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment FullEventFragment on Event {\n    createdAt\n    updatedAt\n    publishedAt\n    slug\n    title\n    summary\n    description\n    start_at\n    end_at\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getEvent($slug: String) {\n    events(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getEvent($slug: String) {\n    events(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query searchEvents(\n    $limit: Int = 100\n    $dateMin: DateTime = \"2020-02-28T03:00:00.000Z\"\n  ) {\n    events(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: $dateMin } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query searchEvents(\n    $limit: Int = 100\n    $dateMin: DateTime = \"2020-02-28T03:00:00.000Z\"\n  ) {\n    events(\n      sort: \"publishedAt:DESC\"\n      filters: { start_at: { gte: $dateMin } }\n      pagination: { page: 1, pageSize: $limit }\n    ) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

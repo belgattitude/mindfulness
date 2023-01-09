@@ -61,11 +61,6 @@
     },
     "slug": {
       "type": "string"
-    },
-    "event_type": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::event-type.event-type"
     }
   }
 }

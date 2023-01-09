@@ -2,9 +2,13 @@
 
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import { createSecureHeaders } from 'next-secure-headers';
+import { publicEnv } from './src/config/public-env.mjs';
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
+
+const strapiUrl = publicEnv.NEXT_PUBLIC_STRAPI_API_URL;
+const { hostname: strapiHostname } = new URL(strapiUrl);
 
 // @link https://github.com/jagaapple/next-secure-headers
 const secureHeaders = createSecureHeaders({
@@ -18,7 +22,7 @@ const secureHeaders = createSecureHeaders({
           connectSrc: [
             "'self'",
             'https://vitals.vercel-insights.com',
-            'https://mindfulness.failwell.be',
+            strapiUrl,
           ],
           imgSrc: ["'self'", 'https:', 'http:', 'data:'],
           workerSrc: ['blob:'],
@@ -39,29 +43,13 @@ const secureHeaders = createSecureHeaders({
 /** @type {import('next').NextConfig} */
 let nextConfig = {
   reactStrictMode: true,
-  /**
-   webpack(config, context) {
-    if (context.buildId !== "development") {
-      // In monorepo example when the locales live in a separate package
-      // there's still issues regarding fast-refresh... To investigate
-      config.cache = false;
-    }
-
-    return config;
-  }, */
 
   // transpilePackages: isProd ? ['ky'] : [],
 
+  eslint: { ignoreDuringBuilds: !!process.env.CI },
+
   images: {
-    domains: ['mindfulness.failwell.be'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.failwell.be',
-        port: '1337',
-        pathname: '/uploads/**',
-      },
-    ],
+    domains: [strapiHostname],
   },
 
   async headers() {

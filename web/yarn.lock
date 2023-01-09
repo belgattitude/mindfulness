@@ -1602,6 +1602,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@httpx/exception@npm:1.7.0, @httpx/exception@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "@httpx/exception@npm:1.7.0"
+  checksum: bfbb0d074ec15d91ce9299f4be07ee2c963e65b5c0dad8411fbdbd1588900102c1dfb6f8c027262920fa0d2a599c7c0aa057d6a55c9642034dd92bb7a7a4a92c
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.8":
   version: 0.11.8
   resolution: "@humanwhocodes/config-array@npm:0.11.8"
@@ -1848,6 +1855,31 @@ __metadata:
   version: 13.1.1
   resolution: "@next/swc-win32-x64-msvc@npm:13.1.1"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@nextvalid/zod-request@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@nextvalid/zod-request@npm:0.4.0"
+  dependencies:
+    "@httpx/exception": "npm:^1.7.0"
+    zod: "npm:^3.20.2"
+  peerDependencies:
+    "@types/node": "*"
+    next: ^11.0.0 || ^12.0.0 || ^13.0.0
+    react: ^17.0.2 || ^18.2.0
+    react-dom: ^17.0.2 || ^18.2.0
+    typescript: ^4.5.0 || ^5.0.0
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+    typescript:
+      optional: true
+  checksum: b9ee7a6c5489a5bcad77fbead7b5e6f9352aa3aaa48a6468c8f7f647c5256ef6332f1dd0f9cf831a3db6c1ad6ddbd7633145ee83dc3f464ff8b1e812118f27c7
   languageName: node
   linkType: hard
 
@@ -3548,6 +3580,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig@npm:8.0.0":
+  version: 8.0.0
+  resolution: "cosmiconfig@npm:8.0.0"
+  dependencies:
+    import-fresh: "npm:^3.2.1"
+    js-yaml: "npm:^4.1.0"
+    parse-json: "npm:^5.0.0"
+    path-type: "npm:^4.0.0"
+  checksum: 436a849ca0a434b4a7344e9213db6314512c6af23c0b187728d21b0292736eec8c2df046a95b8c796a9304afbd9d154bf5e9aeeae535e6303d835d44835cad6d
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^7.0.0":
   version: 7.1.0
   resolution: "cosmiconfig@npm:7.1.0"
@@ -3673,6 +3717,13 @@ __metadata:
   version: 2.29.3
   resolution: "date-fns@npm:2.29.3"
   checksum: 7e0d58b93506bb34184fd8a86ffc84fffa5188789a8afd22622e2f129f0adc40df755133705d95532beac53f2cecc812dc1753e801ae945a604c323cdaa3bbc1
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:1.11.7":
+  version: 1.11.7
+  resolution: "dayjs@npm:1.11.7"
+  checksum: e4befd8f695eeb2fbe2f887c0f6e2a8a498dfba89eb4b4d87c036167e4ae36871dda584a24c15db9b68fcf19688199f934c38095c629abcc30f8adb60f0723ce
   languageName: node
   linkType: hard
 
@@ -5106,6 +5157,28 @@ __metadata:
   peerDependencies:
     graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 80cd871ac7fa46671159a5a7e141bbcc0bccc59e5d3b9af5439aec21ab1f1f500e6dd467a51b56c25580b193de6c741fd03411e6c21b39d0e073a8c4eb2b637e
+  languageName: node
+  linkType: hard
+
+"graphql-config@npm:4.4.0":
+  version: 4.4.0
+  resolution: "graphql-config@npm:4.4.0"
+  dependencies:
+    "@graphql-tools/graphql-file-loader": "npm:^7.3.7"
+    "@graphql-tools/json-file-loader": "npm:^7.3.7"
+    "@graphql-tools/load": "npm:^7.5.5"
+    "@graphql-tools/merge": "npm:^8.2.6"
+    "@graphql-tools/url-loader": "npm:^7.9.7"
+    "@graphql-tools/utils": "npm:^9.0.0"
+    cosmiconfig: "npm:8.0.0"
+    minimatch: "npm:4.2.1"
+    string-env-interpolation: "npm:1.0.1"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    cosmiconfig-toml-loader: ^1.0.0
+    cosmiconfig-typescript-loader: ^4.0.0
+    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 64f26d71ce3e3cf9913742b2d29046a60023a566ad472868746a38e21968b6cb919239b738088c97ecc378f1e7a9ba3f6ffb58b97df77456c64903fbf4a3bf7e
   languageName: node
   linkType: hard
 
@@ -7128,8 +7201,10 @@ __metadata:
     "@graphql-codegen/client-preset": "npm:1.2.5"
     "@graphql-codegen/introspection": "npm:2.2.3"
     "@graphql-codegen/typescript": "npm:2.8.7"
+    "@httpx/exception": "npm:1.7.0"
     "@next/bundle-analyzer": "npm:13.1.1"
     "@next/font": "npm:13.1.1"
+    "@nextvalid/zod-request": "npm:0.4.0"
     "@tailwindcss/aspect-ratio": "npm:0.4.2"
     "@tailwindcss/forms": "npm:0.5.3"
     "@tailwindcss/typography": "npm:0.5.8"
@@ -7141,9 +7216,11 @@ __metadata:
     clsx: "npm:1.2.1"
     cross-env: "npm:7.0.3"
     date-fns: "npm:2.29.3"
+    dayjs: "npm:1.11.7"
     eslint: "npm:8.31.0"
     eslint-config-next: "npm:13.1.1"
     graphql: "npm:16.6.0"
+    graphql-config: "npm:4.4.0"
     graphql-request: "npm:5.1.0"
     next: "npm:13.1.1"
     next-secure-headers: "npm:2.2.0"
@@ -7159,6 +7236,7 @@ __metadata:
     sass: "npm:1.57.1"
     tailwindcss: "npm:3.2.4"
     typescript: "npm:4.9.4"
+    zod: "npm:3.20.2"
   languageName: unknown
   linkType: soft
 
@@ -9845,6 +9923,13 @@ __metadata:
   version: 0.1.2
   resolution: "yoga-wasm-web@npm:0.1.2"
   checksum: d3e7e210fa366d660319a41847dacfed951aa85f374052b62a99985dd5657388d50c080fee9bf71a2f05550dec4f621876680a79bff0e34fce817bdfb9240357
+  languageName: node
+  linkType: hard
+
+"zod@npm:3.20.2, zod@npm:^3.20.2":
+  version: 3.20.2
+  resolution: "zod@npm:3.20.2"
+  checksum: 4afdc2d9962456e1f4dfd6e44791d3017280e0f2f365fd45f85336ea5a850d009ff2f6d671638db47f8b237dd153fe73c0417f9cc300fcf201afb4fff9051c8d
   languageName: node
   linkType: hard
 
