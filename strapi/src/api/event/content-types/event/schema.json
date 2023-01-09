@@ -47,11 +47,11 @@
       "required": true,
       "minLength": 100
     },
-    "start_at": {
+    "startAt": {
       "type": "datetime",
       "required": true
     },
-    "end_at": {
+    "endAt": {
       "type": "datetime",
       "required": true
     },

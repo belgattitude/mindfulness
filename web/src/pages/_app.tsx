@@ -1,7 +1,12 @@
 import '../styles/globals.css';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { Inter, Crimson_Pro, Yanone_Kaffeesatz } from '@next/font/google';
+import {
+  Parisienne,
+  Inter,
+  Crimson_Pro,
+  Yanone_Kaffeesatz,
+} from '@next/font/google';
 import {
   Hydrate,
   QueryClient,
@@ -24,6 +29,11 @@ const clientSideEmotionCache = createEmotionCache();
 const yanone = Yanone_Kaffeesatz({
   weight: 'variable',
   variable: '--font-yanone',
+});
+
+const handwritten = Parisienne({
+  weight: ['400'],
+  variable: '--font-handwritten',
 });
 
 const crimson = Crimson_Pro({
@@ -54,7 +64,7 @@ const MyApp = (appProps: MyAppProps) => {
       <Hydrate state={pageProps.dehydratedState}>
         <CacheProvider value={emotionCache}>
           <div
-            className={`${inter.variable} ${crimson.variable} ${yanone.variable} font-sans`}
+            className={`${inter.variable} ${crimson.variable} ${yanone.variable} ${handwritten.variable} font-sans`}
           >
             <DefaultSeo {...defaultSeoConfig} />
             <Layout>

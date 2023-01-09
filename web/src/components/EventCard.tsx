@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { FC } from 'react';
+import { DateRangeText } from '@/components/DateRangeText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
 import type { FetchEvent } from '../api/events.api';
@@ -14,6 +15,10 @@ type Props = {
 export const EventCard: FC<Props> = (props) => {
   const event = useFragment(eventsApi.fullEventFragment, props.event);
 
+  if (!event) {
+    return <div>Error loading event</div>;
+  }
+
   const keywords = ['cool', 'test'];
 
   return (
@@ -24,6 +29,7 @@ export const EventCard: FC<Props> = (props) => {
             alt="Cover event"
             width={1000}
             height={800}
+            loading={'eager'}
             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
             src={getStrapiMedia(event.cover) ?? ''}
           />
@@ -35,7 +41,11 @@ export const EventCard: FC<Props> = (props) => {
             {event.title}
           </Link>
         </div>
-        <p className="text-indigo-600">By test</p>
+        <DateRangeText
+          startAt={event.startAt}
+          endAt={event.endAt}
+          className="text-indigo-600 first-letter:capitalize"
+        />
         <p className="text-base text-gray-700 line-clamp-4">{event.summary}</p>
       </article>
       <div className="px-6 pt-4 pb-2">

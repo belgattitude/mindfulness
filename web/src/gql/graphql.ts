@@ -14,11 +14,8 @@ export type Scalars = {
   Float: number;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
-  /** A string used to identify an i18n locale */
-  I18NLocaleCode: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  RetraiteDynaDynamicZoneInput: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
@@ -89,22 +86,16 @@ export enum Enum_Event_Universe {
   Yoga = 'yoga'
 }
 
-export type Error = {
-  __typename?: 'Error';
-  code: Scalars['String'];
-  message?: Maybe<Scalars['String']>;
-};
-
 export type Event = {
   __typename?: 'Event';
   cover?: Maybe<UploadFileEntityResponse>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
-  end_at: Scalars['DateTime'];
+  endAt: Scalars['DateTime'];
   flyer?: Maybe<UploadFileEntityResponse>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug: Scalars['String'];
-  start_at: Scalars['DateTime'];
+  startAt: Scalars['DateTime'];
   summary?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   universe?: Maybe<Enum_Event_Universe>;
@@ -132,13 +123,13 @@ export type EventFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<EventFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
-  end_at?: InputMaybe<DateTimeFilterInput>;
+  endAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<EventFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<EventFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
-  start_at?: InputMaybe<DateTimeFilterInput>;
+  startAt?: InputMaybe<DateTimeFilterInput>;
   summary?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   universe?: InputMaybe<StringFilterInput>;
@@ -148,71 +139,14 @@ export type EventFiltersInput = {
 export type EventInput = {
   cover?: InputMaybe<Scalars['ID']>;
   description?: InputMaybe<Scalars['String']>;
-  end_at?: InputMaybe<Scalars['DateTime']>;
+  endAt?: InputMaybe<Scalars['DateTime']>;
   flyer?: InputMaybe<Scalars['ID']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
-  start_at?: InputMaybe<Scalars['DateTime']>;
+  startAt?: InputMaybe<Scalars['DateTime']>;
   summary?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   universe?: InputMaybe<Enum_Event_Universe>;
-};
-
-export type EventType = {
-  __typename?: 'EventType';
-  createdAt?: Maybe<Scalars['DateTime']>;
-  locale?: Maybe<Scalars['String']>;
-  localizations?: Maybe<EventTypeRelationResponseCollection>;
-  slug: Scalars['String'];
-  title?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type EventTypeLocalizationsArgs = {
-  filters?: InputMaybe<EventTypeFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type EventTypeEntity = {
-  __typename?: 'EventTypeEntity';
-  attributes?: Maybe<EventType>;
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type EventTypeEntityResponse = {
-  __typename?: 'EventTypeEntityResponse';
-  data?: Maybe<EventTypeEntity>;
-};
-
-export type EventTypeEntityResponseCollection = {
-  __typename?: 'EventTypeEntityResponseCollection';
-  data: Array<EventTypeEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type EventTypeFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<EventTypeFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  locale?: InputMaybe<StringFilterInput>;
-  localizations?: InputMaybe<EventTypeFiltersInput>;
-  not?: InputMaybe<EventTypeFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<EventTypeFiltersInput>>>;
-  slug?: InputMaybe<StringFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type EventTypeInput = {
-  slug?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-};
-
-export type EventTypeRelationResponseCollection = {
-  __typename?: 'EventTypeRelationResponseCollection';
-  data: Array<EventTypeEntity>;
 };
 
 export type FileInfoInput = {
@@ -245,7 +179,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | EventType | I18NLocale | Retraite | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -360,9 +294,6 @@ export type Mutation = {
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createEvent?: Maybe<EventEntityResponse>;
-  createEventType?: Maybe<EventTypeEntityResponse>;
-  createEventTypeLocalization?: Maybe<EventTypeEntityResponse>;
-  createRetraite?: Maybe<RetraiteEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -370,8 +301,6 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteEvent?: Maybe<EventEntityResponse>;
-  deleteEventType?: Maybe<EventTypeEntityResponse>;
-  deleteRetraite?: Maybe<RetraiteEntityResponse>;
   deleteTest?: Maybe<TestEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -391,9 +320,7 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateEvent?: Maybe<EventEntityResponse>;
-  updateEventType?: Maybe<EventTypeEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
-  updateRetraite?: Maybe<RetraiteEntityResponse>;
   updateTest?: Maybe<TestEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -414,24 +341,6 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateEventArgs = {
   data: EventInput;
-};
-
-
-export type MutationCreateEventTypeArgs = {
-  data: EventTypeInput;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-};
-
-
-export type MutationCreateEventTypeLocalizationArgs = {
-  data?: InputMaybe<EventTypeInput>;
-  id?: InputMaybe<Scalars['ID']>;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-};
-
-
-export type MutationCreateRetraiteArgs = {
-  data: RetraiteInput;
 };
 
 
@@ -456,17 +365,6 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 
 export type MutationDeleteEventArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationDeleteEventTypeArgs = {
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-};
-
-
-export type MutationDeleteRetraiteArgs = {
   id: Scalars['ID'];
 };
 
@@ -537,22 +435,9 @@ export type MutationUpdateEventArgs = {
 };
 
 
-export type MutationUpdateEventTypeArgs = {
-  data: EventTypeInput;
-  id: Scalars['ID'];
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-};
-
-
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info?: InputMaybe<FileInfoInput>;
-};
-
-
-export type MutationUpdateRetraiteArgs = {
-  data: RetraiteInput;
-  id: Scalars['ID'];
 };
 
 
@@ -616,14 +501,10 @@ export enum PublicationState {
 export type Query = {
   __typename?: 'Query';
   event?: Maybe<EventEntityResponse>;
-  eventType?: Maybe<EventTypeEntityResponse>;
-  eventTypes?: Maybe<EventTypeEntityResponseCollection>;
   events?: Maybe<EventEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
-  retraite?: Maybe<RetraiteEntityResponse>;
-  retraites?: Maybe<RetraiteEntityResponseCollection>;
   test?: Maybe<TestEntityResponse>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
@@ -638,20 +519,6 @@ export type Query = {
 
 export type QueryEventArgs = {
   id?: InputMaybe<Scalars['ID']>;
-};
-
-
-export type QueryEventTypeArgs = {
-  id?: InputMaybe<Scalars['ID']>;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-};
-
-
-export type QueryEventTypesArgs = {
-  filters?: InputMaybe<EventTypeFiltersInput>;
-  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -671,19 +538,6 @@ export type QueryI18NLocaleArgs = {
 export type QueryI18NLocalesArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-export type QueryRetraiteArgs = {
-  id?: InputMaybe<Scalars['ID']>;
-};
-
-
-export type QueryRetraitesArgs = {
-  filters?: InputMaybe<RetraiteFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -745,85 +599,6 @@ export type ResponseCollectionMeta = {
   pagination: Pagination;
 };
 
-export type Retraite = {
-  __typename?: 'Retraite';
-  cover?: Maybe<UploadFileEntityResponse>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
-  dyna?: Maybe<Array<Maybe<RetraiteDynaDynamicZone>>>;
-  end_at?: Maybe<Scalars['DateTime']>;
-  images?: Maybe<UploadFileRelationResponseCollection>;
-  participants?: Maybe<Scalars['String']>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  slug?: Maybe<Scalars['String']>;
-  start_at?: Maybe<Scalars['DateTime']>;
-  summary?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type RetraiteImagesArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type RetraiteDynaDynamicZone = ComponentTestPrice | ComponentTestTestcomp | Error;
-
-export type RetraiteEntity = {
-  __typename?: 'RetraiteEntity';
-  attributes?: Maybe<Retraite>;
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type RetraiteEntityResponse = {
-  __typename?: 'RetraiteEntityResponse';
-  data?: Maybe<RetraiteEntity>;
-};
-
-export type RetraiteEntityResponseCollection = {
-  __typename?: 'RetraiteEntityResponseCollection';
-  data: Array<RetraiteEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type RetraiteFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<RetraiteFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  description?: InputMaybe<StringFilterInput>;
-  end_at?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<RetraiteFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<RetraiteFiltersInput>>>;
-  participants?: InputMaybe<StringFilterInput>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  slug?: InputMaybe<StringFilterInput>;
-  start_at?: InputMaybe<DateTimeFilterInput>;
-  summary?: InputMaybe<StringFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type RetraiteInput = {
-  cover?: InputMaybe<Scalars['ID']>;
-  description?: InputMaybe<Scalars['String']>;
-  dyna?: InputMaybe<Array<Scalars['RetraiteDynaDynamicZoneInput']>>;
-  end_at?: InputMaybe<Scalars['DateTime']>;
-  images?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  participants?: InputMaybe<Scalars['String']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
-  slug?: InputMaybe<Scalars['String']>;
-  start_at?: InputMaybe<Scalars['DateTime']>;
-  summary?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-};
-
-export type RetraiteRelationResponseCollection = {
-  __typename?: 'RetraiteRelationResponseCollection';
-  data: Array<RetraiteEntity>;
-};
-
 export type StringFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -852,17 +627,8 @@ export type Test = {
   __typename?: 'Test';
   createdAt?: Maybe<Scalars['DateTime']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
-  retraites?: Maybe<RetraiteRelationResponseCollection>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type TestRetraitesArgs = {
-  filters?: InputMaybe<RetraiteFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type TestEntity = {
@@ -878,7 +644,6 @@ export type TestEntityResponse = {
 
 export type TestInput = {
   publishedAt?: InputMaybe<Scalars['DateTime']>;
-  retraites?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -1255,7 +1020,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type FullEventFragmentFragment = { __typename?: 'Event', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title: string, summary?: string | null, description: string, start_at: any, end_at: any, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } & { ' $fragmentName'?: 'FullEventFragmentFragment' };
+export type FullEventFragmentFragment = { __typename?: 'Event', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title: string, summary?: string | null, description: string, startAt: any, endAt: any, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } & { ' $fragmentName'?: 'FullEventFragmentFragment' };
 
 export type GetEventQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
@@ -1278,6 +1043,6 @@ export type SearchEventsQuery = { __typename?: 'Query', events?: { __typename?: 
         & { ' $fragmentRefs'?: { 'FullEventFragmentFragment': FullEventFragmentFragment } }
       ) | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
 
-export const FullEventFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FullEventFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"start_at"}},{"kind":"Field","name":{"kind":"Name","value":"end_at"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FullEventFragmentFragment, unknown>;
+export const FullEventFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FullEventFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FullEventFragmentFragment, unknown>;
 export const GetEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetEventQuery, GetEventQueryVariables>;
-export const SearchEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchEvents"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"100"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}},"defaultValue":{"kind":"StringValue","value":"2020-02-28T03:00:00.000Z","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"publishedAt:DESC","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"start_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"pageCount"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<SearchEventsQuery, SearchEventsQueryVariables>;
+export const SearchEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchEvents"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"100"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}},"defaultValue":{"kind":"StringValue","value":"2020-02-28T03:00:00.000Z","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"publishedAt:DESC","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"pageCount"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<SearchEventsQuery, SearchEventsQueryVariables>;

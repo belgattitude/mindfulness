@@ -5,9 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | EventType | I18NLocale | Retraite | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
-
-union RetraiteDynaDynamicZone = ComponentTestPrice | ComponentTestTestcomp | Error
+union GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type ComponentTestPrice {
     id: ID!
@@ -20,20 +18,15 @@ type ComponentTestTestcomp {
     start: DateTime
 }
 
-type Error {
-    code: String!
-    message: String
-}
-
 type Event {
     cover: UploadFileEntityResponse
     createdAt: DateTime
     description: String!
-    end_at: DateTime!
+    endAt: DateTime!
     flyer: UploadFileEntityResponse
     publishedAt: DateTime
     slug: String!
-    start_at: DateTime!
+    startAt: DateTime!
     summary: String
     title: String!
     universe: ENUM_EVENT_UNIVERSE
@@ -52,33 +45,6 @@ type EventEntityResponse {
 type EventEntityResponseCollection {
     data: [EventEntity!]!
     meta: ResponseCollectionMeta!
-}
-
-type EventType {
-    createdAt: DateTime
-    locale: String
-    localizations(filters: EventTypeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): EventTypeRelationResponseCollection
-    slug: String!
-    title: String
-    updatedAt: DateTime
-}
-
-type EventTypeEntity {
-    attributes: EventType
-    id: ID
-}
-
-type EventTypeEntityResponse {
-    data: EventTypeEntity
-}
-
-type EventTypeEntityResponseCollection {
-    data: [EventTypeEntity!]!
-    meta: ResponseCollectionMeta!
-}
-
-type EventTypeRelationResponseCollection {
-    data: [EventTypeEntity!]!
 }
 
 type I18NLocale {
@@ -106,9 +72,6 @@ type Mutation {
     "Change user password. Confirm with the current password."
     changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
     createEvent(data: EventInput!): EventEntityResponse
-    createEventType(data: EventTypeInput!, locale: I18NLocaleCode): EventTypeEntityResponse
-    createEventTypeLocalization(data: EventTypeInput, id: ID, locale: I18NLocaleCode): EventTypeEntityResponse
-    createRetraite(data: RetraiteInput!): RetraiteEntityResponse
     createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
     createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
     "Create a new role"
@@ -116,8 +79,6 @@ type Mutation {
     "Create a new user"
     createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
     deleteEvent(id: ID!): EventEntityResponse
-    deleteEventType(id: ID!, locale: I18NLocaleCode): EventTypeEntityResponse
-    deleteRetraite(id: ID!): RetraiteEntityResponse
     deleteTest: TestEntityResponse
     deleteUploadFile(id: ID!): UploadFileEntityResponse
     deleteUploadFolder(id: ID!): UploadFolderEntityResponse
@@ -137,9 +98,7 @@ type Mutation {
     "Reset user password. Confirm with a code (resetToken from forgotPassword)"
     resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
     updateEvent(data: EventInput!, id: ID!): EventEntityResponse
-    updateEventType(data: EventTypeInput!, id: ID!, locale: I18NLocaleCode): EventTypeEntityResponse
     updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
-    updateRetraite(data: RetraiteInput!, id: ID!): RetraiteEntityResponse
     updateTest(data: TestInput!): TestEntityResponse
     updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
     updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
@@ -159,14 +118,10 @@ type Pagination {
 
 type Query {
     event(id: ID): EventEntityResponse
-    eventType(id: ID, locale: I18NLocaleCode): EventTypeEntityResponse
-    eventTypes(filters: EventTypeFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, sort: [String] = []): EventTypeEntityResponseCollection
     events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventEntityResponseCollection
     i18NLocale(id: ID): I18NLocaleEntityResponse
     i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
     me: UsersPermissionsMe
-    retraite(id: ID): RetraiteEntityResponse
-    retraites(filters: RetraiteFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): RetraiteEntityResponseCollection
     test(publicationState: PublicationState = LIVE): TestEntityResponse
     uploadFile(id: ID): UploadFileEntityResponse
     uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
@@ -182,44 +137,9 @@ type ResponseCollectionMeta {
     pagination: Pagination!
 }
 
-type Retraite {
-    cover: UploadFileEntityResponse
-    createdAt: DateTime
-    description: String
-    dyna: [RetraiteDynaDynamicZone]
-    end_at: DateTime
-    images(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection
-    participants: String
-    publishedAt: DateTime
-    slug: String
-    start_at: DateTime
-    summary: String
-    title: String
-    updatedAt: DateTime
-}
-
-type RetraiteEntity {
-    attributes: Retraite
-    id: ID
-}
-
-type RetraiteEntityResponse {
-    data: RetraiteEntity
-}
-
-type RetraiteEntityResponseCollection {
-    data: [RetraiteEntity!]!
-    meta: ResponseCollectionMeta!
-}
-
-type RetraiteRelationResponseCollection {
-    data: [RetraiteEntity!]!
-}
-
 type Test {
     createdAt: DateTime
     publishedAt: DateTime
-    retraites(filters: RetraiteFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): RetraiteRelationResponseCollection
     title: String
     updatedAt: DateTime
 }
@@ -419,13 +339,8 @@ enum PublicationState {
 "A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
 scalar DateTime
 
-"A string used to identify an i18n locale"
-scalar I18NLocaleCode
-
 "The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
 scalar JSON
-
-scalar RetraiteDynaDynamicZoneInput
 
 "The `Upload` scalar type represents a file upload."
 scalar Upload
@@ -482,13 +397,13 @@ input EventFiltersInput {
     and: [EventFiltersInput]
     createdAt: DateTimeFilterInput
     description: StringFilterInput
-    end_at: DateTimeFilterInput
+    endAt: DateTimeFilterInput
     id: IDFilterInput
     not: EventFiltersInput
     or: [EventFiltersInput]
     publishedAt: DateTimeFilterInput
     slug: StringFilterInput
-    start_at: DateTimeFilterInput
+    startAt: DateTimeFilterInput
     summary: StringFilterInput
     title: StringFilterInput
     universe: StringFilterInput
@@ -498,32 +413,14 @@ input EventFiltersInput {
 input EventInput {
     cover: ID
     description: String
-    end_at: DateTime
+    endAt: DateTime
     flyer: ID
     publishedAt: DateTime
     slug: String
-    start_at: DateTime
+    startAt: DateTime
     summary: String
     title: String
     universe: ENUM_EVENT_UNIVERSE
-}
-
-input EventTypeFiltersInput {
-    and: [EventTypeFiltersInput]
-    createdAt: DateTimeFilterInput
-    id: IDFilterInput
-    locale: StringFilterInput
-    localizations: EventTypeFiltersInput
-    not: EventTypeFiltersInput
-    or: [EventTypeFiltersInput]
-    slug: StringFilterInput
-    title: StringFilterInput
-    updatedAt: DateTimeFilterInput
-}
-
-input EventTypeInput {
-    slug: String
-    title: String
 }
 
 input FileInfoInput {
@@ -646,37 +543,6 @@ input PaginationArg {
     start: Int
 }
 
-input RetraiteFiltersInput {
-    and: [RetraiteFiltersInput]
-    createdAt: DateTimeFilterInput
-    description: StringFilterInput
-    end_at: DateTimeFilterInput
-    id: IDFilterInput
-    not: RetraiteFiltersInput
-    or: [RetraiteFiltersInput]
-    participants: StringFilterInput
-    publishedAt: DateTimeFilterInput
-    slug: StringFilterInput
-    start_at: DateTimeFilterInput
-    summary: StringFilterInput
-    title: StringFilterInput
-    updatedAt: DateTimeFilterInput
-}
-
-input RetraiteInput {
-    cover: ID
-    description: String
-    dyna: [RetraiteDynaDynamicZoneInput!]
-    end_at: DateTime
-    images: [ID]
-    participants: String
-    publishedAt: DateTime
-    slug: String
-    start_at: DateTime
-    summary: String
-    title: String
-}
-
 input StringFilterInput {
     and: [String]
     between: [String]
@@ -703,7 +569,6 @@ input StringFilterInput {
 
 input TestInput {
     publishedAt: DateTime
-    retraites: [ID]
     title: String
 }
 

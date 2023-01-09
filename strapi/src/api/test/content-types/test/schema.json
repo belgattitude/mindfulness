@@ -4,18 +4,14 @@
   "info": {
     "singularName": "test",
     "pluralName": "tests",
-    "displayName": "test"
+    "displayName": "test",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "retraites": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::retraite.retraite"
-    },
     "title": {
       "type": "string"
     }

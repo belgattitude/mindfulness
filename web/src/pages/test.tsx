@@ -6,19 +6,79 @@ type Props = {
   // Add whatever extra you need
 };
 
+const imgBackgrounds = {
+  radial: css`
+    background: radial-gradient(
+      ellipse 100% 100% at right center,
+      transparent 30%,
+      #000
+    );
+    content: '""';
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  `,
+  none: css``,
+  linear: css`
+    background: linear-gradient(
+      180deg,
+      #00000061 0,
+      #00000061 3.5%,
+      rgba(0, 0, 0, 0.379) 7%,
+      rgba(0, 0, 0, 0.377) 10.35%,
+      rgba(0, 0, 0, 0.375) 13.85%,
+      rgba(0, 0, 0, 0.372) 17.35%,
+      rgba(0, 0, 0, 0.369) 20.85%,
+      rgba(0, 0, 0, 0.366) 24.35%,
+      rgba(0, 0, 0, 0.364) 27.85%,
+      rgba(0, 0, 0, 0.361) 31.35%,
+      rgba(0, 0, 0, 0.358) 34.85%,
+      rgba(0, 0, 0, 0.355) 38.35%,
+      rgba(0, 0, 0, 0.353) 41.85%,
+      rgba(0, 0, 0, 0.351) 45.35%,
+      #00000059 48.85%,
+      rgba(0, 0, 0, 0.353) 52.35%,
+      #0000005c 55.85%,
+      rgba(0, 0, 0, 0.371) 59.35%,
+      rgba(0, 0, 0, 0.385) 62.85%,
+      rgba(0, 0, 0, 0.402) 66.35%,
+      #0000006b 69.85%,
+      #00000070 73.35%,
+      #00000075 76.85%,
+      #0000007a 80.35%,
+      rgba(0, 0, 0, 0.498) 83.85%,
+      rgba(0, 0, 0, 0.515) 87.35%,
+      rgba(0, 0, 0, 0.529) 90.85%,
+      #0000008a 94.35%,
+      rgba(0, 0, 0, 0.547) 97.85%,
+      #0000008c
+    );
+    content: '""';
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  `,
+} as const;
+
 export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   // const img =
   //  'https://zenyoga.be/wp-content/uploads/2022/04/zen-yoga-paper-background-large.jpg';
   // const img =
-  // 'http://www.sandrinerauter.be/uploads/4/3/7/7/43775673/background-images/254942895.jpg';
+  // 'http://localhost:3000/_next/image?url=http%3A%2F%2Flocalhost%3A1337%2Fuploads%2Fphoto_moulin_2002_orig_6a5dd7bda0.png&w=1080&q=75';
+  const img =
+    'http://www.sandrinerauter.be/uploads/4/3/7/7/43775673/background-images/254942895.jpg';
   // const img =
   //  'https://images.unsplash.com/photo-1671379827325-2fa2dc475840?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80';
-  const img =
-    'https://images.unsplash.com/photo-1671379827325-2fa2dc475840?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHx8&dpr=1&auto=format%2Ccompress&fit=crop&w=1399&h=594';
   // const img =
-  //  'https://mindfulness-eight.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fbr4m2bfj%2Fdevelopment%2F9eed37a9c2f6ec48f090c15e0d1eadae3d7cfca2-1100x572.png%3Frect%3D0%2C11%2C1100%2C550%26w%3D2000%26h%3D1000%26fit%3Dmax%26auto%3Dformat&w=1920&q=75';
+  //  'https://images.unsplash.com/photo-1671379827325-2fa2dc475840?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHx8&dpr=1&auto=format%2Ccompress&fit=crop&w=1399&h=594';
   // const img =
   //  'https://images.unsplash.com/photo-1666457383842-a2e6a748dcac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80';
   return (
@@ -31,46 +91,7 @@ export default function TestPage(
           css={css`
             height: 55vh;
             &:before {
-              background: linear-gradient(
-                180deg,
-                #00000061 0,
-                #00000061 3.5%,
-                rgba(0, 0, 0, 0.379) 7%,
-                rgba(0, 0, 0, 0.377) 10.35%,
-                rgba(0, 0, 0, 0.375) 13.85%,
-                rgba(0, 0, 0, 0.372) 17.35%,
-                rgba(0, 0, 0, 0.369) 20.85%,
-                rgba(0, 0, 0, 0.366) 24.35%,
-                rgba(0, 0, 0, 0.364) 27.85%,
-                rgba(0, 0, 0, 0.361) 31.35%,
-                rgba(0, 0, 0, 0.358) 34.85%,
-                rgba(0, 0, 0, 0.355) 38.35%,
-                rgba(0, 0, 0, 0.353) 41.85%,
-                rgba(0, 0, 0, 0.351) 45.35%,
-                #00000059 48.85%,
-                rgba(0, 0, 0, 0.353) 52.35%,
-                #0000005c 55.85%,
-                rgba(0, 0, 0, 0.371) 59.35%,
-                rgba(0, 0, 0, 0.385) 62.85%,
-                rgba(0, 0, 0, 0.402) 66.35%,
-                #0000006b 69.85%,
-                #00000070 73.35%,
-                #00000075 76.85%,
-                #0000007a 80.35%,
-                rgba(0, 0, 0, 0.498) 83.85%,
-                rgba(0, 0, 0, 0.515) 87.35%,
-                rgba(0, 0, 0, 0.529) 90.85%,
-                #0000008a 94.35%,
-                rgba(0, 0, 0, 0.547) 97.85%,
-                #0000008c
-              );
-              content: '""';
-              left: 0;
-              position: absolute;
-              top: 0;
-              width: 100%;
-              height: 100%;
-              z-index: 1;
+              ${imgBackgrounds.radial}
             }
           `}
         >
@@ -86,11 +107,9 @@ export default function TestPage(
             css={css`
               //font-family: 'Ubuntu Condensed';
               //font-family: 'Yanone Kaffeesatz', 'Comic Sans MS';
-              font-family: var(--font-yanone); // 'Inter', 'Comic Sans MS';
-              font-variation-settings: 'opsz' 48, 'wght' 700, 'wdth' 25,
-                'slnt' -12 'ital' 1;
+              font-family: var(--font-handwritten); // 'Inter', 'Comic Sans MS';
               font-weight: 700;
-              letter-spacing: 0.1rem;
+              //letter-spacing: 0.1rem;
             `}
             className="p-5 text-white z-10 absolute text-xl md:text-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           >
@@ -100,11 +119,11 @@ export default function TestPage(
                 //font-family: 'Ubuntu Condensed';
                 //font-family: 'Yanone Kaffeesatz', 'Comic Sans MS';
                 font-family: var(--font-inter); // 'Inter', 'Comic Sans MS';
-                font-variation-settings: 'opsz' 48, 'wght' 700, 'wdth' 25,
-                  'slnt' -12, 'ital' 1;
+                //font-variation-settings: 'opsz' 48, 'wght' 700, 'wdth' 25,
+                //  'slnt' -12, 'ital' 1;
                 //font-weight: 700;
-
-                letter-spacing: 0.1rem;
+                text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+                // letter-spacing: 0.1rem;
               `}
             >
               Vous trouverez sur ce site toutes les informations concernant mes

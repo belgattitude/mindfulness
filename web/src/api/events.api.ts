@@ -13,8 +13,8 @@ const fullEventFragment = graphql(/* GraphQL */ `
     title
     summary
     description
-    start_at
-    end_at
+    startAt
+    endAt
     cover {
       data {
         id
@@ -48,7 +48,7 @@ const searchEvents = graphql(/* GraphQL */ `
   ) {
     events(
       sort: "publishedAt:DESC"
-      filters: { start_at: { gte: $dateMin } }
+      filters: { startAt: { gte: $dateMin } }
       pagination: { page: 1, pageSize: $limit }
     ) {
       data {
