@@ -10,11 +10,6 @@ const enableCSP = isProd;
 const strapiUrl = publicEnv.NEXT_PUBLIC_STRAPI_API_URL;
 const { hostname: strapiHostname } = new URL(strapiUrl);
 
-if (strapiHostname.startsWith('https://localhost')) {
-  // To bypass self-signed certificates
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-}
-
 // @link https://github.com/jagaapple/next-secure-headers
 const secureHeaders = createSecureHeaders({
   contentSecurityPolicy: {

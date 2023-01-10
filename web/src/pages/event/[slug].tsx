@@ -7,7 +7,6 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { EventCard } from '@/components/EventCard';
 import { EventDetail } from '@/components/EventDetail';
 import { fetchEvent } from '../../api/events.api';
 
@@ -48,6 +47,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     props: {
       slug,
       dehydratedState: dehydrate(queryClient),
+      // @todo when invalidation lands we can set it up
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every 10 seconds
+      // revalidate: 10
     },
   };
 };

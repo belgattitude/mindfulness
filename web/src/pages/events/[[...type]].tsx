@@ -1,6 +1,11 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type {
+  InferGetServerSidePropsType,
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from 'next';
 import { NextSeo } from 'next-seo';
 import { EventCard } from '@/components/EventCard';
 import { fetchEvents } from '../../api/events.api';
@@ -11,11 +16,9 @@ type Props = {
 
 const limit = 10;
 // const dateMin = dayjs().subtract(10, 'month').toDate();
-const dateMin = dayjs().subtract(10, 'month').toDate();
-const strDateMin = dateMin.toString();
 
 export default function EventsPage(
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
+  props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { dateMin } = props;
   const { data, error } = useQuery({
@@ -43,9 +46,10 @@ export default function EventsPage(
   );
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
-  _context
-) => {
+export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+  const dateMin = dayjs().subtract(10, 'month').toDate();
+  const strDateMin = dateMin.toString();
+
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['events', limit, strDateMin],
@@ -55,6 +59,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     props: {
       dateMin: strDateMin,
       dehydratedState: dehydrate(queryClient),
+      // Next.js will attempt to re-generate the page at most
+      revalidate: 3_600,
     },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
   };
 };
