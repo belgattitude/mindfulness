@@ -9,7 +9,7 @@ export const Footer: FC<Props> = (props) => {
       aria-label="Site Footer"
       className={`bg-opacity-30 bg-[url('/logo/sandrine-logo.png')] bg-no-repeat`}
     >
-      <div className="max-w-screen-xl px-4 py-16 mx-auto space-y-8 sm:px-6 lg:space-y-16 lg:px-8">
+      <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-teal-600">
             <svg
@@ -61,7 +61,7 @@ export const Footer: FC<Props> = (props) => {
             </svg>
           </div>
 
-          <ul className="flex justify-start gap-6 mt-8 sm:mt-0 sm:justify-end">
+          <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
             <li>
               <a
                 href="/"
@@ -72,7 +72,7 @@ export const Footer: FC<Props> = (props) => {
                 <span className="sr-only">Facebook</span>
 
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -96,7 +96,7 @@ export const Footer: FC<Props> = (props) => {
                 <span className="sr-only">Instagram</span>
 
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -120,7 +120,7 @@ export const Footer: FC<Props> = (props) => {
                 <span className="sr-only">Twitter</span>
 
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -140,7 +140,7 @@ export const Footer: FC<Props> = (props) => {
                 <span className="sr-only">GitHub</span>
 
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -164,7 +164,7 @@ export const Footer: FC<Props> = (props) => {
                 <span className="sr-only">Dribbble</span>
 
                 <svg
-                  className="w-6 h-6"
+                  className="h-6 w-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -180,7 +180,7 @@ export const Footer: FC<Props> = (props) => {
           </ul>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 pt-8 border-t border-gray-100 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
+        <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
           <div>
             <p className="font-medium text-gray-900">Services</p>
 
@@ -357,7 +357,7 @@ export const Footer: FC<Props> = (props) => {
   );
 
   return (
-    <footer className="w-full p-16 border-t-2 border-amber-200 bg-amber-500 flex flex-row">
+    <footer className="flex w-full flex-row border-t-2 border-amber-200 bg-amber-500 p-16">
       <div className="border-2">FOOTER</div>
       <div className="border-2">FOOTER</div>
     </footer>

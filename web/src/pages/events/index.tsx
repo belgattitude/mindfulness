@@ -27,7 +27,7 @@ export default function EventsPage(
     <>
       <NextSeo />
 
-      <div className="container text-2xl mx-auto p-6 prose lg:prose-xl">
+      <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
         {data && (
           <div>
             {data.events?.data?.map(

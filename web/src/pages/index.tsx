@@ -87,7 +87,7 @@ export default function TestPage(
 
       <div className="w-full">
         <div
-          className="w-full relative"
+          className="relative w-full"
           css={css`
             height: 55vh;
             &:before {
@@ -111,7 +111,7 @@ export default function TestPage(
               font-weight: 700;
               //letter-spacing: 0.1rem;
             `}
-            className="p-5 text-white z-10 absolute text-xl md:text-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 p-5 text-xl text-white md:text-3xl"
           >
             <h1 className={'font-normal'}>Bienvenue</h1>
             <p
@@ -134,7 +134,7 @@ export default function TestPage(
         </div>
       </div>
 
-      <div className="container text-2xl mx-auto p-6 prose lg:prose-xl">
+      <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
         <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
         <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
         <p>

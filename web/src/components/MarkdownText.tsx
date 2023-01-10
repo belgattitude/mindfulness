@@ -11,7 +11,7 @@ export const MarkdownText: FC<Props> = (props) => {
   const { text } = props;
   return (
     <ReactMarkdown
-      className={'list-disc list-inside'}
+      className={'list-inside list-disc'}
       transformImageUri={(src, alt, title) => {
         return getStrapiURL() + src;
       }}

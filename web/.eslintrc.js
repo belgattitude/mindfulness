@@ -13,6 +13,7 @@ module.exports = {
     '@belgattitude/eslint-config-bases/typescript',
     '@belgattitude/eslint-config-bases/react',
     '@belgattitude/eslint-config-bases/react-query',
+    '@belgattitude/eslint-config-bases/tailwind',
     'next/core-web-vitals',
     // Apply prettier and disable incompatible rules
     '@belgattitude/eslint-config-bases/prettier-plugin',

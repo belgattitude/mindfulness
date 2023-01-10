@@ -48,12 +48,12 @@ export const EventDetail: FC<Props> = (props) => {
     <>
       <div
         className={
-          'fixed top-0 left-0 h-[800px] max-h-[60vh] opacity-20 w-full overflow-hidden -z-10 m-0 p-0'
+          'fixed top-0 left-0 -z-10 m-0 h-[800px] max-h-[60vh] w-full overflow-hidden p-0 opacity-20'
         }
       >
         {event.cover && (
           <Image
-            className={'object-cover absolute h-full w-full'}
+            className={'absolute h-full w-full object-cover'}
             alt="Photo retraite"
             width={1200}
             height={900}
@@ -66,7 +66,7 @@ export const EventDetail: FC<Props> = (props) => {
       </div>
       <Ctn
         className={
-          'text-gray-700 prose-ul:list-inside marker:text-purple-600 marker:mr-0 prose-ul:list-disc prose-h1:mb-1 prose-ul:p-0 prose-li:pl-0 prose-h1:font-normal prose-a:text-blue-600 prose md:prose-xl lg:prose-2xl bg-white m-4 p-4 md:p-8 lg:p-16 md:m-8 lg:m-16 border-gray-100 border-1 rounded-2xl shadow-lg'
+          'prose-ul:list-inside prose-ul:list-disc prose-h1:mb-1 prose-ul:p-0 prose-li:pl-0 prose-h1:font-normal prose-a:text-blue-600 prose md:prose-xl lg:prose-2xl border-1 m-4 rounded-2xl border-gray-100 bg-white p-4 text-gray-700 shadow-lg marker:mr-0 marker:text-purple-600 md:m-8 md:p-8 lg:m-16 lg:p-16'
         }
       >
         <div className={'hello'}>

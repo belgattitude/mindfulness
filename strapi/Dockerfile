@@ -21,6 +21,5 @@ WORKDIR /app
 COPY ./ .
 RUN yarn build
 EXPOSE 1337
-CMD ["yarn", "develop"]
-#CMD ["./node_modules/.bin/strapi", "develop"]
+CMD ["./node_modules/.bin/strapi", "develop"]
 

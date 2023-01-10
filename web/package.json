@@ -40,6 +40,7 @@
     "remark-gfm": "3.0.1",
     "remark-html": "15.0.1",
     "rooks": "7.4.3",
+    "sharp": "0.31.3",
     "zod": "3.20.2"
   },
   "devDependencies": {

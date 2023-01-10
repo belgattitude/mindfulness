@@ -45,7 +45,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
   return (
     <MainNavCtn
-      className={`fixed top-0 z-50 w-full border-b border-gray-200 shadow-lg backdrop-blur backdrop-filter`}
+      className={`fixed top-0 z-50 w-full border-b border-gray-200 shadow-lg backdrop-blur`}
       css={css`
         background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 1 : 0.9});
         .left {
@@ -78,13 +78,13 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         }
       `}
     >
-      <div className={`container mx-auto p-6 gap-2 flex p-2`}>
+      <div className={`container mx-auto flex gap-2 p-2`}>
         <div
           className="left"
           // style={{ width: onTop ? '100px' : '30px' }}
         >
           <div
-            className={'transition-all delay-[2s]]'}
+            className={'delay-[2s]] transition-all'}
             style={{ width: scrollIsOnTop ? '60px' : '30px' }}
           >
             <Link href={'/'}>
@@ -92,7 +92,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                 alt={'Sandrine Rauter logo'}
                 src={logo}
                 className={
-                  'transition-all delay-[2s] opacity-90 hover:opacity-100'
+                  'opacity-90 transition-all delay-[2s] hover:opacity-100'
                 }
                 fill={true}
                 priority={true}
@@ -107,13 +107,13 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         </div>
         <div className={'left'}>
           <div
-            className={'transition-all delay-450'}
+            className={'delay-450 transition-all'}
             style={{ width: scrollIsOnTop ? '220px' : '100px' }}
           >
             <Image
               alt={'Sandrine Rauter logo with name'}
               src={logoWithName}
-              className={'transition-all delay-450'}
+              className={'delay-450 transition-all'}
               fill={true}
               priority={true}
               quality={85}
@@ -127,10 +127,10 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
         <div
           className={
-            'hidden md:flex flex-col align-baseline justify-end justify-items-end flex-grow gap-5'
+            'hidden grow flex-col justify-end justify-items-end gap-5 align-baseline md:flex'
           }
         >
-          <div className="text-xl space-x-12">
+          <div className="space-x-12 text-xl">
             {mainNavData.map((link) => {
               return (
                 <Link className={'text-xl'} key={link.href} href={link.href}>

@@ -23,7 +23,7 @@ export const EventCard: FC<Props> = (props) => {
 
   return (
     <div className="max-w-sm overflow-hidden rounded shadow-lg">
-      <div className="aspect-w-16 aspect-h-9 h-56 lg:aspect-none">
+      <div className="aspect-w-16 aspect-h-9 lg:aspect-none h-56">
         {event.cover && (
           <Image
             alt="Cover event"
@@ -46,7 +46,7 @@ export const EventCard: FC<Props> = (props) => {
           endAt={event.endAt}
           className="text-indigo-600 first-letter:capitalize"
         />
-        <p className="text-base text-gray-700 line-clamp-4">{event.summary}</p>
+        <p className="line-clamp-4 text-base text-gray-700">{event.summary}</p>
       </article>
       <div className="px-6 pt-4 pb-2">
         {keywords.map((keyword) => {
