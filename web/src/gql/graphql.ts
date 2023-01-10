@@ -95,6 +95,7 @@ export type Event = {
   endAt: Scalars['DateTime'];
   flyer?: Maybe<UploadFileEntityResponse>;
   location?: Maybe<Scalars['String']>;
+  online: Scalars['Boolean'];
   organizers?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug: Scalars['String'];
@@ -131,6 +132,7 @@ export type EventFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   location?: InputMaybe<StringFilterInput>;
   not?: InputMaybe<EventFiltersInput>;
+  online?: InputMaybe<BooleanFilterInput>;
   or?: InputMaybe<Array<InputMaybe<EventFiltersInput>>>;
   organizers?: InputMaybe<StringFilterInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -149,6 +151,7 @@ export type EventInput = {
   endAt?: InputMaybe<Scalars['DateTime']>;
   flyer?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
+  online?: InputMaybe<Scalars['Boolean']>;
   organizers?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;

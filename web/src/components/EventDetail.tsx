@@ -30,11 +30,10 @@ const Ctn = styled.div`
   }
   .description {
     h1 {
-      font-size: 1.2em;
-      text-transform: lowercase;
+      //font-size: 1.2em;
       font-family: var(--font-handwritten);
-      margin-bottom: 0;
-      padding: 0;
+      //margin-bottom: 0;
+      //padding: 0;
     }
   }
 `;
@@ -67,7 +66,7 @@ export const EventDetail: FC<Props> = (props) => {
       </div>
       <Ctn
         className={
-          'text-gray-700 prose-ul:list-inside prose-ul:list-disc prose-a:text-blue-600 prose-xl md:prose-xl lg:prose-2xl bg-white m-4 p-4 md:p-8 lg:p-16 md:m-8 lg:m-16 border-gray-100 border-1 rounded-2xl shadow-lg'
+          'text-gray-700 prose-ul:list-inside marker:text-purple-600 marker:mr-0 prose-ul:list-disc prose-h1:mb-1 prose-ul:p-0 prose-li:pl-0 prose-h1:font-normal prose-a:text-blue-600 prose md:prose-xl lg:prose-2xl bg-white m-4 p-4 md:p-8 lg:p-16 md:m-8 lg:m-16 border-gray-100 border-1 rounded-2xl shadow-lg'
         }
       >
         <div className={'hello'}>

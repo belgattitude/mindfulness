@@ -84,6 +84,11 @@
       "type": "string",
       "maxLength": 150,
       "minLength": 3
+    },
+    "online": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

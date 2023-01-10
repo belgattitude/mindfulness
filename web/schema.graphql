@@ -26,6 +26,7 @@ type Event {
     endAt: DateTime!
     flyer: UploadFileEntityResponse
     location: String
+    online: Boolean!
     organizers: String
     publishedAt: DateTime
     slug: String!
@@ -405,6 +406,7 @@ input EventFiltersInput {
     id: IDFilterInput
     location: StringFilterInput
     not: EventFiltersInput
+    online: BooleanFilterInput
     or: [EventFiltersInput]
     organizers: StringFilterInput
     publishedAt: DateTimeFilterInput
@@ -423,6 +425,7 @@ input EventInput {
     endAt: DateTime
     flyer: ID
     location: String
+    online: Boolean
     organizers: String
     publishedAt: DateTime
     slug: String

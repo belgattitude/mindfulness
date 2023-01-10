@@ -14,6 +14,7 @@ const fullEventFragment = graphql(/* GraphQL */ `
     displayTitle
     location
     organizers
+    online
     summary
     description
     startAt
