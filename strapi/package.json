@@ -1,14 +1,17 @@
 {
-  "name": "strapi",
+  "name": "mindfulness-strapi",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Mindfulness website",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "clean": "rimraf '**/node_modules' '.cache' 'build'"
+    "deps:check": "npx npm-check-updates@latest --configFileName ncurc.yml",
+    "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml",
+    "clean": "rimraf '**/node_modules' '.cache' 'build'",
+    "docker:build": "docker compose build"
   },
   "dependencies": {
     "@strapi/plugin-graphql": "4.5.5",

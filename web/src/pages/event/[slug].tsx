@@ -27,16 +27,7 @@ export default function EventPage(
   return (
     <>
       <NextSeo />
-
-      <div className="container text-2xl mx-auto p-6 prose lg:prose-xl">
-        <div>Activités &gt; Agenda &gt; Retraite</div>
-
-        {data && (
-          <div>
-            {data.attributes && <EventDetail event={data.attributes} />}
-          </div>
-        )}
-      </div>
+      {data?.attributes && <EventDetail event={data.attributes} />}
     </>
   );
 }

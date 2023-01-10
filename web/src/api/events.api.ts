@@ -11,6 +11,9 @@ const fullEventFragment = graphql(/* GraphQL */ `
     publishedAt
     slug
     title
+    displayTitle
+    location
+    organizers
     summary
     description
     startAt

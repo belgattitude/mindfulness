@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import {
@@ -6,6 +6,8 @@ import {
   Inter,
   Crimson_Pro,
   Yanone_Kaffeesatz,
+  Bad_Script,
+  Marck_Script,
 } from '@next/font/google';
 import {
   Hydrate,
@@ -31,7 +33,7 @@ const yanone = Yanone_Kaffeesatz({
   variable: '--font-yanone',
 });
 
-const handwritten = Parisienne({
+const handwritten = Marck_Script({
   weight: ['400'],
   variable: '--font-handwritten',
 });

@@ -22,8 +22,11 @@ type Event {
     cover: UploadFileEntityResponse
     createdAt: DateTime
     description: String!
+    displayTitle: String
     endAt: DateTime!
     flyer: UploadFileEntityResponse
+    location: String
+    organizers: String
     publishedAt: DateTime
     slug: String!
     startAt: DateTime!
@@ -397,10 +400,13 @@ input EventFiltersInput {
     and: [EventFiltersInput]
     createdAt: DateTimeFilterInput
     description: StringFilterInput
+    displayTitle: StringFilterInput
     endAt: DateTimeFilterInput
     id: IDFilterInput
+    location: StringFilterInput
     not: EventFiltersInput
     or: [EventFiltersInput]
+    organizers: StringFilterInput
     publishedAt: DateTimeFilterInput
     slug: StringFilterInput
     startAt: DateTimeFilterInput
@@ -413,8 +419,11 @@ input EventFiltersInput {
 input EventInput {
     cover: ID
     description: String
+    displayTitle: String
     endAt: DateTime
     flyer: ID
+    location: String
+    organizers: String
     publishedAt: DateTime
     slug: String
     startAt: DateTime

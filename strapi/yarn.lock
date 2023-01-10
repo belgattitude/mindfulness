@@ -10532,6 +10532,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mindfulness-strapi@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "mindfulness-strapi@workspace:."
+  dependencies:
+    "@strapi/plugin-graphql": "npm:4.5.5"
+    "@strapi/plugin-i18n": "npm:4.5.5"
+    "@strapi/plugin-users-permissions": "npm:4.5.5"
+    "@strapi/strapi": "npm:4.5.5"
+    babel-eslint: "npm:10.1.0"
+    better-sqlite3: "npm:8.0.1"
+    eslint: "npm:8.31.0"
+    rimraf: "npm:3.0.2"
+  languageName: unknown
+  linkType: soft
+
 "mini-create-react-context@npm:^0.4.0":
   version: 0.4.1
   resolution: "mini-create-react-context@npm:0.4.1"
@@ -13714,21 +13729,6 @@ __metadata:
   checksum: 85defed899e95b254f919d122692d08ba63b87aa8c453b32392743968c447554a130b1f33874f34be6bb1c28cba7bdce55b0ccb6d3dfd57f13a7bd817a59f4d2
   languageName: node
   linkType: hard
-
-"strapi@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "strapi@workspace:."
-  dependencies:
-    "@strapi/plugin-graphql": "npm:4.5.5"
-    "@strapi/plugin-i18n": "npm:4.5.5"
-    "@strapi/plugin-users-permissions": "npm:4.5.5"
-    "@strapi/strapi": "npm:4.5.5"
-    babel-eslint: "npm:10.1.0"
-    better-sqlite3: "npm:8.0.1"
-    eslint: "npm:8.31.0"
-    rimraf: "npm:3.0.2"
-  languageName: unknown
-  linkType: soft
 
 "stream-browserify@npm:^3.0.0":
   version: 3.0.0

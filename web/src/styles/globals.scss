@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+:root {
+  --main-nav-full-height: 60px;
+  --main-nav-reduced-height: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --main-nav-full-height: 60px;
+    --main-nav-reduced-height: 40px;
+  }
+}
+

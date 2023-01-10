@@ -49,7 +49,8 @@ let nextConfig = {
   eslint: { ignoreDuringBuilds: !!process.env.CI },
 
   images: {
-    domains: [strapiHostname],
+    domains: [strapiHostname, 'images.unsplash.com'],
+    minimumCacheTTL: 86_400,
   },
 
   async headers() {
@@ -73,8 +74,6 @@ let nextConfig = {
     ],
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     esmExternals: true,
-    // @link {https://github.com/vercel/next.js/discussions/26420|Discussion}
-    externalDir: true,
   },
 };
 

@@ -69,6 +69,21 @@
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "displayTitle": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 140
+    },
+    "location": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 3
+    },
+    "organizers": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 3
     }
   }
 }
