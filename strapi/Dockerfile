@@ -27,7 +27,7 @@ RUN NODE_ENV=production yarn build
 
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as runner
-RUN apk update && apk add --no-cache vips
+RUN apk update && apk add --no-cache vips-dev
 RUN corepack enable
 
 WORKDIR /app
