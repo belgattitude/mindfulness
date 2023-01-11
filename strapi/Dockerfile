@@ -14,6 +14,7 @@ WORKDIR /app
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
 RUN --mount=type=cache,target=/app/.yarn-cache \
+    rm /app/.yarn/docker/install-state.gz \
     YARN_CACHE_FOLDER=/app/.yarn-cache \
     yarn install --immutable --inline-builds
 
