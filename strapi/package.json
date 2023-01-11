@@ -9,15 +9,15 @@
     "build": "strapi build",
     "strapi": "strapi",
     "deps:check": "npx npm-check-updates@latest --configFileName ncurc.yml",
-    "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml",
+    "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml -u",
     "clean": "rimraf '**/node_modules' '.cache' 'build'",
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-graphql": "4.5.5",
-    "@strapi/plugin-i18n": "4.5.5",
-    "@strapi/plugin-users-permissions": "4.5.5",
-    "@strapi/strapi": "4.5.5",
+    "@strapi/plugin-graphql": "4.5.6",
+    "@strapi/plugin-i18n": "4.5.6",
+    "@strapi/plugin-users-permissions": "4.5.6",
+    "@strapi/strapi": "4.5.6",
     "better-sqlite3": "8.0.1"
   },
   "devDependencies": {
