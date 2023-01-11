@@ -53,6 +53,16 @@ let nextConfig = {
     minimumCacheTTL: 86_400,
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/content-admin',
+        destination: `${strapiUrl}/admin`,
+        permanent: false,
+      },
+    ]
+  },
+
   async headers() {
     return [
       {

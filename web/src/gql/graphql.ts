@@ -86,6 +86,11 @@ export enum Enum_Event_Universe {
   Yoga = 'yoga'
 }
 
+export enum Enum_Programme_Universe {
+  Mindfulness = 'mindfulness',
+  Yoga = 'yoga'
+}
+
 export type Event = {
   __typename?: 'Event';
   cover?: Maybe<UploadFileEntityResponse>;
@@ -191,7 +196,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Page | Programme | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -306,6 +311,8 @@ export type Mutation = {
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createEvent?: Maybe<EventEntityResponse>;
+  createPage?: Maybe<PageEntityResponse>;
+  createProgramme?: Maybe<ProgrammeEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -313,6 +320,8 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteEvent?: Maybe<EventEntityResponse>;
+  deletePage?: Maybe<PageEntityResponse>;
+  deleteProgramme?: Maybe<ProgrammeEntityResponse>;
   deleteTest?: Maybe<TestEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -333,6 +342,8 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateEvent?: Maybe<EventEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
+  updatePage?: Maybe<PageEntityResponse>;
+  updateProgramme?: Maybe<ProgrammeEntityResponse>;
   updateTest?: Maybe<TestEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -353,6 +364,16 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateEventArgs = {
   data: EventInput;
+};
+
+
+export type MutationCreatePageArgs = {
+  data: PageInput;
+};
+
+
+export type MutationCreateProgrammeArgs = {
+  data: ProgrammeInput;
 };
 
 
@@ -377,6 +398,16 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 
 export type MutationDeleteEventArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeletePageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteProgrammeArgs = {
   id: Scalars['ID'];
 };
 
@@ -453,6 +484,18 @@ export type MutationUpdateFileInfoArgs = {
 };
 
 
+export type MutationUpdatePageArgs = {
+  data: PageInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateProgrammeArgs = {
+  data: ProgrammeInput;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateTestArgs = {
   data: TestInput;
 };
@@ -490,6 +533,61 @@ export type MutationUploadArgs = {
   refId?: InputMaybe<Scalars['ID']>;
 };
 
+export type Page = {
+  __typename?: 'Page';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  programmes?: Maybe<ProgrammeRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type PageProgrammesArgs = {
+  filters?: InputMaybe<ProgrammeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PageEntity = {
+  __typename?: 'PageEntity';
+  attributes?: Maybe<Page>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type PageEntityResponse = {
+  __typename?: 'PageEntityResponse';
+  data?: Maybe<PageEntity>;
+};
+
+export type PageEntityResponseCollection = {
+  __typename?: 'PageEntityResponseCollection';
+  data: Array<PageEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type PageFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<PageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
+  programmes?: InputMaybe<ProgrammeFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  summary?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type PageInput = {
+  programmes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  summary?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   page: Scalars['Int'];
@@ -505,6 +603,63 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']>;
 };
 
+export type Programme = {
+  __typename?: 'Programme';
+  cover?: Maybe<UploadFileEntityResponse>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  universe?: Maybe<Enum_Programme_Universe>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ProgrammeEntity = {
+  __typename?: 'ProgrammeEntity';
+  attributes?: Maybe<Programme>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ProgrammeEntityResponse = {
+  __typename?: 'ProgrammeEntityResponse';
+  data?: Maybe<ProgrammeEntity>;
+};
+
+export type ProgrammeEntityResponseCollection = {
+  __typename?: 'ProgrammeEntityResponseCollection';
+  data: Array<ProgrammeEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ProgrammeFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ProgrammeFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ProgrammeFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ProgrammeFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  universe?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ProgrammeInput = {
+  cover?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  slug?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  universe?: InputMaybe<Enum_Programme_Universe>;
+};
+
+export type ProgrammeRelationResponseCollection = {
+  __typename?: 'ProgrammeRelationResponseCollection';
+  data: Array<ProgrammeEntity>;
+};
+
 export enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW'
@@ -517,6 +672,10 @@ export type Query = {
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  page?: Maybe<PageEntityResponse>;
+  pages?: Maybe<PageEntityResponseCollection>;
+  programme?: Maybe<ProgrammeEntityResponse>;
+  programmes?: Maybe<ProgrammeEntityResponseCollection>;
   test?: Maybe<TestEntityResponse>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
@@ -550,6 +709,32 @@ export type QueryI18NLocaleArgs = {
 export type QueryI18NLocalesArgs = {
   filters?: InputMaybe<I18NLocaleFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryPageArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryPagesArgs = {
+  filters?: InputMaybe<PageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryProgrammeArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryProgrammesArgs = {
+  filters?: InputMaybe<ProgrammeFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1046,6 +1231,7 @@ export type GetEventQuery = { __typename?: 'Query', events?: { __typename?: 'Eve
 
 export type SearchEventsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
+  publicationState?: InputMaybe<PublicationState>;
   dateMin?: InputMaybe<Scalars['DateTime']>;
 }>;
 
@@ -1057,4 +1243,4 @@ export type SearchEventsQuery = { __typename?: 'Query', events?: { __typename?: 
 
 export const FullEventFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FullEventFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Event"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"displayTitle"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"organizers"}},{"kind":"Field","name":{"kind":"Name","value":"online"}},{"kind":"Field","name":{"kind":"Name","value":"summary"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"startAt"}},{"kind":"Field","name":{"kind":"Name","value":"endAt"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}}]}}]}}]}}]}}]} as unknown as DocumentNode<FullEventFragmentFragment, unknown>;
 export const GetEventDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getEvent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetEventQuery, GetEventQueryVariables>;
-export const SearchEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchEvents"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"100"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}},"defaultValue":{"kind":"StringValue","value":"2020-02-28T03:00:00.000Z","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"publishedAt:DESC","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"pageCount"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<SearchEventsQuery, SearchEventsQueryVariables>;
+export const SearchEventsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"searchEvents"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}},"defaultValue":{"kind":"IntValue","value":"100"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"publicationState"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PublicationState"}},"defaultValue":{"kind":"EnumValue","value":"LIVE"}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}},"defaultValue":{"kind":"StringValue","value":"2020-02-28T03:00:00.000Z","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"events"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"publishedAt:DESC","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startAt"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dateMin"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"page"},"value":{"kind":"IntValue","value":"1"}},{"kind":"ObjectField","name":{"kind":"Name","value":"pageSize"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"publicationState"},"value":{"kind":"Variable","name":{"kind":"Name","value":"publicationState"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FullEventFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pagination"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"page"}},{"kind":"Field","name":{"kind":"Name","value":"pageSize"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"pageCount"}}]}}]}}]}}]}},...FullEventFragmentFragmentDoc.definitions]} as unknown as DocumentNode<SearchEventsQuery, SearchEventsQueryVariables>;

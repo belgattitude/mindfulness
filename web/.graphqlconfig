@@ -1,10 +1,10 @@
 {
-  "name": "Untitled GraphQL Schema",
+  "name": "Mindfulness schema",
   "schemaPath": "schema.graphql",
   "extensions": {
     "endpoints": {
-      "Default GraphQL Endpoint": {
-        "url": "http://localhost:1337/graphql",
+      "Graphql Endpoint": {
+        "url": "https://mindfulness.failwell.be/graphql",
         "headers": {
           "user-agent": "JS GraphQL"
         },

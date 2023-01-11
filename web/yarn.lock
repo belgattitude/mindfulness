@@ -750,6 +750,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@colors/colors@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@colors/colors@npm:1.5.0"
+  checksum: 5e08870799494f68e5b3b79e9a337bbf5fd7e634904fbbe642769921bf158fe458c41c888f88edf051b78c5325e3339970f00b24e31421c3480bb58f02687218
+  languageName: node
+  linkType: hard
+
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
   resolution: "@cspotcode/source-map-support@npm:0.8.1"
@@ -931,6 +938,67 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@envelop/core@npm:^2.0.0":
+  version: 2.6.0
+  resolution: "@envelop/core@npm:2.6.0"
+  dependencies:
+    "@envelop/types": "npm:2.4.0"
+    tslib: "npm:2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: afd5fe4b6e2540b2572e399b2fbd6fa138b04420b6f379fdbe28ed668f634e6938433b89ad80e0355ce0cdeb6026daa1c866d6a893fd2fba0dac254f57c5e4c6
+  languageName: node
+  linkType: hard
+
+"@envelop/disable-introspection@npm:^3.0.0":
+  version: 3.6.0
+  resolution: "@envelop/disable-introspection@npm:3.6.0"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@envelop/core": ^2.6.0
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 64399e1bcb879590610d6420b4f1256310b0793b76aca892f262df5e2793a17579f22e8165dd54138831a6cf31681f97cbaf327be7a32ed0ba5eb9e72cefcc10
+  languageName: node
+  linkType: hard
+
+"@envelop/parser-cache@npm:^4.0.0":
+  version: 4.7.0
+  resolution: "@envelop/parser-cache@npm:4.7.0"
+  dependencies:
+    lru-cache: "npm:^6.0.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@envelop/core": ^2.6.0
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: f9ddb672fba4015de8b4f093f8b867c52ba8d373f1324d3507a13faa372cd4e4fc6e5d66185c62e06ac25a155c401678101addbad9d781ff6b6750358b39f15b
+  languageName: node
+  linkType: hard
+
+"@envelop/types@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@envelop/types@npm:2.4.0"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 79e0fe633c281d0bd89fa97bbbcffcfd135c05fb2440680d468d96712d54d4c8e6ae82cb22a87e1161b89de69140deff2d34c2fedb7449a05e666e34ba91a3ce
+  languageName: node
+  linkType: hard
+
+"@envelop/validation-cache@npm:^4.0.0":
+  version: 4.7.0
+  resolution: "@envelop/validation-cache@npm:4.7.0"
+  dependencies:
+    lru-cache: "npm:^6.0.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@envelop/core": ^2.6.0
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 2f31d8c75c611f5949f29591e47ee7eb382a4e1bec21388c60aac20e6f883ee8daf8359e35f06d9f27aaa8b75406899cfe61041c8b786691eec2f8073ed0f528
+  languageName: node
+  linkType: hard
+
 "@eslint/eslintrc@npm:^1.4.1":
   version: 1.4.1
   resolution: "@eslint/eslintrc@npm:1.4.1"
@@ -1081,6 +1149,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/plugin-helpers@npm:^2.7.2":
+  version: 2.7.2
+  resolution: "@graphql-codegen/plugin-helpers@npm:2.7.2"
+  dependencies:
+    "@graphql-tools/utils": "npm:^8.8.0"
+    change-case-all: "npm:1.0.14"
+    common-tags: "npm:1.8.2"
+    import-from: "npm:4.0.0"
+    lodash: "npm:~4.17.0"
+    tslib: "npm:~2.4.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 1b6d5f599395e6c91895766e19a7f4bd25e212cdb27928500dc54a592b84d42f0eada8f8b7ebd6172cb6f611cef0e70426d8cb1d70f363bd2bb412b7340053f4
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/plugin-helpers@npm:^3.1.1, @graphql-codegen/plugin-helpers@npm:^3.1.2":
   version: 3.1.2
   resolution: "@graphql-codegen/plugin-helpers@npm:3.1.2"
@@ -1140,6 +1224,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/typescript-react-query@npm:4.0.6":
+  version: 4.0.6
+  resolution: "@graphql-codegen/typescript-react-query@npm:4.0.6"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^2.7.2"
+    "@graphql-codegen/visitor-plugin-common": "npm:2.13.1"
+    auto-bind: "npm:~4.0.0"
+    change-case-all: "npm:1.0.14"
+    tslib: "npm:~2.4.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: aaacc6543494cf23683965f42dde88fe4b93c3d049f84e47e77ea67175090cc403229149dbfcc7cc41ea20129fe0511863beba357e24dbc3636eb5dd425be398
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/typescript@npm:2.8.7, @graphql-codegen/typescript@npm:^2.8.7":
   version: 2.8.7
   resolution: "@graphql-codegen/typescript@npm:2.8.7"
@@ -1152,6 +1251,26 @@ __metadata:
   peerDependencies:
     graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: ae076ab151e28b86ed35cb8f651c5475ab376e654ab21290b6dc26c1747bc5efef31b5ea41047d7a07adc5e389b1a1dabf468d84f7e9ff576558335cd040c1f5
+  languageName: node
+  linkType: hard
+
+"@graphql-codegen/visitor-plugin-common@npm:2.13.1":
+  version: 2.13.1
+  resolution: "@graphql-codegen/visitor-plugin-common@npm:2.13.1"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^2.7.2"
+    "@graphql-tools/optimize": "npm:^1.3.0"
+    "@graphql-tools/relay-operation-optimizer": "npm:^6.5.0"
+    "@graphql-tools/utils": "npm:^8.8.0"
+    auto-bind: "npm:~4.0.0"
+    change-case-all: "npm:1.0.14"
+    dependency-graph: "npm:^0.11.0"
+    graphql-tag: "npm:^2.11.0"
+    parse-filepath: "npm:^1.0.2"
+    tslib: "npm:~2.4.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 2b72ec71be9e7cc56ac3102e521979cb33691493546e27efe1dc4262fdd975d948bfbcb22e6b05c721d2660c243a93b74fea58410add1b740136ce7207503c5c
   languageName: node
   linkType: hard
 
@@ -1172,6 +1291,275 @@ __metadata:
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 42a7cef36bd0148709e81e2327887b8e7720a2ee0e5eec82b4dfd208f54a4ff83c8f411f52a6ec35d5cf7a3716af78ab83d242e6a3ba59716b97ec05be2b488a
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/audit-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/audit-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    cli-table3: "npm:0.6.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 95e76fc9e5edf2d165749fcc38a0fdc5d48988390b6f92fbb427c8464eaba5de9d3c53b1b495b2d84282315ebf2ee9d9a1a5ecd345cb9e6d10b17c7fe32087d2
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/cli@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/cli@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/audit-command": "npm:3.4.0"
+    "@graphql-inspector/code-loader": "npm:3.4.0"
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/coverage-command": "npm:3.4.0"
+    "@graphql-inspector/diff-command": "npm:3.4.0"
+    "@graphql-inspector/docs-command": "npm:3.4.0"
+    "@graphql-inspector/git-loader": "npm:3.4.0"
+    "@graphql-inspector/github-loader": "npm:3.4.0"
+    "@graphql-inspector/graphql-loader": "npm:3.4.0"
+    "@graphql-inspector/introspect-command": "npm:3.4.0"
+    "@graphql-inspector/json-loader": "npm:3.4.0"
+    "@graphql-inspector/loaders": "npm:3.4.0"
+    "@graphql-inspector/serve-command": "npm:3.4.0"
+    "@graphql-inspector/similar-command": "npm:3.4.0"
+    "@graphql-inspector/url-loader": "npm:3.4.0"
+    "@graphql-inspector/validate-command": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+    yargs: "npm:17.2.1"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+  bin:
+    graphql-inspector: index.js
+  checksum: a4e36c30537511fb187e97fa69462e31b34e5d60fa4de764dd063d464ee3c734fa7368e818c74299174aa2b5454adeeec078e6d5e6e5b9bfa5bdd4b7c3364b94
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/code-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/code-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/code-file-loader": "npm:^7.2.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: c8dfc51810bafd2608f8d734cd6809e51067cfd8aa2f5dcd90e23d8c7153af34f3994f546b42b6cca489f96e5d52d692c77ac4cf101e51e3ac77cd7a8136bd96
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/commands@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/commands@npm:3.4.0"
+  dependencies:
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@graphql-inspector/config": 3.4.0
+    "@graphql-inspector/loaders": 3.4.0
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    yargs: 17.2.1
+  checksum: dc8c43b7c2a4cc0b59bb35ef25fb454a59390fe2bac4d4d2284fdd5ec021352555381f44895b64d95cbdb52b2c3378c8a9f18836990e814db38e8f8611cbb849
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/core@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/core@npm:3.4.0"
+  dependencies:
+    dependency-graph: "npm:0.11.0"
+    object-inspect: "npm:1.10.3"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: cefdf9fbd20adc0c3515f27b7914d98d8754755efb88f956107dc33273c7c02b8bc4e39207ec9c08f0e0357e86a6bbe5063b5dd492d6465a0b46c92b5b825e36
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/coverage-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/coverage-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 9c95999b9ff274e2ec31aff6919a5738071bdfb06503e6922859dc6f380b3e06f038b855e457138d9460fc1c866798efc1ca595a5df92de20178609878499393
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/diff-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/diff-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: c0173b35fa8064ab6a8c3b2498a752997702b32d45701b6c58672ecfe221ecdeea0f0bb244e78f813b2a7c3dfcb29f2f8dd631dbaaec917ba06d8637d794c9a3
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/docs-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/docs-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    open: "npm:8.2.1"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 410c6abe0ac81a3868420d0a10fb6ce45e56925ac9e99dd3a062cd55ad9d7fda1fa5d26a26dceac8c83a3271096ad826fe532da96c55454511ee929b321cdfa1
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/git-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/git-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/git-loader": "npm:^7.1.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 9dc41c24ede594d465cef64bf7ab80fbb443419c6cab895539fa8dc33b6c6c43aa33d6fb964e1c622866042d035ea1e75a8be16eb6fa78fb0092fad7a216f728
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/github-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/github-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/github-loader": "npm:^7.1.1"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: d1d8a9cff9143f72071c1f81e5b1cc86dfeb87d3ce1f5a2e87dfde998442c544ae48bab31648f27995305ae33e6c05de9ceb16376ddcbe8647ded96f4c12e8f4
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/graphql-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/graphql-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/graphql-file-loader": "npm:^7.3.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 29421f53a53f979a2fe227d994446c23d938daa1e73fa71f027cbfa7a01270fd51ea6c82e153730b8b0584aa2687c352948b7fe976df2ef787c1727f3424c276
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/introspect-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/introspect-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: dbc2cb76778a18ba009186173b940e5b4d4000b8d8bdde53ce3c44ea7f6e59534a77d913c1cd2c35ab0c37c1682012db7e5b7dba780223a8208f2d9d3265fc44
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/json-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/json-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/json-file-loader": "npm:^7.3.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 914e54790fbc76194701d79fa873e3d099ca324ca26fec5e09e5116da687c37a73524ee47fa1ae2c44ec996376c6ab39ef2eb4e234cf717f709597b3b8dffc5c
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/loaders@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/loaders@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/load": "npm:^7.4.1"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    "@graphql-inspector/config": 3.4.0
+    "@graphql-tools/utils": ^6.0.0 || ^7.0.0 || ^8.0.0
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 6600d4aba564636c82f40f190d9421d142b8188f40deca6a6bf58b73f3e5698255969815e93f4636b927edba257d71cb58cd412dc73c93726bdb8d7a4ea4700a
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/logger@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/logger@npm:3.4.0"
+  dependencies:
+    chalk: "npm:4.1.2"
+    figures: "npm:3.2.0"
+    log-symbols: "npm:^4.1.0"
+    std-env: "npm:2.3.0"
+    tslib: "npm:^2.0.0"
+  checksum: 3788cf3a9cdd7e0f1e7931d2caf91ceaa0496b7e3a2e3fe25f03c093cb1f15753c2baa0c622c07ffe77f43a7966ec3e6359c6885c1eab07d6a4a6be0531d009c
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/serve-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/serve-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    "@graphql-yoga/node": "npm:2.0.0"
+    open: "npm:8.2.1"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 748ac205e06783d032bb9030ef541d7faa1d62666ef95f787b23e962dfcbb078005b8386ff2112d4e0ee9fcb49155573655f46c0aa7a0b37da4fb6286e74e20c
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/similar-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/similar-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: d7407b9db8f7d9dd6818f1bc085fa951d0a3c75adc3896b7c5ffcd31c8855ecefd378d29affaffd423d1fff351a4cba670ae79c3f5d334d78ea3d5e1d64f7a66
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/url-loader@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/url-loader@npm:3.4.0"
+  dependencies:
+    "@graphql-tools/url-loader": "npm:^7.4.2"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: f5aadb0f7dde54983568756c86308a616a6fec851dcaeefa375791c22b9976eb258b2baaa0b7bdd78548bfcc17286cd7520fc64925471b4443c0c45d093335e6
+  languageName: node
+  linkType: hard
+
+"@graphql-inspector/validate-command@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graphql-inspector/validate-command@npm:3.4.0"
+  dependencies:
+    "@graphql-inspector/commands": "npm:3.4.0"
+    "@graphql-inspector/core": "npm:3.4.0"
+    "@graphql-inspector/logger": "npm:3.4.0"
+    tslib: "npm:^2.0.0"
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 756383070062498cb5fc72934d7a9d97b34b15010fc8e4a5b8081bfe3783d4d1c739f075b6b34ffbe0254461db02e4ed8fc41abce95bc6f71784e33513bbafcb
   languageName: node
   linkType: hard
 
@@ -1203,7 +1591,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/code-file-loader@npm:^7.3.13":
+"@graphql-tools/code-file-loader@npm:^7.2.2, @graphql-tools/code-file-loader@npm:^7.3.13":
   version: 7.3.15
   resolution: "@graphql-tools/code-file-loader@npm:7.3.15"
   dependencies:
@@ -1300,7 +1688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/git-loader@npm:^7.2.13":
+"@graphql-tools/git-loader@npm:^7.1.2, @graphql-tools/git-loader@npm:^7.2.13":
   version: 7.2.15
   resolution: "@graphql-tools/git-loader@npm:7.2.15"
   dependencies:
@@ -1316,7 +1704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/github-loader@npm:^7.3.20":
+"@graphql-tools/github-loader@npm:^7.1.1, @graphql-tools/github-loader@npm:^7.3.20":
   version: 7.3.22
   resolution: "@graphql-tools/github-loader@npm:7.3.22"
   dependencies:
@@ -1331,7 +1719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/graphql-file-loader@npm:^7.3.7, @graphql-tools/graphql-file-loader@npm:^7.5.0":
+"@graphql-tools/graphql-file-loader@npm:^7.3.2, @graphql-tools/graphql-file-loader@npm:^7.3.7, @graphql-tools/graphql-file-loader@npm:^7.5.0":
   version: 7.5.13
   resolution: "@graphql-tools/graphql-file-loader@npm:7.5.13"
   dependencies:
@@ -1375,7 +1763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/json-file-loader@npm:^7.3.7, @graphql-tools/json-file-loader@npm:^7.4.1":
+"@graphql-tools/json-file-loader@npm:^7.3.2, @graphql-tools/json-file-loader@npm:^7.3.7, @graphql-tools/json-file-loader@npm:^7.4.1":
   version: 7.4.14
   resolution: "@graphql-tools/json-file-loader@npm:7.4.14"
   dependencies:
@@ -1403,7 +1791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/load@npm:^7.5.5":
+"@graphql-tools/load@npm:^7.4.1, @graphql-tools/load@npm:^7.5.5":
   version: 7.8.8
   resolution: "@graphql-tools/load@npm:7.8.8"
   dependencies:
@@ -1414,6 +1802,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: ca0f41291a6abd64167b3e43980a8b8c19cab1ab2d480a754953820b10124fcfa0e56d9aef23af997a2222a2c0475ca64aec65af2dedd2ace82a79a8ad6a4156
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/merge@npm:8.3.1":
+  version: 8.3.1
+  resolution: "@graphql-tools/merge@npm:8.3.1"
+  dependencies:
+    "@graphql-tools/utils": "npm:8.9.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: b2ae1c30e386ccfe2d22c048b52905f9ceadd9e2d142174dd767a7cb116adf9ee8c9d4e2e16931570a0659f54be940ae1fa65a8036b265eeb74e7d0d527711f4
   languageName: node
   linkType: hard
 
@@ -1522,7 +1922,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/url-loader@npm:7.16.29, @graphql-tools/url-loader@npm:^7.13.2, @graphql-tools/url-loader@npm:^7.9.7":
+"@graphql-tools/schema@npm:^8.3.1":
+  version: 8.5.1
+  resolution: "@graphql-tools/schema@npm:8.5.1"
+  dependencies:
+    "@graphql-tools/merge": "npm:8.3.1"
+    "@graphql-tools/utils": "npm:8.9.0"
+    tslib: "npm:^2.4.0"
+    value-or-promise: "npm:1.0.11"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: d03487cb801517fbe012ea282f4c4fc4e1453e624d19813e779f4a4302da5bf82e829267e7e9d1f6ee38c7825087dbe0f21ecfb58247f016e72312c97487c081
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/url-loader@npm:7.16.29, @graphql-tools/url-loader@npm:^7.13.2, @graphql-tools/url-loader@npm:^7.4.2, @graphql-tools/url-loader@npm:^7.9.7":
   version: 7.16.29
   resolution: "@graphql-tools/url-loader@npm:7.16.29"
   dependencies:
@@ -1556,6 +1970,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/utils@npm:8.9.0":
+  version: 8.9.0
+  resolution: "@graphql-tools/utils@npm:8.9.0"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: a636007f01b9a24bc95d30a684986356944c29683439cde16e27bfd6c50d7fabd5be40d9878d4ab6ea65f9556efe7c71f80ac2680714b4c081802c499a5195fd
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/utils@npm:9.1.3, @graphql-tools/utils@npm:^9.0.0, @graphql-tools/utils@npm:^9.1.1":
   version: 9.1.3
   resolution: "@graphql-tools/utils@npm:9.1.3"
@@ -1567,7 +1992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^8.6.5":
+"@graphql-tools/utils@npm:^8.6.0, @graphql-tools/utils@npm:^8.6.5, @graphql-tools/utils@npm:^8.8.0":
   version: 8.13.1
   resolution: "@graphql-tools/utils@npm:8.13.1"
   dependencies:
@@ -1599,6 +2024,62 @@ __metadata:
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 27326aef0d432a5dcb72838b52082c6186cd9af377f5cf64fb9994ca4336d0ca2dac561734dbde419d2b8f3d8937b5f3b0a8d437b165c5d81df036887bc1dd8b
+  languageName: node
+  linkType: hard
+
+"@graphql-yoga/common@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@graphql-yoga/common@npm:2.0.0"
+  dependencies:
+    "@envelop/core": "npm:^2.0.0"
+    "@envelop/disable-introspection": "npm:^3.0.0"
+    "@envelop/parser-cache": "npm:^4.0.0"
+    "@envelop/validation-cache": "npm:^4.0.0"
+    "@graphql-tools/schema": "npm:^8.3.1"
+    "@graphql-tools/utils": "npm:^8.6.0"
+    "@graphql-typed-document-node/core": "npm:^3.1.1"
+    "@graphql-yoga/render-graphiql": "npm:2.0.0"
+    "@graphql-yoga/subscription": "npm:2.0.0"
+    chalk: "npm:4.1.2"
+    cross-undici-fetch: "npm:^0.1.25"
+    dset: "npm:^3.1.1"
+    tslib: "npm:^2.3.1"
+  peerDependencies:
+    graphql: ^15.2.0 || ^16.0.0
+  checksum: 8ee336e57375f56eaea4ff39deed618ee9ea5a75ace9b69dae7045fd7ca0cba29282368985da21eb577c3849c5409c57ba44a72baa10b353a3fbdec661daa1e0
+  languageName: node
+  linkType: hard
+
+"@graphql-yoga/node@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@graphql-yoga/node@npm:2.0.0"
+  dependencies:
+    "@envelop/core": "npm:^2.0.0"
+    "@graphql-tools/utils": "npm:^8.6.0"
+    "@graphql-yoga/common": "npm:2.0.0"
+    "@graphql-yoga/subscription": "npm:2.0.0"
+    cross-undici-fetch: "npm:^0.1.25"
+    tslib: "npm:^2.3.1"
+  peerDependencies:
+    graphql: ^15.2.0 || ^16.0.0
+  checksum: 9b72a06cb1ab8f6b764d184c278bc2fb567fda8195b49dcbc3b11f58704f22d94ad1b67ea92d2dfc9847b3b324d16a6f9718fb6b9bc3802fe1d0ae50c4f35493
+  languageName: node
+  linkType: hard
+
+"@graphql-yoga/render-graphiql@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@graphql-yoga/render-graphiql@npm:2.0.0"
+  checksum: 1a12ce2da499513add44de79b822068aebbf9d397410b2bdb34f88acadbb23850027f5b506efb1a76b717e9405b53f8a15169b602c91f30ecdfc7fdb24d9e157
+  languageName: node
+  linkType: hard
+
+"@graphql-yoga/subscription@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@graphql-yoga/subscription@npm:2.0.0"
+  dependencies:
+    "@repeaterjs/repeater": "npm:^3.0.4"
+    tslib: "npm:^2.3.1"
+  checksum: d1edb504f98cea48ccfdf17992cf8d93c6ebc52630501e7a8ceab8480e99fe61fb4df3057dd09b2ff019329ca7b6ddad23ab9a2f9743d041d49fb82a23f3be51
   languageName: node
   linkType: hard
 
@@ -1984,7 +2465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@repeaterjs/repeater@npm:3.0.4":
+"@repeaterjs/repeater@npm:3.0.4, @repeaterjs/repeater@npm:^3.0.4":
   version: 3.0.4
   resolution: "@repeaterjs/repeater@npm:3.0.4"
   checksum: 86a89cbd91055e912e80334ded2ae5c44408747483d5ef237b5f72640e4905c6ec34d969ef7423a020fa49a28a9e28528dfdefabe4bf76ec84c1afaedfc777d2
@@ -2226,6 +2707,13 @@ __metadata:
   dependencies:
     "@types/ms": "npm:*"
   checksum: ba0607de3a9b1bdffcfdb70198163c40089c4ef4be1d5ee2cac2c1593e4f74f9677b115922a251f55bf4a380ca4693b56a3f76ade349d6840e82ec9b18032708
+  languageName: node
+  linkType: hard
+
+"@types/dotenv-flow@npm:^3":
+  version: 3.2.0
+  resolution: "@types/dotenv-flow@npm:3.2.0"
+  checksum: d77dc73b4cdb833e61ed2c99c6946b18415b732c218f39c9c78871562d8bf77cb489cebe3da5f64cd555bde1a78d1e414476abdacbf151255fe9145fd43a6bdc
   languageName: node
   linkType: hard
 
@@ -3202,6 +3690,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+  version: 4.1.2
+  resolution: "chalk@npm:4.1.2"
+  dependencies:
+    ansi-styles: "npm:^4.1.0"
+    supports-color: "npm:^7.1.0"
+  checksum: cb96ab47eb1b55525e72caac9eed1513bff28e686df7eee6b04379c80922df21c8283d9938af16a645826c94c9e19fb52ad63cbead6b5073d08ae5f8fa2661a2
+  languageName: node
+  linkType: hard
+
 "chalk@npm:^2.0.0":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
@@ -3223,13 +3721,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
-  version: 4.1.2
-  resolution: "chalk@npm:4.1.2"
+"change-case-all@npm:1.0.14":
+  version: 1.0.14
+  resolution: "change-case-all@npm:1.0.14"
   dependencies:
-    ansi-styles: "npm:^4.1.0"
-    supports-color: "npm:^7.1.0"
-  checksum: cb96ab47eb1b55525e72caac9eed1513bff28e686df7eee6b04379c80922df21c8283d9938af16a645826c94c9e19fb52ad63cbead6b5073d08ae5f8fa2661a2
+    change-case: "npm:^4.1.2"
+    is-lower-case: "npm:^2.0.2"
+    is-upper-case: "npm:^2.0.2"
+    lower-case: "npm:^2.0.2"
+    lower-case-first: "npm:^2.0.2"
+    sponge-case: "npm:^1.0.1"
+    swap-case: "npm:^2.0.2"
+    title-case: "npm:^3.0.3"
+    upper-case: "npm:^2.0.2"
+    upper-case-first: "npm:^2.0.2"
+  checksum: 0f594a905ca66da6e7cfc837b3fadd9b7c26b0e79d9fabacb2633881aeb0147504549f8fec392c56017e42b29d6d1e4a6453ea3b76e2f9d853d29ed5998720a0
   languageName: node
   linkType: hard
 
@@ -3332,7 +3838,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0":
+"ci-info@npm:^3.0.0, ci-info@npm:^3.2.0":
   version: 3.7.1
   resolution: "ci-info@npm:3.7.1"
   checksum: ac9c61f3c9482220a88aa579dbdda68c287d635c7c61fcc7e66ebafc108133533c4e4041764c98d0fa17c6f05e81a12967c4a9b3126dd36854861feb21dbabe8
@@ -3359,6 +3865,19 @@ __metadata:
   version: 2.7.0
   resolution: "cli-spinners@npm:2.7.0"
   checksum: 46b7cce5a56a9c2d062d84947c552f517e1d23eb88afc9f1835851e905f9324bd2f21eebb24a99a3143f508581dcbe372e7528d9adf019f73e01a4bcbee178df
+  languageName: node
+  linkType: hard
+
+"cli-table3@npm:0.6.2":
+  version: 0.6.2
+  resolution: "cli-table3@npm:0.6.2"
+  dependencies:
+    "@colors/colors": "npm:1.5.0"
+    string-width: "npm:^4.2.0"
+  dependenciesMeta:
+    "@colors/colors":
+      optional: true
+  checksum: dcee6d33413bc64856f709273b693cd639c464c97fb6c4dd33556fa80f107688f004a2e8c9b4e7972796e7819ad86ed616dff26d3dae7be5523c73222a437f45
   languageName: node
   linkType: hard
 
@@ -3394,6 +3913,17 @@ __metadata:
     strip-ansi: "npm:^6.0.0"
     wrap-ansi: "npm:^6.2.0"
   checksum: 50996766627ca59eb561a2fec3adc18dbfd1456929b3d6779dceb5226e4b6a289435bf722439a4abf4bd65ebaafdc988542709b0a440d4784feb7372f9e9a6ad
+  languageName: node
+  linkType: hard
+
+"cliui@npm:^7.0.2":
+  version: 7.0.4
+  resolution: "cliui@npm:7.0.4"
+  dependencies:
+    string-width: "npm:^4.2.0"
+    strip-ansi: "npm:^6.0.0"
+    wrap-ansi: "npm:^7.0.0"
+  checksum: 11f16da76b7dc4a78bce29ea89445e2ad30cc7cf78954813095d187cc17924461cf42f941d481cd920ab1672221c709af677436179d6cb87f6176139117664aa
   languageName: node
   linkType: hard
 
@@ -3671,6 +4201,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-undici-fetch@npm:^0.1.25":
+  version: 0.1.33
+  resolution: "cross-undici-fetch@npm:0.1.33"
+  dependencies:
+    abort-controller: "npm:^3.0.0"
+    form-data-encoder: "npm:^1.7.1"
+    formdata-node: "npm:^4.3.1"
+    node-fetch: "npm:^2.6.7"
+    undici: "npm:^5.0.0"
+    web-streams-polyfill: "npm:^3.2.0"
+  checksum: 7f69e9e788e03e7aa6413136313bec73d85585cefa69cbd8590e121928dd1e5c7ecc3f6107cde8267ce4ca6d412f54803fd4dd78c566ba221f0d6c607cba0012
+  languageName: node
+  linkType: hard
+
 "css-background-parser@npm:^0.1.0":
   version: 0.1.0
   resolution: "css-background-parser@npm:0.1.0"
@@ -3907,7 +4451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-graph@npm:^0.11.0":
+"dependency-graph@npm:0.11.0, dependency-graph@npm:^0.11.0":
   version: 0.11.0
   resolution: "dependency-graph@npm:0.11.0"
   checksum: e16e2c77f4d0f3dd0b33647e7f798ff2b9fa92404456193759009ec4d74ff639c38f63b7b0a211338ac8b0f4ceda55d6633b6efd8e84e3fecd81d59fc99dccb0
@@ -4027,6 +4571,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-flow-cli@npm:1.0.0":
+  version: 1.0.0
+  resolution: "dotenv-flow-cli@npm:1.0.0"
+  dependencies:
+    cross-spawn: "npm:^7.0.3"
+    dotenv-flow: "npm:*"
+    minimist: "npm:^1.2.5"
+  bin:
+    dotenv-flow: cli.js
+  checksum: 812e7ad27e40e2d9e20727b73fbf37e4c7ea44bf10a4ce2129b55cd2cde160a898c23fd4242061d1348a86bf407386562e924d73ca2ffbd1677042b5f0768f92
+  languageName: node
+  linkType: hard
+
+"dotenv-flow@npm:*, dotenv-flow@npm:3.2.0":
+  version: 3.2.0
+  resolution: "dotenv-flow@npm:3.2.0"
+  dependencies:
+    dotenv: "npm:^8.0.0"
+  checksum: 9c48611a583d9a8699fa29ae12c592a686624e8dc9ff2a80a84ee74390795eb3e4edf4d391012ced71d5f58915760bc10c42a7ac1b73074c5e909c07e762ae72
+  languageName: node
+  linkType: hard
+
 "dotenv@npm:^16.0.0":
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
@@ -4034,7 +4600,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dset@npm:3.1.2":
+"dotenv@npm:^8.0.0":
+  version: 8.6.0
+  resolution: "dotenv@npm:8.6.0"
+  checksum: a58180cbaa6b7edec539461e4fd72fc9f2b7a181187a2e10942f047da15316f90f04eeeb18b7137049c6e5035a3451af103ddd7a8c691eac339d4e48e1bb1a08
+  languageName: node
+  linkType: hard
+
+"dset@npm:3.1.2, dset@npm:^3.1.1":
   version: 3.1.2
   resolution: "dset@npm:3.1.2"
   checksum: f81e27f95bed3e766e7521ee45d908bc235632dbfeab62eba9f185eb27d5610b4e6873605b04d39fd9bcbd5625d3064b3e2aa2b8470a19af46343abb535010c5
@@ -4828,7 +5401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figures@npm:^3.0.0":
+"figures@npm:3.2.0, figures@npm:^3.0.0":
   version: 3.2.0
   resolution: "figures@npm:3.2.0"
   dependencies:
@@ -7119,7 +7692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.6, minimist@npm:~1.2.5":
+"minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5, minimist@npm:^1.2.6, minimist@npm:~1.2.5":
   version: 1.2.7
   resolution: "minimist@npm:1.2.7"
   checksum: 7bb50119bb59f48228a834e293a566c4b0e1b6c4648db83fb88830b4f932bfeaca72158bcdcc8a74130b339167eda92ec4cabb65faf07ab8d32542889a451676
@@ -7323,6 +7896,8 @@ __metadata:
     "@graphql-codegen/client-preset": "npm:1.2.5"
     "@graphql-codegen/introspection": "npm:2.2.3"
     "@graphql-codegen/typescript": "npm:2.8.7"
+    "@graphql-codegen/typescript-react-query": "npm:4.0.6"
+    "@graphql-inspector/cli": "npm:3.4.0"
     "@httpx/exception": "npm:1.7.0"
     "@next/bundle-analyzer": "npm:13.1.1"
     "@next/font": "npm:13.1.1"
@@ -7331,6 +7906,7 @@ __metadata:
     "@tailwindcss/forms": "npm:0.5.3"
     "@tailwindcss/typography": "npm:0.5.8"
     "@tanstack/react-query": "npm:4.22.0"
+    "@types/dotenv-flow": "npm:^3"
     "@types/node": "npm:18.11.18"
     "@types/react": "npm:18.0.26"
     "@types/react-dom": "npm:18.0.10"
@@ -7339,6 +7915,8 @@ __metadata:
     cross-env: "npm:7.0.3"
     date-fns: "npm:2.29.3"
     dayjs: "npm:1.11.7"
+    dotenv-flow: "npm:3.2.0"
+    dotenv-flow-cli: "npm:1.0.0"
     eslint: "npm:8.31.0"
     eslint-config-next: "npm:13.1.1"
     graphql: "npm:16.6.0"
@@ -7593,6 +8171,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"object-inspect@npm:1.10.3":
+  version: 1.10.3
+  resolution: "object-inspect@npm:1.10.3"
+  checksum: 75a154852e5ea12b5f55cb2822660d025066e785a14e36ec0dca3e0a5df821c2667b9e1194b4a234d067e28e35f3e525b73733bd557aef235008461c86fd8dae
+  languageName: node
+  linkType: hard
+
 "object-inspect@npm:^1.12.2, object-inspect@npm:^1.9.0":
   version: 1.12.2
   resolution: "object-inspect@npm:1.12.2"
@@ -7694,6 +8279,17 @@ __metadata:
   dependencies:
     mimic-fn: "npm:^2.1.0"
   checksum: 69704199051db0cf44c6c7196bada91387e2a9d171b4585a55c5ce518e64522007e2bcd35833ce5663078bb72042af4cd69289586fef4f74655f604b5e02a617
+  languageName: node
+  linkType: hard
+
+"open@npm:8.2.1":
+  version: 8.2.1
+  resolution: "open@npm:8.2.1"
+  dependencies:
+    define-lazy-prop: "npm:^2.0.0"
+    is-docker: "npm:^2.1.1"
+    is-wsl: "npm:^2.2.0"
+  checksum: b2b31e3dff2003a00d32c0feb035fc03c2eda91e9ad999f0df9882080bb8eb29d6e6c230f6e4c8e049f023dcea0dec00b4fc838162f8e8a069c3f8d9f10caccd
   languageName: node
   linkType: hard
 
@@ -9075,6 +9671,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"std-env@npm:2.3.0":
+  version: 2.3.0
+  resolution: "std-env@npm:2.3.0"
+  dependencies:
+    ci-info: "npm:^3.0.0"
+  checksum: 72ace58298dacb41c9824af1977766d0c02638e2e54e3767d6e0229206fd02d6cae63989addd32728c331cc5ab117144e3b539080e6051f2522962ba2ff39e0d
+  languageName: node
+  linkType: hard
+
 "streamsearch@npm:^1.1.0":
   version: 1.1.0
   resolution: "streamsearch@npm:1.1.0"
@@ -9537,6 +10142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.4.0":
+  version: 2.4.0
+  resolution: "tslib@npm:2.4.0"
+  checksum: 022a70708abbc3491734959effd9a87e6e0af5932b61d0c9f1d07b8b80cabbbfc9fc9e9c0fe86e5ab2d32d766ae30117edf00b02d170ff255ab7e60361a4b711
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -9544,7 +10156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:~2.4.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.4.1, tslib@npm:~2.4.0":
   version: 2.4.1
   resolution: "tslib@npm:2.4.1"
   checksum: a739a21e3ff059e62c7c3c0845333fbc9c081bcc91e015f2d246a31eeaf1fb0e29b10c0913c7d22f692b3203bb469fd60ca5288aa4f27d351a969df2d0714899
@@ -9648,6 +10260,15 @@ __metadata:
   version: 0.1.2
   resolution: "unc-path-regex@npm:0.1.2"
   checksum: 464de7f2552f3f601a9d9c6b708391c5888a4f7b248bd1a0c7eff373898d56ceb7d14cb70138f9e3e826f7f012ef1f95531c96a9b9a210042295dd93da4129b7
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.0.0":
+  version: 5.15.0
+  resolution: "undici@npm:5.15.0"
+  dependencies:
+    busboy: "npm:^1.6.0"
+  checksum: b353261fab90e93d32b6c691c6fc4ad57485eb916a66f917a986dbc6d3a557032e396a1130972c42cdba96e34e7a7d0432268388f0840a39cc962f40deaee56a
   languageName: node
   linkType: hard
 
@@ -10157,10 +10778,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yargs-parser@npm:^20.2.2":
+  version: 20.2.9
+  resolution: "yargs-parser@npm:20.2.9"
+  checksum: fd739a429b7cde755b8e9d28520619fb8adb94c686b2d75d3c93a6ec199fbc8bf120af6d2be144f8d3075f3d675b09893f8894a362548107aa90bb97ad662c7a
+  languageName: node
+  linkType: hard
+
 "yargs-parser@npm:^21.1.1":
   version: 21.1.1
   resolution: "yargs-parser@npm:21.1.1"
   checksum: fc4457cf1e4d7d41e5b3a1d62e86b3934af704dd8777979a3c4c573e08eea437801444622cd68607c0266d53b90d84e8e79fd4f5ff170d1be8860064111bbad6
+  languageName: node
+  linkType: hard
+
+"yargs@npm:17.2.1":
+  version: 17.2.1
+  resolution: "yargs@npm:17.2.1"
+  dependencies:
+    cliui: "npm:^7.0.2"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    require-directory: "npm:^2.1.1"
+    string-width: "npm:^4.2.0"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^20.2.2"
+  checksum: 56757e6149bd1af4cea9c9cfebe09b652f730223072cd0b5297aaf3b70f0c25bf76a60a1fddf51c6bca080d1a33ed7b20924e09fcec6deff061bf88b4abecf3a
   languageName: node
   linkType: hard
 

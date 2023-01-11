@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import request from 'graphql-request';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
+import type { PublicationState } from '@/gql/graphql';
 
 const fullEventFragment = graphql(/* GraphQL */ `
   fragment FullEventFragment on Event {
@@ -48,12 +49,14 @@ const getEvent = graphql(/* GraphQL */ `
 const searchEvents = graphql(/* GraphQL */ `
   query searchEvents(
     $limit: Int = 100
+    $publicationState: PublicationState = LIVE
     $dateMin: DateTime = "2020-02-28T03:00:00.000Z"
   ) {
     events(
       sort: "publishedAt:DESC"
       filters: { startAt: { gte: $dateMin } }
       pagination: { page: 1, pageSize: $limit }
+      publicationState: $publicationState
     ) {
       data {
         id
@@ -82,6 +85,7 @@ const url = process.env.NEXT_PUBLIC_STRAPI_API_URL + '/graphql';
 export const fetchEvents = async (params: {
   limit?: number;
   dateMin?: string;
+  publicationState?: PublicationState;
 }) => {
   const { dateMin } = params;
   return request(url, searchEvents, {
