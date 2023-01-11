@@ -4,7 +4,8 @@
   "info": {
     "singularName": "page",
     "pluralName": "pages",
-    "displayName": "Page"
+    "displayName": "Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,7 +18,7 @@
       "target": "api::programme.programme"
     },
     "title": {
-      "type": "text"
+      "type": "string"
     },
     "summary": {
       "type": "text"
