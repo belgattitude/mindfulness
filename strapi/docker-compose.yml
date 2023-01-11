@@ -15,15 +15,20 @@ services:
     environment:
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: ${NODE_ENV:-production}
     volumes:
       # Share the source code to allow development
-      - .:/app/
+      #- .:/app/
+      # Share the env
+      - ./.env:/app/.env
+      # Share the sqlite database
+      - ./data:/app/data
+      # Share the image uploads database
+      - ./public/uploads:/app/public/uploads
 
       #- strapi-vlm-uploads:/app/public/uploads
       # For install, build and development use volumes
       # to prevent platform/ownership issues between host and container
-      - mindfulness-strapi-vlm-install:/app/.yarn/docker
       - mindfulness-strapi-vlm-build:/app/build
       - mindfulness-strapi-vlm-cache:/app/.cache
       - mindfulness-strapi-vlm-nm:/app/node_modules
@@ -75,7 +80,7 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-strapi}
       POSTGRES_DB: ${DATABASE_NAME:-mindfulness-strapi}
     volumes:
-      - mindfulness-strapi-vlm-db-data:/var/lib/postgresql/data/
+      - mindfulness-strapi-vlm-postgresql-data:/var/lib/postgresql/data/
     ports:
       - '5432:5432'
     networks:
@@ -84,7 +89,7 @@ services:
       - mindfulness-strapi
 
 volumes:
-  mindfulness-strapi-vlm-db-data:
+  mindfulness-strapi-vlm-postgresql-data:
     labels:
       type: 'db-data'
   mindfulness-strapi-vlm-install:

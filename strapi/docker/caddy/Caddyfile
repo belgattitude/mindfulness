@@ -6,6 +6,7 @@
   tls {$TLS_EMAIL}
   reverse_proxy mindfulness-strapi-internal:1337
   encode gzip
+
   # Replace cache-control from strapi
   header /uploads/* Cache-Control "public, max-age=31536000, immutable" {
     defer
