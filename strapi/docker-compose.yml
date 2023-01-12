@@ -29,8 +29,8 @@ services:
       #- strapi-vlm-uploads:/app/public/uploads
       # For install, build and development use volumes
       # to prevent platform/ownership issues between host and container
-      - mindfulness-strapi-vlm-build:/app/build
-      - mindfulness-strapi-vlm-cache:/app/.cache
+      #- mindfulness-strapi-vlm-build:/app/build
+      #- mindfulness-strapi-vlm-cache:/app/.cache
       - mindfulness-strapi-vlm-nm:/app/node_modules
     ports:
       - '1337:1337'
@@ -92,21 +92,9 @@ volumes:
   mindfulness-strapi-vlm-postgresql-data:
     labels:
       type: 'db-data'
-  mindfulness-strapi-vlm-install:
-    labels:
-      type: 'removable'
   mindfulness-strapi-vlm-nm:
     labels:
       type: 'removable'
-  mindfulness-strapi-vlm-build:
-    labels:
-      type: 'removable'
-  mindfulness-strapi-vlm-cache:
-    labels:
-      type: 'removable'
-  mindfulness-strapi-vlm-uploads:
-    labels:
-      type: 'medias'
   mindfulness-caddy-data:
     labels:
       type: 'webserver'

@@ -3,8 +3,8 @@ ARG ALPINE_VERSION=3.17
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as deps
 # Installing libvips-dev for sharp Compatibility
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
-RUN corepack enable
+RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev && \
+    corepack enable
 
 WORKDIR /app
 
@@ -16,8 +16,8 @@ RUN --mount=type=cache,target=/var/cache/mindfulness-strapi \
     yarn install --immutable --inline-builds
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as builder
-RUN apk add --no-cache bash vips
-RUN corepack enable
+RUN apk add --no-cache bash && \
+    corepack enable
 
 WORKDIR /app
 
@@ -27,12 +27,14 @@ RUN NODE_ENV=production yarn build
 
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as runner
-RUN apk update && apk add --no-cache vips-dev
+RUN apk update --no-cache && apk add --no-cache vips
+#RUN apk update --no-cache
 RUN corepack enable
 
 WORKDIR /app
 
-COPY ./package.json ./favicon.png ./
+COPY ./package.json ./yarn.lock ./.yarnrc.yml ./favicon.png ./
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/build ./build
 COPY --from=builder --chown=node:node /app/config ./config
 # DANGER: if ./src is NOT COPIED, STRAPI WILL remove the database
