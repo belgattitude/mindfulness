@@ -17,7 +17,7 @@ const config: CodegenConfig = {
       // https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#config-api
       presetConfig: {
         // fragmentMasking: false,
-        useTypeImports: true,
+        // useTypeImports: true,
         // enumsAsTypes: true,
       },
     },

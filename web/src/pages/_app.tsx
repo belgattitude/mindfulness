@@ -19,6 +19,7 @@ import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
+import { queryClientConfig } from '../config/query-client.config';
 import { defaultSeoConfig } from '../config/seo.config';
 
 type MyAppProps = AppProps & {
@@ -60,7 +61,7 @@ const MyApp = (appProps: MyAppProps) => {
     pageProps,
     emotionCache = clientSideEmotionCache,
   } = appProps;
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient(queryClientConfig));
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>

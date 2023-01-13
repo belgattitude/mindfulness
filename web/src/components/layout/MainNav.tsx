@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { clsx } from 'clsx';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import logo from '@/public/logo/sandrine-logo.png';
@@ -26,10 +27,26 @@ const MainNavCtn = styled.header`
   }
 `;
 
-type MobileMenuProps = { className?: string };
+type MobileMenuProps = { hidden: boolean };
 const MobileMenu: FC<MobileMenuProps> = (props) => {
+  const { hidden } = props;
   return (
-    <div className={props.className}>
+    <div
+      css={css`
+        display: flex;
+        transition: all 250ms ease-in-out;
+        height: ${hidden ? '10px' : '300px'};
+        border: 1px solid red;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: center;
+        div {
+          width: 130px;
+          padding: 5px;
+          margin: 5px;
+        }
+      `}
+    >
       {mainNavData.map((link) => {
         return (
           <div key={`mobile-menu-${link.href}`}>
@@ -44,11 +61,12 @@ const MobileMenu: FC<MobileMenuProps> = (props) => {
 };
 
 export const MainNav: FC<MainNavProps> = (_props) => {
-  const initialScrollProsition = !isServer
-    ? window.scrollY
-    : 0 < isScrolledTopThreshold;
+  const router = useRouter();
+  const initialIsScrollOntop = isServer
+    ? true
+    : window.scrollY < isScrolledTopThreshold;
 
-  const [scrollIsOnTop, setScrollIsOnTop] = useState(initialScrollProsition);
+  const [scrollIsOnTop, setScrollIsOnTop] = useState(initialIsScrollOntop);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const onScroll = () => {
     setScrollIsOnTop(window.scrollY < isScrolledTopThreshold);
@@ -61,6 +79,12 @@ export const MainNav: FC<MainNavProps> = (_props) => {
     };
   }, []);
 
+  useEffect(() => {
+    const closeMenu = () => setIsNavExpanded(false);
+    router.events.on('routeChangeStart', closeMenu);
+    return () => router.events.off('routeChangeStart', closeMenu);
+  }, [router.events]);
+
   return (
     <div
       css={css`
@@ -72,12 +96,10 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         css={css`
           background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 1 : 0.9});
           .left {
-            //height: fit-content;
             display: flex;
             justify-content: flex-start;
             align-content: flex-start;
             flex-direction: row;
-            //position: relative;
             div {
               position: relative;
               height: ${scrollIsOnTop
@@ -117,10 +139,10 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                   className={
                     'opacity-90 transition-all delay-[2s] hover:opacity-100'
                   }
-                  fill={true}
+                  width={95}
+                  height={100}
                   priority={true}
                   quality={85}
-                  // sizes={``}
                   style={{
                     objectFit: 'scale-down',
                   }}
@@ -137,10 +159,9 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                 alt={'Sandrine Rauter logo with name'}
                 src={logoWithName}
                 className={'delay-450 transition-all'}
-                fill={true}
-                priority={true}
+                // width={610}
+                // height={143}
                 quality={85}
-                // sizes={``}
                 style={{
                   objectFit: 'contain',
                 }}
@@ -150,7 +171,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
           <div
             className={
-              'hidden grow flex-col justify-end justify-items-end gap-5 align-baseline md:flex'
+              'grow flex-col justify-end justify-items-end gap-5 align-baseline md:flex'
             }
           >
             {!isNavExpanded ? (
@@ -168,7 +189,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                 })}
               </div>
             ) : (
-              <div className="space-x-12 text-xl">&nbsp;</div>
+              <div className="space-x-12 text-xl">&nbsp;AA</div>
             )}
           </div>
           <div className={'right'}>
@@ -212,7 +233,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
             </button>
           </div>
         </div>
-        <MobileMenu className={isNavExpanded ? 'block' : 'hidden'} />
+        <MobileMenu hidden={!isNavExpanded} />
       </MainNavCtn>
     </div>
   );

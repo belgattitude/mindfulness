@@ -2,7 +2,7 @@ import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+export const getStaticProps = async (_context: GetStaticPropsContext) => {
   return {
     props: {},
   };

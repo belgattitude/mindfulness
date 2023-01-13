@@ -93,7 +93,7 @@ export enum Enum_Programme_Universe {
 
 export type Event = {
   __typename?: 'Event';
-  cover?: Maybe<UploadFileEntityResponse>;
+  cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
   displayTitle?: Maybe<Scalars['String']>;
@@ -605,7 +605,7 @@ export type PaginationArg = {
 
 export type Programme = {
   __typename?: 'Programme';
-  cover?: Maybe<UploadFileEntityResponse>;
+  cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -1217,7 +1217,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type FullEventFragmentFragment = { __typename?: 'Event', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title: string, displayTitle?: string | null, location?: string | null, organizers?: string | null, online: boolean, summary?: string | null, description: string, startAt: any, endAt: any, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } & { ' $fragmentName'?: 'FullEventFragmentFragment' };
+export type FullEventFragmentFragment = { __typename?: 'Event', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title: string, displayTitle?: string | null, location?: string | null, organizers?: string | null, online: boolean, summary?: string | null, description: string, startAt: any, endAt: any, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } & { ' $fragmentName'?: 'FullEventFragmentFragment' };
 
 export type GetEventQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;

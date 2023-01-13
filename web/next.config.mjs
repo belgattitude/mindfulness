@@ -7,6 +7,12 @@ import { publicEnv } from './src/config/public-env.mjs';
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
 
+const trueEnv = ['true', '1', 'yes'];
+const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
+  process.env?.NEXTJS_IGNORE_TYPECHECK ?? 'false'
+);
+
+
 const strapiUrl = publicEnv.NEXT_PUBLIC_STRAPI_API_URL;
 const { hostname: strapiHostname } = new URL(strapiUrl);
 
@@ -84,6 +90,10 @@ let nextConfig = {
     ],
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     esmExternals: true,
+  },
+
+  typescript: {
+    ignoreBuildErrors: NEXTJS_IGNORE_TYPECHECK,
   },
 };
 

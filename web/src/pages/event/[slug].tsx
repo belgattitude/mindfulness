@@ -8,6 +8,8 @@ import type {
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
 import { EventDetail } from '@/components/EventDetail';
+import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
+import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchEvent } from '../../api/events.api';
 
 type Props = {
@@ -18,10 +20,18 @@ export default function EventPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { slug } = props;
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ['event', slug],
     queryFn: async () => fetchEvent({ slug }),
   });
+
+  if (error) {
+    return <ReactQueryErrorBox e={error} />;
+  }
+
+  if (isLoading) {
+    return <ReactQueryLoader />;
+  }
 
   return (
     <>

@@ -8,38 +8,33 @@ import type { FetchEvent } from '../api/events.api';
 import { eventsApi } from '../api/events.api';
 
 type Props = {
-  // event: FragmentType<typeof eventsApi.fullEventFragment>;
   event: FetchEvent;
 };
 
 export const EventCard: FC<Props> = (props) => {
   const event = useFragment(eventsApi.fullEventFragment, props.event);
 
-  if (!event) {
-    return <div>Error loading event</div>;
-  }
-
   const keywords = ['cool', 'test'];
+
+  const eventUrl = `/event/${encodeURIComponent(event.slug)}`;
 
   return (
     <div className="max-w-sm overflow-hidden rounded shadow-lg">
       <div className="aspect-w-16 aspect-h-9 lg:aspect-none h-56">
-        {event.cover && (
+        <Link href={eventUrl}>
           <Image
             alt="Cover event"
             width={1000}
             height={800}
-            loading={'eager'}
+            priority={true}
             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
             src={getStrapiMedia(event.cover) ?? ''}
           />
-        )}
+        </Link>
       </div>
       <article className="prose py-4 px-6">
         <div className="mb-2 text-xl font-bold">
-          <Link href={`/event/${encodeURIComponent(event.slug)}`}>
-            {event.title}
-          </Link>
+          <Link href={eventUrl}>{event.title}</Link>
         </div>
         <DateRangeText
           startAt={event.startAt}

@@ -5,10 +5,7 @@ type Props = {
 };
 export const Footer: FC<Props> = (props) => {
   return (
-    <footer
-      aria-label="Site Footer"
-      className={`bg-opacity-30 bg-[url('/logo/sandrine-logo.png')] bg-no-repeat`}
-    >
+    <footer aria-label="Site Footer">
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-teal-600">

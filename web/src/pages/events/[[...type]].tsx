@@ -1,14 +1,16 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import type {
-  InferGetServerSidePropsType,
   GetStaticPaths,
   GetStaticProps,
   InferGetStaticPropsType,
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { EventCard } from '@/components/EventCard';
+import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
+import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchEvents } from '../../api/events.api';
+import { queryClientConfig } from '../../config/query-client.config';
 
 type Props = {
   dateMin: string;
@@ -21,10 +23,19 @@ export default function EventsPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { dateMin } = props;
-  const { data, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['events', limit, dateMin],
     queryFn: async () => fetchEvents({ limit, dateMin }),
+    useErrorBoundary: false,
   });
+
+  if (error) {
+    return <ReactQueryErrorBox e={error} />;
+  }
+
+  if (isLoading) {
+    return <ReactQueryLoader />;
+  }
 
   return (
     <>
@@ -50,11 +61,14 @@ export const getStaticProps: GetStaticProps<Props> = async (_context) => {
   const dateMin = dayjs().subtract(10, 'month').toDate();
   const strDateMin = dateMin.toString();
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient(queryClientConfig);
+
   await queryClient.prefetchQuery({
     queryKey: ['events', limit, strDateMin],
     queryFn: async () => fetchEvents({ limit, dateMin: strDateMin }),
+    retry: false,
   });
+
   return {
     props: {
       dateMin: strDateMin,
