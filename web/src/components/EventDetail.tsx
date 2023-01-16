@@ -14,8 +14,6 @@ type Props = {
 };
 
 const title = css`
-  //color: hotpink;
-  //font-family: var(--font-inter);
   font-weight: 400;
   font-family: var(--font-handwritten);
 `;

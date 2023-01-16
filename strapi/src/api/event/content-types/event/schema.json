@@ -87,6 +87,12 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "facebookLink": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 255,
+      "regex": "https://"
     }
   }
 }

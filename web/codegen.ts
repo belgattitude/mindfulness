@@ -1,8 +1,10 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-const env = process.env ?? {};
+const schemaUrl = process?.env?.GRAPHQL_INTROSPECTION_URL ?? '';
 
-const schemaUrl = env.GRAPHQL_INTROSPECTION_URL || './schema.graphql';
+if (schemaUrl.trim() === '') {
+  throw new Error(`Missing 'GRAPHQL_INTROSPECTION_URL' env.`);
+}
 
 const config: CodegenConfig = {
   overwrite: true,

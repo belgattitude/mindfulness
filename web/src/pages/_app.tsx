@@ -7,15 +7,17 @@ import {
   Crimson_Pro,
   Yanone_Kaffeesatz,
   Bad_Script,
+  Dancing_Script,
   Marck_Script,
+  Montserrat,
 } from '@next/font/google';
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
+import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
@@ -29,12 +31,19 @@ type MyAppProps = AppProps & {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
+const primaryFont = Montserrat({
+  // subsets: ['latin'],
+  weight: 'variable',
+  // weight: ['200', '300', '400', '600', '700'],
+  style: ['normal', 'italic'],
+});
+
 const yanone = Yanone_Kaffeesatz({
   weight: 'variable',
   variable: '--font-yanone',
 });
 
-const handwritten = Marck_Script({
+const handwritten = Dancing_Script({
   weight: ['400'],
   variable: '--font-handwritten',
 });
@@ -63,20 +72,29 @@ const MyApp = (appProps: MyAppProps) => {
   } = appProps;
   const [queryClient] = useState(() => new QueryClient(queryClientConfig));
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <CacheProvider value={emotionCache}>
-          <div
-            className={`${inter.variable} ${crimson.variable} ${yanone.variable} ${handwritten.variable} font-sans`}
-          >
-            <DefaultSeo {...defaultSeoConfig} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </div>
-        </CacheProvider>
-      </Hydrate>
-    </QueryClientProvider>
+    <>
+      <style jsx global>
+        {`
+          :root {
+            --font-family-text-primary: ${primaryFont.style.fontFamily};
+          }
+        `}
+      </style>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <CacheProvider value={emotionCache}>
+            <div
+              className={`${inter.variable} ${crimson.variable} ${yanone.variable} ${handwritten.variable} font-sans`}
+            >
+              <DefaultSeo {...defaultSeoConfig} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </div>
+          </CacheProvider>
+        </Hydrate>
+      </QueryClientProvider>
+    </>
   );
 };
 

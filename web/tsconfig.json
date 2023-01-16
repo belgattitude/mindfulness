@@ -28,7 +28,8 @@
       "@/layout/*": ["./layout/*"],
       "@/lib/*": ["./lib/*"],
       "@/public/*": ["../public/*"],
-      "@/sanity/*": ["./sanity/*"],
+      "@/styles/*": ["../styles/*"],
+      "@/themes/*": ["./themes/*"],
       "@/ui/*": ["./ui/*"]
     }
   },

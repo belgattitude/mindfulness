@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Image from 'next/image';
 import { NextSeo } from 'next-seo';
+import { AboutMeCard } from '@/components/AboutMeCard';
 
 type Props = {
   // Add whatever extra you need
@@ -86,6 +88,11 @@ export default function TestPage(
       <NextSeo />
 
       <div className="w-full">
+        <div className={'flex flex-row gap-5'}>
+          <div className={'shrink grow'}>Hello</div>
+          <AboutMeCard className={'shrink grow'} />
+        </div>
+
         <div
           className="relative w-full"
           css={css`
@@ -129,6 +136,57 @@ export default function TestPage(
               Vous trouverez sur ce site toutes les informations concernant mes
               activités de Yoga et de Mindfulness - Pleine Conscience qui
               s'adressent autant aux particuliers qu'aux organisations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={'flex w-full basis-0 justify-center bg-amber-100 p-5'}
+        css={css`
+          max-height: 500px;
+          /*
+          background: linear-gradient(
+            90deg,
+            #ff930fff 0%,
+            hsla(58, 100%, 68%, 1) 100%
+          );*/
+        `}
+      >
+        <div
+          className={'border'}
+          css={css`
+            /*
+            mask-image: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 1) 0%,
+              transparent 100%
+            );*/
+          `}
+        >
+          <Image
+            alt={'Sandrine Rauter logo with name'}
+            src={'/logo.com/sandrine-rauter-black.png'}
+            className={'delay-450 h-full w-full border align-middle'}
+            width={800}
+            height={600}
+            quality={85}
+            style={{
+              objectFit: 'contain',
+              // aspectRatio: '16/9',
+            }}
+          />
+        </div>
+        <div
+          className={
+            'basis-100 self-end rounded border bg-white text-xl shadow-white drop-shadow-lg backdrop-contrast-200'
+          }
+        >
+          <div className={'p-5 text-xl shadow-xl drop-shadow-2xl'}>
+            <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
+            <p>
+              A l'image du nuage qui devient pluie ou neige, la vie se forme, se
+              déforme, se transforme.
             </p>
           </div>
         </div>

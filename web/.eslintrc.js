@@ -14,6 +14,7 @@ module.exports = {
     '@belgattitude/eslint-config-bases/react',
     '@belgattitude/eslint-config-bases/react-query',
     '@belgattitude/eslint-config-bases/tailwind',
+    '@belgattitude/eslint-config-bases/storybook',
     'next/core-web-vitals',
     // Apply prettier and disable incompatible rules
     '@belgattitude/eslint-config-bases/prettier-plugin',
@@ -23,6 +24,12 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'off',
   },
   overrides: [
+    {
+      files: ['next.config.mjs'],
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off',
+      },
+    },
     {
       files: ['src/gql/**/*.ts'],
       rules: {

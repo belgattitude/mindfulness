@@ -14,9 +14,7 @@ export const Layout: FC<Props> = ({ children }) => {
   return (
     <>
       <MainNav />
-      <main className={'container mx-auto'} style={style}>
-        {children}
-      </main>
+      <main style={style}>{children}</main>
       <Footer />
     </>
   );

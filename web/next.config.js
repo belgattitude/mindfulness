@@ -1,8 +1,10 @@
 // @ts-check
 
-import withBundleAnalyzer from '@next/bundle-analyzer';
-import { createSecureHeaders } from 'next-secure-headers';
-import { publicEnv } from './src/config/public-env.mjs';
+const withBundleAnalyzer = require('@next/bundle-analyzer');
+// @ts-ignore
+const { createVanillaExtractPlugin } = require('@vanilla-extract/next-plugin');
+const { createSecureHeaders } = require('next-secure-headers');
+const { publicEnv } = require('./src/config/public-env');
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
@@ -12,9 +14,10 @@ const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_TYPECHECK ?? 'false'
 );
 
-
 const strapiUrl = publicEnv.NEXT_PUBLIC_STRAPI_API_URL;
 const { hostname: strapiHostname } = new URL(strapiUrl);
+
+const withVanillaExtract = createVanillaExtractPlugin();
 
 // @link https://github.com/jagaapple/next-secure-headers
 const secureHeaders = createSecureHeaders({
@@ -66,7 +69,7 @@ let nextConfig = {
         destination: `${strapiUrl}/admin`,
         permanent: false,
       },
-    ]
+    ];
   },
 
   async headers() {
@@ -95,7 +98,38 @@ let nextConfig = {
   typescript: {
     ignoreBuildErrors: NEXTJS_IGNORE_TYPECHECK,
   },
+
+  webpack: (config, { webpack, isServer }) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: /\.(js|ts)x?$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          // https://react-svgr.com/docs/webpack/#passing-options
+          options: {
+            svgo: true,
+            // @link https://github.com/svg/svgo#configuration
+            svgoConfig: {
+              multipass: false,
+              datauri: 'base64',
+              js2svg: {
+                indent: 2,
+                pretty: false,
+              },
+            },
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
 };
+
+nextConfig = withVanillaExtract(nextConfig, {
+  debug: !isProd,
+});
 
 if (process.env.ANALYZE === 'true') {
   nextConfig = withBundleAnalyzer({
@@ -103,4 +137,4 @@ if (process.env.ANALYZE === 'true') {
   })(nextConfig);
 }
 
-export default nextConfig;
+module.exports = nextConfig;

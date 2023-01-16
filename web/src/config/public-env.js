@@ -1,6 +1,6 @@
 // @ts-check
 
-import { z } from 'zod';
+const { z } = require('zod');
 
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_STRAPI_API_URL: z.string().url(),
@@ -16,4 +16,6 @@ if (!parsedPublicEnv.success) {
   process.exit(1);
 }
 
-export const publicEnv = parsedPublicEnv.data;
+module.exports = {
+  publicEnv: parsedPublicEnv.data,
+};

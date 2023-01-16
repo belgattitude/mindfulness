@@ -10,7 +10,8 @@
     "strapi": "strapi",
     "deps:check": "npx npm-check-updates@latest --configFileName ncurc.yml",
     "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml -u",
-    "clean": "rimraf '**/node_modules' '.cache' 'build'",
+    "clean": "rimraf '.cache' 'build'",
+    "nuke:node_modules": "npx rimraf@3 '**/node_modules'",
     "docker:build": "docker compose build"
   },
   "dependencies": {
@@ -21,7 +22,7 @@
     "better-sqlite3": "8.0.1"
   },
   "devDependencies": {
-    "rimraf": "3.0.2"
+    "rimraf": "4.0.5"
   },
   "author": {
     "name": "Sébastien Vanvelthem"
