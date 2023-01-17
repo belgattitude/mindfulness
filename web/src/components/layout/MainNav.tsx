@@ -37,9 +37,15 @@ const MobileMenu: FC<MobileMenuProps> = (props) => {
     <div
       css={css`
         display: flex;
-        transition: all 250ms ease-in-out;
-        height: ${hidden ? '10px' : '300px'};
-        border: 1px solid red;
+        position: absolute;
+        top: 0;
+        z-index: 100;
+        background-color: white;
+        width: 100%;
+        transition: all 750ms ease-in-out;
+        //height: ${hidden ? '10px' : '300px'};
+        transform: translateY(${hidden ? '-500px' : '100px'});
+        opacity: ${hidden ? 0 : 1};
         flex-direction: column;
         gap: 5px;
         justify-content: center;
@@ -52,7 +58,7 @@ const MobileMenu: FC<MobileMenuProps> = (props) => {
     >
       {mainNavData.map((link) => {
         return (
-          <div key={`mobile-menu-${link.href}`}>
+          <div key={`mobile-menu-${link.href}`} className={'flex'}>
             <Link className={'text-xl'} key={link.href} href={link.href}>
               {link.title}
             </Link>
@@ -103,7 +109,6 @@ const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
 );
 
 const NavbarCtn = styled.div``;
-const NavBarLogoCtn = styled.div``;
 
 export const MainNav: FC<MainNavProps> = (_props) => {
   const router = useRouter();
@@ -137,8 +142,9 @@ export const MainNav: FC<MainNavProps> = (_props) => {
           <Image
             alt={'Sandrine Rauter logo with name'}
             src={'/logo.com/sandrine-rauter-black.png'}
-            className={'delay-450 transition-all'}
-            width={910}
+            // src={'http://localhost:1337/uploads/bergerons_3_b9c8f4e0dc.webp'}
+            className={'delay-450 opacity-0 transition-all'}
+            width={2000}
             height={443}
             quality={85}
             style={{
@@ -201,13 +207,20 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
           <div
             className={
-              'flex grow flex-row items-center justify-end gap-5 md:flex'
+              'flex grow flex-row items-center justify-end gap-5  md:flex'
             }
           >
-            {!isNavExpanded ? (
-              <MenuLinks className={'text-xl font-extralight'} />
+            {!isNavExpanded || true ? (
+              <MenuLinks
+                className={clsx(
+                  'hidden text-xl font-extralight transition-opacity duration-700 ease-in-out lg:block',
+                  {
+                    ['opacity-0']: isNavExpanded,
+                  }
+                )}
+              />
             ) : (
-              <div className="space-x-12 text-xl">&nbsp;AA</div>
+              <div className="space-x-12 text-xl"></div>
             )}
           </div>
           <div className={'right'}>
@@ -332,7 +345,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                 })}
               </div>
             ) : (
-              <div className="space-x-12 text-xl">&nbsp;AA</div>
+              <div className="space-x-12 text-xl"></div>
             )}
           </div>
           <div className={'right'}>

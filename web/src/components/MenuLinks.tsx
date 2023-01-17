@@ -18,7 +18,6 @@ export const MenuLinks: FC<{ className?: string }> = (props) => {
           >
             <a
               css={css`
-                font-family: var(--font-inter);
                 border-bottom-width: 0;
                 background-size: 0 3px;
                 background-position: 0 100%;

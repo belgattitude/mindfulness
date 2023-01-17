@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
-import { AboutMeCard } from '@/components/AboutMeCard';
+import { AboutMeCard, CardBox } from '@/components/AboutMeCard';
 
 type Props = {
   // Add whatever extra you need
@@ -89,8 +89,9 @@ export default function TestPage(
 
       <div className="w-full">
         <div className={'flex flex-row gap-5'}>
-          <div className={'shrink grow'}>Hello</div>
-          <AboutMeCard className={'shrink grow'} />
+          <CardBox className={'mb-5 w-full'}>
+            <AboutMeCard className={'mx-auto max-w-md border bg-white'} />
+          </CardBox>
         </div>
 
         <div
