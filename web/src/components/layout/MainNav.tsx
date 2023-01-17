@@ -65,7 +65,8 @@ const MobileMenu: FC<MobileMenuProps> = (props) => {
 
 const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
   ({ scrollIsOnTop }) => `
-  background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 1 : 0.9});
+  background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 0 : 0.9});
+  //background: url('https://mindfulness-iota.vercel.app/_next/image?url=https%3A%2F%2Fmindfulness.failwell.be%2Fuploads%2Fbergerons_3_b9c8f4e0dc.webp&w=1080&q=75');
   .left {
     display: flex;
     justify-content: flex-start;
@@ -130,11 +131,23 @@ export const MainNav: FC<MainNavProps> = (_props) => {
   }, [router.events]);
 
   return (
-    <div
-      css={css`
-        display: flex;
-      `}
-    >
+    <div className={'flex'}>
+      <div className={'absolute top-[100px] left-0 -z-50'}>
+        <div>
+          <Image
+            alt={'Sandrine Rauter logo with name'}
+            src={'/logo.com/sandrine-rauter-black.png'}
+            className={'delay-450 transition-all'}
+            width={910}
+            height={443}
+            quality={85}
+            style={{
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+      </div>
+
       <StickyCtn
         className={`fixed top-0 z-50 w-full border-b border-gray-200 shadow-lg backdrop-blur`}
         scrollIsOnTop={scrollIsOnTop}
@@ -159,7 +172,6 @@ export const MainNav: FC<MainNavProps> = (_props) => {
           </Button>
         </div>
         <NavbarCtn className={`container mx-auto flex gap-2 p-2`}>
-          <NavBarLogoCtn className={''}>Hello</NavBarLogoCtn>
           <div
             className="left"
             // style={{ width: onTop ? '100px' : '30px' }}
@@ -184,24 +196,6 @@ export const MainNav: FC<MainNavProps> = (_props) => {
                   }}
                 />
               </Link>
-            </div>
-          </div>
-          <div className={'left'}>
-            <div
-              className={'delay-450 transition-all'}
-              style={{ width: scrollIsOnTop ? '220px' : '100px' }}
-            >
-              <Image
-                alt={'Sandrine Rauter logo with name'}
-                src={'/logo.com/sandrine-rauter-white.png'}
-                className={'delay-450 transition-all'}
-                width={910}
-                height={443}
-                quality={85}
-                style={{
-                  objectFit: 'contain',
-                }}
-              />
             </div>
           </div>
 
