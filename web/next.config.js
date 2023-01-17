@@ -58,6 +58,10 @@ let nextConfig = {
   eslint: { ignoreDuringBuilds: !!process.env.CI },
 
   images: {
+    // Reduce the number of possibles (no real-need)
+    deviceSizes: [750, 828, 1080, 1200, 1920], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [32, 48, 64, 96, 128], // default: [16, 32, 48, 64, 96, 128, 256, 384]
+    // Allow domains and set default ttl if not provided upstream
     domains: [strapiHostname, 'images.unsplash.com'],
     minimumCacheTTL: 86_400,
   },
@@ -65,7 +69,7 @@ let nextConfig = {
   async redirects() {
     return [
       {
-        source: '/content-admin',
+        source: '/admin123',
         destination: `${strapiUrl}/admin`,
         permanent: false,
       },

@@ -10146,7 +10146,7 @@ __metadata:
     "@strapi/plugin-users-permissions": "npm:4.5.6"
     "@strapi/strapi": "npm:4.5.6"
     better-sqlite3: "npm:8.0.1"
-    rimraf: "npm:4.0.5"
+    rimraf: "npm:4.1.0"
   languageName: unknown
   linkType: soft
 
@@ -12569,12 +12569,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:4.0.5":
-  version: 4.0.5
-  resolution: "rimraf@npm:4.0.5"
+"rimraf@npm:4.1.0":
+  version: 4.1.0
+  resolution: "rimraf@npm:4.1.0"
   bin:
     rimraf: dist/cjs/src/bin.js
-  checksum: 32d055cc81f3c256e97950093ed08bc4504e13114e336e918f54eefc928e314341ebb3ac5112f6bf758144fbfa4b40546d7e19b25ad50a4b4942dcaed3f451bb
+  checksum: bd63481f74e716f8dfb792b5435652a03a6dcd38d026388bfd13541e50f2e5c8596f3bdefe0a409ab4695a060e5f26cebefe69ae2029f75ff08b716f6210810b
   languageName: node
   linkType: hard
 
