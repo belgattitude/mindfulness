@@ -140,8 +140,9 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         scrollIsOnTop={scrollIsOnTop}
       >
         <div
+          data-test-id={'top-banner'}
           className={clsx(
-            'transition-all-1s font-custom-style-body bg-custom-brown flex place-content-center space-x-6 p-1 font-extralight text-white',
+            'transition-all-1s font-custom-style-body bg-custom-brown align-center flex justify-center space-x-6 p-1 font-extralight text-white',
             {
               ['-translate-y-60 h-0']: !scrollIsOnTop,
             }

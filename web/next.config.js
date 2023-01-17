@@ -8,6 +8,7 @@ const { publicEnv } = require('./src/config/public-env');
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
+const enableVanillaExtract = false;
 
 const trueEnv = ['true', '1', 'yes'];
 const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
@@ -59,8 +60,8 @@ let nextConfig = {
 
   images: {
     // Reduce the number of possibles (no real-need)
-    deviceSizes: [750, 828, 1080, 1200, 1920], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [32, 48, 64, 96, 128], // default: [16, 32, 48, 64, 96, 128, 256, 384]
+    deviceSizes: [750, 828, 1080, 1200], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [32, 48, 64, 96], // default: [16, 32, 48, 64, 96, 128, 256, 384]
     // Allow domains and set default ttl if not provided upstream
     domains: [strapiHostname, 'images.unsplash.com'],
     minimumCacheTTL: 86_400,
@@ -131,9 +132,11 @@ let nextConfig = {
   },
 };
 
-nextConfig = withVanillaExtract(nextConfig, {
-  debug: !isProd,
-});
+if (enableVanillaExtract) {
+  nextConfig = withVanillaExtract(nextConfig, {
+    debug: !isProd,
+  });
+}
 
 if (process.env.ANALYZE === 'true') {
   nextConfig = withBundleAnalyzer({
