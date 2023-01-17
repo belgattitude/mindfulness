@@ -142,18 +142,20 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         <div
           data-test-id={'top-banner'}
           className={clsx(
-            'transition-all-1s font-custom-style-body bg-custom-brown align-center flex justify-center space-x-6 p-1 font-extralight text-white',
+            'transition-all-1s font-custom-style-body flex items-center justify-center space-x-3 bg-pink-500 p-1 font-light text-white',
             {
               ['-translate-y-60 h-0']: !scrollIsOnTop,
             }
           )}
         >
-          <span>Hello</span>
+          <span className={'text-lg font-light'}>
+            Inscriptions ouvertes pour nos prochains stages
+          </span>
           <Button
-            className={'font-custom-style-body font-extralight'}
+            className={'rounded bg-pink-400 font-light hover:bg-pink-600'}
             size={'small'}
           >
-            Contact
+            Info et réservations
           </Button>
         </div>
         <NavbarCtn className={`container mx-auto flex gap-2 p-2`}>
