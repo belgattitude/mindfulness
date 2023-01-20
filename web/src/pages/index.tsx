@@ -68,6 +68,40 @@ const imgBackgrounds = {
   `,
 } as const;
 
+const IntroText: FC = () => {
+  return (
+    <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
+      <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
+      <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
+      <p>
+        A l'image du nuage qui devient pluie ou neige, la vie se forme, se
+        déforme, se transforme.
+      </p>
+      <p>
+        De la même manière, le lien tissé avec vous au travers des cours
+        hebdomadaires va changer de forme. Installée récemment en France, tous
+        mes cours réguliers ont désormais basculé en ligne via zoom: hatha yoga,
+        méditation et yoga nidra.
+      </p>
+      <p>
+        Vous retrouverez l'agenda des cours en ligne dans la page Cours chez Soi
+        sous l'onglet Prochaines Activités. Les cours de yoga à Shanti Home
+        seront quant à eux assurés les mardis soir par Tatiana Nozdrenkova et
+        les vendredis matin par Giorgia Bruzzese del Pozzo. Aussi je continue à
+        proposer des ateliers à Shanti Home les dimanches lors de mes retours à
+        Bruxelles, les prochains le 4 Déc, l'un en matinée l'autre l'après-midi,
+        et des retraites de 6 jours en nature en Dordogne et en Drôme.
+      </p>
+      <p>
+        Ce dernier trimestre 2022 sera aussi l'occasion de s'initier au Dialogue
+        Conscient au travers d'un atelier découverte et/ou d'une journée de
+        pratique à Bruxelles. Au plaisir de continuer à nourrir ensemble notre
+        pratique et vous accueillir en personne ou à l'écran. Sandrine
+      </p>
+    </div>
+  );
+};
+
 export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
@@ -87,9 +121,31 @@ export default function TestPage(
     <>
       <NextSeo />
 
-      <div className="w-full">
-        <div className={'flex flex-row gap-5'}>
-          <CardBox className={'mb-5 w-full'}>
+      <div className={'absolute top-0 left-0 -z-50'}>
+        <Image
+          alt={'Sandrine Rauter logo with name'}
+          src={
+            // 'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+            'https://images.unsplash.com/photo-1552838671-4c793a745d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+            // 'https://images.unsplash.com/photo-1515339760107-1952b7a08454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'
+          }
+          // src={'/images/sunrise.webp'}
+          className={'delay-450 opacity-100 transition-all'}
+          width={2000}
+          height={443}
+          quality={85}
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+
+      <div className="mx-15 w-full pt-[20px]">
+        <div className={'grid grid-cols-3 gap-5'}>
+          <CardBox className={'col-span-2 mb-5 flex bg-[#c9ded2]'}>
+            <IntroText />
+          </CardBox>
+          <CardBox className={'mb-5 flex'}>
             <AboutMeCard className={'mx-auto max-w-md border bg-white'} />
           </CardBox>
         </div>

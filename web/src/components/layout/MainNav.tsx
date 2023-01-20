@@ -137,23 +137,6 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
   return (
     <div className={'flex'}>
-      <div className={'absolute top-[100px] left-0 -z-50'}>
-        <div>
-          <Image
-            alt={'Sandrine Rauter logo with name'}
-            src={'/logo.com/sandrine-rauter-black.png'}
-            // src={'http://localhost:1337/uploads/bergerons_3_b9c8f4e0dc.webp'}
-            className={'delay-450 opacity-0 transition-all'}
-            width={2000}
-            height={443}
-            quality={85}
-            style={{
-              objectFit: 'contain',
-            }}
-          />
-        </div>
-      </div>
-
       <StickyCtn
         className={`fixed top-0 z-50 w-full border-b border-gray-200 shadow-lg backdrop-blur`}
         scrollIsOnTop={scrollIsOnTop}
