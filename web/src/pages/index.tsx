@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
+import type { FC } from 'react';
 import { AboutMeCard, CardBox } from '@/components/AboutMeCard';
 
 type Props = {
@@ -105,32 +106,23 @@ const IntroText: FC = () => {
 export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  // const img =
-  //  'https://zenyoga.be/wp-content/uploads/2022/04/zen-yoga-paper-background-large.jpg';
-  // const img =
-  // 'http://localhost:3000/_next/image?url=http%3A%2F%2Flocalhost%3A1337%2Fuploads%2Fphoto_moulin_2002_orig_6a5dd7bda0.png&w=1080&q=75';
-  const img =
-    'http://www.sandrinerauter.be/uploads/4/3/7/7/43775673/background-images/254942895.jpg';
-  // const img =
-  //  'https://images.unsplash.com/photo-1671379827325-2fa2dc475840?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80';
-  // const img =
-  //  'https://images.unsplash.com/photo-1671379827325-2fa2dc475840?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHx8&dpr=1&auto=format%2Ccompress&fit=crop&w=1399&h=594';
-  // const img =
-  //  'https://images.unsplash.com/photo-1666457383842-a2e6a748dcac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80';
   return (
     <>
       <NextSeo />
 
-      <div className={'absolute top-0 left-0 -z-50'}>
+      <div className={'top-0 left-0 -z-50 md:absolute'}>
         <Image
           alt={'Sandrine Rauter logo with name'}
           src={
             // 'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-            'https://images.unsplash.com/photo-1552838671-4c793a745d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+            // 'https://images.unsplash.com/photo-1552838671-4c793a745d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
             // 'https://images.unsplash.com/photo-1515339760107-1952b7a08454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'
+            // 'https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+            'https://images.unsplash.com/photo-1615716175507-64c47c317d58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+            // 'https://images.unsplash.com/photo-1600172454132-ada7faa101cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
           }
           // src={'/images/sunrise.webp'}
-          className={'delay-450 opacity-100 transition-all'}
+          className={'delay-450 opacity-50 transition-all'}
           width={2000}
           height={443}
           quality={85}
@@ -140,64 +132,16 @@ export default function TestPage(
         />
       </div>
 
-      <div className="mx-15 w-full pt-[20px]">
-        <div className={'grid grid-cols-3 gap-5'}>
-          <CardBox className={'col-span-2 mb-5 flex bg-[#c9ded2]'}>
+      <div className="mx-15 container mx-auto pt-[20px]">
+        <div className={'grid-row grid gap-5 md:grid-cols-3'}>
+          <CardBox className={'mb-5 flex bg-[#c9ded2] md:col-span-2'}>
             <IntroText />
           </CardBox>
-          <CardBox className={'mb-5 flex'}>
-            <AboutMeCard className={'mx-auto max-w-md border bg-white'} />
+          <CardBox className={'mb-5 flex md:col-span-1'}>
+            <AboutMeCard className={'mx-auto border bg-[#85aa9c]/10'} />
           </CardBox>
         </div>
-
-        <div
-          className="relative w-full"
-          css={css`
-            height: 55vh;
-            &:before {
-              ${imgBackgrounds.radial}
-            }
-          `}
-        >
-          <img
-            css={css`
-              position: sticky;
-              top: 0;
-            `}
-            className="h-full w-full object-cover"
-            src={img}
-          />
-          <div
-            css={css`
-              //font-family: 'Ubuntu Condensed';
-              //font-family: 'Yanone Kaffeesatz', 'Comic Sans MS';
-              font-family: var(--font-handwritten); // 'Inter', 'Comic Sans MS';
-              font-weight: 700;
-              //letter-spacing: 0.1rem;
-            `}
-            className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 p-5 text-xl text-white md:text-3xl"
-          >
-            <h1 className={'font-normal'}>Bienvenue</h1>
-            <p
-              css={css`
-                //font-family: 'Ubuntu Condensed';
-                //font-family: 'Yanone Kaffeesatz', 'Comic Sans MS';
-                font-family: var(--font-inter); // 'Inter', 'Comic Sans MS';
-                //font-variation-settings: 'opsz' 48, 'wght' 700, 'wdth' 25,
-                //  'slnt' -12, 'ital' 1;
-                //font-weight: 700;
-                text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-                // letter-spacing: 0.1rem;
-              `}
-            >
-              Vous trouverez sur ce site toutes les informations concernant mes
-              activités de Yoga et de Mindfulness - Pleine Conscience qui
-              s'adressent autant aux particuliers qu'aux organisations.
-            </p>
-          </div>
-        </div>
       </div>
-
       <div
         className={'flex w-full basis-0 justify-center bg-amber-100 p-5'}
         css={css`
@@ -209,77 +153,7 @@ export default function TestPage(
             hsla(58, 100%, 68%, 1) 100%
           );*/
         `}
-      >
-        <div
-          className={'border'}
-          css={css`
-            /*
-            mask-image: linear-gradient(
-              180deg,
-              rgba(0, 0, 0, 1) 0%,
-              transparent 100%
-            );*/
-          `}
-        >
-          <Image
-            alt={'Sandrine Rauter logo with name'}
-            src={'/logo.com/sandrine-rauter-black.png'}
-            className={'delay-450 h-full w-full border align-middle'}
-            width={800}
-            height={600}
-            quality={85}
-            style={{
-              objectFit: 'contain',
-              // aspectRatio: '16/9',
-            }}
-          />
-        </div>
-        <div
-          className={
-            'basis-100 self-end rounded border bg-white text-xl shadow-white drop-shadow-lg backdrop-contrast-200'
-          }
-        >
-          <div className={'p-5 text-xl shadow-xl drop-shadow-2xl'}>
-            <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
-            <p>
-              A l'image du nuage qui devient pluie ou neige, la vie se forme, se
-              déforme, se transforme.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
-        <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
-        <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
-        <p>
-          A l'image du nuage qui devient pluie ou neige, la vie se forme, se
-          déforme, se transforme.
-        </p>
-        <p>
-          De la même manière, le lien tissé avec vous au travers des cours
-          hebdomadaires va changer de forme. Installée récemment en France, tous
-          mes cours réguliers ont désormais basculé en ligne via zoom: hatha
-          yoga, méditation et yoga nidra.
-        </p>
-        <p>
-          Vous retrouverez l'agenda des cours en ligne dans la page Cours chez
-          Soi sous l'onglet Prochaines Activités. Les cours de yoga à Shanti
-          Home seront quant à eux assurés les mardis soir par Tatiana
-          Nozdrenkova et les vendredis matin par Giorgia Bruzzese del Pozzo.
-          Aussi je continue à proposer des ateliers à Shanti Home les dimanches
-          lors de mes retours à Bruxelles, les prochains le 4 Déc, l'un en
-          matinée l'autre l'après-midi, et des retraites de 6 jours en nature en
-          Dordogne et en Drôme.
-        </p>
-        <p>
-          Ce dernier trimestre 2022 sera aussi l'occasion de s'initier au
-          Dialogue Conscient au travers d'un atelier découverte et/ou d'une
-          journée de pratique à Bruxelles. Au plaisir de continuer à nourrir
-          ensemble notre pratique et vous accueillir en personne ou à l'écran.
-          Sandrine
-        </p>
-      </div>
+      ></div>
     </>
   );
 }

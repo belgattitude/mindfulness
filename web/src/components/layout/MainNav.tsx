@@ -15,6 +15,7 @@ import { siteConfig } from '../../config/site.config';
 
 type MainNavProps = {
   /** add props here */
+  showAlert?: boolean;
 };
 
 const mainNavData = siteConfig.mainNavLinks;
@@ -22,13 +23,6 @@ const mainNavData = siteConfig.mainNavLinks;
 const isScrolledTopThreshold = 100;
 
 const isServer = typeof window === 'undefined';
-
-const MainNavCtn = styled.header`
-  .mainNavReducedImage {
-  }
-  .mainNavFullImage {
-  }
-`;
 
 type MobileMenuProps = { hidden: boolean };
 const MobileMenu: FC<MobileMenuProps> = (props) => {
@@ -110,7 +104,36 @@ const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
 
 const NavbarCtn = styled.div``;
 
-export const MainNav: FC<MainNavProps> = (_props) => {
+const BannerAlert: FC<{ collapse: boolean; render: boolean }> = (props) => {
+  const { collapse = false, render = true } = props;
+  if (!render) {
+    return <></>;
+  }
+  return (
+    <div
+      data-test-id={'top-banner'}
+      className={clsx(
+        'transition-all-1s font-custom-style-body flex items-center justify-center space-x-3 bg-pink-500 p-1 font-light text-white',
+        {
+          ['-translate-y-60 h-0']: collapse,
+        }
+      )}
+    >
+      <span className={'text-lg font-light'}>
+        Inscriptions ouvertes pour nos prochains stages
+      </span>
+      <Button
+        className={'rounded bg-pink-400 font-light hover:bg-pink-600'}
+        size={'small'}
+      >
+        Info et réservations
+      </Button>
+    </div>
+  );
+};
+
+export const MainNav: FC<MainNavProps> = (props) => {
+  const { showAlert = false } = props;
   const router = useRouter();
   const initialIsScrollOntop = isServer
     ? true
@@ -141,25 +164,7 @@ export const MainNav: FC<MainNavProps> = (_props) => {
         className={`fixed top-0 z-50 w-full border-b border-gray-200 shadow-lg backdrop-blur`}
         scrollIsOnTop={scrollIsOnTop}
       >
-        <div
-          data-test-id={'top-banner'}
-          className={clsx(
-            'transition-all-1s font-custom-style-body flex items-center justify-center space-x-3 bg-pink-500 p-1 font-light text-white',
-            {
-              ['-translate-y-60 h-0']: !scrollIsOnTop,
-            }
-          )}
-        >
-          <span className={'text-lg font-light'}>
-            Inscriptions ouvertes pour nos prochains stages
-          </span>
-          <Button
-            className={'rounded bg-pink-400 font-light hover:bg-pink-600'}
-            size={'small'}
-          >
-            Info et réservations
-          </Button>
-        </div>
+        <BannerAlert collapse={!scrollIsOnTop} render={showAlert} />
         <NavbarCtn className={`container mx-auto flex gap-2 p-2`}>
           <div
             className="left"
@@ -190,21 +195,17 @@ export const MainNav: FC<MainNavProps> = (_props) => {
 
           <div
             className={
-              'flex grow flex-row items-center justify-end gap-5  md:flex'
+              'flex grow flex-row items-center justify-end gap-5 md:flex'
             }
           >
-            {!isNavExpanded || true ? (
-              <MenuLinks
-                className={clsx(
-                  'hidden text-xl font-extralight transition-opacity duration-700 ease-in-out lg:block',
-                  {
-                    ['opacity-0']: isNavExpanded,
-                  }
-                )}
-              />
-            ) : (
-              <div className="space-x-12 text-xl"></div>
-            )}
+            <MenuLinks
+              className={clsx(
+                'hidden text-xl font-extralight transition-opacity duration-700 ease-in-out lg:block',
+                {
+                  ['opacity-0']: isNavExpanded,
+                }
+              )}
+            />
           </div>
           <div className={'right'}>
             <button

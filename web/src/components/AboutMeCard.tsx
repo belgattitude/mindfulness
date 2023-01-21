@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import type { FC, ReactNode } from 'react';

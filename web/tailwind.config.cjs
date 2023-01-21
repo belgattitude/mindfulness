@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
     // './node_modules/flowbite-react/**/*.js',
-    './src/**/*.tsx'
+    './src/**/*.tsx',
   ],
   theme: {
     screens: {
