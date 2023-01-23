@@ -34,7 +34,9 @@ export default async function revalidateHandler(
    */
   try {
     await res.revalidate(`/events`);
-    await res.revalidate(`/event/test`);
+    await res.revalidate(
+      `/event/stage-de-yoga-et-meditation-en-sept-2023-en-drome`
+    );
     return res.json({ revalidated: true });
   } catch (e) {
     return res.status(500).json({
