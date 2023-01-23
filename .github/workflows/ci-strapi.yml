@@ -23,7 +23,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ${{ github.workspace }}/strapi
+        working-directory: strapi
 
     steps:
       - uses: actions/checkout@v3
@@ -49,3 +49,5 @@ jobs:
 
       - name: Build strapi
         run: yarn build
+        env:
+          DATABASE_FILENAME: data/mindfulness.sqlite.db

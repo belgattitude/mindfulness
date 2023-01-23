@@ -35,7 +35,7 @@ jobs:
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          cwd: ${{ github.workspace }}/web
+          cwd: web
 
       - name: Typecheck
         run: yarn typecheck
