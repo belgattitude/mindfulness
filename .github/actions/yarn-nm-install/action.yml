@@ -39,12 +39,11 @@ runs:
     - name: Restore yarn cache
       uses: actions/cache@v3
       id: yarn-download-cache
-      working-directory: ${{ inputs.cwd }}
       with:
         path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
-        key: yarn-download-cache-${{ hashFiles('yarn.lock') }}
+        key: yarn-download-cache-${{ inputs.cwd }}-${{ hashFiles('yarn.lock') }}
         restore-keys: |
-          yarn-download-cache-
+          yarn-download-${{ inputs.cwd }}-cache-${{ inputs.cwd }}-
 
     - name: Install dependencies
       shell: bash
