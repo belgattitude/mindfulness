@@ -16,6 +16,8 @@ type Props = {
   slug: string;
 };
 
+const staleTime = 5 * 60_000;
+
 export default function EventPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
@@ -23,6 +25,7 @@ export default function EventPage(
   const { data, error, isLoading } = useQuery({
     queryKey: ['event', slug],
     queryFn: async () => fetchEvent({ slug }),
+    staleTime,
   });
 
   if (error) {
