@@ -33,6 +33,6 @@
   "engines": {
     "node": ">=14.19.1"
   },
-  "packageManager": "yarn@4.0.0-rc.34",
+  "packageManager": "yarn@4.0.0-rc.36",
   "license": "MIT"
 }
