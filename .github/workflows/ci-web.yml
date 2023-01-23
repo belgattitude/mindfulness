@@ -40,6 +40,14 @@ jobs:
         with:
           cwd: web
 
+      - name: Check duplicates
+        run: yarn dedupe --check
+
+      - name: Debug
+        run: |
+          yarn --version
+          yarn which typescript
+
       - name: Typecheck
         run: |
           ls -a node_modules

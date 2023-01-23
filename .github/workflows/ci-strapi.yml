@@ -41,6 +41,9 @@ jobs:
         with:
           cwd: ${{ github.workspace }}/strapi
 
+      - name: Check duplicates
+        run: yarn dedupe --check
+
       #- name: Typecheck
       #  run: yarn typecheck
 
