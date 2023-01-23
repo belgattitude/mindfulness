@@ -26,12 +26,14 @@ runs:
       shell: bash
       run:
         echo "RESTORE_DIRECTORY=$(pwd)" >> $GITHUB_OUTPUT
+        echo ${{ inputs.cwd }}
         cd ${{ inputs.cwd }}
 
     - name: Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
       shell: bash
       run: |
+        pwd
         echo "CACHE_FOLDER=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       env:
         YARN_ENABLE_GLOBAL_CACHE: 'false'
