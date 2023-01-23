@@ -23,7 +23,10 @@ export default function EventPage(
   const { data, error, isLoading } = useQuery({
     queryKey: ['event', slug],
     queryFn: async () => fetchEvent({ slug }),
-    staleTime: 30_000, // prefetched data might have just been produced. No need to refetch on first page load
+    // prefetched data is made available through the server, on the client it might already look
+    // outdated... as we use revalidation with events for this age, it's possible to set stale time
+    // to max
+    staleTime: Number.MAX_SAFE_INTEGER,
     useErrorBoundary: false,
   });
 

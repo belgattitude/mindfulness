@@ -26,7 +26,9 @@ const secureHeaders = createSecureHeaders({
     directives: enableCSP
       ? {
           defaultSrc: "'self'",
+          // 'unsafe-inline' for emotion... possible to add a hash too
           styleSrc: ["'self'", "'unsafe-inline'"],
+          // 'unsafe-inline' for react-markdown
           scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
           frameSrc: ["'self'"],
           connectSrc: [

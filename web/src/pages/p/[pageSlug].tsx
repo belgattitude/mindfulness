@@ -26,7 +26,10 @@ export default function EventsPage(
   const { data, isLoading, error } = useQuery({
     queryKey: ['page', slug],
     queryFn: async () => fetchPage({ slug }),
-    staleTime: 30_000, // prefetched data might have just been produced. No need to refetch on first page load
+    // prefetched data is made available through the server, on the client it might already look
+    // outdated... as we use revalidation with events for this age, it's possible to set stale time
+    // to max
+    staleTime: Number.MAX_SAFE_INTEGER,
     useErrorBoundary: false,
   });
 
@@ -69,7 +72,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       slug,
       dehydratedState: dehydrate(queryClient),
       // Next.js will attempt to re-generate the page at most
-      // revalidate: 3_600,
+      revalidate: 3_600,
     },
   };
 };
