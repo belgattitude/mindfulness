@@ -29,6 +29,12 @@ runs:
         echo ${{ inputs.cwd }}
         cd ${{ inputs.cwd }}
 
+
+    - name: Debug working directory (no able to do better / Jan-2022)
+      shell: bash
+      run:
+        echo $(pwd)
+
     - name: Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
       shell: bash
