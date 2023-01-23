@@ -43,15 +43,8 @@ jobs:
       - name: Check duplicates
         run: yarn dedupe --check
 
-      - name: Debug
-        run: |
-          yarn --version
-          yarn why typescript
-
       - name: Typecheck
-        run: |
-          ls -a node_modules
-          yarn typecheck
+        run: yarn typecheck
 
       - name: ESLint checks
         run: yarn lint
