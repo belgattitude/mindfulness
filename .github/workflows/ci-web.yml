@@ -46,7 +46,7 @@ jobs:
       - name: Debug
         run: |
           yarn --version
-          yarn which typescript
+          yarn why typescript
 
       - name: Typecheck
         run: |
