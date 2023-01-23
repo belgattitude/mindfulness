@@ -96,9 +96,9 @@
     },
     "programmes": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::programme.programme",
-      "mappedBy": "event"
+      "mappedBy": "events"
     }
   }
 }

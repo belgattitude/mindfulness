@@ -38,9 +38,9 @@
       "type": "uid",
       "targetField": "title"
     },
-    "event": {
+    "events": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::event.event",
       "inversedBy": "programmes"
     }

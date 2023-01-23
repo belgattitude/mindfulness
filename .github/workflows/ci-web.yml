@@ -1,0 +1,52 @@
+name: CI-web
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 📥 Monorepo install
+        uses: ./.github/actions/yarn-nm-install
+
+      - name: Typecheck
+        run: yarn typecheck
+
+      - name: ESLint checks
+        run: yarn lint
+
+      - name: Unit tests
+        run: yarn test-unit
+
+      - name: Build nextjs
+        run: yarn build
+        env:
+          NEXTJS_IGNORE_ESLINT: true
+          NEXTJS_IGNORE_TYPECHECK: true
+          NEXT_DISABLE_SOURCEMAPS: true
+          NEXT_TELEMETRY_DISABLED: true

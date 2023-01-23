@@ -20,6 +20,34 @@ export type Scalars = {
   Upload: any;
 };
 
+export type About = {
+  __typename?: 'About';
+  cover?: Maybe<UploadFileEntityResponse>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type AboutEntity = {
+  __typename?: 'AboutEntity';
+  attributes?: Maybe<About>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type AboutEntityResponse = {
+  __typename?: 'AboutEntityResponse';
+  data?: Maybe<AboutEntity>;
+};
+
+export type AboutInput = {
+  cover?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
@@ -44,17 +72,36 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type ComponentTestPrice = {
-  __typename?: 'ComponentTestPrice';
-  id: Scalars['ID'];
-  price?: Maybe<Scalars['Int']>;
+export type Contact = {
+  __typename?: 'Contact';
+  cover?: Maybe<UploadFileEntityResponse>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type ComponentTestTestcomp = {
-  __typename?: 'ComponentTestTestcomp';
-  end?: Maybe<Scalars['DateTime']>;
-  id: Scalars['ID'];
-  start?: Maybe<Scalars['DateTime']>;
+export type ContactEntity = {
+  __typename?: 'ContactEntity';
+  attributes?: Maybe<Contact>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ContactEntityResponse = {
+  __typename?: 'ContactEntityResponse';
+  data?: Maybe<ContactEntity>;
+};
+
+export type ContactInput = {
+  cover?: InputMaybe<Scalars['ID']>;
+  description?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 export type DateTimeFilterInput = {
@@ -87,6 +134,11 @@ export enum Enum_Event_Universe {
 }
 
 export enum Enum_Programme_Universe {
+  Mindfulness = 'mindfulness',
+  Yoga = 'yoga'
+}
+
+export enum Enum_Temoignage_Universe {
   Mindfulness = 'mindfulness',
   Yoga = 'yoga'
 }
@@ -180,6 +232,11 @@ export type EventInput = {
   universe?: InputMaybe<Enum_Event_Universe>;
 };
 
+export type EventRelationResponseCollection = {
+  __typename?: 'EventRelationResponseCollection';
+  data: Array<EventEntity>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']>;
   caption?: InputMaybe<Scalars['String']>;
@@ -210,7 +267,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Page | Programme | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | Contact | Event | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -327,16 +384,19 @@ export type Mutation = {
   createEvent?: Maybe<EventEntityResponse>;
   createPage?: Maybe<PageEntityResponse>;
   createProgramme?: Maybe<ProgrammeEntityResponse>;
+  createTemoignage?: Maybe<TemoignageEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteAbout?: Maybe<AboutEntityResponse>;
+  deleteContact?: Maybe<ContactEntityResponse>;
   deleteEvent?: Maybe<EventEntityResponse>;
   deletePage?: Maybe<PageEntityResponse>;
   deleteProgramme?: Maybe<ProgrammeEntityResponse>;
-  deleteTest?: Maybe<TestEntityResponse>;
+  deleteTemoignage?: Maybe<TemoignageEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Delete an existing role */
@@ -354,11 +414,13 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAbout?: Maybe<AboutEntityResponse>;
+  updateContact?: Maybe<ContactEntityResponse>;
   updateEvent?: Maybe<EventEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updatePage?: Maybe<PageEntityResponse>;
   updateProgramme?: Maybe<ProgrammeEntityResponse>;
-  updateTest?: Maybe<TestEntityResponse>;
+  updateTemoignage?: Maybe<TemoignageEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Update an existing role */
@@ -388,6 +450,11 @@ export type MutationCreatePageArgs = {
 
 export type MutationCreateProgrammeArgs = {
   data: ProgrammeInput;
+};
+
+
+export type MutationCreateTemoignageArgs = {
+  data: TemoignageInput;
 };
 
 
@@ -422,6 +489,11 @@ export type MutationDeletePageArgs = {
 
 
 export type MutationDeleteProgrammeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteTemoignageArgs = {
   id: Scalars['ID'];
 };
 
@@ -486,6 +558,16 @@ export type MutationResetPasswordArgs = {
 };
 
 
+export type MutationUpdateAboutArgs = {
+  data: AboutInput;
+};
+
+
+export type MutationUpdateContactArgs = {
+  data: ContactInput;
+};
+
+
 export type MutationUpdateEventArgs = {
   data: EventInput;
   id: Scalars['ID'];
@@ -510,8 +592,9 @@ export type MutationUpdateProgrammeArgs = {
 };
 
 
-export type MutationUpdateTestArgs = {
-  data: TestInput;
+export type MutationUpdateTemoignageArgs = {
+  data: TemoignageInput;
+  id: Scalars['ID'];
 };
 
 
@@ -630,12 +713,20 @@ export type Programme = {
   cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
-  event?: Maybe<EventEntityResponse>;
+  events?: Maybe<EventRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   universe?: Maybe<Enum_Programme_Universe>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type ProgrammeEventsArgs = {
+  filters?: InputMaybe<EventFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ProgrammeEntity = {
@@ -659,7 +750,7 @@ export type ProgrammeFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<ProgrammeFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
-  event?: InputMaybe<EventFiltersInput>;
+  events?: InputMaybe<EventFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ProgrammeFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ProgrammeFiltersInput>>>;
@@ -673,7 +764,7 @@ export type ProgrammeFiltersInput = {
 export type ProgrammeInput = {
   cover?: InputMaybe<Scalars['ID']>;
   description?: InputMaybe<Scalars['String']>;
-  event?: InputMaybe<Scalars['ID']>;
+  events?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -692,6 +783,8 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query';
+  about?: Maybe<AboutEntityResponse>;
+  contact?: Maybe<ContactEntityResponse>;
   event?: Maybe<EventEntityResponse>;
   events?: Maybe<EventEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
@@ -701,7 +794,8 @@ export type Query = {
   pages?: Maybe<PageEntityResponseCollection>;
   programme?: Maybe<ProgrammeEntityResponse>;
   programmes?: Maybe<ProgrammeEntityResponseCollection>;
-  test?: Maybe<TestEntityResponse>;
+  temoignage?: Maybe<TemoignageEntityResponse>;
+  temoignages?: Maybe<TemoignageEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -764,8 +858,16 @@ export type QueryProgrammesArgs = {
 };
 
 
-export type QueryTestArgs = {
+export type QueryTemoignageArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryTemoignagesArgs = {
+  filters?: InputMaybe<TemoignageFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -845,28 +947,59 @@ export type StringFilterInput = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
-export type Test = {
-  __typename?: 'Test';
+export type Temoignage = {
+  __typename?: 'Temoignage';
+  avatar?: Maybe<UploadFileEntityResponse>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  event?: Maybe<EventEntityResponse>;
+  person: Scalars['String'];
+  programme?: Maybe<ProgrammeEntityResponse>;
   publishedAt?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
+  summary: Scalars['String'];
+  universe?: Maybe<Enum_Temoignage_Universe>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type TestEntity = {
-  __typename?: 'TestEntity';
-  attributes?: Maybe<Test>;
+export type TemoignageEntity = {
+  __typename?: 'TemoignageEntity';
+  attributes?: Maybe<Temoignage>;
   id?: Maybe<Scalars['ID']>;
 };
 
-export type TestEntityResponse = {
-  __typename?: 'TestEntityResponse';
-  data?: Maybe<TestEntity>;
+export type TemoignageEntityResponse = {
+  __typename?: 'TemoignageEntityResponse';
+  data?: Maybe<TemoignageEntity>;
 };
 
-export type TestInput = {
+export type TemoignageEntityResponseCollection = {
+  __typename?: 'TemoignageEntityResponseCollection';
+  data: Array<TemoignageEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type TemoignageFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<TemoignageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  event?: InputMaybe<EventFiltersInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<TemoignageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<TemoignageFiltersInput>>>;
+  person?: InputMaybe<StringFilterInput>;
+  programme?: InputMaybe<ProgrammeFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  summary?: InputMaybe<StringFilterInput>;
+  universe?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type TemoignageInput = {
+  avatar?: InputMaybe<Scalars['ID']>;
+  event?: InputMaybe<Scalars['ID']>;
+  person?: InputMaybe<Scalars['String']>;
+  programme?: InputMaybe<Scalars['ID']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
-  title?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']>;
+  universe?: InputMaybe<Enum_Temoignage_Universe>;
 };
 
 export type UploadFile = {

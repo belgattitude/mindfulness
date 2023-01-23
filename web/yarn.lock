@@ -1493,9 +1493,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@belgattitude/eslint-config-bases@npm:1.17.1":
-  version: 1.17.1
-  resolution: "@belgattitude/eslint-config-bases@npm:1.17.1"
+"@belgattitude/eslint-config-bases@npm:1.17.2":
+  version: 1.17.2
+  resolution: "@belgattitude/eslint-config-bases@npm:1.17.2"
   dependencies:
     "@rushstack/eslint-patch": "npm:^1.2.0"
     "@tanstack/eslint-plugin-query": "npm:4.21.0"
@@ -1517,14 +1517,18 @@ __metadata:
     eslint-plugin-tailwindcss: "npm:^3.8.0"
     eslint-plugin-testing-library: "npm:^5.9.1"
   peerDependencies:
+    "@angular-eslint/template-parser": ^15.2.0
     "@graphql-eslint/eslint-plugin": ^3.14.3
     eslint: ^8.29.0
     graphql: ^16.6.0
     prettier: ^2.7.0 || >= 3.0.0-alpha.4
     react: ^18.0.2
     react-dom: ^18.0.2
+    tailwindcss: ^3.2.2
     typescript: ^4.9.4
   peerDependenciesMeta:
+    "@angular-eslint/template-parser":
+      optional: true
     "@graphql-eslint/eslint-plugin":
       optional: true
     graphql:
@@ -1535,9 +1539,11 @@ __metadata:
       optional: true
     react-dom:
       optional: true
+    tailwindcss:
+      optional: true
     typescript:
       optional: true
-  checksum: b26b2c45057ed2a20ece9d169b427690eb00cf6a2680664b0874d02ce886cf25640f63a50e38ea36330f2a32f6744a68a4ba1ff413b3624ebad7ebda41b25e8e
+  checksum: 5e09483cf7bed82f29cd74a0cf0345f875cf8b2543938492315118d41f87fc1f1a07218daff195b2195320892098944d0ca6a9d468154b88e7ca62190ee7cc98
   languageName: node
   linkType: hard
 
@@ -2757,10 +2763,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@httpx/exception@npm:1.7.0, @httpx/exception@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "@httpx/exception@npm:1.7.0"
-  checksum: bfbb0d074ec15d91ce9299f4be07ee2c963e65b5c0dad8411fbdbd1588900102c1dfb6f8c027262920fa0d2a599c7c0aa057d6a55c9642034dd92bb7a7a4a92c
+"@httpx/exception@npm:1.7.1, @httpx/exception@npm:^1.7.0":
+  version: 1.7.1
+  resolution: "@httpx/exception@npm:1.7.1"
+  checksum: 932b8edab98ff5ef5b1c9a32d19fddfe2b0afa18b66ddee9294c31bf3955714faaf82fa73c46ec21619b104d7d6b66470600cef8c6bd8f49d56be15a980d9e12
   languageName: node
   linkType: hard
 
@@ -9790,13 +9796,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:1.6.2":
-  version: 1.6.2
-  resolution: "flowbite@npm:1.6.2"
+"flowbite@npm:1.6.3":
+  version: 1.6.3
+  resolution: "flowbite@npm:1.6.3"
   dependencies:
     "@popperjs/core": "npm:^2.9.3"
     mini-svg-data-uri: "npm:^1.4.3"
-  checksum: f7c22467ce00bb08e40d28f130b5c09d98c0af9a16724e1b913139b0b276e37bc174e41bbd62dd5c1c933561387d9c48f98d0b42ce10dd59343d9827c06cb18a
+  checksum: 8410e646cd9a5592077fc1e553de89807405d16772ce68131d3b1cbdd1873b577c67abbde669a24a4eda82e259bb40aa0ac40374e19ac5d2f387f6f31e7e6ba5
   languageName: node
   linkType: hard
 
@@ -13429,7 +13435,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "next-classic@workspace:."
   dependencies:
-    "@belgattitude/eslint-config-bases": "npm:1.17.1"
+    "@belgattitude/eslint-config-bases": "npm:1.17.2"
     "@emotion/babel-preset-css-prop": "npm:11.10.0"
     "@emotion/cache": "npm:11.10.5"
     "@emotion/react": "npm:11.10.5"
@@ -13439,7 +13445,7 @@ __metadata:
     "@graphql-codegen/client-preset": "npm:1.2.6"
     "@graphql-codegen/typescript": "npm:2.8.7"
     "@graphql-codegen/typescript-react-query": "npm:4.1.0"
-    "@httpx/exception": "npm:1.7.0"
+    "@httpx/exception": "npm:1.7.1"
     "@next/bundle-analyzer": "npm:13.1.4"
     "@next/font": "npm:13.1.4"
     "@nextvalid/zod-request": "npm:0.4.0"
@@ -13471,7 +13477,7 @@ __metadata:
     dotenv-flow-cli: "npm:1.0.0"
     eslint: "npm:8.32.0"
     eslint-config-next: "npm:13.1.4"
-    flowbite: "npm:1.6.2"
+    flowbite: "npm:1.6.3"
     flowbite-react: "npm:0.3.7"
     graphql: "npm:16.6.0"
     graphql-config: "npm:4.4.0"
@@ -13498,6 +13504,7 @@ __metadata:
     ts-node: "npm:10.9.1"
     typescript: "npm:4.9.4"
     vite: "npm:4.0.4"
+    vite-tsconfig-paths: "npm:4.0.5"
     vitest: "npm:0.28.1"
     webpack-merge: "npm:5.8.0"
     zod: "npm:3.20.2"
@@ -14289,14 +14296,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pathe@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "pathe@npm:1.0.0"
-  checksum: 69965cb0d637a9f8ee55a1cd991e4fb21407f90f60c40a2952df333ff957049b4988a0a0d27d81541064d0d8be77fd86408c289b9d940f6d1496f3986e9b049f
-  languageName: node
-  linkType: hard
-
-"pathe@npm:^1.1.0":
+"pathe@npm:^1.0.0, pathe@npm:^1.1.0":
   version: 1.1.0
   resolution: "pathe@npm:1.1.0"
   checksum: 467cb4c0813dc810c8cd056c7c54ef628eb8ff4801057cd9861a8ff2e30143dbdf7e5765e2bd69c7ea65c151b84bbb9956afa9f1802683da2e3ce6565eadaae4
@@ -17279,6 +17279,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsconfck@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "tsconfck@npm:2.0.2"
+  peerDependencies:
+    typescript: ^4.3.5
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: 152f0c991c978d650a1ac93ea6ebf9f96ba13c52d4b0e3c0d2593f3391d02101159d85aa061a92f3017b3b635484e67711f55353239be9f65c0ec8be3860d078
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths-webpack-plugin@npm:^3.5.2":
   version: 3.5.2
   resolution: "tsconfig-paths-webpack-plugin@npm:3.5.2"
@@ -17971,6 +17985,17 @@ __metadata:
   bin:
     vite-node: vite-node.mjs
   checksum: 9b944a6273d7b299d65c63842f8870553c984dcf72dcabb33c27caf8652ca8fd3f6e19cec49fa8d692a4068ead4a61818ccc97109cafe3ac873c9f0987b394dd
+  languageName: node
+  linkType: hard
+
+"vite-tsconfig-paths@npm:4.0.5":
+  version: 4.0.5
+  resolution: "vite-tsconfig-paths@npm:4.0.5"
+  dependencies:
+    debug: "npm:^4.1.1"
+    globrex: "npm:^0.1.2"
+    tsconfck: "npm:^2.0.1"
+  checksum: 0fb5f393650503dccf67cedcd6b0f88468aabcf6b6c29111ed11b076cea3b9f6f3ef942fa235ea51cc868b1dbf73a7ad35a7cf07702549912e15627e061cce25
   languageName: node
   linkType: hard
 
