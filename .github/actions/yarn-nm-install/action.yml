@@ -25,12 +25,12 @@ runs:
       id: yarn-config
       shell: bash
       run: |
-        cd ${{ github.action_path }}
+        cd ${{ inputs.cwd }}
         echo "CACHE_FOLDER=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       env:
         YARN_ENABLE_GLOBAL_CACHE: 'false'
         YARN_NM_MODE: 'hardlinks-local'
-        YARN_INSTALL_STATE_PATH: ${{ github.action_path }}/.yarn/ci-cache/install-state.gz
+        YARN_INSTALL_STATE_PATH: ${{ inputs.cwd }}/.yarn/ci-cache/install-state.gz
 
     #- name: Debug cache-dir
     #  shell: bash
@@ -43,7 +43,7 @@ runs:
       id: yarn-download-cache
       with:
         path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
-        key: yarn-download-cache-${{ hashFiles('${{ github.action_path }}/yarn.lock') }}
+        key: yarn-download-cache-${{ hashFiles('${{ inputs.cwd }}/yarn.lock') }}
         restore-keys: |
           yarn-download-cache-
 
@@ -54,18 +54,18 @@ runs:
       with:
         path: |
           
-          ${{ github.action_path }}/.yarn/ci-cache/
-        key: ${{ runner.os }}-yarn-install-state-cache-${{ hashFiles('${{ github.action_path }}/yarn.lock', '${{ github.action_path }}/.yarnrc.yml') }}
+          ${{ inputs.cwd }}/.yarn/ci-cache/
+        key: ${{ runner.os }}-yarn-install-state-cache-${{ hashFiles('${{ inputs.cwd }}/yarn.lock', '${{ inputs.cwd }}/.yarnrc.yml') }}
 
     - name: Install dependencies
       shell: bash
       run: |
-        cd ${{ github.action_path }}
+        cd ${{ inputs.cwd }}
         yarn install --immutable --inline-builds
       env:
         # CI optimizations. Overrides yarnrc.yml options (or their defaults) in the CI action.
         YARN_ENABLE_GLOBAL_CACHE: 'false' # Use local cache folder to keep downloaded archives
         YARN_NM_MODE: 'hardlinks-local' # Hardlinks-(local|global) reduces io / node_modules size
-        YARN_INSTALL_STATE_PATH: ${{ github.action_path }}/.yarn/ci-cache/install-state.gz
+        YARN_INSTALL_STATE_PATH: ${{ inputs.cwd }}/.yarn/ci-cache/install-state.gz
         # Other environment variables
         HUSKY: '0' # By default do not run HUSKY install
