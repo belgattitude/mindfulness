@@ -44,3 +44,4 @@ COPY --from=builder --chown=node:node /app/database ./database
 EXPOSE 1337
 CMD ["./node_modules/.bin/strapi", "start"]
 
+

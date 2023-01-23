@@ -37,6 +37,12 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "programmes"
     }
   }
 }

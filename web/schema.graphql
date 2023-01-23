@@ -78,6 +78,7 @@ type Event {
   description: String!
   displayTitle: String
   endAt: DateTime!
+  facebookLink: String
   flyer: UploadFileEntityResponse
   location: String
   online: Boolean!
@@ -111,6 +112,7 @@ input EventFiltersInput {
   description: StringFilterInput
   displayTitle: StringFilterInput
   endAt: DateTimeFilterInput
+  facebookLink: StringFilterInput
   id: IDFilterInput
   location: StringFilterInput
   not: EventFiltersInput
@@ -131,6 +133,7 @@ input EventInput {
   description: String
   displayTitle: String
   endAt: DateTime
+  facebookLink: String
   flyer: ID
   location: String
   online: Boolean
@@ -344,9 +347,12 @@ type Mutation {
 }
 
 type Page {
+  cover: UploadFileEntityResponse
   createdAt: DateTime
+  introduction: String
   programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProgrammeRelationResponseCollection
   publishedAt: DateTime
+  slug: String!
   summary: String
   title: String
   updatedAt: DateTime
@@ -370,18 +376,23 @@ input PageFiltersInput {
   and: [PageFiltersInput]
   createdAt: DateTimeFilterInput
   id: IDFilterInput
+  introduction: StringFilterInput
   not: PageFiltersInput
   or: [PageFiltersInput]
   programmes: ProgrammeFiltersInput
   publishedAt: DateTimeFilterInput
+  slug: StringFilterInput
   summary: StringFilterInput
   title: StringFilterInput
   updatedAt: DateTimeFilterInput
 }
 
 input PageInput {
+  cover: ID
+  introduction: String
   programmes: [ID]
   publishedAt: DateTime
+  slug: String
   summary: String
   title: String
 }

@@ -23,7 +23,7 @@ const config: CodegenConfig = {
         // enumsAsTypes: true,
       },
     },
-    /*
+
     './src/gql/hooks.ts': {
       plugins: [
         'typescript',
@@ -31,7 +31,6 @@ const config: CodegenConfig = {
         'typescript-react-query',
       ],
     },
-     */
   },
 };
 

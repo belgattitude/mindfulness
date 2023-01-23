@@ -1,3 +1,4 @@
+import { isUrlRelativePath } from '@/lib/typeguards';
 import { getStrapiURL } from '../../config/strapi.config';
 
 type StrapiMedia = {
@@ -15,6 +16,8 @@ export function getStrapiMedia(media: StrapiMedia): string | null {
   if (!url) {
     return null;
   }
-  const imageUrl = url.startsWith('/') ? getStrapiURL(url) : url;
-  return imageUrl;
+  if (isUrlRelativePath(url)) {
+    return getStrapiURL(url);
+  }
+  return url;
 }

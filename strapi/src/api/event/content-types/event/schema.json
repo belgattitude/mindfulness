@@ -93,6 +93,12 @@
       "minLength": 10,
       "maxLength": 255,
       "regex": "https://"
+    },
+    "programmes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::programme.programme",
+      "mappedBy": "event"
     }
   }
 }

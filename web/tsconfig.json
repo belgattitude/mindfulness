@@ -31,7 +31,8 @@
       "@/styles/*": ["../styles/*"],
       "@/themes/*": ["./themes/*"],
       "@/ui/*": ["./ui/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "exclude": ["**/node_modules", ".next", "**/.*/"],
   "include": [
