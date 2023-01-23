@@ -26,6 +26,7 @@ export default function EventsPage(
   const { data, isLoading, error } = useQuery({
     queryKey: ['events', limit, dateMin],
     queryFn: async () => fetchEvents({ limit, dateMin }),
+    staleTime: 30_000, // prefetched data might have just been produced. No need to refetch on first page load
     useErrorBoundary: false,
   });
 
