@@ -27,12 +27,10 @@ runs:
       shell: bash
       working-directory: ${{ inputs.cwd }}
       run: |
-        pwd
         echo "CACHE_FOLDER=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       env:
         YARN_ENABLE_GLOBAL_CACHE: 'false'
         YARN_NM_MODE: 'hardlinks-local'
-        YARN_INSTALL_STATE_PATH: .yarn/ci-cache/install-state.gz
 
     # Yarn rotates the downloaded cache archives.
     # @see https://github.com/actions/setup-node/issues/325

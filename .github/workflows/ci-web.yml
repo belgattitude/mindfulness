@@ -41,7 +41,9 @@ jobs:
           cwd: web
 
       - name: Typecheck
-        run: yarn typecheck
+        run: |
+          ls -a node_modules
+          yarn typecheck
 
       - name: ESLint checks
         run: yarn lint
