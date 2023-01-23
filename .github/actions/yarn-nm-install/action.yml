@@ -41,7 +41,7 @@ runs:
       id: yarn-download-cache
       with:
         path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
-        key: yarn-download-cache-${{ inputs.cwd }}-${{ hashFiles('{0}/yarn.lock', ${{ inputs.cwd }}) }}
+        key: yarn-download-cache-${{ inputs.cwd }}-${{ hashFiles(format('{0}/yarn.lock', ${{ inputs.cwd }})) }}
         restore-keys: |
           yarn-download-${{ inputs.cwd }}-cache-${{ inputs.cwd }}-
 
