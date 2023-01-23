@@ -1,4 +1,4 @@
-name: CI-examples
+name: CI-strapi
 
 on:
   push:
