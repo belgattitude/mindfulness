@@ -15,7 +15,15 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
     <div>
-      {cover && <Image src={cover} width={800} height={600} alt={'Img'} />}
+      {cover && (
+        <Image
+          src={cover}
+          width={800}
+          height={600}
+          priority={true}
+          alt={'Img'}
+        />
+      )}
       <h1>{page.title}</h1>
 
       <MarkdownText text={page.introduction ?? ''} />
