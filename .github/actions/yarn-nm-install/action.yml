@@ -24,13 +24,13 @@ runs:
     - name: Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
       shell: bash
-      working-directory: ${{ inputs.cwd }}
       run: |
+        cd ${{ github.action_path }}
         echo "CACHE_FOLDER=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       env:
         YARN_ENABLE_GLOBAL_CACHE: 'false'
         YARN_NM_MODE: 'hardlinks-local'
-        YARN_INSTALL_STATE_PATH: ${{ inputs.cwd }}/.yarn/ci-cache/install-state.gz
+        YARN_INSTALL_STATE_PATH: ${{ github.action_path }}/.yarn/ci-cache/install-state.gz
 
     #- name: Debug cache-dir
     #  shell: bash
@@ -41,10 +41,9 @@ runs:
     - name: Restore yarn cache
       uses: actions/cache@v3
       id: yarn-download-cache
-      working-directory: ${{ inputs.cwd }}
       with:
-        path: ${{ inputs.cwd }}/${{ steps.yarn-config.outputs.CACHE_FOLDER }}
-        key: yarn-download-cache-${{ hashFiles('yarn.lock') }}
+        path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
+        key: yarn-download-cache-${{ hashFiles('${{ github.action_path }}/yarn.lock') }}
         restore-keys: |
           yarn-download-cache-
 
@@ -52,20 +51,21 @@ runs:
     - name: Restore yarn install state
       id: yarn-install-state-cache
       uses: actions/cache@v3
-      working-directory: ${{ inputs.cwd }}
       with:
         path: |
-          ${{ inputs.cwd }}/.yarn/ci-cache/
-        key: ${{ runner.os }}-yarn-install-state-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml') }}
+          
+          ${{ github.action_path }}/.yarn/ci-cache/
+        key: ${{ runner.os }}-yarn-install-state-cache-${{ hashFiles('${{ github.action_path }}/yarn.lock', '${{ github.action_path }}/.yarnrc.yml') }}
 
     - name: Install dependencies
       shell: bash
-      working-directory: ${{ inputs.cwd }}
-      run: yarn install --immutable --inline-builds
+      run: |
+        cd ${{ github.action_path }}
+        yarn install --immutable --inline-builds
       env:
         # CI optimizations. Overrides yarnrc.yml options (or their defaults) in the CI action.
         YARN_ENABLE_GLOBAL_CACHE: 'false' # Use local cache folder to keep downloaded archives
         YARN_NM_MODE: 'hardlinks-local' # Hardlinks-(local|global) reduces io / node_modules size
-        YARN_INSTALL_STATE_PATH: ${{ inputs.cwd }}/.yarn/ci-cache/install-state.gz
+        YARN_INSTALL_STATE_PATH: ${{ github.action_path }}/.yarn/ci-cache/install-state.gz
         # Other environment variables
         HUSKY: '0' # By default do not run HUSKY install
