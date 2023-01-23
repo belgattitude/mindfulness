@@ -23,7 +23,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: strapi
+        working-directory: ${{ github.workspace }}/strapi
 
     steps:
       - uses: actions/checkout@v3
@@ -32,9 +32,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-          cache-dependency-path: ./strapi/yarn.lock
 
+      - name: 📥 Monorepo install
+        uses: ./.github/actions/yarn-nm-install
+        with:
+          cwd: ${{ github.workspace }}/strapi
 
       #- name: Typecheck
       #  run: yarn typecheck

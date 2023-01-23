@@ -21,23 +21,11 @@ runs:
   using: 'composite'
 
   steps:
-    - name: Set working directory (no able to do better / Jan-2022)
-      id: setup
-      shell: bash
-      run:
-        echo "RESTORE_DIRECTORY=$(pwd)" >> $GITHUB_OUTPUT
-        echo ${{ inputs.cwd }}
-        cd ${{ inputs.cwd }}
-
-
-    - name: Debug working directory (no able to do better / Jan-2022)
-      shell: bash
-      run:
-        echo $(pwd)
 
     - name: Expose yarn config as "$GITHUB_OUTPUT"
       id: yarn-config
       shell: bash
+      working-directory: ${{ inputs.cwd }}
       run: |
         pwd
         echo "CACHE_FOLDER=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
@@ -51,6 +39,7 @@ runs:
     - name: Restore yarn cache
       uses: actions/cache@v3
       id: yarn-download-cache
+      working-directory: ${{ inputs.cwd }}
       with:
         path: ${{ steps.yarn-config.outputs.CACHE_FOLDER }}
         key: yarn-download-cache-${{ hashFiles('yarn.lock') }}
@@ -59,6 +48,7 @@ runs:
 
     - name: Install dependencies
       shell: bash
+      working-directory: ${{ inputs.cwd }}
       run: yarn install --immutable --inline-builds
       env:
         # CI optimizations. Overrides yarnrc.yml options (or their defaults) in the CI action.
@@ -66,8 +56,3 @@ runs:
         YARN_NM_MODE: 'hardlinks-local' # Hardlinks-(local|global) reduces io / node_modules size
         # Other environment variables
         HUSKY: '0' # By default do not run HUSKY install
-
-    - name: Restore working directory
-      shell: bash
-      run: |
-        cd ${{ steps.setup.outputs.RESTORE_DIRECTORY }}
