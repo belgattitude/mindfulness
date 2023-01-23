@@ -100,5 +100,5 @@
     "vitest": "0.28.1",
     "webpack-merge": "5.8.0"
   },
-  "packageManager": "yarn@4.0.0-rc.35"
+  "packageManager": "yarn@4.0.0-rc.36"
 }

@@ -8,8 +8,8 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     branches:
       - '**'
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - 'web'
 
 permissions:
   contents: read
