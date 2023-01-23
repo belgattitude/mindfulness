@@ -7,8 +7,8 @@
   reverse_proxy mindfulness-strapi-internal:1337
   encode gzip
 
-  # Replace cache-control from strapi
-  header /uploads/* Cache-Control "public, max-age=86400" {
+  # Replace cache-control from strapi (2592000=30days)
+  header /uploads/* Cache-Control "public, max-age=2592000" {
     defer
   }
 }
