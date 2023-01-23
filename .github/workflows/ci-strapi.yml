@@ -36,7 +36,7 @@ jobs:
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          working-directory: ./strapi
+          cwd: ./strapi
 
       #- name: Typecheck
       #  run: yarn typecheck
