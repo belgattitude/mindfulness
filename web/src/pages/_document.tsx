@@ -62,4 +62,5 @@ MyDocument.getInitialProps = async (ctx) => {
     emotionStyleTags,
   };
 };
+
 export default MyDocument;

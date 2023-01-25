@@ -46,7 +46,7 @@ export default function EventsPage(
       <NextSeo />
 
       <div className={'prose container mx-auto flex flex-col'}>
-        <div>{data?.attributes && <CustomPage page={data.attributes} />}</div>
+        {data?.attributes && <CustomPage page={data.attributes} />}
       </div>
     </>
   );

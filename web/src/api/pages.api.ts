@@ -11,6 +11,7 @@ export const fullPageFragment = graphql(/* GraphQL */ `
     createdAt
     updatedAt
     publishedAt
+    slug
     title
     summary
     introduction
