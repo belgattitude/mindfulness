@@ -6,11 +6,11 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { CustomPage } from '@/components/CustomPage';
+import { ProgrammeCard } from '@/components/ProgrammeCard';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { fetchPage } from '../../api/pages.api';
-import { queryClientConfig } from '../../config/query-client.config';
+import { fetchProgramme } from '../../../api/programmes';
+import { queryClientConfig } from '../../../config/query-client.config';
 
 type Props = {
   /**
@@ -24,8 +24,8 @@ export default function ProgrammesPage(
 ) {
   const { slug } = props;
   const { data, isLoading, error } = useQuery({
-    queryKey: ['page', slug],
-    queryFn: async () => fetchPage({ slug }),
+    queryKey: ['programme', slug],
+    queryFn: async () => fetchProgramme({ slug }),
     // prefetched data is made available through the server, on the client it might already look
     // outdated... as we use revalidation with events for this age, it's possible to set stale time
     // to max
@@ -46,24 +46,24 @@ export default function ProgrammesPage(
       <NextSeo />
 
       <div className={'container mx-auto flex flex-col'}>
-        {data?.attributes && <CustomPage page={data.attributes} />}
+        {data?.attributes && <ProgrammeCard programme={data.attributes} />}
       </div>
     </>
   );
 }
 
 const schema = z.object({
-  pageSlug: z.string().min(3).max(255),
+  programmeSlug: z.string().min(3).max(255),
 });
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const queryClient = new QueryClient(queryClientConfig);
 
-  const { pageSlug: slug } = schema.parse(context.params);
+  const { programmeSlug: slug } = schema.parse(context.params);
 
   await queryClient.prefetchQuery({
-    queryKey: ['page', slug],
-    queryFn: async () => fetchPage({ slug }),
+    queryKey: ['programme', slug],
+    queryFn: async () => fetchProgramme({ slug }),
     retry: false,
   });
 

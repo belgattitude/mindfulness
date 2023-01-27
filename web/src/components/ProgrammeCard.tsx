@@ -21,10 +21,22 @@ export const ProgrammeCard: FC<Props> = (props) => {
   const cover = getStrapiMedia(data.cover);
   return (
     <div className={twMerge('mb-5 border-2 p-5', className)}>
-      {cover && <Image src={cover} width={800} height={600} alt={'Img'} />}
+      {cover && (
+        <Image
+          className={'max-h-[800px] object-cover'}
+          src={cover}
+          width={800}
+          height={600}
+          alt={'Img'}
+        />
+      )}
       <h1>{data.title}</h1>
 
       <MarkdownText text={data.description ?? ''} />
+
+      <Link href={`/p/i/${data.slug}`} legacyBehavior={true}>
+        <Button>Détail</Button>
+      </Link>
 
       <Link href={'/events'} legacyBehavior={true}>
         <Button>Consultez l'agenda</Button>

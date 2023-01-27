@@ -10,8 +10,11 @@ type Props = {
 export const Footer: FC<Props> = (props) => {
   const { mainNavLinks } = props;
   return (
-    <footer aria-label="Site Footer" className={' mt-20 w-full bg-white'}>
-      <div className="container mx-auto space-y-8 bg-white px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+    <footer
+      aria-label="Site Footer"
+      className={'mt-20 w-full bg-white bg-opacity-50'}
+    >
+      <div className="container mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-teal-600">
             <MainLogo />
@@ -67,42 +70,7 @@ export const Footer: FC<Props> = (props) => {
           </div>
 
           <div>
-            <p className="font-medium text-gray-900">Company</p>
-
-            <nav aria-label="Footer Navigation - Company" className="mt-6">
-              <ul className="space-y-4 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    About
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    Meet the Team
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    Accounts Review
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          <div>
-            <p className="font-medium text-gray-900">Helpful Links</p>
+            <p className="font-medium text-gray-900">Liens</p>
 
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">

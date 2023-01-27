@@ -126,7 +126,7 @@ export default function TestPage(
           alt={'Sandrine Rauter logo with name'}
           src={ArrayUtils.getRandom(testImages)}
           // src={'/images/sunrise.webp'}
-          className={'opacity-50'}
+          className={'opacity-70'}
           width={2000}
           height={800}
           quality={85}

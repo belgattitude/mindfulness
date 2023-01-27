@@ -21,6 +21,7 @@ const documents = {
     "\n  query getPage($slug: String) {\n    pages(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullPageFragment\n        }\n      }\n    }\n  }\n": types.GetPageDocument,
     "\n  fragment FullProgrammeFragment on Programme {\n    createdAt\n    updatedAt\n    publishedAt\n    slug\n    title\n    description\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n": types.FullProgrammeFragmentFragmentDoc,
     "\n  query searchProgrammes(\n    $limit: Int = 100\n    $publicationState: PublicationState = LIVE\n  ) {\n    programmes(\n      sort: \"publishedAt:DESC\"\n      pagination: { page: 1, pageSize: $limit }\n      publicationState: $publicationState\n    ) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n": types.SearchProgrammesDocument,
+    "\n  query getProgramme($slug: String) {\n    programmes(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n    }\n  }\n": types.GetProgrammeDocument,
 };
 
 /**
@@ -69,6 +70,10 @@ export function graphql(source: "\n  fragment FullProgrammeFragment on Programme
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query searchProgrammes(\n    $limit: Int = 100\n    $publicationState: PublicationState = LIVE\n  ) {\n    programmes(\n      sort: \"publishedAt:DESC\"\n      pagination: { page: 1, pageSize: $limit }\n      publicationState: $publicationState\n    ) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query searchProgrammes(\n    $limit: Int = 100\n    $publicationState: PublicationState = LIVE\n  ) {\n    programmes(\n      sort: \"publishedAt:DESC\"\n      pagination: { page: 1, pageSize: $limit }\n      publicationState: $publicationState\n    ) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getProgramme($slug: String) {\n    programmes(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getProgramme($slug: String) {\n    programmes(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullProgrammeFragment\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

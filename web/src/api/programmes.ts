@@ -1,6 +1,7 @@
 // Temporary api with graphql-request - will have to change this, either
 // - urql
 // - phase out graphql
+import { HttpNotFound } from '@httpx/exception';
 import request from 'graphql-request';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
@@ -56,6 +57,34 @@ const searchProgrammes = graphql(/* GraphQL */ `
     }
   }
 `);
+
+const getProgramme = graphql(/* GraphQL */ `
+  query getProgramme($slug: String) {
+    programmes(filters: { slug: { eq: $slug } }) {
+      data {
+        id
+        attributes {
+          ...FullProgrammeFragment
+        }
+      }
+    }
+  }
+`);
+
+export const fetchProgramme = async (params: { slug: string }) => {
+  const { slug } = params;
+  return request(getGraphQLUrl(), getProgramme, {
+    slug,
+  })
+    .catch(getGraphqlRequestCatcher)
+    .then((resp) => {
+      const event = resp.programmes?.data?.[0];
+      if (!event) {
+        throw new HttpNotFound(`Programme '${slug}' not found`);
+      }
+      return event;
+    });
+};
 
 export const fetchProgrammes = async (params: {
   limit?: number;

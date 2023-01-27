@@ -283,7 +283,31 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = About | Contact | Event | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | Contact | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+
+export type Home = {
+  __typename?: 'Home';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  introduction?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type HomeEntity = {
+  __typename?: 'HomeEntity';
+  attributes?: Maybe<Home>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HomeEntityResponse = {
+  __typename?: 'HomeEntityResponse';
+  data?: Maybe<HomeEntity>;
+};
+
+export type HomeInput = {
+  introduction?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -410,6 +434,7 @@ export type Mutation = {
   deleteAbout?: Maybe<AboutEntityResponse>;
   deleteContact?: Maybe<ContactEntityResponse>;
   deleteEvent?: Maybe<EventEntityResponse>;
+  deleteHome?: Maybe<HomeEntityResponse>;
   deletePage?: Maybe<PageEntityResponse>;
   deleteProgramme?: Maybe<ProgrammeEntityResponse>;
   deleteTemoignage?: Maybe<TemoignageEntityResponse>;
@@ -434,6 +459,7 @@ export type Mutation = {
   updateContact?: Maybe<ContactEntityResponse>;
   updateEvent?: Maybe<EventEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
+  updateHome?: Maybe<HomeEntityResponse>;
   updatePage?: Maybe<PageEntityResponse>;
   updateProgramme?: Maybe<ProgrammeEntityResponse>;
   updateTemoignage?: Maybe<TemoignageEntityResponse>;
@@ -593,6 +619,11 @@ export type MutationUpdateEventArgs = {
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
   info?: InputMaybe<FileInfoInput>;
+};
+
+
+export type MutationUpdateHomeArgs = {
+  data: HomeInput;
 };
 
 
@@ -803,6 +834,7 @@ export type Query = {
   contact?: Maybe<ContactEntityResponse>;
   event?: Maybe<EventEntityResponse>;
   events?: Maybe<EventEntityResponseCollection>;
+  home?: Maybe<HomeEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
@@ -833,6 +865,11 @@ export type QueryEventsArgs = {
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryHomeArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
@@ -1436,6 +1473,13 @@ export type SearchProgrammesQueryVariables = Exact<{
 
 export type SearchProgrammesQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
 
+export type GetProgrammeQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetProgrammeQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null };
+
 export const FullEventFragmentFragmentDoc = `
     fragment FullEventFragment on Event {
   createdAt
@@ -1672,5 +1716,30 @@ export const useSearchProgrammesQuery = <
     useQuery<SearchProgrammesQuery, TError, TData>(
       variables === undefined ? ['searchProgrammes'] : ['searchProgrammes', variables],
       fetcher<SearchProgrammesQuery, SearchProgrammesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchProgrammesDocument, variables),
+      options
+    );
+export const GetProgrammeDocument = `
+    query getProgramme($slug: String) {
+  programmes(filters: {slug: {eq: $slug}}) {
+    data {
+      id
+      attributes {
+        ...FullProgrammeFragment
+      }
+    }
+  }
+}
+    ${FullProgrammeFragmentFragmentDoc}`;
+export const useGetProgrammeQuery = <
+      TData = GetProgrammeQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetProgrammeQueryVariables,
+      options?: UseQueryOptions<GetProgrammeQuery, TError, TData>
+    ) =>
+    useQuery<GetProgrammeQuery, TError, TData>(
+      variables === undefined ? ['getProgramme'] : ['getProgramme', variables],
+      fetcher<GetProgrammeQuery, GetProgrammeQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProgrammeDocument, variables),
       options
     );
