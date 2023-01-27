@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
 import { AboutMeCard, CardBox } from '@/components/AboutMeCard';
+import { ArrayUtils } from '@/lib/array';
 
 type Props = {
   // Add whatever extra you need
@@ -103,6 +104,16 @@ const IntroText: FC = () => {
   );
 };
 
+const testImages = [
+  'https://images.unsplash.com/photo-1416230789844-1998de481fdc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1528&q=80',
+  'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  'https://images.unsplash.com/photo-1552838671-4c793a745d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  'https://images.unsplash.com/photo-1515339760107-1952b7a08454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',
+  'https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  'https://images.unsplash.com/photo-1615716175507-64c47c317d58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+  'https://images.unsplash.com/photo-1600172454132-ada7faa101cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+];
+
 export default function TestPage(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
@@ -110,21 +121,14 @@ export default function TestPage(
     <>
       <NextSeo />
 
-      <div className={'top-0 left-0 -z-50 md:absolute'}>
+      <div className={'fixed top-0 left-0 -z-50'}>
         <Image
           alt={'Sandrine Rauter logo with name'}
-          src={
-            // 'https://images.unsplash.com/photo-1475113548554-5a36f1f523d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-            // 'https://images.unsplash.com/photo-1552838671-4c793a745d03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-            // 'https://images.unsplash.com/photo-1515339760107-1952b7a08454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'
-            // 'https://images.unsplash.com/photo-1566041510632-30055e21a9cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-            'https://images.unsplash.com/photo-1615716175507-64c47c317d58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-            // 'https://images.unsplash.com/photo-1600172454132-ada7faa101cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
-          }
+          src={ArrayUtils.getRandom(testImages)}
           // src={'/images/sunrise.webp'}
-          className={'delay-450 opacity-50 transition-all'}
+          className={'opacity-50'}
           width={2000}
-          height={443}
+          height={800}
           quality={85}
           style={{
             objectFit: 'cover',
@@ -142,18 +146,6 @@ export default function TestPage(
           </CardBox>
         </div>
       </div>
-      <div
-        className={'flex w-full basis-0 justify-center bg-amber-100 p-5'}
-        css={css`
-          max-height: 500px;
-          /*
-          background: linear-gradient(
-            90deg,
-            #ff930fff 0%,
-            hsla(58, 100%, 68%, 1) 100%
-          );*/
-        `}
-      ></div>
     </>
   );
 }

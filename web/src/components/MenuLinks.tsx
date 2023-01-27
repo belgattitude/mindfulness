@@ -3,15 +3,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
-import { siteConfig } from '../config/site.config';
+import type { MainNavLinks } from '../config/site.config';
 
-export const MenuLinks: FC<{ className?: string }> = (props) => {
-  const { className = '' } = props;
+type Props = {
+  className?: string;
+  mainNavLinks: MainNavLinks;
+};
+
+export const MenuLinks: FC<Props> = (props) => {
+  const { className = '', mainNavLinks } = props;
   const { asPath } = useRouter();
 
   return (
     <div className={['items-end', className].join(' ')}>
-      {siteConfig.mainNavLinks.map(({ title, href }) => {
+      {mainNavLinks.map(({ title, href }) => {
         return (
           <Link
             key={`main-links-${href}`}

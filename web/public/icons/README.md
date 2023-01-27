@@ -1,2 +1,3 @@
 - lotus.svg - https://www.svgrepo.com/svg/481482/lotus-2
 - yoga.svg - https://www.svgrepo.com/svg/324866/yoga
+- burger icons - https://www.svgrepo.com/collection/ikono-bold-line-icons/

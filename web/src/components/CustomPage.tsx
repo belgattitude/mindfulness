@@ -16,13 +16,12 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'bg-white p-[45px]'}>
+    <div className={'prose mx-auto max-w-[900px] bg-white p-[45px]'}>
       {cover && (
         <Image
           className={clsx({
             ['fixed top-[40px] left-0 h-full -z-50 w-full object-cover']: [
               'mindfulness',
-              'yoga',
             ].includes(page.slug),
           })}
           src={cover}

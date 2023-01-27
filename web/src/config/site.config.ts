@@ -7,3 +7,5 @@ export const siteConfig = {
     { title: 'Contact', href: '/contact' },
   ],
 } as const;
+
+export type MainNavLinks = typeof siteConfig.mainNavLinks;
