@@ -15,7 +15,6 @@ type Props = {
 
 const title = css`
   font-weight: 400;
-  font-family: var(--font-handwritten);
 `;
 
 const Ctn = styled.div`
@@ -29,7 +28,7 @@ const Ctn = styled.div`
   .description {
     h1 {
       //font-size: 1.2em;
-      font-family: var(--font-handwritten);
+
       //margin-bottom: 0;
       //padding: 0;
     }

@@ -18,7 +18,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'custom-style-body': [
+        'body': [
+          'var(--font-family-text-primary)',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        'title': [
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
         ],

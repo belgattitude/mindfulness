@@ -5,6 +5,6 @@ export const vars = createGlobalTheme(':root', {
     brand: 'blue',
   },
   font: {
-    body: '--var(font-handwritten)',
+    body: '--var(font-body)',
   },
 });

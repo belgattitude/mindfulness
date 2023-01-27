@@ -43,11 +43,6 @@ const yanone = Yanone_Kaffeesatz({
   variable: '--font-yanone',
 });
 
-const handwritten = Dancing_Script({
-  weight: ['400'],
-  variable: '--font-handwritten',
-});
-
 const crimson = Crimson_Pro({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
@@ -84,7 +79,7 @@ const MyApp = (appProps: MyAppProps) => {
         <Hydrate state={pageProps.dehydratedState}>
           <CacheProvider value={emotionCache}>
             <div
-              className={`${inter.variable} ${crimson.variable} ${yanone.variable} ${handwritten.variable} font-sans`}
+              className={`${inter.variable} ${crimson.variable} ${yanone.variable} font-sans`}
             >
               <DefaultSeo {...defaultSeoConfig} />
               <Layout>

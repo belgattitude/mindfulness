@@ -1,31 +1,12 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import IconLotus from '@/public/icons/lotus.svg';
 import IconMeditation from '@/public/icons/meditation.svg';
 import IconYoga from '@/public/icons/yoga.svg';
 
-type CardBoxProps = {
-  children: ReactNode;
-  className?: string;
-};
-export const CardBox: FC<CardBoxProps> = (props) => {
-  const { className = '', children } = props;
-
-  return (
-    <div
-      className={twMerge(
-        clsx('flex justify-center overflow-hidden'),
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
-export const AboutMeCard: FC<{ className?: string }> = (props) => {
+export const AboutCard: FC<{ className?: string }> = (props) => {
   const { className = '' } = props;
   return (
     <div

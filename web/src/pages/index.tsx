@@ -3,7 +3,8 @@ import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
-import { AboutMeCard, CardBox } from '@/components/AboutMeCard';
+import { AboutCard } from '@/components/about/AboutCard';
+import { AboutCardBox } from '@/components/about/AboutCardBox';
 import { ArrayUtils } from '@/lib/array';
 
 type Props = {
@@ -123,7 +124,7 @@ export default function TestPage(
 
       <div className={'fixed top-0 left-0 -z-50'}>
         <Image
-          alt={'Sandrine Rauter logo with name'}
+          alt={'Page background image'}
           src={ArrayUtils.getRandom(testImages)}
           // src={'/images/sunrise.webp'}
           className={'opacity-70'}
@@ -138,12 +139,12 @@ export default function TestPage(
 
       <div className="mx-15 container mx-auto pt-[20px]">
         <div className={'grid-row grid gap-5 md:grid-cols-3'}>
-          <CardBox className={'mb-5 flex bg-[#c9ded2] md:col-span-2'}>
+          <AboutCardBox className={'mb-5 flex bg-[#c9ded2] md:col-span-2'}>
             <IntroText />
-          </CardBox>
-          <CardBox className={'mb-5 flex md:col-span-1'}>
-            <AboutMeCard className={'mx-auto border bg-[#85aa9c]/10'} />
-          </CardBox>
+          </AboutCardBox>
+          <AboutCardBox className={'mb-5 flex md:col-span-1'}>
+            <AboutCard className={'mx-auto border bg-[#85aa9c]/10'} />
+          </AboutCardBox>
         </div>
       </div>
     </>
