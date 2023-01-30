@@ -15,7 +15,7 @@ export const BannerAlert: FC<Props> = (props) => {
     <div
       data-test-id={'top-banner'}
       className={clsx(
-        'transition-all-1s font-body flex items-center justify-center space-x-3 bg-pink-500 p-1 font-light text-white',
+        'transition-all-1s font-text-primary flex items-center justify-center space-x-3 bg-pink-500 p-1 font-light text-white',
         {
           ['-translate-y-60 h-0']: collapse,
         }

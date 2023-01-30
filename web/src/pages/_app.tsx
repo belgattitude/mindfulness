@@ -2,13 +2,9 @@ import '../styles/globals.scss';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import {
-  Parisienne,
   Inter,
   Crimson_Pro,
   Yanone_Kaffeesatz,
-  Bad_Script,
-  Dancing_Script,
-  Marck_Script,
   Montserrat,
 } from '@next/font/google';
 import {
@@ -31,17 +27,21 @@ type MyAppProps = AppProps & {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-const primaryFont = Montserrat({
-  // subsets: ['latin'],
+const fontTextPrimary = Montserrat({
   weight: 'variable',
-  // weight: ['200', '300', '400', '600', '700'],
+  variable: '--font-text-primary',
   style: ['normal', 'italic'],
+  preload: true,
+  display: 'block',
+  // weight: ['200', '300', '400', '600', '700'],
+  // subsets: ['latin'],
 });
 
+/*
 const yanone = Yanone_Kaffeesatz({
   weight: 'variable',
   variable: '--font-yanone',
-});
+}); */
 
 const crimson = Crimson_Pro({
   subsets: ['latin'],
@@ -71,7 +71,7 @@ const MyApp = (appProps: MyAppProps) => {
       <style jsx global>
         {`
           :root {
-            --font-family-text-primary: ${primaryFont.style.fontFamily};
+            --font-family-text-primary: ${fontTextPrimary.style.fontFamily};
           }
         `}
       </style>
@@ -79,7 +79,7 @@ const MyApp = (appProps: MyAppProps) => {
         <Hydrate state={pageProps.dehydratedState}>
           <CacheProvider value={emotionCache}>
             <div
-              className={`${inter.variable} ${crimson.variable} ${yanone.variable} font-sans`}
+              className={`${fontTextPrimary.variable} ${inter.variable} ${crimson.variable}  font-sans`}
             >
               <DefaultSeo {...defaultSeoConfig} />
               <Layout>

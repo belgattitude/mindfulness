@@ -18,11 +18,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'body': [
+        'text-primary': [
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
         ],
-        'title': [
+        title: [
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
         ],
