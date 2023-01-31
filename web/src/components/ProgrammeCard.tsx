@@ -23,10 +23,13 @@ export const ProgrammeCard: FC<Props> = (props) => {
     <div className={twMerge('mb-5 border-2 p-5', className)}>
       {cover && (
         <Image
-          className={'max-h-[800px] object-cover'}
+          className={'max-h-[800px] w-full object-cover'}
           src={cover}
           width={800}
           height={600}
+          style={{
+            objectFit: 'cover',
+          }}
           alt={'Img'}
         />
       )}
