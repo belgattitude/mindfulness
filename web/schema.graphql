@@ -1,3 +1,28 @@
+type About {
+  cover: UploadFileEntityResponse
+  createdAt: DateTime
+  description: String
+  summary: String
+  title: String
+  updatedAt: DateTime
+}
+
+type AboutEntity {
+  attributes: About
+  id: ID
+}
+
+type AboutEntityResponse {
+  data: AboutEntity
+}
+
+input AboutInput {
+  cover: ID
+  description: String
+  summary: String
+  title: String
+}
+
 input BooleanFilterInput {
   and: [Boolean]
   between: [Boolean]
@@ -22,15 +47,33 @@ input BooleanFilterInput {
   startsWith: Boolean
 }
 
-type ComponentTestPrice {
-  id: ID!
-  price: Int
+type Contact {
+  cover: UploadFileEntityResponse
+  createdAt: DateTime
+  description: String
+  email: String
+  phone: String
+  summary: String
+  title: String
+  updatedAt: DateTime
 }
 
-type ComponentTestTestcomp {
-  end: DateTime
-  id: ID!
-  start: DateTime
+type ContactEntity {
+  attributes: Contact
+  id: ID
+}
+
+type ContactEntityResponse {
+  data: ContactEntity
+}
+
+input ContactInput {
+  cover: ID
+  description: String
+  email: String
+  phone: String
+  summary: String
+  title: String
 }
 
 """
@@ -72,6 +115,11 @@ enum ENUM_PROGRAMME_UNIVERSE {
   yoga
 }
 
+enum ENUM_TEMOIGNAGE_UNIVERSE {
+  mindfulness
+  yoga
+}
+
 type Event {
   cover: UploadFileEntityResponse!
   createdAt: DateTime
@@ -83,6 +131,7 @@ type Event {
   location: String
   online: Boolean!
   organizers: String
+  programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProgrammeRelationResponseCollection
   publishedAt: DateTime
   slug: String!
   startAt: DateTime!
@@ -119,6 +168,7 @@ input EventFiltersInput {
   online: BooleanFilterInput
   or: [EventFiltersInput]
   organizers: StringFilterInput
+  programmes: ProgrammeFiltersInput
   publishedAt: DateTimeFilterInput
   slug: StringFilterInput
   startAt: DateTimeFilterInput
@@ -138,12 +188,17 @@ input EventInput {
   location: String
   online: Boolean
   organizers: String
+  programmes: [ID]
   publishedAt: DateTime
   slug: String
   startAt: DateTime
   summary: String
   title: String
   universe: ENUM_EVENT_UNIVERSE
+}
+
+type EventRelationResponseCollection {
+  data: [EventEntity!]!
 }
 
 input FileInfoInput {
@@ -176,7 +231,28 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = ComponentTestPrice | ComponentTestTestcomp | Event | I18NLocale | Page | Programme | Test | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = About | Contact | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+
+type Home {
+  createdAt: DateTime
+  introduction: String
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type HomeEntity {
+  attributes: Home
+  id: ID
+}
+
+type HomeEntityResponse {
+  data: HomeEntity
+}
+
+input HomeInput {
+  introduction: String
+  publishedAt: DateTime
+}
 
 type I18NLocale {
   code: String
@@ -293,6 +369,7 @@ type Mutation {
   createEvent(data: EventInput!): EventEntityResponse
   createPage(data: PageInput!): PageEntityResponse
   createProgramme(data: ProgrammeInput!): ProgrammeEntityResponse
+  createTemoignage(data: TemoignageInput!): TemoignageEntityResponse
   createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
 
@@ -301,10 +378,13 @@ type Mutation {
 
   """Create a new user"""
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  deleteAbout: AboutEntityResponse
+  deleteContact: ContactEntityResponse
   deleteEvent(id: ID!): EventEntityResponse
+  deleteHome: HomeEntityResponse
   deletePage(id: ID!): PageEntityResponse
   deleteProgramme(id: ID!): ProgrammeEntityResponse
-  deleteTest: TestEntityResponse
+  deleteTemoignage(id: ID!): TemoignageEntityResponse
   deleteUploadFile(id: ID!): UploadFileEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
 
@@ -330,11 +410,14 @@ type Mutation {
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  updateAbout(data: AboutInput!): AboutEntityResponse
+  updateContact(data: ContactInput!): ContactEntityResponse
   updateEvent(data: EventInput!, id: ID!): EventEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
+  updateHome(data: HomeInput!): HomeEntityResponse
   updatePage(data: PageInput!, id: ID!): PageEntityResponse
   updateProgramme(data: ProgrammeInput!, id: ID!): ProgrammeEntityResponse
-  updateTest(data: TestInput!): TestEntityResponse
+  updateTemoignage(data: TemoignageInput!, id: ID!): TemoignageEntityResponse
   updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
   updateUploadFolder(data: UploadFolderInput!, id: ID!): UploadFolderEntityResponse
 
@@ -415,6 +498,7 @@ type Programme {
   cover: UploadFileEntityResponse!
   createdAt: DateTime
   description: String
+  events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventRelationResponseCollection
   publishedAt: DateTime
   slug: String
   title: String
@@ -440,6 +524,7 @@ input ProgrammeFiltersInput {
   and: [ProgrammeFiltersInput]
   createdAt: DateTimeFilterInput
   description: StringFilterInput
+  events: EventFiltersInput
   id: IDFilterInput
   not: ProgrammeFiltersInput
   or: [ProgrammeFiltersInput]
@@ -453,6 +538,7 @@ input ProgrammeFiltersInput {
 input ProgrammeInput {
   cover: ID
   description: String
+  events: [ID]
   publishedAt: DateTime
   slug: String
   title: String
@@ -469,8 +555,11 @@ enum PublicationState {
 }
 
 type Query {
+  about: AboutEntityResponse
+  contact: ContactEntityResponse
   event(id: ID): EventEntityResponse
   events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventEntityResponseCollection
+  home(publicationState: PublicationState = LIVE): HomeEntityResponse
   i18NLocale(id: ID): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
@@ -478,7 +567,8 @@ type Query {
   pages(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageEntityResponseCollection
   programme(id: ID): ProgrammeEntityResponse
   programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProgrammeEntityResponseCollection
-  test(publicationState: PublicationState = LIVE): TestEntityResponse
+  temoignage(id: ID): TemoignageEntityResponse
+  temoignages(filters: TemoignageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): TemoignageEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
   uploadFolder(id: ID): UploadFolderEntityResponse
@@ -517,25 +607,55 @@ input StringFilterInput {
   startsWith: String
 }
 
-type Test {
+type Temoignage {
+  avatar: UploadFileEntityResponse
   createdAt: DateTime
+  event: EventEntityResponse
+  person: String!
+  programme: ProgrammeEntityResponse
   publishedAt: DateTime
-  title: String
+  summary: String!
+  universe: ENUM_TEMOIGNAGE_UNIVERSE
   updatedAt: DateTime
 }
 
-type TestEntity {
-  attributes: Test
+type TemoignageEntity {
+  attributes: Temoignage
   id: ID
 }
 
-type TestEntityResponse {
-  data: TestEntity
+type TemoignageEntityResponse {
+  data: TemoignageEntity
 }
 
-input TestInput {
+type TemoignageEntityResponseCollection {
+  data: [TemoignageEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+input TemoignageFiltersInput {
+  and: [TemoignageFiltersInput]
+  createdAt: DateTimeFilterInput
+  event: EventFiltersInput
+  id: IDFilterInput
+  not: TemoignageFiltersInput
+  or: [TemoignageFiltersInput]
+  person: StringFilterInput
+  programme: ProgrammeFiltersInput
+  publishedAt: DateTimeFilterInput
+  summary: StringFilterInput
+  universe: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input TemoignageInput {
+  avatar: ID
+  event: ID
+  person: String
+  programme: ID
   publishedAt: DateTime
-  title: String
+  summary: String
+  universe: ENUM_TEMOIGNAGE_UNIVERSE
 }
 
 """The `Upload` scalar type represents a file upload."""
