@@ -139,11 +139,13 @@ export default function TestPage(
 
       <div className="mx-15 container mx-auto pt-[20px]">
         <div className={'grid-row grid gap-5 md:grid-cols-3'}>
-          <AboutCardBox className={'mb-5 flex bg-[#c9ded2] md:col-span-2'}>
+          <AboutCardBox
+            className={'font-brand bg-brand-color-400 mb-5 flex md:col-span-2'}
+          >
             <IntroText />
           </AboutCardBox>
           <AboutCardBox className={'mb-5 flex md:col-span-1'}>
-            <AboutCard className={'mx-auto border bg-[#85aa9c]/10'} />
+            <AboutCard className={'bg-brand-color/60 mx-auto border'} />
           </AboutCardBox>
         </div>
       </div>

@@ -7,6 +7,7 @@ import {
   Yanone_Kaffeesatz,
   Montserrat,
 } from '@next/font/google';
+import localFont from '@next/font/local';
 import {
   Hydrate,
   QueryClient,
@@ -59,6 +60,33 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+const fontBrand = localFont({
+  src: [
+    {
+      // path: 'fonts/agrandir/PPAgrandir-Regular.woff2',
+      path: './PPAgrandir-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    /*
+    {
+      path: './Roboto-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: './Roboto-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './Roboto-BoldItalic.woff2',
+      weight: '700',
+      style: 'italic',
+    }, */
+  ],
+});
+
 const MyApp = (appProps: MyAppProps) => {
   const {
     Component,
@@ -72,6 +100,7 @@ const MyApp = (appProps: MyAppProps) => {
         {`
           :root {
             --font-family-text-primary: ${fontTextPrimary.style.fontFamily};
+            --font-family-brand: ${fontBrand.style.fontFamily};
           }
         `}
       </style>

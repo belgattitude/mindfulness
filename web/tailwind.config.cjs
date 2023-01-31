@@ -22,6 +22,10 @@ module.exports = {
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
         ],
+        'brand': [
+          'var(--font-family-brand)',
+          ...defaultTheme.fontFamily.sans,
+        ],
         title: [
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
@@ -33,6 +37,20 @@ module.exports = {
         'custom-brown': {
           DEFAULT: 'rgb(193,160,132)',
         },
+        'brand-color': {
+
+          50: 'hsl(150, 27%, 92%)',
+          100: 'hsl(150, 27%, 88%)',
+          200: 'hsl(150, 27%, 85%)',
+          300: 'hsl(150, 27%, 82%)',
+          400: 'hsl(150, 27%, 78%)',
+          DEFAULT: 'hsl(150, 27%, 78%)',
+          500: 'hsl(150, 27%, 74%)',
+          600: 'hsl(150, 27%, 71%)',
+          700: 'hsl(150, 27%, 67%)',
+          800: 'hsl(150, 27%, 62%)',
+          900: 'hsl(150, 27%, 55%)',
+        }
       },
       /**
       spacing: {
