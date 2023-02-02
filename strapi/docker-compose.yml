@@ -35,7 +35,7 @@ services:
     ports:
       - '1337:1337'
     networks:
-      - mindfulness-net
+      - cloud-net
 
   mindfulness-caddy:
     container_name: mindfulness-caddy
@@ -65,7 +65,7 @@ services:
       - mindfulness-caddy-config:/config
 
     networks:
-      - mindfulness-net
+      - cloud-net
 
   mindfulness-postgresql:
     container_name: mindfulness-postgresql
@@ -84,7 +84,7 @@ services:
     ports:
       - '5432:5432'
     networks:
-      - mindfulness-net
+      - cloud-net
     depends_on:
       - mindfulness-strapi
 
@@ -103,5 +103,6 @@ volumes:
       type: 'webserver'
 
 networks:
-  mindfulness-net:
+  cloud-net:
+    name: cloud-net
     driver: bridge
