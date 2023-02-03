@@ -17,7 +17,10 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
     >
       <div className="">
         <Image
-          src="/images/sandrine-photo.jpg"
+          // src="/images/sandrine-photo.jpg"
+          src={
+            'https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+          }
           className=""
           width={800}
           height={800}
@@ -32,6 +35,19 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
 
       <div className="divide-y divide-gray-300/50">
         <div className="space-y-6 py-8 text-base font-normal leading-7 text-neutral-800">
+          <div className="">
+            <Image
+              // src="/images/sandrine-photo.jpg"
+              src={
+                'https://images.unsplash.com/photo-1600618528240-fb9fc964b853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+              }
+              className=""
+              width={800}
+              height={800}
+              alt={'Photo profil Sandrine'}
+            />
+          </div>
+
           <p className={'text-3xl font-light'}>Bonjour, à mon propos</p>
           <p>
             Je suis Sandrine Rauter, professeur de Yoga et de pleine conscience
@@ -39,6 +55,7 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
             je n'ai pas encore eu le plaisir de faire connaissance, vous
             trouverez un aperçu de mon parcours ici.
           </p>
+
           <ul className="space-y-4">
             <li className="flex items-center">
               <IconLotus className="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" />
@@ -60,6 +77,7 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
             suffit de la déposer dans une rivère.
           </p>
         </div>
+
         <div className="pt-8 text-base font-light leading-10">
           <p className="text-gray-900">Liens vers mes formations</p>
           <p>

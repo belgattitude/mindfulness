@@ -10,7 +10,10 @@ type Props = {
 export const Footer: FC<Props> = (props) => {
   const { mainNavLinks } = props;
   return (
-    <footer aria-label="Site Footer" className={'mt-20 w-full bg-white/50'}>
+    <footer
+      aria-label="Site Footer"
+      className={'bg-brand-color-200/90 mt-20 w-full'}
+    >
       <div className="container mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-teal-600">
@@ -86,13 +89,6 @@ export const Footer: FC<Props> = (props) => {
 
         <p className="text-xs text-gray-500">Sandrine Rauter</p>
       </div>
-    </footer>
-  );
-
-  return (
-    <footer className="flex w-full flex-row border-t-2 border-amber-200 bg-amber-500 p-16">
-      <div className="border-2">FOOTER</div>
-      <div className="border-2">FOOTER</div>
     </footer>
   );
 };

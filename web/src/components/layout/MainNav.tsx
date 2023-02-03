@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
+import { MainNavHeader } from '@/components/layout/MainNavHeader';
 import { MobileMenu } from '@/components/layout/MobileMenu';
 import { MainLogo } from '@/components/logo/MainLogo';
 import { MenuLinks } from '@/components/MenuLinks';
@@ -43,7 +44,7 @@ const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
 );
 
 export const MainNav: FC<MainNavProps> = (props) => {
-  const { showAlert = false, mainNavLinks } = props;
+  const { showAlert = true, mainNavLinks } = props;
   const router = useRouter();
   const initialIsScrollOntop = isServer
     ? true
@@ -77,8 +78,9 @@ export const MainNav: FC<MainNavProps> = (props) => {
         })}
         scrollIsOnTop={scrollIsOnTop}
       >
-        <BannerAlert collapse={!scrollIsOnTop} render={showAlert} />
-        <div className={`container mx-auto flex gap-2 p-2`}>
+        <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} />
+
+        <div className={`container mx-auto hidden gap-2 p-2 md:flex`}>
           <div className="left">
             <div
               className={'flex'}
@@ -123,7 +125,11 @@ export const MainNav: FC<MainNavProps> = (props) => {
                 setIsNavExpanded((prevState) => !prevState);
               }}
             >
-              <div className={'relative h-[32px] w-[32px] transition-opacity'}>
+              <div
+                className={
+                  'absolute top-5 right-5 h-[32px] w-[32px] transition-opacity'
+                }
+              >
                 <BurgerOpenIcon
                   className={clsx(
                     'delay-450 absolute top-0 left-0 h-auto w-auto transition-opacity duration-300 ease-in-out',
@@ -144,6 +150,7 @@ export const MainNav: FC<MainNavProps> = (props) => {
             </button>
           </div>
         </div>
+        <BannerAlert collapse={!scrollIsOnTop} render={scrollIsOnTop} />
         <MobileMenu hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
       </StickyCtn>
     </div>

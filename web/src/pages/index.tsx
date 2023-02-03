@@ -73,9 +73,14 @@ const imgBackgrounds = {
 
 const IntroText: FC = () => {
   return (
-    <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
+    <div className="prose lg:prose-xl border-3 container mx-auto rounded-2xl bg-white/90 p-[40px] p-6 text-2xl text-gray-700 drop-shadow">
       <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
       <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
+      <img
+        src={
+          'https://images.unsplash.com/photo-1611800065908-233b597db552?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+        }
+      />
       <p>
         A l'image du nuage qui devient pluie ou neige, la vie se forme, se
         déforme, se transforme.
@@ -144,7 +149,7 @@ export default function TestPage(
           >
             <IntroText />
           </AboutCardBox>
-          <AboutCardBox className={'mb-5 flex md:col-span-1'}>
+          <AboutCardBox className={'mb-5 flex flex-col md:col-span-1'}>
             <AboutCard className={'bg-brand-color/60 mx-auto border'} />
           </AboutCardBox>
         </div>
