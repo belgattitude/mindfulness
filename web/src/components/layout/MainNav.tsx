@@ -72,7 +72,7 @@ export const MainNav: FC<MainNavProps> = (props) => {
   return (
     <div className={'flex'}>
       <StickyCtn
-        className={clsx('fixed top-0 z-50 w-full  backdrop-blur', {
+        className={clsx('fixed top-0 z-50 w-full backdrop-blur', {
           ['bg-white']: scrollIsOnTop,
           ['border-b border-gray-200 shadow-lg']: false,
         })}
@@ -127,7 +127,7 @@ export const MainNav: FC<MainNavProps> = (props) => {
             >
               <div
                 className={
-                  'absolute top-5 right-5 h-[32px] w-[32px] transition-opacity'
+                  'absolute top-3 right-5 h-[32px] w-[32px] transition-opacity'
                 }
               >
                 <BurgerOpenIcon
@@ -150,7 +150,7 @@ export const MainNav: FC<MainNavProps> = (props) => {
             </button>
           </div>
         </div>
-        <BannerAlert collapse={!scrollIsOnTop} render={scrollIsOnTop} />
+        <BannerAlert collapse={!scrollIsOnTop} render={showAlert} />
         <MobileMenu hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
       </StickyCtn>
     </div>
