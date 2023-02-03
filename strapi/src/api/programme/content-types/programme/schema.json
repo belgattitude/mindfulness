@@ -31,7 +31,8 @@
       "type": "enumeration",
       "enum": [
         "yoga",
-        "mindfulness"
+        "mindfulness",
+        "dialogue"
       ]
     },
     "slug": {
@@ -43,6 +44,9 @@
       "relation": "manyToMany",
       "target": "api::event.event",
       "inversedBy": "programmes"
+    },
+    "summary": {
+      "type": "text"
     }
   }
 }

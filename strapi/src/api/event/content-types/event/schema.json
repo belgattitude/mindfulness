@@ -16,7 +16,7 @@
       "type": "string",
       "unique": true,
       "maxLength": 255,
-      "minLength": 40,
+      "minLength": 15,
       "required": true
     },
     "summary": {
@@ -36,7 +36,8 @@
       "type": "enumeration",
       "enum": [
         "yoga",
-        "mindfulness"
+        "mindfulness",
+        "dialogue"
       ],
       "required": false
     },

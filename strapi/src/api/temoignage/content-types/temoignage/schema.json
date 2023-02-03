@@ -43,7 +43,8 @@
       "type": "enumeration",
       "enum": [
         "yoga",
-        "mindfulness"
+        "mindfulness",
+        "dialogue"
       ]
     }
   }

@@ -106,16 +106,19 @@ input DateTimeFilterInput {
 }
 
 enum ENUM_EVENT_UNIVERSE {
+  dialogue
   mindfulness
   yoga
 }
 
 enum ENUM_PROGRAMME_UNIVERSE {
+  dialogue
   mindfulness
   yoga
 }
 
 enum ENUM_TEMOIGNAGE_UNIVERSE {
+  dialogue
   mindfulness
   yoga
 }
@@ -501,6 +504,7 @@ type Programme {
   events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventRelationResponseCollection
   publishedAt: DateTime
   slug: String
+  summary: String
   title: String
   universe: ENUM_PROGRAMME_UNIVERSE
   updatedAt: DateTime
@@ -530,6 +534,7 @@ input ProgrammeFiltersInput {
   or: [ProgrammeFiltersInput]
   publishedAt: DateTimeFilterInput
   slug: StringFilterInput
+  summary: StringFilterInput
   title: StringFilterInput
   universe: StringFilterInput
   updatedAt: DateTimeFilterInput
@@ -541,6 +546,7 @@ input ProgrammeInput {
   events: [ID]
   publishedAt: DateTime
   slug: String
+  summary: String
   title: String
   universe: ENUM_PROGRAMME_UNIVERSE
 }
