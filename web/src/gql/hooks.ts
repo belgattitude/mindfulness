@@ -145,16 +145,19 @@ export type DateTimeFilterInput = {
 };
 
 export enum Enum_Event_Universe {
+  Dialogue = 'dialogue',
   Mindfulness = 'mindfulness',
   Yoga = 'yoga'
 }
 
 export enum Enum_Programme_Universe {
+  Dialogue = 'dialogue',
   Mindfulness = 'mindfulness',
   Yoga = 'yoga'
 }
 
 export enum Enum_Temoignage_Universe {
+  Dialogue = 'dialogue',
   Mindfulness = 'mindfulness',
   Yoga = 'yoga'
 }
@@ -763,6 +766,7 @@ export type Programme = {
   events?: Maybe<EventRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   universe?: Maybe<Enum_Programme_Universe>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -803,6 +807,7 @@ export type ProgrammeFiltersInput = {
   or?: InputMaybe<Array<InputMaybe<ProgrammeFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
   slug?: InputMaybe<StringFilterInput>;
+  summary?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   universe?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -814,6 +819,7 @@ export type ProgrammeInput = {
   events?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   slug?: InputMaybe<Scalars['String']>;
+  summary?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   universe?: InputMaybe<Enum_Programme_Universe>;
 };
