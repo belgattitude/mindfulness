@@ -73,7 +73,7 @@ const imgBackgrounds = {
 
 const IntroText: FC = () => {
   return (
-    <div className="prose lg:prose-xl border-3 container mx-auto rounded-2xl bg-white/90 p-[40px] p-6 text-2xl text-gray-700 drop-shadow">
+    <div className="prose lg:prose-xl border-3 container mx-auto rounded-2xl bg-white/90 p-[40px] text-2xl text-gray-700 drop-shadow">
       <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
       <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
       <img

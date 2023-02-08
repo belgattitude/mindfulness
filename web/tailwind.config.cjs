@@ -22,10 +22,7 @@ module.exports = {
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
         ],
-        'brand': [
-          'var(--font-family-brand)',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        brand: ['var(--font-family-brand)', ...defaultTheme.fontFamily.sans],
         title: [
           'var(--font-family-text-primary)',
           ...defaultTheme.fontFamily.sans,
@@ -49,7 +46,7 @@ module.exports = {
           700: 'hsl(150, 27%, 67%)',
           800: 'hsl(150, 27%, 62%)',
           900: 'hsl(150, 27%, 45%)',
-        }
+        },
       },
       /**
       spacing: {
