@@ -56,7 +56,12 @@ const secureHeaders = createSecureHeaders({
 let nextConfig = {
   reactStrictMode: true,
 
-  // transpilePackages: isProd ? ['ky'] : [],
+  transpilePackages: isProd
+    ? [
+        // dist make usage of nullish ?.
+        'tailwind-merge',
+      ]
+    : [],
 
   eslint: { ignoreDuringBuilds: !!process.env.CI },
 
