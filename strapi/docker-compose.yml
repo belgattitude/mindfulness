@@ -1,3 +1,4 @@
+name: mindfulness
 services:
   mindfulness-strapi:
     container_name: mindfulness-strapi
