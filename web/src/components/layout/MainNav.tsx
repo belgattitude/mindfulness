@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { MainNavHeader } from '@/components/layout/MainNavHeader';
 import { MobileMenu } from '@/components/layout/MobileMenu';
 import { MainLogo } from '@/components/logo/MainLogo';
+import { BurgerMenuButton } from '@/components/menu/BurgerMenuButton';
 import { MenuLinks } from '@/components/MenuLinks';
 import BurgerOpenIcon from '@/public/icons/burger-simple-svgrepo-com.svg';
 import BurgerCloseIcon from '@/public/icons/cross-svgrepo-com.svg';
@@ -118,40 +119,16 @@ export const MainNav: FC<MainNavProps> = (props) => {
               )}
             />
           </div>
-          <div className={'flex items-center justify-center'}>
-            <button
-              className={''}
-              onClick={() => {
-                setIsNavExpanded((prevState) => !prevState);
-              }}
-            >
-              <div
-                className={
-                  'absolute top-3 right-5 h-[32px] w-[32px] transition-opacity'
-                }
-              >
-                <BurgerOpenIcon
-                  className={clsx(
-                    'delay-450 absolute top-0 left-0 h-auto w-auto transition-opacity duration-300 ease-in-out',
-                    {
-                      ['opacity-0']: isNavExpanded,
-                    }
-                  )}
-                />
-                <BurgerCloseIcon
-                  className={clsx(
-                    'delay-450 absolute h-auto w-auto opacity-0 transition-opacity duration-300 ease-in-out',
-                    {
-                      ['opacity-100']: isNavExpanded,
-                    }
-                  )}
-                />
-              </div>
-            </button>
-          </div>
+          <div className={'flex items-center justify-center'}></div>
         </div>
         <BannerAlert collapse={!scrollIsOnTop} render={showAlert} />
         <MobileMenu hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
+        <BurgerMenuButton
+          handleClick={() => {
+            setIsNavExpanded((prevState) => !prevState);
+          }}
+          isOpen={isNavExpanded}
+        />
       </StickyCtn>
     </div>
   );

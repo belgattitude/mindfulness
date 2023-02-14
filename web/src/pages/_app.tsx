@@ -1,13 +1,8 @@
 import '../styles/globals.scss';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import {
-  Inter,
-  Crimson_Pro,
-  Yanone_Kaffeesatz,
-  Montserrat,
-} from '@next/font/google';
-import localFont from '@next/font/local';
+import { Inter, Crimson_Pro, Montserrat } from '@next/font/google';
+// import localFont from '@next/font/local';
 import {
   Hydrate,
   QueryClient,
@@ -38,17 +33,11 @@ const fontTextPrimary = Montserrat({
   // subsets: ['latin'],
 });
 
-/*
-const yanone = Yanone_Kaffeesatz({
-  weight: 'variable',
-  variable: '--font-yanone',
-}); */
-
-const crimson = Crimson_Pro({
+const fontBrand = Crimson_Pro({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
   style: ['normal', 'italic'],
-  variable: '--font-crimson',
+  variable: '--font-brand',
 });
 
 const inter = Inter({
@@ -60,6 +49,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+/*
 const fontBrand = localFont({
   src: [
     {
@@ -68,7 +58,6 @@ const fontBrand = localFont({
       weight: '400',
       style: 'normal',
     },
-    /*
     {
       path: './Roboto-Italic.woff2',
       weight: '400',
@@ -83,10 +72,10 @@ const fontBrand = localFont({
       path: './Roboto-BoldItalic.woff2',
       weight: '700',
       style: 'italic',
-    }, */
+    },
   ],
 });
-
+*/
 const MyApp = (appProps: MyAppProps) => {
   const {
     Component,
@@ -108,7 +97,7 @@ const MyApp = (appProps: MyAppProps) => {
         <Hydrate state={pageProps.dehydratedState}>
           <CacheProvider value={emotionCache}>
             <div
-              className={`${fontTextPrimary.variable} ${inter.variable} ${crimson.variable}  font-sans`}
+              className={`${fontTextPrimary.variable} ${inter.variable}  font-sans`}
             >
               <DefaultSeo {...defaultSeoConfig} />
               <Layout>

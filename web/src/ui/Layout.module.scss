@@ -1,5 +1,5 @@
 .textSans {
-  font-family: var(--crimson-font);
+  font-family: var(--font-brand);
 }
 .mainCtn {
   font-family: var(--inter-font);
@@ -34,7 +34,7 @@
     margin: 0;
     padding-left: 0;
     li {
-      font-family: var(--crimson-font);
+      font-family: var(--font-brand);
       //background: darkorange;
       display: block;
       text-decoration: none;
