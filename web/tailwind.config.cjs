@@ -18,13 +18,17 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'text-primary': [
-          'var(--font-family-text-primary)',
+        'family-primary': [
+          'var(--font-family-montserrat)',
           ...defaultTheme.fontFamily.sans,
         ],
-        brand: ['var(--font-family-brand)', ...defaultTheme.fontFamily.sans],
-        title: [
-          'var(--font-family-text-primary)',
+        'family-brand': ['var(--font-family-quicksand)', ...defaultTheme.fontFamily.sans],
+        'family-menu': [
+          'var(--font-family-quicksand)',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        'family-title': [
+          'var(--font-family-montserrat)',
           ...defaultTheme.fontFamily.sans,
         ],
       },

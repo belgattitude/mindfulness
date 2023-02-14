@@ -1,7 +1,7 @@
 import '../styles/globals.scss';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { Inter, Crimson_Pro, Montserrat } from '@next/font/google';
+import { Montserrat, Quicksand } from '@next/font/google';
 // import localFont from '@next/font/local';
 import {
   Hydrate,
@@ -23,30 +23,19 @@ type MyAppProps = AppProps & {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-const fontTextPrimary = Montserrat({
+const fontMontserrat = Montserrat({
   weight: 'variable',
-  variable: '--font-text-primary',
+  variable: '--font-family-montserrat',
   style: ['normal', 'italic'],
   preload: true,
   display: 'block',
-  // weight: ['200', '300', '400', '600', '700'],
-  // subsets: ['latin'],
 });
 
-const fontBrand = Crimson_Pro({
+const fontQuicksand = Quicksand({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-brand',
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  // weight: ['400', '600', '700', '800', '900'],
   weight: 'variable',
-  // weight: ['400', '700'],
-  // style: ['normal'],
-  variable: '--font-inter',
+  style: ['normal'],
+  variable: '--font-family-quicksand',
 });
 
 /*
@@ -88,8 +77,8 @@ const MyApp = (appProps: MyAppProps) => {
       <style jsx global>
         {`
           :root {
-            --font-family-text-primary: ${fontTextPrimary.style.fontFamily};
-            --font-family-brand: ${fontBrand.style.fontFamily};
+            --font-family-montserrat: ${fontMontserrat.style.fontFamily};
+            --font-family-quicksand: ${fontQuicksand.style.fontFamily};
           }
         `}
       </style>
@@ -97,7 +86,7 @@ const MyApp = (appProps: MyAppProps) => {
         <Hydrate state={pageProps.dehydratedState}>
           <CacheProvider value={emotionCache}>
             <div
-              className={`${fontTextPrimary.variable} ${inter.variable}  font-sans`}
+              className={`${fontMontserrat.variable} ${fontQuicksand.variable} font-sans`}
             >
               <DefaultSeo {...defaultSeoConfig} />
               <MainLayout>

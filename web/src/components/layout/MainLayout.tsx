@@ -17,7 +17,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <>
       <MainHeader mainNavLinks={mainNavLinks} />
-      <main style={style}>{children}</main>
+      <main style={style} className={'font-family-primary'}>
+        {children}
+      </main>
       <MainFooter mainNavLinks={mainNavLinks} />
     </>
   );

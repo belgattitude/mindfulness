@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useQuery } from '@tanstack/react-query';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
@@ -10,6 +10,8 @@ import { MarkdownText } from '@/components/MarkdownText';
 import { useGetHomePageQuery } from '@/gql/hooks';
 import { ArrayUtils } from '@/lib/array';
 import { fetchHome } from '../api/home.api';
+import { fetchPage } from '../api/pages.api';
+import { queryClientConfig } from '../config/query-client.config';
 
 type Props = {
   // Add whatever extra you need
@@ -125,7 +127,7 @@ export default function HomeRoute(
 
       <div className="mx-15 container mx-auto pt-[20px]">
         <div className={'grid-row grid gap-5 md:grid-cols-3'}>
-          <AboutCardBox className={'font-brand mb-5 flex md:col-span-2'}>
+          <AboutCardBox className={'font-family-brand mb-5 flex md:col-span-2'}>
             <HomePage />
           </AboutCardBox>
           <AboutCardBox className={'mb-5 flex flex-col md:col-span-1'}>
@@ -138,7 +140,19 @@ export default function HomeRoute(
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+  const queryClient = new QueryClient(queryClientConfig);
+
+  await queryClient.prefetchQuery({
+    queryKey: ['home'],
+    queryFn: async () => fetchHome(),
+    retry: false,
+  });
+
   return {
-    props: {},
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      // Next.js will attempt to re-generate the page at most
+      revalidate: 3_600,
+    },
   };
 };
