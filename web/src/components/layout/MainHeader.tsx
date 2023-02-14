@@ -64,6 +64,8 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     return () => router.events.off('routeChangeStart', closeMenu);
   }, [router.events]);
 
+  const isHome = router.asPath === '/';
+
   return (
     <div className={'flex'}>
       <StickyCtn
@@ -76,7 +78,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         scrollIsOnTop={scrollIsOnTop}
       >
         {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
-        <MainNavHeader collapse={false} render={router.asPath === '/'} />
+        <MainNavHeader collapse={!isHome} render={true} />
 
         <div
           className={clsx(`container mx-auto hidden gap-2 p-2 md:flex`, {
@@ -129,7 +131,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
           isOpen={isNavExpanded}
         />
         {/* <BannerAlert collapse={!scrollIsOnTop} render={showAlert} /> */}
-        <BannerAlert collapse={false} render={showAlert} />
+        <BannerAlert collapse={!isHome} render={showAlert} />
       </StickyCtn>
     </div>
   );
