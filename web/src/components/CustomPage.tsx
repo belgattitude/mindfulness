@@ -16,21 +16,11 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'prose mx-auto max-w-[1000px] bg-white p-[45px]'}>
-      {cover && (
-        <Image
-          className={clsx({
-            ['fixed top-[40px] left-0 h-full -z-50 w-full object-cover']: [
-              'mindfulness',
-            ].includes(page.slug),
-          })}
-          src={cover}
-          width={1200}
-          height={900}
-          priority={true}
-          alt={'Img'}
-        />
-      )}
+    <div
+      className={
+        'font-family-primary prose-pink prose mx-auto mt-5 max-w-[1000px] bg-white text-neutral-800 '
+      }
+    >
       <h1
         className={''}
         css={css`
@@ -52,14 +42,14 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
 
       <MarkdownText text={page.introduction ?? ''} />
 
-      <h1>Programmes et cycles</h1>
+      <h1 className={''}>Programmes et cycles</h1>
 
       {page.programmes &&
         page.programmes.data.map((programme) => {
           return (
             programme.attributes && (
               <ProgrammeCard
-                className={'bg-white'}
+                className={'rounded-xl bg-white'}
                 key={programme.id}
                 programme={programme.attributes}
               />

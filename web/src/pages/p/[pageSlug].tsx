@@ -44,7 +44,6 @@ export default function ProgrammesPage(
   return (
     <>
       <NextSeo />
-
       <div className={'container mx-auto flex flex-col'}>
         {data?.attributes && <CustomPage page={data.attributes} />}
       </div>

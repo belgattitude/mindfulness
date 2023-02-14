@@ -76,7 +76,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         scrollIsOnTop={scrollIsOnTop}
       >
         {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
-        <MainNavHeader collapse={false} render={true} />
+        <MainNavHeader collapse={false} render={router.asPath === '/'} />
 
         <div
           className={clsx(`container mx-auto hidden gap-2 p-2 md:flex`, {

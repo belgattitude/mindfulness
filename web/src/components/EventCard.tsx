@@ -6,9 +6,6 @@ import { twMerge } from 'tailwind-merge';
 import { DateRangeText } from '@/components/DateRangeText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import IconLotus from '@/public/icons/lotus.svg';
-import IconMeditation from '@/public/icons/meditation.svg';
-import IconYoga from '@/public/icons/yoga.svg';
 import type { FetchEvent } from '../api/events.api';
 import { eventsApi } from '../api/events.api';
 

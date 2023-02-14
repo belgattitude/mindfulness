@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
 import { AboutCard } from '@/components/about/AboutCard';
 import { AboutCardBox } from '@/components/about/AboutCardBox';
 import { MarkdownText } from '@/components/MarkdownText';
-import { useGetHomePageQuery } from '@/gql/hooks';
-import { ArrayUtils } from '@/lib/array';
+import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
+import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchHome } from '../api/home.api';
-import { fetchPage } from '../api/pages.api';
 import { queryClientConfig } from '../config/query-client.config';
 
 type Props = {
@@ -78,16 +77,21 @@ const imgBackgrounds = {
 } as const;
 
 const HomePage: FC = () => {
-  const { data } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ['home'],
     queryFn: async () => fetchHome(),
   });
-  if (!data) {
-    return <div>Loading</div>;
+
+  if (error) {
+    return <ReactQueryErrorBox e={error} />;
+  }
+
+  if (isLoading) {
+    return <ReactQueryLoader />;
   }
   return (
     <div className="prose lg:prose-xl border-3 mx-auto bg-white/90 p-5 text-gray-700">
-      <MarkdownText text={data.introduction} />
+      {data && <MarkdownText text={data.introduction} />}
     </div>
   );
 };
@@ -103,7 +107,7 @@ const testImages = [
 ];
 
 export default function HomeRoute(
-  _props: InferGetStaticPropsType<typeof getStaticProps>
+  _props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   return (
     <>
@@ -139,7 +143,9 @@ export default function HomeRoute(
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  _context
+) => {
   const queryClient = new QueryClient(queryClientConfig);
 
   await queryClient.prefetchQuery({

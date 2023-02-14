@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .font-shadow-1 {
+    //-webkit-text-stroke: 4px #EEE;
+    text-shadow:
+            -1px -1px 0 #AAA,
+            1px -1px 0 #000,
+            -1px 1px 0 #AAA,
+            1px 1px 0 #AAA;
+  }
+}
 
 
 :root {
@@ -11,6 +21,7 @@
   --main-nav-reduced-height: 40px;
   --color-brand: hotpink;
 }
+
 
 @media only screen and (max-width: 600px) {
   :root {
