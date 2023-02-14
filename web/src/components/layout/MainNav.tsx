@@ -7,10 +7,8 @@ import { useEffect, useState } from 'react';
 import { MainNavHeader } from '@/components/layout/MainNavHeader';
 import { MobileMenu } from '@/components/layout/MobileMenu';
 import { MainLogo } from '@/components/logo/MainLogo';
-import { BurgerMenuButton } from '@/components/menu/BurgerMenuButton';
+import { BurgerMenuIcon } from '@/components/menu/BurgerMenuIcon';
 import { MenuLinks } from '@/components/MenuLinks';
-import BurgerOpenIcon from '@/public/icons/burger-simple-svgrepo-com.svg';
-import BurgerCloseIcon from '@/public/icons/cross-svgrepo-com.svg';
 import type { MainNavLinks } from '../../config/site.config';
 import { BannerAlert } from '../banner/BannerAlert';
 
@@ -28,10 +26,6 @@ const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
   ({ scrollIsOnTop }) => `
   background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 0 : 0.9});
   .left {
-    display: flex;
-    justify-content: flex-start;
-    align-content: flex-start;
-    flex-direction: row;
     div {
       position: relative;
       height: ${
@@ -73,9 +67,11 @@ export const MainNav: FC<MainNavProps> = (props) => {
   return (
     <div className={'flex'}>
       <StickyCtn
-        className={clsx('fixed top-0 z-50 w-full backdrop-blur', {
+        className={clsx('top-0 z-50 w-full backdrop-blur', {
           ['bg-white']: scrollIsOnTop,
-          ['border-b border-gray-200 shadow-lg']: false,
+          // ['fixed']: !scrollIsOnTop,
+          // ['sticky']: scrollIsOnTop,
+          ['border-b border-gray-200 shadow-lg']: true,
         })}
         scrollIsOnTop={scrollIsOnTop}
       >
@@ -121,14 +117,16 @@ export const MainNav: FC<MainNavProps> = (props) => {
           </div>
           <div className={'flex items-center justify-center'}></div>
         </div>
-        <BannerAlert collapse={!scrollIsOnTop} render={showAlert} />
+
         <MobileMenu hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
-        <BurgerMenuButton
+        <BurgerMenuIcon
+          className={'absolute top-3 right-5 h-[32px] w-[32px]'}
           handleClick={() => {
             setIsNavExpanded((prevState) => !prevState);
           }}
           isOpen={isNavExpanded}
         />
+        <BannerAlert collapse={!scrollIsOnTop} render={false} />
       </StickyCtn>
     </div>
   );

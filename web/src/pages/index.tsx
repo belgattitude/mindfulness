@@ -1,11 +1,15 @@
 import { css } from '@emotion/react';
+import { useQuery } from '@tanstack/react-query';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
 import { AboutCard } from '@/components/about/AboutCard';
 import { AboutCardBox } from '@/components/about/AboutCardBox';
+import { MarkdownText } from '@/components/MarkdownText';
+import { useGetHomePageQuery } from '@/gql/hooks';
 import { ArrayUtils } from '@/lib/array';
+import { fetchHome } from '../api/home.api';
 
 type Props = {
   // Add whatever extra you need
@@ -71,41 +75,17 @@ const imgBackgrounds = {
   `,
 } as const;
 
-const IntroText: FC = () => {
+const HomePage: FC = () => {
+  const { data } = useQuery({
+    queryKey: ['home'],
+    queryFn: async () => fetchHome(),
+  });
+  if (!data) {
+    return <div>Loading</div>;
+  }
   return (
     <div className="prose lg:prose-xl border-3 container mx-auto rounded-2xl bg-white/90 p-[40px] text-2xl text-gray-700 drop-shadow">
-      <p>News - Cours en ligne et Ateliers ponctuels chez Shanti Home</p>
-      <blockquote>"Un nuage ne meurt jamais" Thich Nhat Hanh</blockquote>
-      <img
-        src={
-          'https://images.unsplash.com/photo-1611800065908-233b597db552?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-        }
-      />
-      <p>
-        A l'image du nuage qui devient pluie ou neige, la vie se forme, se
-        déforme, se transforme.
-      </p>
-      <p>
-        De la même manière, le lien tissé avec vous au travers des cours
-        hebdomadaires va changer de forme. Installée récemment en France, tous
-        mes cours réguliers ont désormais basculé en ligne via zoom: hatha yoga,
-        méditation et yoga nidra.
-      </p>
-      <p>
-        Vous retrouverez l'agenda des cours en ligne dans la page Cours chez Soi
-        sous l'onglet Prochaines Activités. Les cours de yoga à Shanti Home
-        seront quant à eux assurés les mardis soir par Tatiana Nozdrenkova et
-        les vendredis matin par Giorgia Bruzzese del Pozzo. Aussi je continue à
-        proposer des ateliers à Shanti Home les dimanches lors de mes retours à
-        Bruxelles, les prochains le 4 Déc, l'un en matinée l'autre l'après-midi,
-        et des retraites de 6 jours en nature en Dordogne et en Drôme.
-      </p>
-      <p>
-        Ce dernier trimestre 2022 sera aussi l'occasion de s'initier au Dialogue
-        Conscient au travers d'un atelier découverte et/ou d'une journée de
-        pratique à Bruxelles. Au plaisir de continuer à nourrir ensemble notre
-        pratique et vous accueillir en personne ou à l'écran. Sandrine
-      </p>
+      <MarkdownText text={data.introduction} />
     </div>
   );
 };
@@ -120,7 +100,7 @@ const testImages = [
   'https://images.unsplash.com/photo-1600172454132-ada7faa101cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
 ];
 
-export default function TestPage(
+export default function HomeRoute(
   _props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
@@ -147,7 +127,7 @@ export default function TestPage(
           <AboutCardBox
             className={'font-brand bg-brand-color-400 mb-5 flex md:col-span-2'}
           >
-            <IntroText />
+            <HomePage />
           </AboutCardBox>
           <AboutCardBox className={'mb-5 flex flex-col md:col-span-1'}>
             <AboutCard className={'bg-brand-color/60 mx-auto border'} />

@@ -8,7 +8,7 @@ type Props = {
 };
 
 const style: React.CSSProperties = {
-  marginTop: 'calc(var(--main-nav-full-height) + 60px)',
+  // marginTop: 'calc(var(--main-nav-full-height) + 60px)',
 };
 
 const mainNavLinks = siteConfig.mainNavLinks;
