@@ -84,7 +84,7 @@ const HomePage: FC = () => {
     return <div>Loading</div>;
   }
   return (
-    <div className="prose lg:prose-xl border-3 container mx-auto rounded-2xl bg-white/90 p-[40px] text-2xl text-gray-700 drop-shadow">
+    <div className="prose lg:prose-xl border-3 mx-auto bg-white/90 p-5 text-gray-700">
       <MarkdownText text={data.introduction} />
     </div>
   );
@@ -107,6 +107,7 @@ export default function HomeRoute(
     <>
       <NextSeo />
 
+      {/*
       <div className={'fixed top-0 left-0 -z-50'}>
         <Image
           alt={'Page background image'}
@@ -120,13 +121,11 @@ export default function HomeRoute(
             objectFit: 'cover',
           }}
         />
-      </div>
+      </div> */}
 
       <div className="mx-15 container mx-auto pt-[20px]">
         <div className={'grid-row grid gap-5 md:grid-cols-3'}>
-          <AboutCardBox
-            className={'font-brand bg-brand-color-400 mb-5 flex md:col-span-2'}
-          >
+          <AboutCardBox className={'font-brand mb-5 flex md:col-span-2'}>
             <HomePage />
           </AboutCardBox>
           <AboutCardBox className={'mb-5 flex flex-col md:col-span-1'}>

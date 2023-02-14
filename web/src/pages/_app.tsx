@@ -11,7 +11,7 @@ import {
 import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
-import { Layout } from '@/components/layout/Layout';
+import { MainLayout } from '@/components/layout/MainLayout';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
 import { queryClientConfig } from '../config/query-client.config';
 import { defaultSeoConfig } from '../config/seo.config';
@@ -100,9 +100,9 @@ const MyApp = (appProps: MyAppProps) => {
               className={`${fontTextPrimary.variable} ${inter.variable}  font-sans`}
             >
               <DefaultSeo {...defaultSeoConfig} />
-              <Layout>
+              <MainLayout>
                 <Component {...pageProps} />
-              </Layout>
+              </MainLayout>
             </div>
           </CacheProvider>
         </Hydrate>

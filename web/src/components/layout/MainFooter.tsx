@@ -7,7 +7,7 @@ import { MainLogo } from '../logo/MainLogo';
 type Props = {
   mainNavLinks: MainNavLinks;
 };
-export const Footer: FC<Props> = (props) => {
+export const MainFooter: FC<Props> = (props) => {
   const { mainNavLinks } = props;
   return (
     <footer

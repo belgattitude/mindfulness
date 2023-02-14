@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { MainNavHeader } from '@/components/layout/MainNavHeader';
-import { MobileMenu } from '@/components/layout/MobileMenu';
+import { MainSidebar } from '@/components/layout/MainSidebar';
 import { MainLogo } from '@/components/logo/MainLogo';
 import { BurgerMenuIcon } from '@/components/menu/BurgerMenuIcon';
 import { MenuLinks } from '@/components/MenuLinks';
@@ -18,7 +18,7 @@ type MainNavProps = {
   mainNavLinks: MainNavLinks;
 };
 
-const isScrolledTopThreshold = 100;
+const isScrolledTopThreshold = 400;
 
 const isServer = typeof window === 'undefined';
 
@@ -38,7 +38,7 @@ const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
 `
 );
 
-export const MainNav: FC<MainNavProps> = (props) => {
+export const MainHeader: FC<MainNavProps> = (props) => {
   const { showAlert = true, mainNavLinks } = props;
   const router = useRouter();
   const initialIsScrollOntop = isServer
@@ -75,14 +75,16 @@ export const MainNav: FC<MainNavProps> = (props) => {
         })}
         scrollIsOnTop={scrollIsOnTop}
       >
-        <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} />
+        {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
+        <MainNavHeader collapse={false} render={true} />
 
-        <div className={`container mx-auto hidden gap-2 p-2 md:flex`}>
+        <div
+          className={clsx(`container mx-auto hidden gap-2 p-2 md:flex`, {
+            ['static top-0']: !scrollIsOnTop,
+          })}
+        >
           <div className="left">
-            <div
-              className={'flex'}
-              // style={{ width: scrollIsOnTop ? '60px' : '30px' }}
-            >
+            <div className={'flex'}>
               <Link
                 href={'/'}
                 className={
@@ -101,9 +103,9 @@ export const MainNav: FC<MainNavProps> = (props) => {
           </div>
 
           <div
-            className={
+            className={clsx(
               'flex grow flex-row items-center justify-center gap-5 md:flex'
-            }
+            )}
           >
             <MenuLinks
               mainNavLinks={mainNavLinks}
@@ -118,7 +120,7 @@ export const MainNav: FC<MainNavProps> = (props) => {
           <div className={'flex items-center justify-center'}></div>
         </div>
 
-        <MobileMenu hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
+        <MainSidebar hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
           className={'absolute top-3 right-5 h-[32px] w-[32px]'}
           handleClick={() => {
@@ -126,7 +128,8 @@ export const MainNav: FC<MainNavProps> = (props) => {
           }}
           isOpen={isNavExpanded}
         />
-        <BannerAlert collapse={!scrollIsOnTop} render={false} />
+        {/* <BannerAlert collapse={!scrollIsOnTop} render={showAlert} /> */}
+        <BannerAlert collapse={false} render={showAlert} />
       </StickyCtn>
     </div>
   );

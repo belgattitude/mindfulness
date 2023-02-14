@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
-import { Footer } from '@/components/layout/Footer';
-import { MainNav } from '@/components/layout/MainNav';
+import { MainFooter } from '@/components/layout/MainFooter';
+import { MainHeader } from '@/components/layout/MainHeader';
 import { siteConfig } from '../../config/site.config';
 
 type Props = {
@@ -13,12 +13,12 @@ const style: React.CSSProperties = {
 
 const mainNavLinks = siteConfig.mainNavLinks;
 
-export const Layout: FC<Props> = ({ children }) => {
+export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <>
-      <MainNav mainNavLinks={mainNavLinks} />
+      <MainHeader mainNavLinks={mainNavLinks} />
       <main style={style}>{children}</main>
-      <Footer mainNavLinks={mainNavLinks} />
+      <MainFooter mainNavLinks={mainNavLinks} />
     </>
   );
 };

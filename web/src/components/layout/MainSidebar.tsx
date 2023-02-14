@@ -3,11 +3,11 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import type { MainNavLinks } from '../../config/site.config';
 
-type MobileMenuProps = {
+type MainSidebarProps = {
   hidden: boolean;
   mainNavLinks: MainNavLinks;
 };
-export const MobileMenu: FC<MobileMenuProps> = (props) => {
+export const MainSidebar: FC<MainSidebarProps> = (props) => {
   const { hidden, mainNavLinks } = props;
   return (
     <div

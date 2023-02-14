@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MainNav } from './MainNav';
+import { MainHeader } from './MainHeader';
 
-const meta: Meta<typeof MainNav> = {
+const meta: Meta<typeof MainHeader> = {
   title: 'MainNav',
-  component: MainNav,
+  component: MainHeader,
 
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/7.0/react/writing-docs/docs-page
   tags: ['autodocs'],
@@ -14,7 +14,7 @@ const meta: Meta<typeof MainNav> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof MainNav>;
+type Story = StoryObj<typeof MainHeader>;
 
 export const Default: Story = {
   args: {},
