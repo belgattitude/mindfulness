@@ -6,8 +6,8 @@ import { DateRangeText } from '@/components/DateRangeText';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import type { FetchEvent } from '../api/events.api';
-import { eventsApi } from '../api/events.api';
+import type { FetchEvent } from '../../api/events.api';
+import { eventsApi } from '../../api/events.api';
 
 type Props = {
   event: FetchEvent;

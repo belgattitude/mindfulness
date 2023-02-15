@@ -3,7 +3,7 @@ export const siteConfig = {
     { title: 'Accueil', href: '/' },
     { title: 'Mindfulness', href: '/p/mindfulness' },
     { title: 'Yoga', href: '/p/yoga' },
-    { title: 'Dialogue Conscient', href: '/dialogue-conscient' },
+    { title: 'Dialogue Conscient', href: '/p/dialogue-conscient' },
     { title: 'Agenda', href: '/events' },
     { title: 'Contact', href: '/contact' },
   ],

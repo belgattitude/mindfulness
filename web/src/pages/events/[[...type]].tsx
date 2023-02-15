@@ -6,7 +6,7 @@ import type {
   InferGetStaticPropsType,
 } from 'next';
 import { NextSeo } from 'next-seo';
-import { EventCard } from '@/components/EventCard';
+import { EventCard } from '@/components/event/EventCard';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchEvents } from '../../api/events.api';
@@ -45,17 +45,22 @@ export default function EventsPage(
     <>
       <NextSeo />
 
-      <div className="prose lg:prose-xl container mx-auto p-6 text-2xl">
-        {data && (
-          <div>
-            {data.events?.data?.map(
-              (e, i) =>
-                e?.attributes && (
-                  <EventCard event={e.attributes} key={`event-${e.id}`} />
-                )
-            )}
-          </div>
-        )}
+      <div className={'flex flex-col py-5'}>
+        <div className={'flex py-5 text-3xl'}>
+          Les filtres seront ici (stages, cours réguliers...)
+        </div>
+        <div className="flex flex-col gap-5">
+          {data && (
+            <>
+              {data.events?.data?.map(
+                (e) =>
+                  e?.attributes && (
+                    <EventCard event={e.attributes} key={`event-${e.id}`} />
+                  )
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   );

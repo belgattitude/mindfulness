@@ -1,8 +1,8 @@
 import { EventJsonLd } from 'next-seo';
 import type { FC } from 'react';
 import { useFragment } from '@/gql/fragment-masking';
-import type { FetchEvent } from '../api/events.api';
-import { eventsApi } from '../api/events.api';
+import type { FetchEvent } from '../../api/events.api';
+import { eventsApi } from '../../api/events.api';
 
 type Props = {
   event: FetchEvent;

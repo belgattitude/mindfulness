@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
+import { BurgerMenuIcon } from '@/components/burger/BurgerMenuIcon';
 import { MainNavHeader } from '@/components/layout/MainNavHeader';
 import { MainSidebar } from '@/components/layout/MainSidebar';
 import { MainLogo } from '@/components/logo/MainLogo';
-import { BurgerMenuIcon } from '@/components/menu/BurgerMenuIcon';
 import { MenuLinks } from '@/components/MenuLinks';
 import type { MainNavLinks } from '../../config/site.config';
 import { BannerAlert } from '../banner/BannerAlert';
@@ -45,10 +45,10 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     ? true
     : window.scrollY < isScrolledTopThreshold;
 
-  const [scrollIsOnTop, setScrollIsOnTop] = useState(initialIsScrollOntop);
+  const [isScrollOnTop, setIsScrollOnTop] = useState(initialIsScrollOntop);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const onScroll = () => {
-    setScrollIsOnTop(window.scrollY < isScrolledTopThreshold);
+    setIsScrollOnTop(window.scrollY < isScrolledTopThreshold);
   };
 
   useEffect(() => {
@@ -64,25 +64,25 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     return () => router.events.off('routeChangeStart', closeMenu);
   }, [router.events]);
 
-  const isHome = router.asPath === '/';
+  const renderTopLevelHeader = true; // router.asPath === '/';
 
   return (
     <div className={'flex'}>
       <StickyCtn
         className={clsx('top-0 z-50 w-full backdrop-blur', {
-          ['bg-white']: scrollIsOnTop,
+          ['bg-white']: isScrollOnTop,
           // ['fixed']: !scrollIsOnTop,
           // ['sticky']: scrollIsOnTop,
           ['border-b border-gray-200 shadow-lg']: true,
         })}
-        scrollIsOnTop={scrollIsOnTop}
+        scrollIsOnTop={isScrollOnTop}
       >
         {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
-        <MainNavHeader collapse={!isHome} render={true} />
+        <MainNavHeader collapse={!renderTopLevelHeader} render={true} />
 
         <div
           className={clsx(`container mx-auto hidden gap-2 p-2 md:flex`, {
-            ['static top-0']: !scrollIsOnTop,
+            ['static top-0']: !isScrollOnTop,
           })}
         >
           <div className="left">
@@ -124,14 +124,17 @@ export const MainHeader: FC<MainNavProps> = (props) => {
 
         <MainSidebar hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
-          className={'absolute top-3 right-5 h-[32px] w-[32px]'}
+          className={clsx('absolute top-3 right-5 h-[32px] w-[32px]', {
+            ['text-white']: renderTopLevelHeader,
+            ['text-black']: !renderTopLevelHeader,
+          })}
           handleClick={() => {
             setIsNavExpanded((prevState) => !prevState);
           }}
           isOpen={isNavExpanded}
         />
         {/* <BannerAlert collapse={!scrollIsOnTop} render={showAlert} /> */}
-        <BannerAlert collapse={!isHome} render={showAlert} />
+        <BannerAlert collapse={!renderTopLevelHeader} render={showAlert} />
       </StickyCtn>
     </div>
   );

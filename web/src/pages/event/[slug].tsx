@@ -7,7 +7,7 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { EventDetail } from '@/components/EventDetail';
+import { EventDetail } from '@/components/event/EventDetail';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchEvent } from '../../api/events.api';

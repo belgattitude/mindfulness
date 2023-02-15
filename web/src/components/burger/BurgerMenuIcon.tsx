@@ -20,7 +20,7 @@ export const BurgerMenuIcon = forwardRef<
 
     return (
       <div
-        className={twMerge('transition-opacity cursor-pointer', className)}
+        className={twMerge('cursor-pointer transition-opacity', className)}
         onClick={() => {
           handleClick();
         }}
