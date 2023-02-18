@@ -6,8 +6,8 @@ import { Button } from '@/components/Button';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import type { FetchProgramme } from '../api/programmes';
-import { fullProgrammeFragment } from '../api/programmes';
+import type { FetchProgramme } from '../../api/programmes';
+import { fullProgrammeFragment } from '../../api/programmes';
 
 type Props = {
   children?: never;

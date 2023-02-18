@@ -6,7 +6,7 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { ProgrammeCard } from '@/components/ProgrammeCard';
+import { ProgrammeCard } from '@/components/programme/ProgrammeCard';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchProgramme } from '../../../api/programmes';

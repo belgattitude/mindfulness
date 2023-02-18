@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { BurgerMenuIcon } from '@/components/burger/BurgerMenuIcon';
+import { MainMenuLinks } from '@/components/layout/MainMenuLinks';
 import { MainNavHeader } from '@/components/layout/MainNavHeader';
 import { MainSidebar } from '@/components/layout/MainSidebar';
 import { MainLogo } from '@/components/logo/MainLogo';
-import { MenuLinks } from '@/components/MenuLinks';
 import type { MainNavLinks } from '../../config/site.config';
 import { BannerAlert } from '../banner/BannerAlert';
 
@@ -21,22 +21,6 @@ type MainNavProps = {
 const isScrolledTopThreshold = 400;
 
 const isServer = typeof window === 'undefined';
-
-const StickyCtn = styled.div<{ scrollIsOnTop: boolean }>(
-  ({ scrollIsOnTop }) => `
-  background-color: rgba(255, 255, 255, ${scrollIsOnTop ? 0 : 0.9});
-  .left {
-    div {
-      position: relative;
-      height: ${
-        scrollIsOnTop
-          ? 'var(--main-nav-full-height)'
-          : 'var(--main-nav-reduced-height)'
-      };
-    }
-  }
-`
-);
 
 export const MainHeader: FC<MainNavProps> = (props) => {
   const { showAlert = true, mainNavLinks } = props;
@@ -68,14 +52,10 @@ export const MainHeader: FC<MainNavProps> = (props) => {
 
   return (
     <div className={'flex'}>
-      <StickyCtn
-        className={clsx('top-0 z-50 w-full backdrop-blur', {
-          ['bg-white']: isScrollOnTop,
-          // ['fixed']: !scrollIsOnTop,
-          // ['sticky']: scrollIsOnTop,
-          ['border-b border-gray-200 shadow-lg']: true,
-        })}
-        scrollIsOnTop={isScrollOnTop}
+      <div
+        className={clsx(
+          'border-brand-color-50 shadow-brand-color-50 top-0 z-50 w-full border-b-8 shadow-lg backdrop-blur'
+        )}
       >
         {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
         <MainNavHeader collapse={!renderTopLevelHeader} render={true} />
@@ -85,31 +65,12 @@ export const MainHeader: FC<MainNavProps> = (props) => {
             ['static top-0']: !isScrollOnTop,
           })}
         >
-          <div className="left">
-            <div className={'flex'}>
-              <Link
-                href={'/'}
-                className={
-                  'duration-800 align-center flex hidden justify-center opacity-90 transition-all delay-75 ease-in-out hover:rotate-3 hover:opacity-100'
-                }
-                legacyBehavior={false}
-              >
-                <MainLogo
-                  className={'h-auto w-auto'}
-                  style={{
-                    objectFit: 'scale-down',
-                  }}
-                />
-              </Link>
-            </div>
-          </div>
-
           <div
             className={clsx(
-              'flex grow flex-row items-center justify-center gap-5 md:flex'
+              'flex grow flex-row items-center justify-center gap-5 py-2 md:flex'
             )}
           >
-            <MenuLinks
+            <MainMenuLinks
               mainNavLinks={mainNavLinks}
               className={clsx(
                 'font-family-menu hidden text-xl font-extralight transition-opacity duration-700 ease-in-out lg:block',
@@ -135,7 +96,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         />
         {/* <BannerAlert collapse={!scrollIsOnTop} render={showAlert} /> */}
         <BannerAlert collapse={!renderTopLevelHeader} render={showAlert} />
-      </StickyCtn>
+      </div>
     </div>
   );
 };

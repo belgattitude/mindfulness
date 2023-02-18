@@ -3,14 +3,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
-import type { MainNavLinks } from '../config/site.config';
+import type { MainNavLinks } from '../../config/site.config';
 
 type Props = {
   className?: string;
   mainNavLinks: MainNavLinks;
 };
 
-export const MenuLinks: FC<Props> = (props) => {
+export const MainMenuLinks: FC<Props> = (props) => {
   const { className = '', mainNavLinks } = props;
   const { asPath } = useRouter();
 

@@ -11,7 +11,7 @@ const mainNavLinks = siteConfig.mainNavLinks;
 export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <>
-      <MainHeader mainNavLinks={mainNavLinks} />
+      <MainHeader mainNavLinks={mainNavLinks} showAlert={false} />
       <MainContent className={'max-w-[1300px]'}>{children}</MainContent>
       <MainFooter mainNavLinks={mainNavLinks} />
     </>

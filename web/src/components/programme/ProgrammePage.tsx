@@ -5,8 +5,8 @@ import type { FC } from 'react';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import type { FetchPage } from '../api/pages.api';
-import { fullPageFragment } from '../api/pages.api';
+import type { FetchPage } from '../../api/pages.api';
+import { fullPageFragment } from '../../api/pages.api';
 import { ProgrammeCard } from './ProgrammeCard';
 
 export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
