@@ -22,7 +22,10 @@ module.exports = {
           'var(--font-family-montserrat)',
           ...defaultTheme.fontFamily.sans,
         ],
-        'family-brand': ['var(--font-family-quicksand)', ...defaultTheme.fontFamily.sans],
+        'family-brand': [
+          'var(--font-family-quicksand)',
+          ...defaultTheme.fontFamily.sans,
+        ],
         'family-menu': [
           'var(--font-family-quicksand)',
           ...defaultTheme.fontFamily.sans,
