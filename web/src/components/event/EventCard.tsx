@@ -19,8 +19,13 @@ export const EventCard: FC<Props> = (props) => {
   const event = useFragment(eventsApi.fullEventFragment, props.event);
   const eventUrl = `/event/${encodeURIComponent(event.slug)}`;
   return (
-    <div className={twMerge(clsx('flex flex-row gap-5 pt-5'), className)}>
-      <div className={'w-[300px] flex-none'}>
+    <div
+      className={twMerge(
+        clsx('flex flex-col gap-5 pt-5 md:flex-row'),
+        className
+      )}
+    >
+      <div className={'flex-none md:w-[300px]'}>
         <Link href={eventUrl}>
           <Image
             alt={`Photo ${event.title}`}

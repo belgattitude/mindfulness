@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import type { CSSProperties, FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-import logo from '@/public/logo/sandrine-logo.png';
+// import logo from '@/public/logo/sandrine-logo.png';
+import logo from '@/public/logo/logo-small-sandrine-transparent.png';
 
 type Props = {
   className?: string;
@@ -19,14 +20,14 @@ export const MainLogo: FC<Props> = (props) => {
     style,
   } = props;
   return (
-    <Image
+    <img
       alt={'Sandrine Rauter logo'}
-      src={logo}
+      src={'/logo/logo-small-green-sandrine-transparent.png'}
       className={twMerge('', className)}
-      width={width}
-      height={height}
-      priority={priority}
-      quality={85}
+      // width={width}
+      // height={height}
+      loading={'eager'}
+      // quality={90}
       style={style}
     />
   );

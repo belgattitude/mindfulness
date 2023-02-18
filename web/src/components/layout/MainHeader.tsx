@@ -90,7 +90,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
               <Link
                 href={'/'}
                 className={
-                  'duration-800 align-center flex justify-center opacity-90 transition-all delay-75 ease-in-out hover:rotate-3 hover:opacity-100'
+                  'duration-800 align-center flex hidden justify-center opacity-90 transition-all delay-75 ease-in-out hover:rotate-3 hover:opacity-100'
                 }
                 legacyBehavior={false}
               >

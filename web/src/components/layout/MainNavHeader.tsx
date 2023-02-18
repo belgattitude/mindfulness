@@ -34,13 +34,12 @@ export const MainNavHeader: FC<Props> = (props) => {
         className
       )}
     >
-      <MainLogo
-        className={'brightness-900 mb-[7px] h-[75px] w-[75px] opacity-90'}
-        style={{
-          objectFit: 'scale-down',
-        }}
-      />
-      <p className={'font-family-title text-2xl font-light text-white'}>
+      <MainLogo width={70} height={70} className={'mb-[7px]'} />
+      <p
+        className={
+          'font-family-title text-2xl font-normal text-white opacity-100'
+        }
+      >
         Sandrine Rauter
       </p>
     </div>

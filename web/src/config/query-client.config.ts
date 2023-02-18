@@ -6,6 +6,7 @@ const isProd = process.env.NODE_ENV === 'production';
 export const queryClientConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
+      refetchOnWindowFocus: !isProd,
       // Warning when using prefetchQuery in getServerSideProps or getStaticProps
       // the initial data looks stale on the client and causes a refresh. As it's
       // not exactly what is intended, you can change either this globally in this config

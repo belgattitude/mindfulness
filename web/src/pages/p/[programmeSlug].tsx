@@ -6,7 +6,7 @@ import type {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { CustomPage } from '@/components/CustomPage';
+import { ProgrammePage } from '@/components/ProgrammePage';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchPage } from '../../api/pages.api';
@@ -45,20 +45,20 @@ export default function ProgrammesPage(
     <>
       <NextSeo />
       <div className={'container mx-auto flex flex-col'}>
-        {data?.attributes && <CustomPage page={data.attributes} />}
+        {data?.attributes && <ProgrammePage page={data.attributes} />}
       </div>
     </>
   );
 }
 
 const schema = z.object({
-  pageSlug: z.string().min(3).max(255),
+  programmeSlug: z.string().min(3).max(255),
 });
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const queryClient = new QueryClient(queryClientConfig);
 
-  const { pageSlug: slug } = schema.parse(context.params);
+  const { programmeSlug: slug } = schema.parse(context.params);
 
   await queryClient.prefetchQuery({
     queryKey: ['page', slug],

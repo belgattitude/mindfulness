@@ -9,7 +9,7 @@ import type { FetchPage } from '../api/pages.api';
 import { fullPageFragment } from '../api/pages.api';
 import { ProgrammeCard } from './ProgrammeCard';
 
-export const CustomPage: FC<{ page: FetchPage }> = (props) => {
+export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
   const page = useFragment(fullPageFragment, props.page);
   if (!page) {
     return <p>NotFound</p>;
@@ -30,8 +30,6 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
             rgba(113, 223, 208, 1) 70%,
             rgba(113, 223, 208, 1) 100%
           );
-          //background-image: url('/videos/grass-anim.webp');
-          //background-size: cover;
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
