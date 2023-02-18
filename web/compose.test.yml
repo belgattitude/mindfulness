@@ -1,0 +1,14 @@
+name: mindfulness-web-test
+
+services:
+  mailcatcher:
+    container_name: mindfulness-web-test-mailcatcher
+    image: schickling/mailcatcher
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      TEST: ${TEST:-localhost}
+    ports:
+      - 1080:1080
+      - 1025:1025
+
