@@ -5,6 +5,7 @@ export const siteConfig = {
     { title: 'Yoga', href: '/p/yoga' },
     { title: 'Dialogue Conscient', href: '/p/dialogue-conscient' },
     { title: 'Agenda', href: '/events' },
+    { title: 'A propos', href: '/about' },
     { title: 'Contact', href: '/contact' },
   ],
 } as const;

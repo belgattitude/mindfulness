@@ -91,7 +91,7 @@ const HomeIntro: FC = () => {
     return <ReactQueryLoader />;
   }
   return (
-    <div className="prose lg:prose-xl border-3 mx-auto bg-white/90 p-5 text-gray-700">
+    <div className="prose lg:prose-xl border-3 mx-auto bg-white/90 text-gray-700">
       {data && <MarkdownText text={data.introduction} />}
     </div>
   );
@@ -99,7 +99,7 @@ const HomeIntro: FC = () => {
 
 const HomePage: FC = () => {
   return (
-    <div className="mx-15 container mx-auto pt-[20px]">
+    <div className="container mx-auto">
       <div className={'grid-row grid gap-5 md:grid-cols-12'} css={css``}>
         <AboutCardBox className={'font-family-brand mb-5 flex md:col-span-8'}>
           <HomeIntro />
@@ -110,22 +110,6 @@ const HomePage: FC = () => {
       </div>
       <div>
         <MyActivitiesCard className={'mt-5 p-5'} />
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="mx-15 container mx-auto pt-[20px]">
-      <div className={'grid-row grid gap-5 md:grid-cols-12'}>
-        <AboutCardBox className={'font-family-brand mb-5 flex md:col-span-8'}>
-          <HomeIntro />
-        </AboutCardBox>
-        <AboutCardBox className={'mb-5 flex flex-col  md:col-span-4 '}>
-          <AboutCard className={'bg-brand-color/60 mx-auto border'} />
-        </AboutCardBox>
-        <AboutCardBox className={'mb-5 flex flex-col  md:col-span-4 '}>
-          <MyActivitiesCard />
-        </AboutCardBox>
       </div>
     </div>
   );

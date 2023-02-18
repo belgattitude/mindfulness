@@ -12,7 +12,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <>
       <MainHeader mainNavLinks={mainNavLinks} showAlert={false} />
-      <MainContent className={'max-w-[1300px]'}>{children}</MainContent>
+      <MainContent className={'m-5 mx-auto flex max-w-[1200px]'}>
+        {children}
+      </MainContent>
       <MainFooter mainNavLinks={mainNavLinks} />
     </>
   );

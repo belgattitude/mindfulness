@@ -11,7 +11,7 @@ export const MainContent: FC<Props> = (props) => {
   return (
     <main
       className={twMerge(
-        clsx('font-family-primary container mx-auto p-5'),
+        clsx('font-family-primary container mx-auto'),
         className
       )}
     >

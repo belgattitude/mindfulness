@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
-import { clsx } from 'clsx';
-import Image from 'next/image';
 import type { FC } from 'react';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
-import { getStrapiMedia } from '@/lib/strapi';
 import type { FetchPage } from '../../api/pages.api';
 import { fullPageFragment } from '../../api/pages.api';
 import { ProgrammeCard } from './ProgrammeCard';
@@ -14,7 +11,7 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
   if (!page) {
     return <p>NotFound</p>;
   }
-  const cover = page.cover ? getStrapiMedia(page.cover) : '';
+  // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
     <div
       className={

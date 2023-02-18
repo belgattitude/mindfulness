@@ -1434,6 +1434,16 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
+export type GetAboutPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutPageQuery = { __typename?: 'Query', about?: { __typename?: 'AboutEntityResponse', data?: { __typename?: 'AboutEntity', attributes?: { __typename?: 'About', summary?: string | null, description?: string | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null } | null } | null };
+
+export type GetContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetContactPageQuery = { __typename?: 'Query', contact?: { __typename?: 'ContactEntityResponse', data?: { __typename?: 'ContactEntity', attributes?: { __typename?: 'Contact', summary?: string | null, description?: string | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } | null } | null } | null };
+
 export type FullEventFragmentFragment = { __typename?: 'Event', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title: string, displayTitle?: string | null, location?: string | null, organizers?: string | null, online: boolean, summary?: string | null, description: string, startAt: any, endAt: any, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } };
 
 export type GetEventQueryVariables = Exact<{
@@ -1567,6 +1577,72 @@ export const FullPageFragmentFragmentDoc = `
   }
 }
     ${FullProgrammeFragmentFragmentDoc}`;
+export const GetAboutPageDocument = `
+    query getAboutPage {
+  about {
+    data {
+      attributes {
+        summary
+        description
+        cover {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetAboutPageQuery = <
+      TData = GetAboutPageQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetAboutPageQueryVariables,
+      options?: UseQueryOptions<GetAboutPageQuery, TError, TData>
+    ) =>
+    useQuery<GetAboutPageQuery, TError, TData>(
+      variables === undefined ? ['getAboutPage'] : ['getAboutPage', variables],
+      fetcher<GetAboutPageQuery, GetAboutPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetAboutPageDocument, variables),
+      options
+    );
+export const GetContactPageDocument = `
+    query getContactPage {
+  contact {
+    data {
+      attributes {
+        summary
+        description
+        cover {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetContactPageQuery = <
+      TData = GetContactPageQuery,
+      TError = unknown
+    >(
+      dataSource: { endpoint: string, fetchParams?: RequestInit },
+      variables?: GetContactPageQueryVariables,
+      options?: UseQueryOptions<GetContactPageQuery, TError, TData>
+    ) =>
+    useQuery<GetContactPageQuery, TError, TData>(
+      variables === undefined ? ['getContactPage'] : ['getContactPage', variables],
+      fetcher<GetContactPageQuery, GetContactPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetContactPageDocument, variables),
+      options
+    );
 export const GetEventDocument = `
     query getEvent($slug: String) {
   events(filters: {slug: {eq: $slug}}) {

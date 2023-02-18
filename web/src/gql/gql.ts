@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
+    "\n  query getAboutPage {\n    about {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GetAboutPageDocument,
+    "\n  query getContactPage {\n    contact {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n": types.GetContactPageDocument,
     "\n  fragment FullEventFragment on Event {\n    createdAt\n    updatedAt\n    publishedAt\n    slug\n    title\n    displayTitle\n    location\n    organizers\n    online\n    summary\n    description\n    startAt\n    endAt\n    cover {\n      data {\n        id\n        attributes {\n          url\n          caption\n          alternativeText\n        }\n      }\n    }\n  }\n": types.FullEventFragmentFragmentDoc,
     "\n  query getEvent($slug: String) {\n    events(filters: { slug: { eq: $slug } }) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n    }\n  }\n": types.GetEventDocument,
     "\n  query searchEvents(\n    $limit: Int = 100\n    $publicationState: PublicationState = LIVE\n    $dateMin: DateTime = \"2020-02-28T03:00:00.000Z\"\n  ) {\n    events(\n      sort: \"publishedAt:DESC\"\n      filters: { startAt: { gte: $dateMin } }\n      pagination: { page: 1, pageSize: $limit }\n      publicationState: $publicationState\n    ) {\n      data {\n        id\n        attributes {\n          ...FullEventFragment\n        }\n      }\n      meta {\n        pagination {\n          page\n          pageSize\n          total\n          pageCount\n        }\n      }\n    }\n  }\n": types.SearchEventsDocument,
@@ -39,6 +41,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getAboutPage {\n    about {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getAboutPage {\n    about {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getContactPage {\n    contact {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getContactPage {\n    contact {\n      data {\n        attributes {\n          summary\n          description\n          cover {\n            data {\n              attributes {\n                url\n                alternativeText\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

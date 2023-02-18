@@ -39,7 +39,8 @@
       "type": "uid",
       "required": true,
       "minLength": 3,
-      "maxLength": 15
+      "maxLength": 35,
+      "targetField": "title"
     }
   }
 }
