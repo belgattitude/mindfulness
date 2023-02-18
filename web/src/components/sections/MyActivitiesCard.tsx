@@ -42,7 +42,7 @@ export const MyActivitiesCard: FC<Props> = (props) => {
   return (
     <div
       className={twMerge(
-        'font-family-primary flex flex-col p-5 text-neutral-700 gap-5 shadow-xl sm:rounded-lg sm:px-10 bg-brand-color/60 mx-auto border',
+        'radial-gradient font-family-primary flex flex-col p-5 text-neutral-700 gap-5 shadow-xl sm:rounded-lg sm:px-10 bg-brand-color/60 mx-auto border',
         className
       )}
     >

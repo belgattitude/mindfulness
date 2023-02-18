@@ -73,7 +73,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
             <MainMenuLinks
               mainNavLinks={mainNavLinks}
               className={clsx(
-                'font-family-menu hidden text-xl font-extralight transition-opacity duration-700 ease-in-out lg:block',
+                'font-family-brand hidden text-xl font-light transition-opacity duration-700 ease-in-out md:block',
                 {
                   ['opacity-0']: isNavExpanded,
                 }

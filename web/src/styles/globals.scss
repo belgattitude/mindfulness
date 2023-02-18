@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.radial-gradient {
+  background: #FFFFFF;
+  background: radial-gradient(circle at center, #e1f1e6 5%, #a9dac3 55%);
+}
+
 @layer base {
   .font-shadow-1 {
     //-webkit-text-stroke: 4px #EEE;

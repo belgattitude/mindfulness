@@ -41,11 +41,8 @@ export const EventCard: FC<Props> = (props) => {
         </Link>
       </div>
       <div className="">
-        <div className={'text-2xl font-extralight uppercase leading-8'}>
-          <Link
-            href={eventUrl}
-            className={'text-2xl font-extralight uppercase leading-8'}
-          >
+        <div className={'text-brand-color-900 text-2xl uppercase leading-8'}>
+          <Link href={eventUrl} className={'text-2xl uppercase leading-8'}>
             {event.title}
           </Link>
         </div>

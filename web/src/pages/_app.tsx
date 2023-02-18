@@ -1,14 +1,14 @@
 import '../styles/globals.scss';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { Montserrat, Quicksand } from '@next/font/google';
-// import localFont from '@next/font/local';
+// import localFont from 'next/font/local';
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
+import { Montserrat, Quicksand } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { MainLayout } from '@/components/layout/MainLayout';
@@ -34,6 +34,7 @@ const fontMontserrat = Montserrat({
 const fontQuicksand = Quicksand({
   subsets: ['latin'],
   weight: 'variable',
+  // weight: ['100', '300', '400'],
   style: ['normal'],
   variable: '--font-family-quicksand',
 });

@@ -24,7 +24,7 @@ export const MainLogo: FC<Props> = (props) => {
       alt={'Sandrine Rauter logo'}
       src={'/logo/logo-small-green-sandrine-transparent.png'}
       className={twMerge('', className)}
-      // width={width}
+      width={width}
       // height={height}
       loading={'eager'}
       // quality={90}
