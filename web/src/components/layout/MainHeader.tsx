@@ -85,10 +85,13 @@ export const MainHeader: FC<MainNavProps> = (props) => {
 
         <MainSidebar hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
-          className={clsx('absolute top-3 right-5 h-[32px] w-[32px]', {
-            ['text-white']: renderTopLevelHeader,
-            ['text-black']: !renderTopLevelHeader,
-          })}
+          className={clsx(
+            'absolute top-3 right-5 h-[32px] w-[32px] md:hidden',
+            {
+              ['text-white']: renderTopLevelHeader,
+              ['text-black']: !renderTopLevelHeader,
+            }
+          )}
           handleClick={() => {
             setIsNavExpanded((prevState) => !prevState);
           }}
