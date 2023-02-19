@@ -1,8 +1,10 @@
-@use "reset.scss";
+@import "reset.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 
 .radial-gradient {
@@ -10,9 +12,14 @@
   background: radial-gradient(circle at center, #e1f1e6 5%, #a9dac3 55%);
 }
 
-@layer base {
+@layer components {
+  .image-rendering-unblur {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
   .font-shadow-1 {
-    //-webkit-text-stroke: 4px #EEE;
+    /*-webkit-text-stroke: 4px #EEE;*/
     text-shadow:
             -1px -1px 0 #AAA,
             1px -1px 0 #000,

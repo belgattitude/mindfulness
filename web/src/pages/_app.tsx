@@ -1,4 +1,4 @@
-import '../styles/globals.scss';
+import '../styles/globals.css';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 // import localFont from 'next/font/local';

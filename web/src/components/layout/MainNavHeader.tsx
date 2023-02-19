@@ -36,7 +36,11 @@ export const MainNavHeader: FC<Props> = (props) => {
         className
       )}
     >
-      <div className={'flex flex-col items-center justify-center'}>
+      <div
+        className={
+          'image-rendering-unblur flex flex-col items-center justify-center'
+        }
+      >
         <MainLogo width={90} height={60} className={'mb-[7px]'} />
         <p
           className={
