@@ -1,4 +1,4 @@
-name: CI-strapi-build
+name: CD-strapi-deploy
 
 on:
   push:
@@ -44,6 +44,7 @@ jobs:
             "github_token=${{ secrets.GITHUB_TOKEN }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
       - name: Inspect
         run: |
           docker image inspect ${{ env.LATEST_TAG }}
