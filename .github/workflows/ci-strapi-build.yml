@@ -8,9 +8,17 @@ on:
 env:
   LATEST_TAG: belgattitude/mindfulness-strapi:latest
 
+permissions:
+  contents: read
+
 jobs:
   docker:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: strapi
+
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
