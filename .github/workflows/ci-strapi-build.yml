@@ -1,4 +1,4 @@
-name:
+name: CI-strapi-build
 
 on:
   push:
@@ -29,7 +29,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           load: true
-          context: ./strapi
+          path: ./strapi
+          context: .
           tags: |
             ${{ env.LATEST_TAG }}
           secrets: |
