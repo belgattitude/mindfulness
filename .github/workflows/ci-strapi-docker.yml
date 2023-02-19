@@ -1,4 +1,4 @@
-name: CD-strapi-deploy
+name: CI-strapi-docker
 
 on:
   push:
