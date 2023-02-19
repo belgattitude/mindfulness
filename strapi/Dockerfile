@@ -10,10 +10,15 @@ WORKDIR /app
 
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
-RUN --mount=type=cache,target=/var/cache/yarn-mindfulness-strapi,rw \
-    YARN_ENABLE_GLOBAL_CACHE="false" \
+#RUN --mount=type=cache,target=/var/cache/yarn-mindfulness-strapi,rw \
+#    YARN_ENABLE_GLOBAL_CACHE="false" \
+#    YARN_CACHE_FOLDER=/var/cache/yarn-mindfulness-strapi \
+#    yarn install --immutable --inline-builds
+
+RUN YARN_ENABLE_GLOBAL_CACHE="false" \
     YARN_CACHE_FOLDER=/var/cache/yarn-mindfulness-strapi \
     yarn install --immutable --inline-builds
+
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as builder
 RUN apk add --no-cache bash && \
