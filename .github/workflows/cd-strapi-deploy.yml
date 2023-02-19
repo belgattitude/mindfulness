@@ -43,6 +43,8 @@ jobs:
           context: "./strapi"
           tags: |
             ${{ env.LATEST_TAG }}
+          build-args: |
+            "DATABASE_FILENAME=data/mindfulness-build.sqlite.db"
           secrets: |
             "github_token=${{ secrets.GITHUB_TOKEN }}"
           cache-from: type=gha

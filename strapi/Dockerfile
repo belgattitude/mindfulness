@@ -26,6 +26,9 @@ RUN apk add --no-cache bash && \
 
 WORKDIR /app-build-stage
 
+ARG DATABASE_FILENAME
+ENV DATABASE_FILENAME ${DATABASE_FILENAME}
+
 COPY . .
 COPY --from=deps /app-dev-stage/node_modules ./node_modules
 RUN NODE_ENV=production yarn build
