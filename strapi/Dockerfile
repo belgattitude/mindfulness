@@ -6,7 +6,7 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as deps
 RUN apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev && \
     corepack enable
 
-WORKDIR /app
+WORKDIR /app-dev-stage
 
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
@@ -24,10 +24,10 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as builder
 RUN apk add --no-cache bash && \
     corepack enable
 
-WORKDIR /app
+WORKDIR /app-build-stage
 
 COPY . .
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app-dev-stage/node_modules ./node_modules
 RUN NODE_ENV=production yarn build
 
 
@@ -39,13 +39,13 @@ RUN corepack enable
 WORKDIR /app
 
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./favicon.png ./
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app-dev-stage/node_modules ./node_modules
 #COPY --from=builder --chown=node:node /app/node_modules ./node_modules
-COPY --from=builder --chown=node:node /app/build ./build
-COPY --from=builder --chown=node:node /app/config ./config
+COPY --from=builder --chown=node:node /app-build-stage/build ./build
+COPY --from=builder --chown=node:node /app-build-stage/config ./config
 # DANGER: if ./src is NOT COPIED, STRAPI WILL remove the database
-COPY --from=builder --chown=node:node /app/src ./src
-COPY --from=builder --chown=node:node /app/database ./database
+COPY --from=builder --chown=node:node /app-build-stage/src ./src
+COPY --from=builder --chown=node:node /app-build-stage/database ./database
 EXPOSE 1337
 CMD ["./node_modules/.bin/strapi", "start"]
 
