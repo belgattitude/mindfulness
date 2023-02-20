@@ -13,7 +13,10 @@ permissions:
 
 jobs:
   docker:
+    # if main branch not protected
+    #if: ${{ github.repository == 'belgattitude/mindfulness' && contains('refs/heads/main',github.ref)}}
     runs-on: ubuntu-latest
+    name: Strapi docker build
     defaults:
       run:
         shell: bash

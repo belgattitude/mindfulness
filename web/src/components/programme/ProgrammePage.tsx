@@ -13,13 +13,9 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div
-      className={
-        'font-family-primary prose-pink prose mx-auto mt-5 max-w-[1000px] bg-white text-neutral-800 '
-      }
-    >
+    <div className={'font-family-brand prose-lg mx-auto mt-5 bg-white'}>
       <h1
-        className={''}
+        className={'text-2xl'}
         css={css`
           background: linear-gradient(
             90deg,

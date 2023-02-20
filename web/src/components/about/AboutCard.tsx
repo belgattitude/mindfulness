@@ -11,11 +11,11 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
   return (
     <div
       className={twMerge(
-        clsx('px-6 pt-10 pb-8 shadow-xl sm:rounded-lg sm:px-10'),
+        clsx('rounded-lg px-6 pt-10 pb-8 shadow-lg sm:px-10'),
         className
       )}
     >
-      <div className=" space-y-6 text-base font-normal leading-7 text-neutral-800">
+      <div className="space-y-6 text-base font-normal leading-7 text-neutral-800">
         <div className="">
           <Image
             src="/images/sandrine-photo.jpg"
