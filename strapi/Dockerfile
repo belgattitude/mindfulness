@@ -24,10 +24,10 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as builder
 RUN apk add --no-cache bash && \
     corepack enable
 
-WORKDIR /app
-
 ARG DATABASE_FILENAME
 ENV DATABASE_FILENAME ${DATABASE_FILENAME}
+
+WORKDIR /app
 
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
