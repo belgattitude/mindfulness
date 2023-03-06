@@ -22,7 +22,7 @@ export const ProgrammeCard: FC<Props> = (props) => {
   return (
     <div
       className={twMerge(
-        clsx('flex flex-col gap-5 pt-5 md:flex-row'),
+        clsx('prose-lg border-5 my-5 flex flex-col gap-5 py-5  md:flex-row'),
         className
       )}
     >
@@ -36,7 +36,7 @@ export const ProgrammeCard: FC<Props> = (props) => {
             width={1000}
             height={800}
             priority={true}
-            className="relative h-[200px] rounded object-cover"
+            className="relative mt-2 h-[200px] rounded-xl object-cover"
             style={{
               objectFit: 'cover',
             }}
@@ -45,18 +45,26 @@ export const ProgrammeCard: FC<Props> = (props) => {
         </Link>
       </div>
 
-      <div className={twMerge('mb-5 border-2 p-5', className)}>
-        <h1>{data.title}</h1>
+      <div className={twMerge('', className)}>
+        <h1 className={'text-title-color-600 mb-5 text-2xl'}>{data.title}</h1>
 
-        <MarkdownText text={data.description ?? ''} />
+        <MarkdownText
+          className=""
+          text={(data.description ?? '').slice(0, 100)}
+        />
 
-        <Link href={`/p/i/${data.slug}`} legacyBehavior={true}>
-          <Button>Détail</Button>
-        </Link>
-
-        <Link href={'/events'} legacyBehavior={true}>
-          <Button>Consultez l'agenda</Button>
-        </Link>
+        <div className={'flex w-full flex-row justify-start gap-2'}>
+          <div>
+            <Link href={`/p/i/${data.slug}`} legacyBehavior={true}>
+              <Button>Détail</Button>
+            </Link>
+          </div>
+          <div>
+            <Link href={'/events'} legacyBehavior={true}>
+              <Button>Consultez l'agenda</Button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

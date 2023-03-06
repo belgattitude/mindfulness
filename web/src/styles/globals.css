@@ -4,15 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-.radial-gradient {
-  background: #FFFFFF;
-  background: radial-gradient(circle at center, #e1f1e6 5%, #a9dac3 55%);
-}
-
 @layer components {
+  .radial-gradient {
+    background: #FFFFFF;
+    background: radial-gradient(circle at center, #e1f1e6 5%, #a9dac3 55%);
+  }
   .image-rendering-unblur {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;

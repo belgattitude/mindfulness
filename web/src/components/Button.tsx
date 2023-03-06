@@ -22,7 +22,7 @@ export const Button = forwardRef<
         ref={ref}
         className={twMerge(
           clsx(
-            'rounded-full border bg-blue-500 font-bold text-white hover:bg-blue-700',
+            'hover:bg-title-color-300 bg-title-color-400 rounded-3xl border text-white',
             {
               ['py-1 px-2']: size === 'small',
               ['py-2 px-4']: size === 'normal',

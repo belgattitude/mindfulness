@@ -1,14 +1,13 @@
 import '../styles/globals.css';
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-// import localFont from 'next/font/local';
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
-import { Montserrat, Quicksand } from 'next/font/google';
+import { Montserrat, Quicksand, Inter } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { MainLayout } from '@/components/layout/MainLayout';
@@ -22,6 +21,14 @@ type MyAppProps = AppProps & {
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
+
+const fontInter = Inter({
+  weight: 'variable',
+  variable: '--font-family-inter',
+  style: ['normal'],
+  preload: true,
+  display: 'block',
+});
 
 const fontMontserrat = Montserrat({
   weight: 'variable',
@@ -80,6 +87,7 @@ const MyApp = (appProps: MyAppProps) => {
           :root {
             --font-family-montserrat: ${fontMontserrat.style.fontFamily};
             --font-family-quicksand: ${fontQuicksand.style.fontFamily};
+            --font-family-inter: ${fontInter.style.fontFamily};
           }
         `}
       </style>

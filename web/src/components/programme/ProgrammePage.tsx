@@ -13,14 +13,14 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'font-family-brand prose-lg mx-auto mt-5 bg-white'}>
+    <div className={'font-family-brand mx-auto mt-5  bg-white'}>
       <h1
-        className={'text-2xl'}
+        className={'hidden text-xl'}
         css={css`
           background: linear-gradient(
             90deg,
-            rgba(33, 169, 192, 1) 0%,
-            rgba(113, 223, 208, 1) 70%,
+            #a9dac3 0%,
+            #a9dac3 70%,
             rgba(113, 223, 208, 1) 100%
           );
           -webkit-background-clip: text;
@@ -31,9 +31,13 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
         {page.title}
       </h1>
 
-      <MarkdownText text={page.introduction ?? ''} />
-
-      <h1 className={''}>Programmes et cycles</h1>
+      <MarkdownText
+        className={'prose-lg text-title-color-800 my-5'}
+        text={page.introduction ?? ''}
+      />
+      <h1 className={'text-title-color-800 pt-5 text-3xl'}>
+        Programmes et cycles
+      </h1>
 
       {page.programmes &&
         page.programmes.data.map((programme) => {

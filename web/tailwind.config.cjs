@@ -27,7 +27,7 @@ module.exports = {
           ...defaultTheme.fontFamily.sans,
         ],
         'family-menu': [
-          'var(--font-family-quicksand)',
+          'var(--font-family-inter)',
           ...defaultTheme.fontFamily.sans,
         ],
         'family-title': [
@@ -40,6 +40,19 @@ module.exports = {
         brightRed: 'hsl(12, 88%, 59)',
         'custom-brown': {
           DEFAULT: 'rgb(193,160,132)',
+        },
+        'title-color': {
+          50: 'hsl(159, 30%, 92%)',
+          100: 'hsl(159, 30%, 85%)',
+          200: 'hsl(159, 30%, 80%)',
+          300: 'hsl(159, 30%, 65%)',
+          400: 'hsl(159, 30%, 60%)',
+          DEFAULT: 'hsl(159, 30%, 55%)',
+          500: 'hsl(159, 30%, 50%)',
+          600: 'hsl(159, 30%, 40%)',
+          700: 'hsl(159, 30%, 30%)',
+          800: 'hsl(159, 30%, 30%)',
+          900: 'hsl(159, 30%, 20%)',
         },
         'brand-color': {
           50: 'hsl(150, 27%, 92%)',
@@ -57,10 +70,10 @@ module.exports = {
       },
 
       typography: ({ theme }) => ({
-        pink: {
+        brand: {
           css: {
             '--tw-prose-body': theme('colors.pink[800]'),
-            '--tw-prose-headings': theme('colors.pink[900]'),
+            '--tw-prose-headings': theme('colors.title-color[500]'),
             '--tw-prose-lead': theme('colors.pink[700]'),
             '--tw-prose-links': theme('colors.pink[900]'),
             '--tw-prose-bold': theme('colors.pink[900]'),
