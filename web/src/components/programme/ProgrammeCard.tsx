@@ -22,21 +22,21 @@ export const ProgrammeCard: FC<Props> = (props) => {
   return (
     <div
       className={twMerge(
-        clsx('prose-lg border-5 my-5 flex flex-col gap-5 py-5  md:flex-row'),
+        clsx('prose-lg border-5 my-5 flex flex-col gap-5 py-5 md:flex-row'),
         className
       )}
     >
-      <div className={'flex-none md:w-[300px]'}>
+      <div className={'flex-none md:w-[250px]'}>
         <Link href={`/p/i/${data.slug}`}>
           <Image
             alt={`Photo ${
               data.cover.data?.attributes?.alternativeText ??
               `programme ${data.title}`
             }`}
-            width={1000}
-            height={800}
+            width={500}
+            height={500}
             priority={true}
-            className="relative mt-2 h-[200px] rounded-xl object-cover"
+            className="relative mt-2 h-[250px] rounded-lg object-cover md:rounded-full"
             style={{
               objectFit: 'cover',
             }}

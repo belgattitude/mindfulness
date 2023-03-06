@@ -1,5 +1,6 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type {
+  GetServerSideProps,
   GetStaticPaths,
   GetStaticProps,
   InferGetStaticPropsType,
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export default function ProgrammesPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
+  props: Awaited<InferGetStaticPropsType<typeof getServerSideProps>>
 ) {
   const { slug } = props;
   const { data, isLoading, error } = useQuery({
@@ -55,7 +56,9 @@ const schema = z.object({
   programmeSlug: z.string().min(3).max(255),
 });
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
   const queryClient = new QueryClient(queryClientConfig);
 
   const { programmeSlug: slug } = schema.parse(context.params);
@@ -71,14 +74,15 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       slug,
       dehydratedState: dehydrate(queryClient),
       // Next.js will attempt to re-generate the page at most
-      revalidate: 3_600,
+      // revalidate: 3_600,
     },
   };
 };
 
+/*
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
     fallback: 'blocking',
   };
-};
+}; */
