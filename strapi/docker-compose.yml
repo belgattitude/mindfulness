@@ -23,6 +23,7 @@ services:
       # Share the env
       - ./.env:/app/.env
       # Share the sqlite database
+      - ${DOCKER_SQLITE_HOST_DIRECTORY:-./sqlite}:/app/sqlite
       - ./data:/app/data
       # Share the image uploads database
       - ${DOCKER_UPLOAD_HOST_DIRECTORY:-./public/uploads}:/app/public/uploads
