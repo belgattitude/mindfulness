@@ -35,7 +35,7 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
         className={'prose-lg text-title-color-800 my-5'}
         text={page.introduction ?? ''}
       />
-      <h1 className={'text-title-color-800 pt-5 text-3xl'}>
+      <h1 className={'text-title-color-800 hidden pt-5 text-3xl'}>
         Programmes et cycles
       </h1>
 

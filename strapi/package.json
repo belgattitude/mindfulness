@@ -22,7 +22,7 @@
     "better-sqlite3": "8.1.0"
   },
   "devDependencies": {
-    "rimraf": "4.3.0"
+    "rimraf": "4.3.1"
   },
   "author": {
     "name": "Sébastien Vanvelthem"

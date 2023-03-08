@@ -36,7 +36,7 @@ export const ProgrammeCard: FC<Props> = (props) => {
             width={500}
             height={500}
             priority={true}
-            className="relative mt-2 h-[250px] rounded-lg object-cover md:rounded-full"
+            className="relative mt-2 h-[250px] object-cover md:rounded-full"
             style={{
               objectFit: 'cover',
             }}
