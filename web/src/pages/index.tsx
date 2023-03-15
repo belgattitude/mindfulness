@@ -3,12 +3,12 @@ import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
-import { AboutCard } from '@/components/about/AboutCard';
-import { AboutCardBox } from '@/components/about/AboutCardBox';
+import { AboutCard } from '@/components/About/AboutCard';
+import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { MyActivitiesCard } from '@/components/sections/MyActivitiesCard';
+import { MyActivitiesCard } from '@/components/Sections/MyActivitiesCard';
 import { fetchHome } from '../api/home.api';
 import { queryClientConfig } from '../config/query-client.config';
 

@@ -1,12 +1,14 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type {
+  GetServerSideProps,
   GetStaticPaths,
   GetStaticProps,
+  InferGetServerSidePropsType,
   InferGetStaticPropsType,
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { ProgrammeCard } from '@/components/programme/ProgrammeCard';
+import { ProgrammeListItem } from '@/components/Programme/ProgrammeListItem';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchProgramme } from '../../../api/programmes';
@@ -19,8 +21,8 @@ type Props = {
   slug: string;
 };
 
-export default function ProgrammesPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
+export default function ProgrammeRoute(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const { slug } = props;
   const { data, isLoading, error } = useQuery({
@@ -46,7 +48,7 @@ export default function ProgrammesPage(
       <NextSeo />
 
       <div className={'container mx-auto flex flex-col'}>
-        {data?.attributes && <ProgrammeCard programme={data.attributes} />}
+        {data?.attributes && <ProgrammeListItem programme={data.attributes} />}
       </div>
     </>
   );
@@ -56,7 +58,9 @@ const schema = z.object({
   programmeSlug: z.string().min(3).max(255),
 });
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
   const queryClient = new QueryClient(queryClientConfig);
 
   const { programmeSlug: slug } = schema.parse(context.params);
@@ -72,14 +76,16 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       slug,
       dehydratedState: dehydrate(queryClient),
       // Next.js will attempt to re-generate the page at most
-      revalidate: 3_600,
+      // revalidate: 3_600,
     },
   };
 };
 
+/*
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
     fallback: 'blocking',
   };
 };
+*/

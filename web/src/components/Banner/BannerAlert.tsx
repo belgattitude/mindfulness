@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import type { FC } from 'react';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/Button/Button';
 
 type Props = {
   collapse: boolean;

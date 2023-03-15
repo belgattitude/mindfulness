@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
-import { MainContent } from '@/components/layout/MainContent';
-import { MainFooter } from '@/components/layout/MainFooter';
-import { MainHeader } from '@/components/layout/MainHeader';
+import { MainContent } from '@/components/Layout/MainContent';
+import { MainFooter } from '@/components/Layout/MainFooter';
+import { MainHeader } from '@/components/Layout/MainHeader';
 import { siteConfig } from '../../config/site.config';
 
 type Props = PropsWithChildren;

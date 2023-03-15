@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/Button/Button';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
@@ -16,7 +16,7 @@ type Props = {
   className?: string;
 };
 
-export const ProgrammeCard: FC<Props> = (props) => {
+export const ProgrammeListItem: FC<Props> = (props) => {
   const { className = '' } = props;
   const data = useFragment(fullProgrammeFragment, props.programme);
   return (
@@ -50,7 +50,7 @@ export const ProgrammeCard: FC<Props> = (props) => {
 
         <MarkdownText
           className=""
-          text={(data.description ?? '').slice(0, 100)}
+          text={data.summary ?? data.description ?? ''}
         />
 
         <div className={'flex w-full flex-row justify-start gap-2'}>

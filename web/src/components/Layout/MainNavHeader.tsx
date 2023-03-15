@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { MainLogo } from '@/components/logo/MainLogo';
+import { MainLogo } from '@/components/Logo/MainLogo';
 
 type Props = {
   collapse: boolean;

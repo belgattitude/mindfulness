@@ -10,7 +10,7 @@ import type { AppProps } from 'next/app';
 import { Montserrat, Quicksand, Inter } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
-import { MainLayout } from '@/components/layout/MainLayout';
+import { MainLayout } from '@/components/Layout';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
 import { queryClientConfig } from '../config/query-client.config';
 import { defaultSeoConfig } from '../config/seo.config';

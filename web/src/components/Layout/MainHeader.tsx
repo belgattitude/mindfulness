@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
-import { BurgerMenuIcon } from '@/components/burger/BurgerMenuIcon';
-import { MainMenuLinks } from '@/components/layout/MainMenuLinks';
-import { MainNavHeader } from '@/components/layout/MainNavHeader';
-import { MainSidebar } from '@/components/layout/MainSidebar';
-import { MainLogo } from '@/components/logo/MainLogo';
+import { BurgerMenuIcon } from '@/components/Burger/BurgerMenuIcon';
+import { MainMenuLinks } from '@/components/Layout/MainMenuLinks';
+import { MainNavHeader } from '@/components/Layout/MainNavHeader';
+import { MainSidebar } from '@/components/Layout/MainSidebar';
+import { MainLogo } from '@/components/Logo/MainLogo';
 import type { MainNavLinks } from '../../config/site.config';
-import { BannerAlert } from '../banner/BannerAlert';
+import { BannerAlert } from '../Banner/BannerAlert';
 
 type MainNavProps = {
   /** add props here */

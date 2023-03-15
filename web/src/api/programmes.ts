@@ -17,6 +17,7 @@ export const fullProgrammeFragment = graphql(/* GraphQL */ `
     slug
     title
     description
+    summary
     cover {
       data {
         id
@@ -24,6 +25,16 @@ export const fullProgrammeFragment = graphql(/* GraphQL */ `
           url
           caption
           alternativeText
+        }
+      }
+    }
+    events {
+      data {
+        attributes {
+          displayTitle
+          location
+          startAt
+          endAt
         }
       }
     }

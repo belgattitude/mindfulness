@@ -6,7 +6,7 @@ import type {
   InferGetStaticPropsType,
 } from 'next';
 import { NextSeo } from 'next-seo';
-import { EventCard } from '@/components/event/EventCard';
+import { EventCard } from '@/components/Event/EventCard';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchEvents } from '../../api/events.api';
@@ -19,7 +19,7 @@ type Props = {
 const limit = 10;
 // const dateMin = dayjs().subtract(10, 'month').toDate();
 
-export default function EventsPage(
+export default function EventsRoute(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const { dateMin } = props;

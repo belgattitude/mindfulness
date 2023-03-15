@@ -3,7 +3,7 @@ import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
-import { AboutCardBox } from '@/components/about/AboutCardBox';
+import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';

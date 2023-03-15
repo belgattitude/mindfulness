@@ -1,13 +1,8 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import type {
-  GetServerSideProps,
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { NextSeo } from 'next-seo';
 import { z } from 'zod';
-import { ProgrammePage } from '@/components/programme/ProgrammePage';
+import { ProgrammesPage } from '@/components/Programme/ProgrammesPage';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { fetchPage } from '../../api/pages.api';
@@ -20,8 +15,8 @@ type Props = {
   slug: string;
 };
 
-export default function ProgrammesPage(
-  props: Awaited<InferGetStaticPropsType<typeof getServerSideProps>>
+export default function ProgrammesRoute(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const { slug } = props;
   const { data, isLoading, error } = useQuery({
@@ -46,7 +41,7 @@ export default function ProgrammesPage(
     <>
       <NextSeo />
       <div className={'container mx-auto flex flex-col'}>
-        {data?.attributes && <ProgrammePage page={data.attributes} />}
+        {data?.attributes && <ProgrammesPage page={data.attributes} />}
       </div>
     </>
   );

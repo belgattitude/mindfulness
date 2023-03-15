@@ -4,9 +4,9 @@ import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import type { FetchPage } from '../../api/pages.api';
 import { fullPageFragment } from '../../api/pages.api';
-import { ProgrammeCard } from './ProgrammeCard';
+import { ProgrammeListItem } from './ProgrammeListItem';
 
-export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
+export const ProgrammesPage: FC<{ page: FetchPage }> = (props) => {
   const page = useFragment(fullPageFragment, props.page);
   if (!page) {
     return <p>NotFound</p>;
@@ -43,7 +43,7 @@ export const ProgrammePage: FC<{ page: FetchPage }> = (props) => {
         page.programmes.data.map((programme) => {
           return (
             programme.attributes && (
-              <ProgrammeCard
+              <ProgrammeListItem
                 className={'rounded-xl bg-white'}
                 key={programme.id}
                 programme={programme.attributes}
