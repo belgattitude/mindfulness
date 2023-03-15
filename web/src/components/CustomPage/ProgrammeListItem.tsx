@@ -55,7 +55,7 @@ export const ProgrammeListItem: FC<Props> = (props) => {
 
         <div className={'flex w-full flex-row justify-start gap-2'}>
           <div>
-            <Link href={`/p/i/${data.slug}`} legacyBehavior={true}>
+            <Link href={`/programme/${data.slug}`} legacyBehavior={true}>
               <Button>Détail</Button>
             </Link>
           </div>

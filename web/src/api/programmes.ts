@@ -3,11 +3,11 @@
 // - phase out graphql
 import { HttpNotFound } from '@httpx/exception';
 import request from 'graphql-request';
+import { getGraphQLUrl } from '@/config/graphql.config';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
 import type { PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphQLUrl } from '../config/graphql.config';
 
 export const fullProgrammeFragment = graphql(/* GraphQL */ `
   fragment FullProgrammeFragment on Programme {

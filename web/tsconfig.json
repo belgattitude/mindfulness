@@ -22,7 +22,9 @@
       "@your-org/common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ],
+      "@/api/*": ["./api/*"],
       "@/components/*": ["./components/*"],
+      "@/config/*": ["./config/*"],
       "@/features/*": ["./features/*"],
       "@/gql/*": ["./gql/*"],
       "@/layout/*": ["./layout/*"],

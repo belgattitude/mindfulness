@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { FC } from 'react';
+import type { FetchPage } from '@/api/pages.api';
+import { fullPageFragment } from '@/api/pages.api';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
-import type { FetchPage } from '../../api/pages.api';
-import { fullPageFragment } from '../../api/pages.api';
 import { ProgrammeListItem } from './ProgrammeListItem';
 
-export const ProgrammesPage: FC<{ page: FetchPage }> = (props) => {
+export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   const page = useFragment(fullPageFragment, props.page);
   if (!page) {
     return <p>NotFound</p>;
