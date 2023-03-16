@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,7 +6,6 @@ import { twMerge } from 'tailwind-merge';
 import { fullProgrammeFragment } from '@/api/programmes';
 import type { FetchProgramme } from '@/api/programmes';
 import { Button } from '@/components/Button';
-import { ProgrammeListItem } from '@/components/CustomPage/ProgrammeListItem';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
@@ -19,7 +17,7 @@ type Props = {
 
 export const ProgrammePage: FC<Props> = (props) => {
   const { className = '', programme } = props;
-  const data = useFragment(fullProgrammeFragment, props.programme);
+  const data = useFragment(fullProgrammeFragment, programme);
 
   if (!data) {
     return <p>NotFound</p>;

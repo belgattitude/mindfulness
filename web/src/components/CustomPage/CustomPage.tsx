@@ -13,9 +13,9 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'font-family-brand mx-auto mt-5  bg-white'}>
+    <div className={'font-family-brand mx-auto mt-5 bg-white'}>
       <h1
-        className={'hidden text-xl'}
+        className={'hidden text-3xl'}
         css={css`
           background: linear-gradient(
             90deg,
@@ -35,7 +35,7 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
         className={'prose-lg text-title-color-800 my-5'}
         text={page.introduction ?? ''}
       />
-      <h1 className={'text-title-color-800 hidden pt-5 text-3xl'}>
+      <h1 className={'text-title-color-800 pt-5 text-3xl'}>
         Programmes et cycles
       </h1>
 

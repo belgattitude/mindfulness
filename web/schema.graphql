@@ -105,6 +105,11 @@ input DateTimeFilterInput {
   startsWith: DateTime
 }
 
+enum ENUM_EVENT_EVENTTYPE {
+  cours_reguliers
+  stages_et_retraites
+}
+
 enum ENUM_EVENT_UNIVERSE {
   dialogue
   mindfulness
@@ -129,6 +134,7 @@ type Event {
   description: String!
   displayTitle: String
   endAt: DateTime!
+  eventType: ENUM_EVENT_EVENTTYPE!
   facebookLink: String
   flyer: UploadFileEntityResponse
   location: String
@@ -164,6 +170,7 @@ input EventFiltersInput {
   description: StringFilterInput
   displayTitle: StringFilterInput
   endAt: DateTimeFilterInput
+  eventType: StringFilterInput
   facebookLink: StringFilterInput
   id: IDFilterInput
   location: StringFilterInput
@@ -186,6 +193,7 @@ input EventInput {
   description: String
   displayTitle: String
   endAt: DateTime
+  eventType: ENUM_EVENT_EVENTTYPE
   facebookLink: String
   flyer: ID
   location: String
@@ -563,25 +571,25 @@ enum PublicationState {
 type Query {
   about: AboutEntityResponse
   contact: ContactEntityResponse
-  event(id: ID): EventEntityResponse
+  event(id: ID!): EventEntityResponse
   events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventEntityResponseCollection
   home(publicationState: PublicationState = LIVE): HomeEntityResponse
-  i18NLocale(id: ID): I18NLocaleEntityResponse
+  i18NLocale(id: ID!): I18NLocaleEntityResponse
   i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
-  page(id: ID): PageEntityResponse
+  page(id: ID!): PageEntityResponse
   pages(filters: PageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PageEntityResponseCollection
-  programme(id: ID): ProgrammeEntityResponse
+  programme(id: ID!): ProgrammeEntityResponse
   programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProgrammeEntityResponseCollection
-  temoignage(id: ID): TemoignageEntityResponse
+  temoignage(id: ID!): TemoignageEntityResponse
   temoignages(filters: TemoignageFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): TemoignageEntityResponseCollection
-  uploadFile(id: ID): UploadFileEntityResponse
+  uploadFile(id: ID!): UploadFileEntityResponse
   uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
-  uploadFolder(id: ID): UploadFolderEntityResponse
+  uploadFolder(id: ID!): UploadFolderEntityResponse
   uploadFolders(filters: UploadFolderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFolderEntityResponseCollection
-  usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
+  usersPermissionsRole(id: ID!): UsersPermissionsRoleEntityResponse
   usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
-  usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
+  usersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse
   usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
 }
 

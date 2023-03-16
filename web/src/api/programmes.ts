@@ -28,16 +28,6 @@ export const fullProgrammeFragment = graphql(/* GraphQL */ `
         }
       }
     }
-    events {
-      data {
-        attributes {
-          displayTitle
-          location
-          startAt
-          endAt
-        }
-      }
-    }
   }
 `);
 

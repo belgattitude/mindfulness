@@ -1,19 +1,13 @@
-import { css } from '@emotion/react';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import type { FC } from 'react';
-import { AboutCard } from '@/components/About/AboutCard';
+import { fetchAboutPage } from '@/api/about.api';
 import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { MyActivitiesCard } from '@/components/Sections/MyActivitiesCard';
-import { fetchAboutPage } from '../api/about.api';
-import { fetchContactPage } from '../api/contact.api';
-import { fetchHome } from '../api/home.api';
-import { queryClientConfig } from '../config/query-client.config';
+import { queryClientConfig } from '@/config/query-client.config';
 
 type Props = {
   // Add whatever extra you need

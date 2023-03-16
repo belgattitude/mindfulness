@@ -4,13 +4,14 @@
 import { HttpNotFound } from '@httpx/exception';
 import dayjs from 'dayjs';
 import request from 'graphql-request';
+import type { EventTypeSlugs } from '@/components/Event/utils';
+import { getGraphQLUrl } from '@/config/graphql.config';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
 import type { PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphQLUrl } from '../config/graphql.config';
 
-const fullEventFragment = graphql(/* GraphQL */ `
+export const fullEventFragment = graphql(/* GraphQL */ `
   fragment FullEventFragment on Event {
     createdAt
     updatedAt
@@ -56,10 +57,11 @@ const searchEvents = graphql(/* GraphQL */ `
     $limit: Int = 100
     $publicationState: PublicationState = LIVE
     $dateMin: DateTime = "2020-02-28T03:00:00.000Z"
+    $eventType: String
   ) {
     events(
       sort: "publishedAt:DESC"
-      filters: { startAt: { gte: $dateMin } }
+      filters: { startAt: { gte: $dateMin }, eventType: { eq: $eventType } }
       pagination: { page: 1, pageSize: $limit }
       publicationState: $publicationState
     ) {
@@ -89,6 +91,7 @@ export const fetchEvents = async (params: {
   limit?: number;
   dateMin?: string;
   publicationState?: PublicationState;
+  eventType?: EventTypeSlugs | null;
 }) => {
   const { dateMin } = params;
 

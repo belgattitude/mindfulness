@@ -4,6 +4,7 @@ const { z } = require('zod');
 
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_STRAPI_API_URL: z.string().url(),
+  NEXT_PUBLIC_SITE_URL: z.string().url(),
 });
 
 const parsedPublicEnv = publicEnvSchema.safeParse(process.env);

@@ -60,7 +60,7 @@ export const ProgrammeListItem: FC<Props> = (props) => {
             </Link>
           </div>
           <div>
-            <Link href={'/events'} legacyBehavior={true}>
+            <Link href={'/agenda'} legacyBehavior={true}>
               <Button>Consultez l'agenda</Button>
             </Link>
           </div>

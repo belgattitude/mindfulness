@@ -100,6 +100,14 @@
       "relation": "manyToMany",
       "target": "api::programme.programme",
       "mappedBy": "events"
+    },
+    "eventType": {
+      "type": "enumeration",
+      "enum": [
+        "stages-et-retraites",
+        "cours-reguliers"
+      ],
+      "required": true
     }
   }
 }

@@ -2748,6 +2748,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/react@npm:1.7.13":
+  version: 1.7.13
+  resolution: "@headlessui/react@npm:1.7.13"
+  dependencies:
+    client-only: "npm:^0.0.1"
+  peerDependencies:
+    react: ^16 || ^17 || ^18
+    react-dom: ^16 || ^17 || ^18
+  checksum: f0badf7755c7bb5268a212060a2d3b8b890b867b210fb9c4cbb234b862b9d9fea1bb7d7a21598e2df5f098e573d2c3bfa09dcfe4853e828496f86ea8a13dbb38
+  languageName: node
+  linkType: hard
+
+"@heroicons/react@npm:2.0.16":
+  version: 2.0.16
+  resolution: "@heroicons/react@npm:2.0.16"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 076fcafb10e2925cada826efd650c61bf1db01a0b572f6c0a8078751afb5562d8765f9150476951ebebfd02d7334c75ce98a0984ec097e75bb83833b27de95b0
+  languageName: node
+  linkType: hard
+
 "@httpx/exception@npm:1.7.1, @httpx/exception@npm:^1.7.0":
   version: 1.7.1
   resolution: "@httpx/exception@npm:1.7.1"
@@ -7277,7 +7298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"client-only@npm:0.0.1":
+"client-only@npm:0.0.1, client-only@npm:^0.0.1":
   version: 0.0.1
   resolution: "client-only@npm:0.0.1"
   checksum: d2117e1ff1ceaaa6c21ce705f5516fbdb197d5a10e7ebc6f698cb550cae63394da07d1a73045bc208f5608e953523ac807009cfb88a7e4c740df5da347ce722f
@@ -17439,6 +17460,8 @@ __metadata:
     "@graphql-codegen/client-preset": "npm:2.1.1"
     "@graphql-codegen/typescript": "npm:3.0.2"
     "@graphql-codegen/typescript-react-query": "npm:4.1.0"
+    "@headlessui/react": "npm:1.7.13"
+    "@heroicons/react": "npm:2.0.16"
     "@httpx/exception": "npm:1.7.1"
     "@next/bundle-analyzer": "npm:13.2.4"
     "@nextvalid/zod-request": "npm:0.4.0"

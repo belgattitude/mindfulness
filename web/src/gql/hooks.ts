@@ -144,6 +144,11 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']>;
 };
 
+export enum Enum_Event_Eventtype {
+  CoursReguliers = 'cours_reguliers',
+  StagesEtRetraites = 'stages_et_retraites'
+}
+
 export enum Enum_Event_Universe {
   Dialogue = 'dialogue',
   Mindfulness = 'mindfulness',
@@ -169,6 +174,7 @@ export type Event = {
   description: Scalars['String'];
   displayTitle?: Maybe<Scalars['String']>;
   endAt: Scalars['DateTime'];
+  eventType: Enum_Event_Eventtype;
   facebookLink?: Maybe<Scalars['String']>;
   flyer?: Maybe<UploadFileEntityResponse>;
   location?: Maybe<Scalars['String']>;
@@ -215,6 +221,7 @@ export type EventFiltersInput = {
   description?: InputMaybe<StringFilterInput>;
   displayTitle?: InputMaybe<StringFilterInput>;
   endAt?: InputMaybe<DateTimeFilterInput>;
+  eventType?: InputMaybe<StringFilterInput>;
   facebookLink?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   location?: InputMaybe<StringFilterInput>;
@@ -237,6 +244,7 @@ export type EventInput = {
   description?: InputMaybe<Scalars['String']>;
   displayTitle?: InputMaybe<Scalars['String']>;
   endAt?: InputMaybe<Scalars['DateTime']>;
+  eventType?: InputMaybe<Enum_Event_Eventtype>;
   facebookLink?: InputMaybe<Scalars['String']>;
   flyer?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
@@ -1457,6 +1465,7 @@ export type SearchEventsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   publicationState?: InputMaybe<PublicationState>;
   dateMin?: InputMaybe<Scalars['DateTime']>;
+  eventType?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -1467,7 +1476,7 @@ export type GetHomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHomePageQuery = { __typename?: 'Query', home?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', introduction?: string | null } | null } | null } | null };
 
-export type FullPageFragmentFragment = { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null };
+export type FullPageFragmentFragment = { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null };
 
 export type SearchPagesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1475,16 +1484,16 @@ export type SearchPagesQueryVariables = Exact<{
 }>;
 
 
-export type SearchPagesQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', id?: string | null, attributes?: { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
+export type SearchPagesQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', id?: string | null, attributes?: { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
 
 export type GetPageQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetPageQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', id?: string | null, attributes?: { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
+export type GetPageQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', id?: string | null, attributes?: { __typename?: 'Page', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } | null }> } | null };
 
-export type FullProgrammeFragmentFragment = { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null };
+export type FullProgrammeFragmentFragment = { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } };
 
 export type SearchProgrammesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1492,14 +1501,14 @@ export type SearchProgrammesQueryVariables = Exact<{
 }>;
 
 
-export type SearchProgrammesQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
+export type SearchProgrammesQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }>, meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', page: number, pageSize: number, total: number, pageCount: number } } } | null };
 
 export type GetProgrammeQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProgrammeQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null }, events?: { __typename?: 'EventRelationResponseCollection', data: Array<{ __typename?: 'EventEntity', attributes?: { __typename?: 'Event', displayTitle?: string | null, location?: string | null, startAt: any, endAt: any } | null }> } | null } | null }> } | null };
+export type GetProgrammeQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null };
 
 export const FullEventFragmentFragmentDoc = `
     fragment FullEventFragment on Event {
@@ -1544,16 +1553,6 @@ export const FullProgrammeFragmentFragmentDoc = `
         url
         caption
         alternativeText
-      }
-    }
-  }
-  events {
-    data {
-      attributes {
-        displayTitle
-        location
-        startAt
-        endAt
       }
     }
   }
@@ -1680,10 +1679,10 @@ export const useGetEventQuery = <
       options
     );
 export const SearchEventsDocument = `
-    query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $dateMin: DateTime = "2020-02-28T03:00:00.000Z") {
+    query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $dateMin: DateTime = "2020-02-28T03:00:00.000Z", $eventType: String) {
   events(
     sort: "publishedAt:DESC"
-    filters: {startAt: {gte: $dateMin}}
+    filters: {startAt: {gte: $dateMin}, eventType: {eq: $eventType}}
     pagination: {page: 1, pageSize: $limit}
     publicationState: $publicationState
   ) {

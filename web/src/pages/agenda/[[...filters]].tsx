@@ -1,36 +1,42 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import type {
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from 'next';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { NextSeo } from 'next-seo';
+import { z } from 'zod';
+import { fetchEvents } from '@/api/events.api';
 import { EventCard } from '@/components/Event/EventCard';
+import { EventFilters } from '@/components/Event/EventFilters';
+import type { EventTypeSlugs } from '@/components/Event/utils';
+import { getEventTypeSlugs } from '@/components/Event/utils';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { fetchEvents } from '../../api/events.api';
-import { queryClientConfig } from '../../config/query-client.config';
+import { queryClientConfig } from '@/config/query-client.config';
 
 type Props = {
   dateMin: string;
+  eventType: EventTypeSlugs | null;
 };
 
 const limit = 10;
 // const dateMin = dayjs().subtract(10, 'month').toDate();
 
 export default function EventsRoute(
-  props: InferGetStaticPropsType<typeof getStaticProps>
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  const { dateMin } = props;
+  const { dateMin, eventType } = props;
   const { data, isLoading, error } = useQuery({
-    queryKey: ['events', limit, dateMin],
-    queryFn: async () => fetchEvents({ limit, dateMin }),
+    queryKey: ['events', limit, dateMin, eventType],
+    queryFn: async () =>
+      fetchEvents({
+        limit,
+        dateMin,
+        eventType,
+      }),
+    useErrorBoundary: false,
     // prefetched data is made available through the server, on the client it might already look
     // outdated... as we use revalidation with events for this age, it's possible to set stale time
     // to max
-    staleTime: Number.MAX_SAFE_INTEGER,
-    useErrorBoundary: false,
+    // staleTime: Number.MAX_SAFE_INTEGER,
   });
 
   if (error) {
@@ -46,8 +52,8 @@ export default function EventsRoute(
       <NextSeo />
 
       <div className={'flex flex-col py-5'}>
-        <div className={'flex py-5 text-3xl'}>
-          Les filtres seront ici (stages, cours réguliers...)
+        <div className={'flex'}>
+          <EventFilters selected={eventType} />
         </div>
         <div className="flex flex-col gap-5">
           {data && (
@@ -66,31 +72,45 @@ export default function EventsRoute(
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async (_context) => {
+const schema = z.object({
+  eventType: z
+    .enum([...getEventTypeSlugs()] as [string, ...string[]])
+    .optional(),
+});
+
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context
+) => {
   const dateMin = dayjs().subtract(10, 'month').toDate();
   const strDateMin = dateMin.toString();
+
+  const { filters = [] } = context.params ?? {};
+
+  const f = {
+    eventType: filters?.[0] ?? undefined,
+    universe: filters?.[1] ?? undefined,
+  };
+  const parsedFilters = schema.parse(f);
+  const eventType = (parsedFilters.eventType as EventTypeSlugs) ?? null;
 
   const queryClient = new QueryClient(queryClientConfig);
 
   await queryClient.prefetchQuery({
-    queryKey: ['events', limit, strDateMin],
-    queryFn: async () => fetchEvents({ limit, dateMin: strDateMin }),
+    queryKey: ['events', limit, strDateMin, eventType],
+    queryFn: async () =>
+      fetchEvents({
+        limit,
+        dateMin: strDateMin,
+        ...(eventType ? { eventType } : {}),
+      }),
     retry: false,
   });
 
   return {
     props: {
+      eventType: eventType ?? null,
       dateMin: strDateMin,
       dehydratedState: dehydrate(queryClient),
-      // Next.js will attempt to re-generate the page at most
-      revalidate: 3_600,
     },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
   };
 };
