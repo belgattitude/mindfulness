@@ -8,7 +8,7 @@ import type { EventTypeSlugs } from '@/components/Event/utils';
 import { getGraphQLUrl } from '@/config/graphql.config';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
-import type { PublicationState } from '@/gql/graphql';
+import type { EventFiltersInput, PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
 
 export const fullEventFragment = graphql(/* GraphQL */ `
@@ -56,12 +56,11 @@ const searchEvents = graphql(/* GraphQL */ `
   query searchEvents(
     $limit: Int = 100
     $publicationState: PublicationState = LIVE
-    $dateMin: DateTime = "2020-02-28T03:00:00.000Z"
-    $eventType: String
+    $rawFilters: EventFiltersInput = {}
   ) {
     events(
-      sort: "publishedAt:DESC"
-      filters: { startAt: { gte: $dateMin }, eventType: { eq: $eventType } }
+      sort: ["publishedAt:DESC"]
+      filters: $rawFilters
       pagination: { page: 1, pageSize: $limit }
       publicationState: $publicationState
     ) {
@@ -93,11 +92,18 @@ export const fetchEvents = async (params: {
   publicationState?: PublicationState;
   eventType?: EventTypeSlugs | null;
 }) => {
-  const { dateMin } = params;
+  const { dateMin, eventType } = params;
+
+  const dm = dateMin ? dayjs(dateMin).toDate() : undefined;
+
+  const rawFilters: EventFiltersInput = {
+    ...(dm ? { startAt: { gte: dm.toISOString() } } : {}),
+    ...(eventType ? { eventType: { eq: eventType } } : {}),
+  };
 
   return request(getGraphQLUrl(), searchEvents, {
     ...params,
-    dateMin: dateMin ? dayjs(dateMin).toDate() : undefined,
+    rawFilters,
   }).catch(getGraphqlRequestCatcher);
 };
 

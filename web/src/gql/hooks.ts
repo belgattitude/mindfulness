@@ -870,7 +870,7 @@ export type Query = {
 
 
 export type QueryEventArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -888,7 +888,7 @@ export type QueryHomeArgs = {
 
 
 export type QueryI18NLocaleArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -900,7 +900,7 @@ export type QueryI18NLocalesArgs = {
 
 
 export type QueryPageArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -913,7 +913,7 @@ export type QueryPagesArgs = {
 
 
 export type QueryProgrammeArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -926,7 +926,7 @@ export type QueryProgrammesArgs = {
 
 
 export type QueryTemoignageArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -939,7 +939,7 @@ export type QueryTemoignagesArgs = {
 
 
 export type QueryUploadFileArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -951,7 +951,7 @@ export type QueryUploadFilesArgs = {
 
 
 export type QueryUploadFolderArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -963,7 +963,7 @@ export type QueryUploadFoldersArgs = {
 
 
 export type QueryUsersPermissionsRoleArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -975,7 +975,7 @@ export type QueryUsersPermissionsRolesArgs = {
 
 
 export type QueryUsersPermissionsUserArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -1464,8 +1464,7 @@ export type GetEventQuery = { __typename?: 'Query', events?: { __typename?: 'Eve
 export type SearchEventsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   publicationState?: InputMaybe<PublicationState>;
-  dateMin?: InputMaybe<Scalars['DateTime']>;
-  eventType?: InputMaybe<Scalars['String']>;
+  rawFilters?: InputMaybe<EventFiltersInput>;
 }>;
 
 
@@ -1679,10 +1678,10 @@ export const useGetEventQuery = <
       options
     );
 export const SearchEventsDocument = `
-    query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $dateMin: DateTime = "2020-02-28T03:00:00.000Z", $eventType: String) {
+    query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $rawFilters: EventFiltersInput = {}) {
   events(
-    sort: "publishedAt:DESC"
-    filters: {startAt: {gte: $dateMin}, eventType: {eq: $eventType}}
+    sort: ["publishedAt:DESC"]
+    filters: $rawFilters
     pagination: {page: 1, pageSize: $limit}
     publicationState: $publicationState
   ) {
