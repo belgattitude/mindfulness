@@ -1680,7 +1680,7 @@ export const useGetEventQuery = <
 export const SearchEventsDocument = `
     query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $rawFilters: EventFiltersInput = {}) {
   events(
-    sort: ["publishedAt:DESC"]
+    sort: ["eventType:ASC", "startAt:ASC", "publishedAt:ASC"]
     filters: $rawFilters
     pagination: {page: 1, pageSize: $limit}
     publicationState: $publicationState

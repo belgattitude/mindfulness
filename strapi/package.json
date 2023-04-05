@@ -15,14 +15,15 @@
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-graphql": "4.8.2",
-    "@strapi/plugin-i18n": "4.8.2",
-    "@strapi/plugin-users-permissions": "4.8.2",
-    "@strapi/strapi": "4.8.2",
+    "@strapi/plugin-documentation": "4.9.0",
+    "@strapi/plugin-graphql": "4.9.0",
+    "@strapi/plugin-i18n": "4.9.0",
+    "@strapi/plugin-users-permissions": "4.9.0",
+    "@strapi/strapi": "4.9.0",
     "better-sqlite3": "8.2.0"
   },
   "devDependencies": {
-    "rimraf": "4.4.0"
+    "rimraf": "4.4.1"
   },
   "author": {
     "name": "Sébastien Vanvelthem"
@@ -31,8 +32,8 @@
     "uuid": "ef7a525d-01bc-487a-bbe8-0dfaeb05faaa"
   },
   "engines": {
-    "node": ">=14.19.1"
+    "node": ">=16.17"
   },
-  "packageManager": "yarn@4.0.0-rc.36",
+  "packageManager": "yarn@4.0.0-rc.42",
   "license": "MIT"
 }

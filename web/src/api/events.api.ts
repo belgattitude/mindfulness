@@ -59,7 +59,7 @@ const searchEvents = graphql(/* GraphQL */ `
     $rawFilters: EventFiltersInput = {}
   ) {
     events(
-      sort: ["publishedAt:DESC"]
+      sort: ["eventType:ASC", "startAt:ASC", "publishedAt:ASC"]
       filters: $rawFilters
       pagination: { page: 1, pageSize: $limit }
       publicationState: $publicationState
@@ -92,12 +92,13 @@ export const fetchEvents = async (params: {
   publicationState?: PublicationState;
   eventType?: EventTypeSlugs | null;
 }) => {
-  const { dateMin, eventType } = params;
-
-  const dm = dateMin ? dayjs(dateMin).toDate() : undefined;
-
+  const defaultDateMin = dayjs().subtract(100, 'days').toISOString();
+  const { dateMin = defaultDateMin, eventType } = params;
+  console.log(dateMin);
+  // const dm = dateMin ? dayjs(dateMin).toDate() : undefined;
+  const dm = dayjs(dateMin).toDate();
   const rawFilters: EventFiltersInput = {
-    ...(dm ? { startAt: { gte: dm.toISOString() } } : {}),
+    ...(dm ? { startAt: { gte: dm } } : {}),
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 
