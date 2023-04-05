@@ -1,8 +1,12 @@
 // @ts-check
 
-const withBundleAnalyzer = require('@next/bundle-analyzer');
-const { createSecureHeaders } = require('next-secure-headers');
-const { publicEnv } = require('./src/config/public-env');
+import withBundleAnalyzer from '@next/bundle-analyzer';
+import { createSecureHeaders } from 'next-secure-headers';
+import { publicEnv } from './src/config/public-env.mjs';
+
+// @ts-ignore
+import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
+
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
@@ -129,12 +133,7 @@ let nextConfig = {
 };
 
 if (enableVanillaExtract) {
-  const {
-    createVanillaExtractPlugin,
-    // @ts-ignore vanilla extract next plugin does not publish types (yet)
-  } = require('@vanilla-extract/next-plugin');
   const withVanillaExtract = createVanillaExtractPlugin();
-
   nextConfig = withVanillaExtract(nextConfig, {
     debug: !isProd,
   });
@@ -146,4 +145,4 @@ if (process.env.ANALYZE === 'true') {
   })(nextConfig);
 }
 
-module.exports = nextConfig;
+export default nextConfig;
