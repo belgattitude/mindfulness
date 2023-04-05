@@ -1,11 +1,11 @@
 // @ts-check
 
 import withBundleAnalyzer from '@next/bundle-analyzer';
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 import { createSecureHeaders } from 'next-secure-headers';
 import { publicEnv } from './src/config/public-env.mjs';
 
 // @ts-ignore
+import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
