@@ -26,7 +26,7 @@ export const MainMenuLinks: FC<Props> = (props) => {
           >
             <a
               className={clsx(
-                'py-2 px-4 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
+                'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
                 {
                   ['underline']:
                     asPath === '/' ? asPath === href : href.startsWith(asPath),

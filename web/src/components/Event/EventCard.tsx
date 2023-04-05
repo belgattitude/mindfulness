@@ -84,7 +84,7 @@ export const EventCardBackup: FC<Props> = (props) => {
           />
         </Link>
       </div>
-      <article className="prose py-4 px-6">
+      <article className="prose px-6 py-4">
         <div className="mb-2 text-xl font-bold">
           <Link href={eventUrl}>{event.title}</Link>
         </div>
@@ -95,12 +95,12 @@ export const EventCardBackup: FC<Props> = (props) => {
         />
         <p className="line-clamp-4 text-base text-gray-700">{event.summary}</p>
       </article>
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-6 pb-2 pt-4">
         {keywords.map((keyword) => {
           return (
             <span
               key={keyword}
-              className="mr-2 mb-2 inline-block rounded-full bg-gray-200 py-1 px-3 text-sm font-semibold text-gray-700"
+              className="mb-2 mr-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700"
             >
               #{keyword}
             </span>

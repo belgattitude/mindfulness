@@ -29,7 +29,7 @@ export const BurgerMenuIcon = forwardRef<
       >
         <BurgerOpenIcon
           className={clsx(
-            'delay-450 absolute top-0 left-0 h-auto w-auto transition-opacity duration-300 ease-in-out',
+            'delay-450 absolute left-0 top-0 h-auto w-auto transition-opacity duration-300 ease-in-out',
             {
               ['opacity-0']: isOpen,
             }

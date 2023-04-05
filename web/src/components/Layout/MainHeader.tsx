@@ -86,7 +86,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         <MainSidebar hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
           className={clsx(
-            'absolute top-3 right-5 h-[32px] w-[32px] md:hidden',
+            'absolute right-5 top-3 h-[32px] w-[32px] md:hidden',
             {
               ['text-white']: renderTopLevelHeader,
               ['text-black']: !renderTopLevelHeader,

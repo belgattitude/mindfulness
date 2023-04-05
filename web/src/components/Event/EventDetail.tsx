@@ -45,7 +45,7 @@ export const EventDetail: FC<Props> = (props) => {
     <>
       <div
         className={
-          'fixed top-0 left-0 -z-10 m-0 h-[800px] max-h-[60vh] w-full overflow-hidden p-0 opacity-20'
+          'fixed left-0 top-0 -z-10 m-0 h-[800px] max-h-[60vh] w-full overflow-hidden p-0 opacity-20'
         }
       >
         {event.cover && (
