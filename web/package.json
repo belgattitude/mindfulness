@@ -21,7 +21,7 @@
     "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml -u",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "nuke:node_modules": "npx rimraf@3 '**/node_modules'",
+    "nuke:node_modules": "rimraf --glob '**/node_modules'",
     "favpie": "npx favpie@latest ./public/logo/logo-sandrine-transparent.png ./public/favicon --app-name 'Sandrine Rauter' --short-name 'Sandrine Rauter'"
   },
   "dependencies": {
