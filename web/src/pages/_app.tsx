@@ -23,6 +23,7 @@ type MyAppProps = AppProps & {
 const clientSideEmotionCache = createEmotionCache();
 
 const fontInter = Inter({
+  subsets: ['latin'],
   weight: 'variable',
   variable: '--font-family-inter',
   style: ['normal'],
@@ -31,6 +32,7 @@ const fontInter = Inter({
 });
 
 const fontMontserrat = Montserrat({
+  subsets: ['latin'],
   weight: 'variable',
   variable: '--font-family-montserrat',
   style: ['normal', 'italic'],

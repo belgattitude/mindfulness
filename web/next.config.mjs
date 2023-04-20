@@ -98,10 +98,6 @@ let nextConfig = {
   },
 
   experimental: {
-    // https://nextjs.org/docs/messages/google-fonts-missing-subsets
-    fontLoaders: [
-      { loader: '@next/font/google', options: { subsets: ['latin'] } },
-    ],
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     esmExternals: true,
   },
@@ -133,9 +129,7 @@ let nextConfig = {
 
 if (enableVanillaExtract) {
   const withVanillaExtract = createVanillaExtractPlugin();
-  nextConfig = withVanillaExtract(nextConfig, {
-    debug: !isProd,
-  });
+  nextConfig = withVanillaExtract(nextConfig);
 }
 
 if (process.env.ANALYZE === 'true') {
