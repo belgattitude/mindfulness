@@ -11,9 +11,11 @@ import { getEventTypeSlugs } from '@/components/Event/utils';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { queryClientConfig } from '@/config/query-client.config';
+import { assertStringIsoDate } from '@/lib/date/assertStringIsoDate';
+import { convertIsoStringToDate } from '@/lib/date/date.utils';
 
 type Props = {
-  dateMin: string;
+  dateMinStr: string;
   eventType: EventTypeSlugs | null;
 };
 
@@ -23,13 +25,14 @@ const limit = 10;
 export default function EventsRoute(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  const { dateMin, eventType } = props;
+  const { dateMinStr, eventType } = props;
+  assertStringIsoDate(dateMinStr);
   const { data, isLoading, error } = useQuery({
-    queryKey: ['events', limit, dateMin, eventType],
+    queryKey: ['events', limit, dateMinStr, eventType],
     queryFn: async () =>
       fetchEvents({
         limit,
-        dateMin,
+        dateMin: convertIsoStringToDate(dateMinStr),
         eventType,
       }),
     useErrorBoundary: false,
@@ -82,7 +85,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
   const dateMin = dayjs().subtract(10, 'month').toDate();
-  const strDateMin = dateMin.toString();
+  const dateMinStr = dateMin.toISOString();
+  assertStringIsoDate(dateMinStr);
 
   const { filters = [] } = context.params ?? {};
 
@@ -96,11 +100,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const queryClient = new QueryClient(queryClientConfig);
 
   await queryClient.prefetchQuery({
-    queryKey: ['events', limit, strDateMin, eventType],
+    queryKey: ['events', limit, dateMinStr, eventType],
     queryFn: async () =>
       fetchEvents({
         limit,
-        dateMin: strDateMin,
+        dateMin: convertIsoStringToDate(dateMinStr),
         ...(eventType ? { eventType } : {}),
       }),
     retry: false,
@@ -109,7 +113,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   return {
     props: {
       eventType: eventType ?? null,
-      dateMin: strDateMin,
+      dateMinStr: dateMinStr,
       dehydratedState: dehydrate(queryClient),
     },
   };

@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/HomeListResponse"
+                "$ref": "#/components/schemas/HomeResponse"
               }
             }
           }

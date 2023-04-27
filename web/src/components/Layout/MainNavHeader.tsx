@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import Link from 'next/link';
 import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { MainLogo } from '@/components/Logo/MainLogo';
@@ -41,7 +42,9 @@ export const MainNavHeader: FC<Props> = (props) => {
           'image-rendering-unblur flex flex-col items-center justify-center'
         }
       >
-        <MainLogo width={90} height={60} className={'mb-[7px]'} />
+        <Link href={'/'}>
+          <MainLogo width={90} height={60} className={'mb-[7px]'} />
+        </Link>
         <p
           className={
             'font-family-brand hidden text-2xl font-normal text-[#34695d]'

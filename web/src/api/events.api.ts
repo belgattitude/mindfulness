@@ -88,17 +88,14 @@ export const eventsApi = {
 
 export const fetchEvents = async (params: {
   limit?: number;
-  dateMin?: string;
+  dateMin: Date;
   publicationState?: PublicationState;
   eventType?: EventTypeSlugs | null;
 }) => {
-  const defaultDateMin = dayjs().subtract(100, 'days').toISOString();
-  const { dateMin = defaultDateMin, eventType } = params;
-  console.log(dateMin);
-  // const dm = dateMin ? dayjs(dateMin).toDate() : undefined;
-  const dm = dayjs(dateMin).toDate();
+  const { dateMin, eventType } = params;
+
   const rawFilters: EventFiltersInput = {
-    ...(dm ? { startAt: { gte: dm } } : {}),
+    startAt: { gte: dateMin },
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 

@@ -1,20 +1,13 @@
-export const convertUTCStringToDate = (dateStr: string | Date): Date => {
+import { isStringIsoDate } from '@/lib/date/isStringIsoDate';
+
+export const convertIsoStringToDate = (dateStr: string | Date): Date => {
   if (dateStr instanceof Date) {
     return dateStr;
   }
-  if (
-    // 2023-05-08T16:30:00.000Z
-    !/^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])T(?:[0-1]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+|)(?:Z|(?:\+|-)(?:\d{2}):?(?:\d{2}))$/.test(
-      dateStr
-    )
-  ) {
+  if (!isStringIsoDate(dateStr)) {
     throw new Error(`Invalid date string: ${dateStr}`);
   }
-  const d = new Date(dateStr);
-  if (d.toUTCString() === dateStr) {
-    throw new Error(`Invalid date string: ${dateStr}`);
-  }
-  return d;
+  return new Date(dateStr);
 };
 
 export const getDateRangeStr = (params: {
@@ -25,8 +18,8 @@ export const getDateRangeStr = (params: {
   timeZone?: string;
 }): string => {
   const { startAt, endAt, locale = 'fr', timeZone = 'Europe/Paris' } = params;
-  const dateFrom = convertUTCStringToDate(startAt);
-  const dateEnd = endAt ? convertUTCStringToDate(endAt) : undefined;
+  const dateFrom = convertIsoStringToDate(startAt);
+  const dateEnd = endAt ? convertIsoStringToDate(endAt) : undefined;
 
   if (dateEnd === undefined) {
     return `le ${formatDate(dateFrom)}`;
