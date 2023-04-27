@@ -19,7 +19,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: apps/strapi
+        working-directory: strapi
 
     steps:
       - name: Checkout
