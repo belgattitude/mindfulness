@@ -15,15 +15,15 @@
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.10.1",
-    "@strapi/plugin-graphql": "4.10.1",
-    "@strapi/plugin-i18n": "4.10.1",
-    "@strapi/plugin-users-permissions": "4.10.1",
-    "@strapi/strapi": "4.10.1",
+    "@strapi/plugin-documentation": "4.10.5",
+    "@strapi/plugin-graphql": "4.10.5",
+    "@strapi/plugin-i18n": "4.10.5",
+    "@strapi/plugin-users-permissions": "4.10.5",
+    "@strapi/strapi": "4.10.5",
     "better-sqlite3": "8.3.0"
   },
   "devDependencies": {
-    "rimraf": "5.0.0",
+    "rimraf": "5.0.1",
     "util": "0.12.5"
   },
   "author": {
