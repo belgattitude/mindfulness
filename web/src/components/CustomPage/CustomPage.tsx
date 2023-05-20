@@ -13,7 +13,7 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'font-family-brand mx-auto mt-5 bg-white'}>
+    <div className={'mx-auto mt-5 bg-white font-family-brand'}>
       <h1
         className={'hidden text-3xl'}
         css={css`
@@ -32,10 +32,10 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
       </h1>
 
       <MarkdownText
-        className={'prose-lg text-title-color-800 my-5'}
+        className={'prose-lg my-5 text-title-color-800'}
         text={page.introduction ?? ''}
       />
-      <h1 className={'text-title-color-800 pt-5 text-3xl'}>
+      <h1 className={'pt-5 text-3xl text-title-color-800'}>
         Programmes et cycles
       </h1>
 

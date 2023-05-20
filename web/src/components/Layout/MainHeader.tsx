@@ -51,7 +51,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     <div className={'flex'}>
       <div
         className={clsx(
-          'border-brand-color-50 shadow-brand-color-50 top-0 z-50 w-full border-b-8' //  border-b-8 shadow-lg backdrop-blur
+          'top-0 z-50 w-full border-b-8 border-brand-color-50 shadow-brand-color-50' //  border-b-8 shadow-lg backdrop-blur
         )}
       >
         {/* <MainNavHeader collapse={!scrollIsOnTop} render={scrollIsOnTop} /> */}
@@ -70,7 +70,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
             <MainMenuLinks
               mainNavLinks={mainNavLinks}
               className={clsx(
-                'font-family-menu hidden text-xl font-extralight transition-opacity duration-700 ease-in-out md:block',
+                'hidden font-family-menu text-xl font-extralight transition-opacity duration-700 ease-in-out md:block',
                 {
                   ['opacity-0']: isNavExpanded,
                 }

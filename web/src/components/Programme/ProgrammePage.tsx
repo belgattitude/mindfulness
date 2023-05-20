@@ -27,11 +27,11 @@ export const ProgrammePage: FC<Props> = (props) => {
   return (
     <div
       className={twMerge(
-        clsx('prose-lg border-5 my-5 flex flex-col gap-5 py-5'),
+        clsx('border-5 prose-lg my-5 flex flex-col gap-5 py-5'),
         className
       )}
     >
-      <h1 className={'text-title-color-600 mb-5 text-2xl'}>{data.title}</h1>
+      <h1 className={'mb-5 text-2xl text-title-color-600'}>{data.title}</h1>
       <div className={'w-full flex-none'}>
         <Image
           alt={`Photo ${

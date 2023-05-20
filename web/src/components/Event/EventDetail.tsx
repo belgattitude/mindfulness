@@ -63,7 +63,7 @@ export const EventDetail: FC<Props> = (props) => {
       </div>
       <Ctn
         className={
-          'prose-ul:list-inside prose-ul:list-disc prose-h1:mb-1 prose-ul:p-0 prose-li:pl-0 prose-h1:font-normal prose-a:text-blue-600 prose md:prose-xl lg:prose-2xl border-1 m-4 rounded-2xl border-gray-100 bg-white p-4 text-gray-700 shadow-lg marker:mr-0 marker:text-purple-600 md:m-8 md:p-8 lg:m-16 lg:p-16'
+          'border-1 prose m-4 rounded-2xl border-gray-100 bg-white p-4 text-gray-700 shadow-lg md:prose-xl lg:prose-2xl marker:mr-0 marker:text-purple-600 prose-h1:mb-1 prose-h1:font-normal prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0 md:m-8 md:p-8 lg:m-16 lg:p-16'
         }
       >
         <div className={'hello'}>

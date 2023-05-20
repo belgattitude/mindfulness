@@ -27,7 +27,7 @@ const AboutIntro: FC = () => {
     return <ReactQueryLoader />;
   }
   return (
-    <div className="prose lg:prose-xl border-3 mx-auto bg-white/90 text-gray-700">
+    <div className="border-3 prose mx-auto bg-white/90 text-gray-700 lg:prose-xl">
       {data && (
         <MarkdownText text={data.about?.data?.attributes?.description ?? ''} />
       )}
@@ -38,7 +38,7 @@ const AboutIntro: FC = () => {
 const AboutPage: FC = () => {
   return (
     <div className="container mx-auto flex">
-      <AboutCardBox className={'font-family-brand mb-5'}>
+      <AboutCardBox className={'mb-5 font-family-brand'}>
         <AboutIntro />
       </AboutCardBox>
     </div>

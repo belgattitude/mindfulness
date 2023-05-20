@@ -12,7 +12,7 @@ export const MainFooter: FC<Props> = (props) => {
   return (
     <footer
       aria-label="Site Footer"
-      className={'font-family-primary bg-brand-color-200/90 mt-20 w-full'}
+      className={'mt-20 w-full bg-brand-color-200/90 font-family-primary'}
     >
       <div className="container mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">

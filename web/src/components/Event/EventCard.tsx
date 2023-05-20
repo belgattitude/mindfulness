@@ -41,7 +41,7 @@ export const EventCard: FC<Props> = (props) => {
         </Link>
       </div>
       <div className="">
-        <div className={'text-brand-color-900 text-2xl uppercase leading-8'}>
+        <div className={'text-2xl uppercase leading-8 text-brand-color-900'}>
           <Link href={eventUrl} className={'text-2xl uppercase leading-8'}>
             {event.title}
           </Link>
@@ -72,7 +72,7 @@ export const EventCardBackup: FC<Props> = (props) => {
 
   return (
     <div className="max-w-sm overflow-hidden rounded shadow-lg">
-      <div className="aspect-w-16 aspect-h-9 lg:aspect-none h-56">
+      <div className="aspect-h-9 aspect-w-16 h-56 lg:aspect-none">
         <Link href={eventUrl}>
           <Image
             alt="Cover event"
