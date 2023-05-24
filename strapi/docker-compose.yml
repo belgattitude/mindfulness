@@ -33,7 +33,7 @@ services:
       # to prevent platform/ownership issues between host and container
       #- mindfulness-strapi-vlm-build:/app/build
       #- mindfulness-strapi-vlm-cache:/app/.cache
-      - strapi-node-modules:/app/node_modules
+      - /app/node_modules
     ports:
       - '1337:1337'
     networks:
@@ -103,9 +103,6 @@ volumes:
   mindfulness-strapi-vlm-postgresql-data:
     labels:
       type: 'db-data'
-  strapi-node-modules:
-    labels:
-      type: 'removable'
   mindfulness-caddy-data:
     labels:
       type: 'webserver'
