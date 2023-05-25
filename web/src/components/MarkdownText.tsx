@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { twMerge } from 'tailwind-merge';
-import { getStrapiURL } from '../config/strapi.config';
+import { getStrapiURL } from '@/config/strapi.config';
 
 type Props = {
   text: string;

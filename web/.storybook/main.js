@@ -1,6 +1,4 @@
 const path = require('path');
-// const { VanillaExtractPlugin } = require('@vanilla-extract/webpack-plugin');
-// const { merge } = require('webpack-merge');
 
 module.exports = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -29,27 +27,6 @@ module.exports = {
 
     return webpackConfig
   },
-
-  // https://github.com/storybookjs/storybook/tree/next/code/frameworks/nextjs#custom-webpack-config
-  /*
-  webpackFinal: async (config) => {
-    // This modifies the existing image rule to exclude .svg files
-    // since you want to handle those files with @svgr/webpack
-    const imageRule = config.module.rules.find((rule) =>
-      rule.test.test('.svg')
-    );
-    imageRule.exclude = /\.svg$/;
-
-    // Configure .svg files to be loaded with @svgr/webpack
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return merge(config, {
-      plugins: [new VanillaExtractPlugin()],
-    });
-  },*/
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',

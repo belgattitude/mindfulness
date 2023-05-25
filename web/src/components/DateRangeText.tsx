@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { getDateRangeStr } from '@/lib/date/date.utils';
-import * as styles from './DateRangeText.css';
 
 type Props = {
   startAt: Date | string;

@@ -4,12 +4,8 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 import { createSecureHeaders } from 'next-secure-headers';
 import { publicEnv } from './src/config/public-env.mjs';
 
-// @ts-ignore
-import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
-
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
-const enableVanillaExtract = false;
 
 const trueEnv = ['true', '1', 'yes'];
 const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
@@ -126,11 +122,6 @@ let nextConfig = {
     return config;
   },
 };
-
-if (enableVanillaExtract) {
-  const withVanillaExtract = createVanillaExtractPlugin();
-  nextConfig = withVanillaExtract(nextConfig);
-}
 
 if (process.env.ANALYZE === 'true') {
   nextConfig = withBundleAnalyzer({
