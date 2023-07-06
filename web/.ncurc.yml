@@ -4,7 +4,5 @@
 
 # Add here exclusions on packages if any
 reject: [
-   # Why ? cause `@storybook/nextjs ^7.0.0-beta.26  →  ^7.0.0-alpha.41`
-  '@storybook/blocks',
-  '@storybook/nextjs'
+  "prettier"
 ]
