@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-07-22T16:02:23.746Z"
+    "x-generation-date": "2023-08-12T18:59:26.232Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11652,7 +11652,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfull registration",
+            "description": "Successful registration",
             "content": {
               "application/json": {
                 "schema": {
