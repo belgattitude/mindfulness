@@ -1,8 +1,5 @@
-import Image from 'next/image';
 import type { CSSProperties, FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-// import logo from '@/public/logo/sandrine-logo.png';
-import logo from '@/public/logo/logo-small-sandrine-transparent.png';
 
 type Props = {
   className?: string;

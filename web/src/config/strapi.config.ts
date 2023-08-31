@@ -1,5 +1,4 @@
-import type { UrlRelativePath } from '@/lib/typeguards';
-import { isUrlRelativePath } from '@/lib/typeguards';
+import { isUrlRelativePath, type UrlRelativePath } from '@/lib/typeguards';
 
 export const getStrapiURL = (path: UrlRelativePath | '' = ''): string => {
   const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL ?? '';

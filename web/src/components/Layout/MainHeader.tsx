@@ -1,7 +1,6 @@
 import { clsx } from 'clsx';
 import { useRouter } from 'next/router';
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { BurgerMenuIcon } from '@/components/Burger/BurgerMenuIcon';
 import { MainMenuLinks } from '@/components/Layout/MainMenuLinks';
 import { MainNavHeader } from '@/components/Layout/MainNavHeader';

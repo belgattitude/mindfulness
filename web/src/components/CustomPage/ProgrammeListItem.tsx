@@ -7,8 +7,10 @@ import { Button } from '@/components/Button/Button';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import type { FetchProgramme } from '../../api/programmes';
-import { fullProgrammeFragment } from '../../api/programmes';
+import {
+  fullProgrammeFragment,
+  type FetchProgramme,
+} from '../../api/programmes';
 
 type Props = {
   children?: never;

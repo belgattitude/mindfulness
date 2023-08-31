@@ -4,6 +4,7 @@ const {
 
 module.exports = {
   root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
@@ -35,8 +36,12 @@ module.exports = {
     },
     {
       files: ['src/gql/**/*.ts'],
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
       rules: {
+        'import/no-named-as-default': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/array-type': 'off',
+        '@typescript-eslint/consistent-indexed-object-style': 'off',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/consistent-type-imports': 'off',
         'prettier/prettier': 'off',

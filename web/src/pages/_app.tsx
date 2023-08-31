@@ -1,6 +1,5 @@
 import '../styles/globals.css';
-import type { EmotionCache } from '@emotion/react';
-import { CacheProvider } from '@emotion/react';
+import { CacheProvider, type EmotionCache } from '@emotion/react';
 import {
   Hydrate,
   QueryClient,
@@ -11,13 +10,16 @@ import { Montserrat, Quicksand, Inter } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { useState } from 'react';
 import { MainLayout } from '@/components/Layout';
+import { queryClientConfig } from '@/config/query-client.config';
+import { defaultSeoConfig } from '@/config/seo.config';
 import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
-import { queryClientConfig } from '../config/query-client.config';
-import { defaultSeoConfig } from '../config/seo.config';
 
-type MyAppProps = AppProps & {
+interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
-};
+  pageProps: {
+    dehydratedState: unknown;
+  };
+}
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

@@ -36,8 +36,9 @@
     },
     "types": ["vitest/globals"]
   },
-  "exclude": ["**/node_modules", ".next", "**/.*/", "storybook-static"],
+  "exclude": ["**/node_modules", ".next", "**/.*/*", "storybook-static"],
   "include": [
+    ".eslintrc.*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

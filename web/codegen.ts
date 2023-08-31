@@ -18,19 +18,23 @@ const config: CodegenConfig = {
       plugins: [],
       // https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#config-api
       presetConfig: {
+        // defaultScalarType: 'unknown',
+        // scalars: {
+        //  DateTime: 'string',
+        // },
         // fragmentMasking: false,
         // useTypeImports: true,
         // enumsAsTypes: true,
       },
     },
-
+    /*
     './src/gql/hooks.ts': {
       plugins: [
         'typescript',
         'typescript-operations',
         'typescript-react-query',
       ],
-    },
+    }, */
   },
 };
 

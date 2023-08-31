@@ -1,11 +1,9 @@
 import { Listbox } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
-import type { FC } from 'react';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
 import { twMerge } from 'tailwind-merge';
-import type { EventTypeSlugs } from '@/components/Event/utils';
-import { findEventBySlug } from '@/components/Event/utils';
+import { findEventBySlug, type EventTypeSlugs } from '@/components/Event/utils';
 import { siteConfig } from '@/config/site.config';
 
 const types = [
@@ -30,14 +28,14 @@ export const EventFilters: FC<Props> = (props) => {
     findEventBySlug(props.selected) ?? types[0]
   );
 
-  const updateFilters = (selected: Types) => {
+  const updateFilters = async (selected: Types) => {
     if (onChange) {
       // onChange(selected);
     }
     const { slug } = selected;
     setSelected(selected);
     const url = ['/agenda', slug].filter((s) => s.length > 0).join('/');
-    push(url);
+    await push(url);
   };
 
   return (
