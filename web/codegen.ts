@@ -17,11 +17,12 @@ const config: CodegenConfig = {
       preset: 'client',
       plugins: [],
       // https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#config-api
-      presetConfig: {
-        // defaultScalarType: 'unknown',
-        // scalars: {
-        //  DateTime: 'string',
-        // },
+      config: {
+        defaultScalarType: 'unknown',
+        scalars: {
+          DateTime: 'string',
+          Date: 'string',
+        },
         // fragmentMasking: false,
         // useTypeImports: true,
         // enumsAsTypes: true,

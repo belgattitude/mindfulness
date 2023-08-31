@@ -4,7 +4,6 @@ import type { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import IconLotus from '@/public/icons/lotus.svg';
 import IconMeditation from '@/public/icons/meditation.svg';
-import IconYoga from '@/public/icons/yoga.svg';
 
 type Props = {
   className?: string;
