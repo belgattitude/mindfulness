@@ -13,11 +13,12 @@ WORKDIR /app
 
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
+#    YARN_COMPRESSION_LEVEL=0 \
+#    YARN_CHECKSUM_BEHAVIOR=ignore \
+
 RUN YARN_ENABLE_GLOBAL_CACHE="false" \
     YARN_ENABLE_MIRROR="false" \
     YARN_CACHE_FOLDER=/var/cache/yarn-artist-strapi \
-    YARN_COMPRESSION_LEVEL=0 \
-    YARN_CHECKSUM_BEHAVIOR=ignore \
     yarn install --immutable --inline-builds
 
 #############################################################
