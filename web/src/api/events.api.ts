@@ -2,7 +2,6 @@
 // - urql
 // - phase out graphql
 import { HttpNotFound } from '@httpx/exception';
-import dayjs from 'dayjs';
 import request from 'graphql-request';
 import type { EventTypeSlugs } from '@/components/Event/utils';
 import { getGraphQLUrl } from '@/config/graphql.config';
@@ -95,7 +94,7 @@ export const fetchEvents = async (params: {
   const { dateMin, eventType } = params;
 
   const rawFilters: EventFiltersInput = {
-    startAt: { gte: dateMin },
+    startAt: { gte: dateMin.toISOString() },
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 

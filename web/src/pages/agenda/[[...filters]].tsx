@@ -6,8 +6,10 @@ import { z } from 'zod';
 import { fetchEvents } from '@/api/events.api';
 import { EventCard } from '@/components/Event/EventCard';
 import { EventFilters } from '@/components/Event/EventFilters';
-import type { EventTypeSlugs } from '@/components/Event/utils';
-import { getEventTypeSlugs } from '@/components/Event/utils';
+import {
+  getEventTypeSlugs,
+  type EventTypeSlugs,
+} from '@/components/Event/utils';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { queryClientConfig } from '@/config/query-client.config';

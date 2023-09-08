@@ -1,4 +1,3 @@
-import { zodReq } from '@nextvalid/zod-request';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type {
   GetStaticPaths,

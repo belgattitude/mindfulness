@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import type { FC } from 'react';
-import React from 'react';
-import type { MainNavLinks } from '../../config/site.config';
+import type { MainNavLinks } from '@/config/site.config';
 import { MainLogo } from '../Logo/MainLogo';
 
 type Props = {

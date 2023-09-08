@@ -6,8 +6,7 @@ import { twMerge } from 'tailwind-merge';
 import { DateRangeText } from '@/components/DateRangeText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import type { FetchEvent } from '../../api/events.api';
-import { eventsApi } from '../../api/events.api';
+import { eventsApi, type FetchEvent } from '../../api/events.api';
 
 type Props = {
   event: FetchEvent;

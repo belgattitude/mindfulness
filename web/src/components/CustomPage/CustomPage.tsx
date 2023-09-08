@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { FC } from 'react';
-import type { FetchPage } from '@/api/pages.api';
-import { fullPageFragment } from '@/api/pages.api';
+import { fullPageFragment, type FetchPage } from '@/api/pages.api';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { ProgrammeListItem } from './ProgrammeListItem';
@@ -39,18 +38,17 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
         Programmes et cycles
       </h1>
 
-      {page.programmes &&
-        page.programmes.data.map((programme) => {
-          return (
-            programme.attributes && (
-              <ProgrammeListItem
-                className={'rounded-xl bg-white'}
-                key={programme.id}
-                programme={programme.attributes}
-              />
-            )
-          );
-        })}
+      {page.programmes?.data.map((programme) => {
+        return (
+          programme.attributes && (
+            <ProgrammeListItem
+              className={'rounded-xl bg-white'}
+              key={programme.id}
+              programme={programme.attributes}
+            />
+          )
+        );
+      })}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import { EventJsonLd } from 'next-seo';
 import type { FC } from 'react';
-import type { FetchEvent } from '@/api/events.api';
-import { eventsApi } from '@/api/events.api';
+import { eventsApi, type FetchEvent } from '@/api/events.api';
 import { siteConfig } from '@/config/site.config';
 import { useFragment } from '@/gql/fragment-masking';
 

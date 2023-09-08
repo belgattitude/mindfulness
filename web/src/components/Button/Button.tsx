@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import type { ButtonHTMLAttributes } from 'react';
-import { forwardRef } from 'react';
+import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
