@@ -94,7 +94,7 @@ export const fetchEvents = async (params: {
   const { dateMin, eventType } = params;
 
   const rawFilters: EventFiltersInput = {
-    startAt: { gte: dateMin },
+    startAt: { gte: dateMin.toISOString() },
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 
