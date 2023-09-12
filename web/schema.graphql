@@ -37,6 +37,7 @@ input BooleanFilterInput {
   lt: Boolean
   lte: Boolean
   ne: Boolean
+  nei: Boolean
   not: BooleanFilterInput
   notContains: Boolean
   notContainsi: Boolean
@@ -95,6 +96,7 @@ input DateTimeFilterInput {
   lt: DateTime
   lte: DateTime
   ne: DateTime
+  nei: DateTime
   not: DateTimeFilterInput
   notContains: DateTime
   notContainsi: DateTime
@@ -232,6 +234,7 @@ input FloatFilterInput {
   lt: Float
   lte: Float
   ne: Float
+  nei: Float
   not: FloatFilterInput
   notContains: Float
   notContainsi: Float
@@ -311,6 +314,7 @@ input IDFilterInput {
   lt: ID
   lte: ID
   ne: ID
+  nei: ID
   not: IDFilterInput
   notContains: ID
   notContainsi: ID
@@ -335,6 +339,7 @@ input IntFilterInput {
   lt: Int
   lte: Int
   ne: Int
+  nei: Int
   not: IntFilterInput
   notContains: Int
   notContainsi: Int
@@ -364,6 +369,7 @@ input JSONFilterInput {
   lt: JSON
   lte: JSON
   ne: JSON
+  nei: JSON
   not: JSONFilterInput
   notContains: JSON
   notContainsi: JSON
@@ -611,6 +617,7 @@ input StringFilterInput {
   lt: String
   lte: String
   ne: String
+  nei: String
   not: StringFilterInput
   notContains: String
   notContainsi: String
