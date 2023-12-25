@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
-import type { MainNavLinks } from '../../config/site.config';
+import type { MainNavLinks } from '@/config/site.config';
 
 type Props = {
   className?: string;
