@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "files": [
     "env.mjs",
     "next.config.mjs",
