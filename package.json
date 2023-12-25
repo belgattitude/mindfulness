@@ -1,0 +1,13 @@
+{
+  "name": "mindfulness-root",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "env.mjs",
+    "next.config.mjs",
+    "dist",
+    "public"
+  ],
+  "packageManager": "yarn@4.0.2"
+}
