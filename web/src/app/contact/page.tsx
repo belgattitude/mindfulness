@@ -2,6 +2,12 @@ import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { fetchContactPage } from '@/api/contact.api';
 import { MarkdownText } from '@/components/MarkdownText';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+// export const dynamicParams = true;
+// export const revalidate = false;
+// export const fetchCache = 'auto';
+
 export default async function About() {
   const data = await fetchContactPage();
   return (
