@@ -53,7 +53,6 @@ export default function ContactRoute(
   return (
     <>
       <NextSeo />
-
       <ContactPage />
     </>
   );

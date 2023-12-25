@@ -71,7 +71,7 @@ export const EventCardBackup: FC<Props> = (props) => {
 
   return (
     <div className="max-w-sm overflow-hidden rounded shadow-lg">
-      <div className="aspect-h-9 aspect-w-16 h-56 lg:aspect-none">
+      <div className="aspect-h-9 aspect-w-16 lg:aspect-none h-56">
         <Link href={eventUrl}>
           <Image
             alt="Cover event"
