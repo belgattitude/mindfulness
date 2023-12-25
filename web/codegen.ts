@@ -29,9 +29,9 @@ const config: CodegenConfig = {
         // enumsAsTypes: true,
       },
     },
-
     './src/gql/hooks.ts': {
       config: {
+        useTypeImports: true,
         reactQueryVersion: 5,
       },
       plugins: [
