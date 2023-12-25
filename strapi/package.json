@@ -8,8 +8,8 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "deps:check": "npx npm-check-updates@latest --configFileName ncurc.yml",
-    "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml -u",
+    "deps:check": "npx npm-check-updates@latest --configFileName .ncurc.yml",
+    "deps:update": "npx npm-check-updates@latest --configFileName .ncurc.yml -u",
     "clean": "rimraf .cache build node_modules/.cache",
     "nuke:node_modules": "rimraf --glob '**/node_modules'",
     "docker:build": "docker compose build"
@@ -21,10 +21,10 @@
     "@strapi/plugin-users-permissions": "4.16.2",
     "@strapi/strapi": "4.16.2",
     "better-sqlite3": "9.2.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "5.3.4",
+    "styled-components": "5.3.11"
   },
   "devDependencies": {
     "rimraf": "5.0.5",
