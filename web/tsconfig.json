@@ -1,8 +1,12 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,27 +20,58 @@
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
     "incremental": true,
+    "verbatimModuleSyntax": true,
     "baseUrl": "./src",
     "paths": {
-      "@your-org/common-i18n": ["../../../packages/common-i18n/src/index"],
-      "@your-org/common-i18n/locales/*": [
-        "../../../packages/common-i18n/src/locales/*"
+      "@/api/*": [
+        "./api/*"
       ],
-      "@/api/*": ["./api/*"],
-      "@/components/*": ["./components/*"],
-      "@/config/*": ["./config/*"],
-      "@/features/*": ["./features/*"],
-      "@/gql/*": ["./gql/*"],
-      "@/layout/*": ["./layout/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/public/*": ["../public/*"],
-      "@/styles/*": ["../styles/*"],
-      "@/themes/*": ["./themes/*"],
-      "@/ui/*": ["./ui/*"]
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/config/*": [
+        "./config/*"
+      ],
+      "@/features/*": [
+        "./features/*"
+      ],
+      "@/gql/*": [
+        "./gql/*"
+      ],
+      "@/layout/*": [
+        "./layout/*"
+      ],
+      "@/lib/*": [
+        "./lib/*"
+      ],
+      "@/public/*": [
+        "../public/*"
+      ],
+      "@/styles/*": [
+        "../styles/*"
+      ],
+      "@/themes/*": [
+        "./themes/*"
+      ],
+      "@/ui/*": [
+        "./ui/*"
+      ]
     },
-    "types": ["vitest/globals"]
+    "types": [
+      "vitest/globals"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "exclude": ["**/node_modules", ".next", "**/.*/*", "storybook-static"],
+  "exclude": [
+    "**/node_modules",
+    ".next",
+    "**/.*/*",
+    "storybook-static"
+  ],
   "include": [
     ".eslintrc.*",
     "next-env.d.ts",
@@ -46,6 +81,7 @@
     "**/*.jsx",
     "**.*.cjs",
     "**/*.mjs",
-    "**/*.json"
+    "**/*.json",
+    ".next/types/**/*.ts"
   ]
 }

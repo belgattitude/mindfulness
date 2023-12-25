@@ -21,17 +21,16 @@ export const getDateRangeStr = (params: {
   const dateFrom = convertIsoStringToDate(startAt);
   const dateEnd = endAt ? convertIsoStringToDate(endAt) : undefined;
 
-  if (dateEnd === undefined) {
-    return `le ${formatDate(dateFrom)}`;
-  } else {
-    return `du ${formatDate(dateFrom, {
-      year:
-        dateEnd.getFullYear() !== dateFrom.getFullYear()
-          ? 'numeric'
-          : undefined,
-      month: dateEnd.getMonth() !== dateFrom.getMonth() ? 'numeric' : undefined,
-    })} au ${formatDate(dateEnd)}`;
-  }
+  return dateEnd === undefined
+    ? `le ${formatDate(dateFrom)}`
+    : `du ${formatDate(dateFrom, {
+        year:
+          dateEnd.getFullYear() === dateFrom.getFullYear()
+            ? undefined
+            : 'numeric',
+        month:
+          dateEnd.getMonth() === dateFrom.getMonth() ? undefined : 'numeric',
+      })} au ${formatDate(dateEnd)}`;
 };
 
 const defaultOptions = {

@@ -8,22 +8,26 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "deps:check": "npx npm-check-updates@latest --configFileName ncurc.yml",
-    "deps:update": "npx npm-check-updates@latest --configFileName ncurc.yml -u",
+    "deps:check": "npx npm-check-updates@latest --configFileName .ncurc.yml",
+    "deps:update": "npx npm-check-updates@latest --configFileName .ncurc.yml -u",
     "clean": "rimraf .cache build node_modules/.cache",
     "nuke:node_modules": "rimraf --glob '**/node_modules'",
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.13.6",
-    "@strapi/plugin-graphql": "4.13.6",
-    "@strapi/plugin-i18n": "4.13.6",
-    "@strapi/plugin-users-permissions": "4.13.6",
-    "@strapi/strapi": "4.13.6",
-    "better-sqlite3": "8.6.0"
+    "@strapi/plugin-documentation": "4.16.2",
+    "@strapi/plugin-graphql": "4.16.2",
+    "@strapi/plugin-i18n": "4.16.2",
+    "@strapi/plugin-users-permissions": "4.16.2",
+    "@strapi/strapi": "4.16.2",
+    "better-sqlite3": "9.2.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "5.3.4",
+    "styled-components": "5.3.11"
   },
   "devDependencies": {
-    "rimraf": "5.0.1",
+    "rimraf": "5.0.5",
     "util": "0.12.5"
   },
   "author": {
@@ -35,6 +39,6 @@
   "engines": {
     "node": ">=18.10"
   },
-  "packageManager": "yarn@4.0.0-rc.50",
+  "packageManager": "yarn@4.0.2",
   "license": "MIT"
 }

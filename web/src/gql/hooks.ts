@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -80,6 +80,7 @@ export type BooleanFilterInput = {
   lt?: InputMaybe<Scalars['Boolean']['input']>;
   lte?: InputMaybe<Scalars['Boolean']['input']>;
   ne?: InputMaybe<Scalars['Boolean']['input']>;
+  nei?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<BooleanFilterInput>;
   notContains?: InputMaybe<Scalars['Boolean']['input']>;
   notContainsi?: InputMaybe<Scalars['Boolean']['input']>;
@@ -122,6 +123,107 @@ export type ContactInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ContentReleasesRelease = {
+  __typename?: 'ContentReleasesRelease';
+  actions?: Maybe<ContentReleasesReleaseActionRelationResponseCollection>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  name: Scalars['String']['output'];
+  releasedAt?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ContentReleasesReleaseAction = {
+  __typename?: 'ContentReleasesReleaseAction';
+  contentType: Scalars['String']['output'];
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  entry?: Maybe<GenericMorph>;
+  release?: Maybe<ContentReleasesReleaseEntityResponse>;
+  type: Enum_Contentreleasesreleaseaction_Type;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ContentReleasesReleaseActionEntity = {
+  __typename?: 'ContentReleasesReleaseActionEntity';
+  attributes?: Maybe<ContentReleasesReleaseAction>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type ContentReleasesReleaseActionEntityResponse = {
+  __typename?: 'ContentReleasesReleaseActionEntityResponse';
+  data?: Maybe<ContentReleasesReleaseActionEntity>;
+};
+
+export type ContentReleasesReleaseActionEntityResponseCollection = {
+  __typename?: 'ContentReleasesReleaseActionEntityResponseCollection';
+  data: Array<ContentReleasesReleaseActionEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ContentReleasesReleaseActionFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>;
+  contentType?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseActionFiltersInput>>>;
+  release?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  type?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ContentReleasesReleaseActionInput = {
+  contentType?: InputMaybe<Scalars['String']['input']>;
+  release?: InputMaybe<Scalars['ID']['input']>;
+  type?: InputMaybe<Enum_Contentreleasesreleaseaction_Type>;
+};
+
+export type ContentReleasesReleaseActionRelationResponseCollection = {
+  __typename?: 'ContentReleasesReleaseActionRelationResponseCollection';
+  data: Array<ContentReleasesReleaseActionEntity>;
+};
+
+export type ContentReleasesReleaseEntity = {
+  __typename?: 'ContentReleasesReleaseEntity';
+  attributes?: Maybe<ContentReleasesRelease>;
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
+export type ContentReleasesReleaseEntityResponse = {
+  __typename?: 'ContentReleasesReleaseEntityResponse';
+  data?: Maybe<ContentReleasesReleaseEntity>;
+};
+
+export type ContentReleasesReleaseEntityResponseCollection = {
+  __typename?: 'ContentReleasesReleaseEntityResponseCollection';
+  data: Array<ContentReleasesReleaseEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ContentReleasesReleaseFiltersInput = {
+  actions?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  and?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ContentReleasesReleaseFiltersInput>>>;
+  releasedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ContentReleasesReleaseInput = {
+  actions?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  releasedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type DateTimeFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
@@ -136,6 +238,7 @@ export type DateTimeFilterInput = {
   lt?: InputMaybe<Scalars['DateTime']['input']>;
   lte?: InputMaybe<Scalars['DateTime']['input']>;
   ne?: InputMaybe<Scalars['DateTime']['input']>;
+  nei?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<DateTimeFilterInput>;
   notContains?: InputMaybe<Scalars['DateTime']['input']>;
   notContainsi?: InputMaybe<Scalars['DateTime']['input']>;
@@ -145,6 +248,11 @@ export type DateTimeFilterInput = {
   or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   startsWith?: InputMaybe<Scalars['DateTime']['input']>;
 };
+
+export enum Enum_Contentreleasesreleaseaction_Type {
+  Publish = 'publish',
+  Unpublish = 'unpublish'
+}
 
 export enum Enum_Event_Eventtype {
   CoursReguliers = 'cours_reguliers',
@@ -286,6 +394,7 @@ export type FloatFilterInput = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
   ne?: InputMaybe<Scalars['Float']['input']>;
+  nei?: InputMaybe<Scalars['Float']['input']>;
   not?: InputMaybe<FloatFilterInput>;
   notContains?: InputMaybe<Scalars['Float']['input']>;
   notContainsi?: InputMaybe<Scalars['Float']['input']>;
@@ -296,7 +405,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = About | Contact | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | Contact | ContentReleasesRelease | ContentReleasesReleaseAction | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Home = {
   __typename?: 'Home';
@@ -372,6 +481,7 @@ export type IdFilterInput = {
   lt?: InputMaybe<Scalars['ID']['input']>;
   lte?: InputMaybe<Scalars['ID']['input']>;
   ne?: InputMaybe<Scalars['ID']['input']>;
+  nei?: InputMaybe<Scalars['ID']['input']>;
   not?: InputMaybe<IdFilterInput>;
   notContains?: InputMaybe<Scalars['ID']['input']>;
   notContainsi?: InputMaybe<Scalars['ID']['input']>;
@@ -396,6 +506,7 @@ export type IntFilterInput = {
   lt?: InputMaybe<Scalars['Int']['input']>;
   lte?: InputMaybe<Scalars['Int']['input']>;
   ne?: InputMaybe<Scalars['Int']['input']>;
+  nei?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<IntFilterInput>;
   notContains?: InputMaybe<Scalars['Int']['input']>;
   notContainsi?: InputMaybe<Scalars['Int']['input']>;
@@ -420,6 +531,7 @@ export type JsonFilterInput = {
   lt?: InputMaybe<Scalars['JSON']['input']>;
   lte?: InputMaybe<Scalars['JSON']['input']>;
   ne?: InputMaybe<Scalars['JSON']['input']>;
+  nei?: InputMaybe<Scalars['JSON']['input']>;
   not?: InputMaybe<JsonFilterInput>;
   notContains?: InputMaybe<Scalars['JSON']['input']>;
   notContainsi?: InputMaybe<Scalars['JSON']['input']>;
@@ -434,6 +546,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  createContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   createEvent?: Maybe<EventEntityResponse>;
   createPage?: Maybe<PageEntityResponse>;
   createProgramme?: Maybe<ProgrammeEntityResponse>;
@@ -446,6 +560,8 @@ export type Mutation = {
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteAbout?: Maybe<AboutEntityResponse>;
   deleteContact?: Maybe<ContactEntityResponse>;
+  deleteContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  deleteContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   deleteEvent?: Maybe<EventEntityResponse>;
   deleteHome?: Maybe<HomeEntityResponse>;
   deletePage?: Maybe<PageEntityResponse>;
@@ -470,6 +586,8 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAbout?: Maybe<AboutEntityResponse>;
   updateContact?: Maybe<ContactEntityResponse>;
+  updateContentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  updateContentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
   updateEvent?: Maybe<EventEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateHome?: Maybe<HomeEntityResponse>;
@@ -490,6 +608,16 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationCreateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput;
+};
+
+
+export type MutationCreateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput;
 };
 
 
@@ -530,6 +658,16 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteContentReleasesReleaseArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteContentReleasesReleaseActionArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -620,6 +758,18 @@ export type MutationUpdateAboutArgs = {
 
 export type MutationUpdateContactArgs = {
   data: ContactInput;
+};
+
+
+export type MutationUpdateContentReleasesReleaseArgs = {
+  data: ContentReleasesReleaseInput;
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateContentReleasesReleaseActionArgs = {
+  data: ContentReleasesReleaseActionInput;
+  id: Scalars['ID']['input'];
 };
 
 
@@ -848,6 +998,10 @@ export type Query = {
   __typename?: 'Query';
   about?: Maybe<AboutEntityResponse>;
   contact?: Maybe<ContactEntityResponse>;
+  contentReleasesRelease?: Maybe<ContentReleasesReleaseEntityResponse>;
+  contentReleasesReleaseAction?: Maybe<ContentReleasesReleaseActionEntityResponse>;
+  contentReleasesReleaseActions?: Maybe<ContentReleasesReleaseActionEntityResponseCollection>;
+  contentReleasesReleases?: Maybe<ContentReleasesReleaseEntityResponseCollection>;
   event?: Maybe<EventEntityResponse>;
   events?: Maybe<EventEntityResponseCollection>;
   home?: Maybe<HomeEntityResponse>;
@@ -868,6 +1022,30 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+};
+
+
+export type QueryContentReleasesReleaseArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryContentReleasesReleaseActionArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type QueryContentReleasesReleaseActionsArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseActionFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryContentReleasesReleasesArgs = {
+  filters?: InputMaybe<ContentReleasesReleaseFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -1006,6 +1184,7 @@ export type StringFilterInput = {
   lt?: InputMaybe<Scalars['String']['input']>;
   lte?: InputMaybe<Scalars['String']['input']>;
   ne?: InputMaybe<Scalars['String']['input']>;
+  nei?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<StringFilterInput>;
   notContains?: InputMaybe<Scalars['String']['input']>;
   notContainsi?: InputMaybe<Scalars['String']['input']>;
@@ -1511,6 +1690,7 @@ export type GetProgrammeQueryVariables = Exact<{
 
 export type GetProgrammeQuery = { __typename?: 'Query', programmes?: { __typename?: 'ProgrammeEntityResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: { __typename?: 'Programme', createdAt?: any | null, updatedAt?: any | null, publishedAt?: any | null, slug?: string | null, title?: string | null, description?: string | null, summary?: string | null, cover: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } } | null }> } | null };
 
+
 export const FullEventFragmentFragmentDoc = `
     fragment FullEventFragment on Event {
   createdAt
@@ -1608,19 +1788,24 @@ export const GetAboutPageDocument = `
   }
 }
     `;
+
 export const useGetAboutPageQuery = <
       TData = GetAboutPageQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetAboutPageQueryVariables,
-      options?: UseQueryOptions<GetAboutPageQuery, TError, TData>
-    ) =>
-    useQuery<GetAboutPageQuery, TError, TData>(
-      variables === undefined ? ['getAboutPage'] : ['getAboutPage', variables],
-      fetcher<GetAboutPageQuery, GetAboutPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetAboutPageDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetAboutPageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetAboutPageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetAboutPageQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getAboutPage'] : ['getAboutPage', variables],
+    queryFn: fetcher<GetAboutPageQuery, GetAboutPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetAboutPageDocument, variables),
+    ...options
+  }
+    )};
+
 export const GetContactPageDocument = `
     query getContactPage {
   contact {
@@ -1641,19 +1826,24 @@ export const GetContactPageDocument = `
   }
 }
     `;
+
 export const useGetContactPageQuery = <
       TData = GetContactPageQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetContactPageQueryVariables,
-      options?: UseQueryOptions<GetContactPageQuery, TError, TData>
-    ) =>
-    useQuery<GetContactPageQuery, TError, TData>(
-      variables === undefined ? ['getContactPage'] : ['getContactPage', variables],
-      fetcher<GetContactPageQuery, GetContactPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetContactPageDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetContactPageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetContactPageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetContactPageQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getContactPage'] : ['getContactPage', variables],
+    queryFn: fetcher<GetContactPageQuery, GetContactPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetContactPageDocument, variables),
+    ...options
+  }
+    )};
+
 export const GetEventDocument = `
     query getEvent($slug: String) {
   events(filters: {slug: {eq: $slug}}) {
@@ -1666,19 +1856,24 @@ export const GetEventDocument = `
   }
 }
     ${FullEventFragmentFragmentDoc}`;
+
 export const useGetEventQuery = <
       TData = GetEventQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetEventQueryVariables,
-      options?: UseQueryOptions<GetEventQuery, TError, TData>
-    ) =>
-    useQuery<GetEventQuery, TError, TData>(
-      variables === undefined ? ['getEvent'] : ['getEvent', variables],
-      fetcher<GetEventQuery, GetEventQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetEventDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetEventQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetEventQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetEventQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getEvent'] : ['getEvent', variables],
+    queryFn: fetcher<GetEventQuery, GetEventQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetEventDocument, variables),
+    ...options
+  }
+    )};
+
 export const SearchEventsDocument = `
     query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $rawFilters: EventFiltersInput = {}) {
   events(
@@ -1704,19 +1899,24 @@ export const SearchEventsDocument = `
   }
 }
     ${FullEventFragmentFragmentDoc}`;
+
 export const useSearchEventsQuery = <
       TData = SearchEventsQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: SearchEventsQueryVariables,
-      options?: UseQueryOptions<SearchEventsQuery, TError, TData>
-    ) =>
-    useQuery<SearchEventsQuery, TError, TData>(
-      variables === undefined ? ['searchEvents'] : ['searchEvents', variables],
-      fetcher<SearchEventsQuery, SearchEventsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchEventsDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<SearchEventsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<SearchEventsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<SearchEventsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['searchEvents'] : ['searchEvents', variables],
+    queryFn: fetcher<SearchEventsQuery, SearchEventsQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchEventsDocument, variables),
+    ...options
+  }
+    )};
+
 export const GetHomePageDocument = `
     query getHomePage {
   home {
@@ -1728,19 +1928,24 @@ export const GetHomePageDocument = `
   }
 }
     `;
+
 export const useGetHomePageQuery = <
       TData = GetHomePageQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetHomePageQueryVariables,
-      options?: UseQueryOptions<GetHomePageQuery, TError, TData>
-    ) =>
-    useQuery<GetHomePageQuery, TError, TData>(
-      variables === undefined ? ['getHomePage'] : ['getHomePage', variables],
-      fetcher<GetHomePageQuery, GetHomePageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetHomePageDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetHomePageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetHomePageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetHomePageQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getHomePage'] : ['getHomePage', variables],
+    queryFn: fetcher<GetHomePageQuery, GetHomePageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetHomePageDocument, variables),
+    ...options
+  }
+    )};
+
 export const SearchPagesDocument = `
     query searchPages($limit: Int = 100, $publicationState: PublicationState = LIVE) {
   pages(
@@ -1765,19 +1970,24 @@ export const SearchPagesDocument = `
   }
 }
     ${FullPageFragmentFragmentDoc}`;
+
 export const useSearchPagesQuery = <
       TData = SearchPagesQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: SearchPagesQueryVariables,
-      options?: UseQueryOptions<SearchPagesQuery, TError, TData>
-    ) =>
-    useQuery<SearchPagesQuery, TError, TData>(
-      variables === undefined ? ['searchPages'] : ['searchPages', variables],
-      fetcher<SearchPagesQuery, SearchPagesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchPagesDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<SearchPagesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<SearchPagesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<SearchPagesQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['searchPages'] : ['searchPages', variables],
+    queryFn: fetcher<SearchPagesQuery, SearchPagesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchPagesDocument, variables),
+    ...options
+  }
+    )};
+
 export const GetPageDocument = `
     query getPage($slug: String) {
   pages(filters: {slug: {eq: $slug}}) {
@@ -1790,19 +2000,24 @@ export const GetPageDocument = `
   }
 }
     ${FullPageFragmentFragmentDoc}`;
+
 export const useGetPageQuery = <
       TData = GetPageQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetPageQueryVariables,
-      options?: UseQueryOptions<GetPageQuery, TError, TData>
-    ) =>
-    useQuery<GetPageQuery, TError, TData>(
-      variables === undefined ? ['getPage'] : ['getPage', variables],
-      fetcher<GetPageQuery, GetPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPageDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetPageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetPageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetPageQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getPage'] : ['getPage', variables],
+    queryFn: fetcher<GetPageQuery, GetPageQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetPageDocument, variables),
+    ...options
+  }
+    )};
+
 export const SearchProgrammesDocument = `
     query searchProgrammes($limit: Int = 100, $publicationState: PublicationState = LIVE) {
   programmes(
@@ -1827,19 +2042,24 @@ export const SearchProgrammesDocument = `
   }
 }
     ${FullProgrammeFragmentFragmentDoc}`;
+
 export const useSearchProgrammesQuery = <
       TData = SearchProgrammesQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: SearchProgrammesQueryVariables,
-      options?: UseQueryOptions<SearchProgrammesQuery, TError, TData>
-    ) =>
-    useQuery<SearchProgrammesQuery, TError, TData>(
-      variables === undefined ? ['searchProgrammes'] : ['searchProgrammes', variables],
-      fetcher<SearchProgrammesQuery, SearchProgrammesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchProgrammesDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<SearchProgrammesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<SearchProgrammesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<SearchProgrammesQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['searchProgrammes'] : ['searchProgrammes', variables],
+    queryFn: fetcher<SearchProgrammesQuery, SearchProgrammesQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, SearchProgrammesDocument, variables),
+    ...options
+  }
+    )};
+
 export const GetProgrammeDocument = `
     query getProgramme($slug: String) {
   programmes(filters: {slug: {eq: $slug}}) {
@@ -1852,16 +2072,20 @@ export const GetProgrammeDocument = `
   }
 }
     ${FullProgrammeFragmentFragmentDoc}`;
+
 export const useGetProgrammeQuery = <
       TData = GetProgrammeQuery,
       TError = unknown
     >(
       dataSource: { endpoint: string, fetchParams?: RequestInit },
       variables?: GetProgrammeQueryVariables,
-      options?: UseQueryOptions<GetProgrammeQuery, TError, TData>
-    ) =>
-    useQuery<GetProgrammeQuery, TError, TData>(
-      variables === undefined ? ['getProgramme'] : ['getProgramme', variables],
-      fetcher<GetProgrammeQuery, GetProgrammeQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProgrammeDocument, variables),
-      options
-    );
+      options?: Omit<UseQueryOptions<GetProgrammeQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetProgrammeQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetProgrammeQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getProgramme'] : ['getProgramme', variables],
+    queryFn: fetcher<GetProgrammeQuery, GetProgrammeQueryVariables>(dataSource.endpoint, dataSource.fetchParams || {}, GetProgrammeDocument, variables),
+    ...options
+  }
+    )};

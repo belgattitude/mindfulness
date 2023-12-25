@@ -18,6 +18,7 @@ const config: CodegenConfig = {
       plugins: [],
       // https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#config-api
       config: {
+        useTypeImports: true,
         defaultScalarType: 'unknown',
         scalars: {
           DateTime: 'string',
@@ -28,14 +29,17 @@ const config: CodegenConfig = {
         // enumsAsTypes: true,
       },
     },
-    /*
     './src/gql/hooks.ts': {
+      config: {
+        useTypeImports: true,
+        reactQueryVersion: 5,
+      },
       plugins: [
         'typescript',
         'typescript-operations',
         'typescript-react-query',
       ],
-    }, */
+    },
   },
 };
 

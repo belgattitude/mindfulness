@@ -9,7 +9,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
-  ignorePatterns: [...getDefaultIgnorePatterns(), 'storybook-static', '.yarn'],
+  ignorePatterns: [
+    ...getDefaultIgnorePatterns(),
+    'storybook-static',
+    '.yarn',
+    'src/gql',
+  ],
   extends: [
     '@belgattitude/eslint-config-bases/typescript',
     '@belgattitude/eslint-config-bases/react',

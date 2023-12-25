@@ -1,8 +1,7 @@
 // @ts-check
 
-import withBundleAnalyzer from '@next/bundle-analyzer';
 import { createSecureHeaders } from 'next-secure-headers';
-import { publicEnv } from './src/config/public-env.mjs';
+import { env } from './env.mjs';
 
 const isProd = process.env.NODE_ENV === 'production';
 const enableCSP = isProd;
@@ -12,7 +11,7 @@ const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_TYPECHECK ?? 'false'
 );
 
-const strapiUrl = publicEnv.NEXT_PUBLIC_STRAPI_API_URL;
+const strapiUrl = env.NEXT_PUBLIC_STRAPI_API_URL;
 const { hostname: strapiHostname } = new URL(strapiUrl);
 
 // @link https://github.com/jagaapple/next-secure-headers
@@ -60,13 +59,31 @@ let nextConfig = {
 
   eslint: { ignoreDuringBuilds: !!process.env.CI },
 
+  // @link https://nextjs.org/docs/basic-features/image-optimization
   images: {
-    // Reduce the number of possibles (no real-need)
     deviceSizes: [750, 828, 1080, 1200], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [32, 48, 64, 96], // default: [16, 32, 48, 64, 96, 128, 256, 384]
-    // Allow domains and set default ttl if not provided upstream
-    domains: [strapiHostname, 'images.unsplash.com'],
     minimumCacheTTL: 86_400,
+    formats: ['image/webp'],
+    loader: 'default',
+    dangerouslyAllowSVG: false,
+    disableStaticImages: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'http',
+        hostname: strapiHostname,
+      },
+      {
+        protocol: 'https',
+        hostname: strapiHostname,
+      },
+    ],
+    unoptimized: false,
   },
 
   async redirects() {
@@ -124,9 +141,16 @@ let nextConfig = {
 };
 
 if (process.env.ANALYZE === 'true') {
-  nextConfig = withBundleAnalyzer({
-    enabled: true,
-  })(nextConfig);
+  try {
+    const withBundleAnalyzer = await import('@next/bundle-analyzer').then(
+      (mod) => mod.default
+    );
+    nextConfig = withBundleAnalyzer({
+      enabled: true,
+    })(nextConfig);
+  } catch {
+    // Do nothing, @next/bundle-analyzer is probably purged in prod or not installed
+  }
 }
 
 export default nextConfig;

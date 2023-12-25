@@ -9,7 +9,7 @@ exports
 *.cache
 dist
 .strapi-updater.json
-
+.strapi
 
 ############################
 # OS X

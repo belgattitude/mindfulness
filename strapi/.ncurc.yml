@@ -3,4 +3,7 @@
 # @link https://github.com/raineorshine/npm-check-updates
 
 # Add here exclusions on packages if any
-reject: []
+reject: [
+  'styled-components',
+  'react-router-dom',
+]

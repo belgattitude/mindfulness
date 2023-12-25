@@ -14,7 +14,7 @@ export const MarkdownText: FC<Props> = (props) => {
   return (
     <ReactMarkdown
       className={twMerge('list-inside list-disc', className)}
-      transformImageUri={(src, alt, title) => {
+      urlTransform={(src, _alt, _title) => {
         return getStrapiURL() + src;
       }}
       remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
