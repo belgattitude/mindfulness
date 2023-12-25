@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { FC } from 'react';
-import type { MainNavLinks } from '../../config/site.config';
+import type { MainNavLinks } from '@/config/site.config';
 import { cn } from '../utils';
 
 type MainSidebarProps = {
@@ -14,7 +14,7 @@ export const MainSidebar: FC<MainSidebarProps> = (props) => {
       className={cn(
         'bg-white absolute top-0 flex w-[90vw] border-8 p-5 justify-center flex-col gap-5 transition-all ease-in-out duration-300',
         hidden
-          ? 'translate-x-[-500px] opacity-0 pointer-events-none'
+          ? 'translate-x-[-500px] opacity-0 -z-50 pointer-events-none'
           : 'translate-x-[0px] opacity-100 z-50 pointer-events-auto'
       )}
     >

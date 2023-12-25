@@ -1,11 +1,12 @@
+'use client';
+
 import { clsx } from 'clsx';
-import { useRouter } from 'next/router';
 import { useEffect, useState, type FC } from 'react';
 import { BurgerMenuIcon } from '@/components/Burger/BurgerMenuIcon';
 import { MainMenuLinks } from '@/components/Layout/MainMenuLinks';
 import { MainNavHeader } from '@/components/Layout/MainNavHeader';
 import { MainSidebar } from '@/components/Layout/MainSidebar';
-import type { MainNavLinks } from '../../config/site.config';
+import type { MainNavLinks } from '@/config/site.config';
 import { BannerAlert } from '../Banner/BannerAlert';
 
 type MainNavProps = {
@@ -20,7 +21,6 @@ const isServer = typeof window === 'undefined';
 
 export const MainHeader: FC<MainNavProps> = (props) => {
   const { showAlert = true, mainNavLinks } = props;
-  const router = useRouter();
   const initialIsScrollOntop = isServer
     ? true
     : window.scrollY < isScrolledTopThreshold;
@@ -37,12 +37,6 @@ export const MainHeader: FC<MainNavProps> = (props) => {
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
-
-  useEffect(() => {
-    const closeMenu = () => setIsNavExpanded(false);
-    router.events.on('routeChangeStart', closeMenu);
-    return () => router.events.off('routeChangeStart', closeMenu);
-  }, [router.events]);
 
   const renderTopLevelHeader = true; // router.asPath === '/';
 
