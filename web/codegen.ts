@@ -18,6 +18,7 @@ const config: CodegenConfig = {
       plugins: [],
       // https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#config-api
       config: {
+        useTypeImports: true,
         defaultScalarType: 'unknown',
         scalars: {
           DateTime: 'string',
