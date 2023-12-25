@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import type { FC } from 'react';
 
 import type { MainNavLinks } from '@/config/site.config';
@@ -12,7 +12,7 @@ type Props = {
 
 export const MainMenuLinks: FC<Props> = (props) => {
   const { className = '', mainNavLinks } = props;
-  const { asPath } = useRouter();
+  const routePath = usePathname();
 
   return (
     <div className={['items-end', className].join(' ')}>
@@ -29,7 +29,9 @@ export const MainMenuLinks: FC<Props> = (props) => {
                 'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
                 {
                   ['underline']:
-                    asPath === '/' ? asPath === href : href.startsWith(asPath),
+                    routePath === '/'
+                      ? routePath === href
+                      : href.startsWith(routePath),
                 }
               )}
               href={href}

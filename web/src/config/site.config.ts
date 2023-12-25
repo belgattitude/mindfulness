@@ -1,5 +1,9 @@
 export const siteConfig = {
   canonicalUrl: process.env.NEXT_PUBLIC_SITE_URL,
+  metadata: {
+    siteTitle: 'Sandrine Rauter',
+    siteDescription: '',
+  },
   mainNavLinks: [
     { title: 'Accueil', href: '/' },
     { title: 'Mindfulness', href: '/p/mindfulness' },
