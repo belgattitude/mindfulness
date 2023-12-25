@@ -4,6 +4,9 @@ import { MyActivitiesCard } from '@/components/Sections/MyActivitiesCard';
 import { fetchHome } from '@/api/home.api';
 import { MarkdownText } from '@/components/MarkdownText';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+
 export default async function Home() {
   const homeData = await fetchHome();
   return (
