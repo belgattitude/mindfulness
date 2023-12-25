@@ -8,6 +8,7 @@ import { MainNavHeader } from '@/components/Layout/MainNavHeader';
 import { MainSidebar } from '@/components/Layout/MainSidebar';
 import type { MainNavLinks } from '@/config/site.config';
 import { BannerAlert } from '../Banner/BannerAlert';
+import { cn } from '@/components/utils';
 
 type MainNavProps = {
   /** add props here */
@@ -75,12 +76,9 @@ export const MainHeader: FC<MainNavProps> = (props) => {
 
         <MainSidebar hidden={!isNavExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
-          className={clsx(
+          className={cn(
             'absolute right-5 top-3 h-[32px] w-[32px] md:hidden',
-            {
-              ['text-white']: renderTopLevelHeader,
-              ['text-black']: !renderTopLevelHeader,
-            }
+            renderTopLevelHeader ? 'text-white' : 'text-black'
           )}
           handleClick={() => {
             setIsNavExpanded((prevState) => !prevState);

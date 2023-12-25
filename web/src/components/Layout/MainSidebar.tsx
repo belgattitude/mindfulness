@@ -12,7 +12,7 @@ export const MainSidebar: FC<MainSidebarProps> = (props) => {
   return (
     <div
       className={cn(
-        'bg-white absolute top-0 flex w-[90vw] border-8 p-5 justify-center flex-col gap-5 transition-all ease-in-out duration-300',
+        'bg-white h-full absolute top-0 flex w-[70vw] border-8 p-5 justify-center flex-col gap-5 transition-all ease-in-out duration-300',
         hidden
           ? 'translate-x-[-500px] opacity-0 -z-50 pointer-events-none'
           : 'translate-x-[0px] opacity-100 z-50 pointer-events-auto'
