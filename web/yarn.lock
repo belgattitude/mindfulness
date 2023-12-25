@@ -4040,7 +4040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.0.2":
+"@radix-ui/react-slot@npm:*, @radix-ui/react-slot@npm:1.0.2":
   version: 1.0.2
   resolution: "@radix-ui/react-slot@npm:1.0.2"
   dependencies:
@@ -8343,6 +8343,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-variance-authority@npm:0.7.0":
+  version: 0.7.0
+  resolution: "class-variance-authority@npm:0.7.0"
+  dependencies:
+    clsx: "npm:2.0.0"
+  checksum: e11c57edf4bf50ef1c97bae41d68885afbaaedba26c48b7cc5dfb033390fed7012147e9532168d8c4f3497fce4dff15e20e6e60b8c9c9a4b0fe26b0e804513db
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:^5.2.2":
   version: 5.3.2
   resolution: "clean-css@npm:5.3.2"
@@ -8461,7 +8470,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.0.0":
+"clsx@npm:*, clsx@npm:2.0.0":
   version: 2.0.0
   resolution: "clsx@npm:2.0.0"
   checksum: c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
@@ -16402,6 +16411,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-twc@npm:1.2.1":
+  version: 1.2.1
+  resolution: "react-twc@npm:1.2.1"
+  dependencies:
+    "@radix-ui/react-slot": "npm:*"
+    clsx: "npm:*"
+  checksum: ef2896a75790c69536354e4f061cf4ab632f74c8fd3461867ef77702525c71d42128c38212b9050f19e7fdeb73c62b8996d566d38a6be5ceeda6d9365f11e36a
+  languageName: node
+  linkType: hard
+
 "react@npm:18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
@@ -19626,6 +19645,7 @@ __metadata:
     "@types/react": "npm:18.2.45"
     "@types/react-dom": "npm:18.2.18"
     "@vercel/og": "npm:0.6.1"
+    class-variance-authority: "npm:0.7.0"
     clsx: "npm:2.0.0"
     cross-env: "npm:7.0.3"
     css-loader: "npm:^6.8.1"
@@ -19649,6 +19669,7 @@ __metadata:
     react-dom: "npm:18.2.0"
     react-google-recaptcha-v3: "npm:1.10.1"
     react-markdown: "npm:9.0.1"
+    react-twc: "npm:1.2.1"
     remark: "npm:15.0.1"
     remark-gfm: "npm:4.0.0"
     remark-html: "npm:16.0.1"

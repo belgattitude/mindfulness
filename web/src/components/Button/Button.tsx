@@ -1,38 +1,30 @@
-import clsx from 'clsx';
-import { forwardRef, type ButtonHTMLAttributes } from 'react';
-import { twMerge } from 'tailwind-merge';
+import type { TwcComponentProps } from 'react-twc';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { twx } from '@/components/utils';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  size?: 'small' | 'normal' | 'large';
-  children: string;
-};
-
-export const Button = forwardRef<
-  HTMLButtonElement, // | HTMLAnchorElement,
-  ButtonProps
->(
-  /** prefer named function to not have to set the displayName */
-  function Button(props, ref) {
-    const { size = 'normal', className = '', children, ...restProps } = props;
-
-    return (
-      <button
-        {...restProps}
-        ref={ref}
-        className={twMerge(
-          clsx(
-            'rounded-3xl border bg-title-color-400 text-white hover:bg-title-color-300',
-            {
-              ['py-1 px-2']: size === 'small',
-              ['py-2 px-4']: size === 'normal',
-              ['py-4 px-6']: size === 'large',
-            }
-          ),
-          className
-        )}
-      >
-        {children}
-      </button>
-    );
+const button = cva(
+  'rounded-3xl border bg-title-color-400 text-white hover:bg-title-color-300',
+  {
+    variants: {
+      $size: {
+        sm: 'rounded-xl px-2 py-1',
+        md: 'px-4 py-2',
+        lg: 'px-6 py-4',
+      },
+      $intent: {
+        primary: '',
+        secondary: 'bg-white text-gray-800',
+      },
+    },
+    defaultVariants: {
+      $intent: 'primary',
+      $size: 'md',
+    },
   }
+);
+
+type ButtonProps = TwcComponentProps<'button'> & VariantProps<typeof button>;
+
+export const Button = twx.button<ButtonProps>(({ $intent, $size }) =>
+  button({ $intent, $size })
 );

@@ -1,4 +1,4 @@
-# next-i18next example app
+# web
 
 
 ```bash

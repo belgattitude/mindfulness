@@ -26,7 +26,7 @@ export const BannerAlert: FC<Props> = (props) => {
       </span>
       <Button
         className={'rounded bg-pink-400 font-light hover:bg-pink-600'}
-        size={'small'}
+        $size={'sm'}
       >
         Info et réservations
       </Button>
