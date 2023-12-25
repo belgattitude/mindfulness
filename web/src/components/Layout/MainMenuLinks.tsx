@@ -12,7 +12,7 @@ type Props = {
 
 export const MainMenuLinks: FC<Props> = (props) => {
   const { className = '', mainNavLinks } = props;
-  const routePath = usePathname();
+  const currentRouterPath = usePathname();
 
   return (
     <div className={['items-end', className].join(' ')}>
@@ -29,9 +29,9 @@ export const MainMenuLinks: FC<Props> = (props) => {
                 'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
                 {
                   ['underline']:
-                    routePath === '/'
-                      ? routePath === href
-                      : href.startsWith(routePath),
+                    currentRouterPath === '/'
+                      ? currentRouterPath === href
+                      : href.startsWith(currentRouterPath ?? '/null'),
                 }
               )}
               href={href}
