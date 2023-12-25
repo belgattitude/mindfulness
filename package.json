@@ -2,7 +2,7 @@
   "name": "mindfulness-root",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "files": [
     "env.mjs",
     "next.config.mjs",
