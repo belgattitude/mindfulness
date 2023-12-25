@@ -12,7 +12,7 @@ import {
 } from '@/components/Event/utils';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { queryClientConfig } from '@/config/query-client.config';
+import { reactQueryConfig } from '@/config/react-query.config';
 import { assertStringIsoDate } from '@/lib/date/assertStringIsoDate';
 import { convertIsoStringToDate } from '@/lib/date/date.utils';
 
@@ -37,11 +37,6 @@ export default function EventsRoute(
         dateMin: convertIsoStringToDate(dateMinStr),
         eventType,
       }),
-    useErrorBoundary: false,
-    // prefetched data is made available through the server, on the client it might already look
-    // outdated... as we use revalidation with events for this age, it's possible to set stale time
-    // to max
-    // staleTime: Number.MAX_SAFE_INTEGER,
   });
 
   if (error) {
@@ -99,7 +94,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const parsedFilters = schema.parse(f);
   const eventType = (parsedFilters.eventType as EventTypeSlugs) ?? null;
 
-  const queryClient = new QueryClient(queryClientConfig);
+  const queryClient = new QueryClient(reactQueryConfig);
 
   await queryClient.prefetchQuery({
     queryKey: ['events', limit, dateMinStr, eventType],

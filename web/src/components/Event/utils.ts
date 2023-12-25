@@ -12,5 +12,5 @@ export const getEventTypeSlugs = (): string[] => {
 };
 
 export const findEventBySlug = (slug: EventTypeSlugs | null) => {
-  return eventTypes.filter((type) => type.slug === slug)?.[0] ?? null;
+  return eventTypes.find((type) => type.slug === slug) ?? null;
 };

@@ -7,7 +7,7 @@ import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { queryClientConfig } from '@/config/query-client.config';
+import { reactQueryConfig } from '@/config/react-query.config';
 
 type Props = {
   // Add whatever extra you need
@@ -60,7 +60,7 @@ export default function AboutRoute(
 export const getServerSideProps: GetServerSideProps<Props> = async (
   _context
 ) => {
-  const queryClient = new QueryClient(queryClientConfig);
+  const queryClient = new QueryClient(reactQueryConfig);
 
   await queryClient.prefetchQuery({
     queryKey: ['about'],
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     props: {
       dehydratedState: dehydrate(queryClient),
       // Next.js will attempt to re-generate the page at most
-      revalidate: 3_600,
+      revalidate: 3600,
     },
   };
 };

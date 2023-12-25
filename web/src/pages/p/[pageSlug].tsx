@@ -6,7 +6,7 @@ import { fetchPage } from '@/api/pages.api';
 import { CustomPage } from '@/components/CustomPage/CustomPage';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { queryClientConfig } from '@/config/query-client.config';
+import { reactQueryConfig } from '@/config/react-query.config';
 
 type Props = {
   /**
@@ -22,7 +22,6 @@ export default function PageRoute(
   const { data, isLoading, error } = useQuery({
     queryKey: ['page', slug],
     queryFn: async () => fetchPage({ slug }),
-    useErrorBoundary: false,
   });
 
   if (error) {
@@ -50,7 +49,7 @@ const schema = z.object({
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const queryClient = new QueryClient(queryClientConfig);
+  const queryClient = new QueryClient(reactQueryConfig);
 
   const { pageSlug: slug } = schema.parse(context.params);
 

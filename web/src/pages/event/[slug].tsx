@@ -26,7 +26,6 @@ export default function EventRoute(
     // outdated... as we use revalidation with events for this age, it's possible to set stale time
     // to max
     staleTime: Number.MAX_SAFE_INTEGER,
-    useErrorBoundary: false,
   });
 
   if (error) {

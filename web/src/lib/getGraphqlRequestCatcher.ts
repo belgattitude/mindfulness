@@ -9,7 +9,7 @@ export const getGraphqlRequestCatcher = (e: unknown) => {
     (isHttpFetchErrorLike(e) &&
       ['ECONNREFUSED', 'ECONNRESET'].includes(e?.code ?? '')) ||
     // covers cross-fetch / browser-ponyfill on client side
-    (e instanceof Error && e.message.match(/network(.*)fail/i))
+    (e instanceof Error && /network(.*)fail/i.test(e.message))
   ) {
     const details = [
       'code' in e ? e.code : undefined,

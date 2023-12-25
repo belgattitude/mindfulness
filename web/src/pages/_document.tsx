@@ -13,7 +13,7 @@ type Props = DocumentProps & {
 };
 
 class MyDocument extends Document<Props> {
-  render() {
+  override render() {
     const locale = 'fr';
     return (
       <Html lang={locale}>

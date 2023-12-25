@@ -10,7 +10,7 @@ import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { MyActivitiesCard } from '@/components/Sections/MyActivitiesCard';
 import { fetchHome } from '../api/home.api';
-import { queryClientConfig } from '../config/query-client.config';
+import { reactQueryConfig } from '@/config/react-query.config';
 
 type Props = {
   // Add whatever extra you need
@@ -70,7 +70,7 @@ export default function HomeRoute(
 export const getServerSideProps: GetServerSideProps<Props> = async (
   _context
 ) => {
-  const queryClient = new QueryClient(queryClientConfig);
+  const queryClient = new QueryClient(reactQueryConfig);
 
   await queryClient.prefetchQuery({
     queryKey: ['home'],

@@ -26,13 +26,7 @@ export const MainNavHeader: FC<Props> = (props) => {
       data-test-id={'main-nav-header'}
       className={twMerge(
         clsx(
-          'radial-gradient font-menu flex flex-col items-center justify-center space-x-3 bg-brand-color-600 p-10 font-light',
-          false &&
-            'transition-all-1s font-menu flex flex-col items-center justify-center space-x-3 bg-gradient-to-r from-brand-color-500 via-brand-color-500 to-brand-color-700 p-10 font-light text-white',
-          {
-            ['-translate-y-60 h-0']: collapse,
-            ['bg-white']: forceWhiteBg,
-          }
+          'radial-gradient font-menu flex flex-col items-center justify-center space-x-3 bg-brand-color-600 p-10 font-light'
         ),
         className
       )}

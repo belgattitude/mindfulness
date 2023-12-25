@@ -6,7 +6,7 @@ import { fetchProgramme } from '@/api/programmes';
 import { ProgrammePage } from '@/components/Programme/ProgrammePage';
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
-import { queryClientConfig } from '@/config/query-client.config';
+import { reactQueryConfig } from '@/config/react-query.config';
 
 type Props = {
   slug: string;
@@ -19,11 +19,6 @@ export default function ProgrammeRoute(
   const { data, isLoading, error } = useQuery({
     queryKey: ['programme', slug],
     queryFn: async () => fetchProgramme({ slug }),
-    // prefetched data is made available through the server, on the client it might already look
-    // outdated... as we use revalidation with events for this age, it's possible to set stale time
-    // to max
-    // staleTime: Number.MAX_SAFE_INTEGER,
-    useErrorBoundary: false,
   });
 
   if (error) {
@@ -51,7 +46,7 @@ const schema = z.object({
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context
 ) => {
-  const queryClient = new QueryClient(queryClientConfig);
+  const queryClient = new QueryClient(reactQueryConfig);
 
   const { programmeSlug: slug } = schema.parse(context.params);
 

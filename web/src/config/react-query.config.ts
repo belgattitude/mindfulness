@@ -1,9 +1,9 @@
-import type { QueryClientConfig } from '@tanstack/query-core';
+import type { QueryClientConfig } from '@tanstack/react-query';
 
 const isServer = typeof window === 'undefined';
 const isProd = process.env.NODE_ENV === 'production';
 
-export const queryClientConfig: QueryClientConfig = {
+export const reactQueryConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: !isProd,
@@ -14,7 +14,7 @@ export const queryClientConfig: QueryClientConfig = {
       // refetchOnWindowFocus: !isProd,
       // staleTime: 5 * 60_000,
       retry: isServer ? false : 2,
-      retryDelay: isProd ? 1_000 : 250,
+      retryDelay: isProd ? 1000 : 250,
     },
   },
 };

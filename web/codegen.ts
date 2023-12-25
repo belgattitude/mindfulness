@@ -28,14 +28,17 @@ const config: CodegenConfig = {
         // enumsAsTypes: true,
       },
     },
-    /*
+
     './src/gql/hooks.ts': {
+      config: {
+        reactQueryVersion: 5,
+      },
       plugins: [
         'typescript',
         'typescript-operations',
         'typescript-react-query',
       ],
-    }, */
+    },
   },
 };
 

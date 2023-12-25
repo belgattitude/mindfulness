@@ -19,8 +19,8 @@ type Props = {
 };
 
 export const ProgrammeListItem: FC<Props> = (props) => {
-  const { className = '' } = props;
-  const data = useFragment(fullProgrammeFragment, props.programme);
+  const { className = '', programme } = props;
+  const data = useFragment(fullProgrammeFragment, programme);
   return (
     <div
       className={twMerge(
