@@ -1,22 +1,16 @@
 import '../styles/globals.css';
-import { CacheProvider, type EmotionCache } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import { Montserrat, Quicksand, Inter } from 'next/font/google';
 import { DefaultSeo } from 'next-seo';
 import { MainLayout } from '@/components/Layout';
 import { defaultSeoConfig } from '@/config/seo.config';
-import { createEmotionCache } from '@/lib/emotion/createEmotionCache';
 import { ReactQueryClientProvider } from '../providers/ReactQueryClientProvider';
 
 interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
   pageProps: {
     dehydratedState: unknown;
   };
 }
-
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
 
 const fontInter = Inter({
   subsets: ['latin'],
@@ -72,11 +66,7 @@ const fontBrand = localFont({
 });
 */
 const MyApp = (appProps: MyAppProps) => {
-  const {
-    Component,
-    pageProps,
-    emotionCache = clientSideEmotionCache,
-  } = appProps;
+  const { Component, pageProps } = appProps;
   return (
     <>
       <style jsx global>
@@ -89,16 +79,14 @@ const MyApp = (appProps: MyAppProps) => {
         `}
       </style>
       <ReactQueryClientProvider>
-        <CacheProvider value={emotionCache}>
-          <div
-            className={`${fontMontserrat.variable} ${fontQuicksand.variable} font-sans`}
-          >
-            <DefaultSeo {...defaultSeoConfig} />
-            <MainLayout>
-              <Component {...pageProps} />
-            </MainLayout>
-          </div>
-        </CacheProvider>
+        <div
+          className={`${fontMontserrat.variable} ${fontQuicksand.variable} font-sans`}
+        >
+          <DefaultSeo {...defaultSeoConfig} />
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
+        </div>
       </ReactQueryClientProvider>
     </>
   );

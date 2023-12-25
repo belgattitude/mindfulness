@@ -31,10 +31,6 @@
     "nuke:node_modules": "rimraf --glob '**/node_modules'"
   },
   "dependencies": {
-    "@emotion/cache": "11.11.0",
-    "@emotion/react": "11.11.3",
-    "@emotion/server": "11.11.0",
-    "@emotion/styled": "11.11.0",
     "@headlessui/react": "1.7.17",
     "@heroicons/react": "2.1.1",
     "@httpx/exception": "2.5.7",

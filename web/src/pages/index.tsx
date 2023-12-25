@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { NextSeo } from 'next-seo';
@@ -39,7 +38,7 @@ const HomeIntro: FC = () => {
 const HomePage: FC = () => {
   return (
     <div className="container mx-auto">
-      <div className={'grid-row grid gap-5 md:grid-cols-12'} css={css``}>
+      <div className={'grid-row grid gap-5 md:grid-cols-12'}>
         <AboutCardBox
           className={'flex px-5 font-family-brand md:col-span-8 md:px-0'}
         >

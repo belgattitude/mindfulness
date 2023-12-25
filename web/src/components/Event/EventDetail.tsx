@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import Image from 'next/image';
 import type { FC } from 'react';
 import { eventsApi, type FetchEvent } from '@/api/events.api';
@@ -11,28 +9,6 @@ import { getStrapiMedia } from '@/lib/strapi';
 type Props = {
   event: FetchEvent;
 };
-
-const title = css`
-  font-weight: 400;
-`;
-
-const Ctn = styled.div`
-  .hello {
-    > h1:first-of-type {
-      ${title};
-    }
-  }
-  .cover {
-  }
-  .description {
-    h1 {
-      //font-size: 1.2em;
-
-      //margin-bottom: 0;
-      //padding: 0;
-    }
-  }
-`;
 
 export const EventDetail: FC<Props> = (props) => {
   const event = useFragment(eventsApi.fullEventFragment, props.event);
@@ -60,7 +36,7 @@ export const EventDetail: FC<Props> = (props) => {
           />
         )}
       </div>
-      <Ctn
+      <div
         className={
           'border-1 prose m-4 rounded-2xl border-gray-100 bg-white p-4 text-gray-700 shadow-lg md:prose-xl lg:prose-2xl marker:mr-0 marker:text-purple-600 prose-h1:mb-1 prose-h1:font-normal prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0 md:m-8 md:p-8 lg:m-16 lg:p-16'
         }
@@ -90,10 +66,9 @@ export const EventDetail: FC<Props> = (props) => {
               src={getStrapiMedia(event.cover) ?? ''}
             />
           )}
-
           <MarkdownText text={event.description ?? ''} />
         </div>
-      </Ctn>
+      </div>
     </>
   );
 };

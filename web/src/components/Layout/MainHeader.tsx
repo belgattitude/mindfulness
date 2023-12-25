@@ -93,7 +93,6 @@ export const MainHeader: FC<MainNavProps> = (props) => {
           }}
           isOpen={isNavExpanded}
         />
-        {/* <BannerAlert collapse={!scrollIsOnTop} render={showAlert} /> */}
         <BannerAlert collapse={!renderTopLevelHeader} render={showAlert} />
       </div>
     </div>

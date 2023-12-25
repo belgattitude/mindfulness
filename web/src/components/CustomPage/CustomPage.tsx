@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import type { FC } from 'react';
 import { fullPageFragment, type FetchPage } from '@/api/pages.api';
 import { MarkdownText } from '@/components/MarkdownText';
@@ -13,22 +12,7 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
     <div className={'mx-auto mt-5 bg-white font-family-brand'}>
-      <h1
-        className={'hidden text-3xl'}
-        css={css`
-          background: linear-gradient(
-            90deg,
-            #a9dac3 0%,
-            #a9dac3 70%,
-            rgba(113, 223, 208, 1) 100%
-          );
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        `}
-      >
-        {page.title}
-      </h1>
+      <h1 className={'hidden text-3xl'}>{page.title}</h1>
 
       <MarkdownText
         className={'prose-lg my-5 text-title-color-800'}

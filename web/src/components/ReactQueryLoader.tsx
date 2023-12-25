@@ -1,13 +1,5 @@
-import styled from '@emotion/styled';
 import type { FC } from 'react';
 
-const Ctn = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 5px;
-  padding: 5px;
-`;
 export const ReactQueryLoader: FC = () => {
-  return <Ctn>Loading...</Ctn>;
+  return <div className={'absolute bottom-0 right-0 m-5 p-5'}>Loading...</div>;
 };
