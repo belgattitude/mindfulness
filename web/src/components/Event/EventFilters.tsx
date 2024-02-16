@@ -46,7 +46,7 @@ export const EventFilters: FC<Props> = (props) => {
             <span className="block truncate">{selected.title}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
+                className="size-5 text-gray-400"
                 aria-hidden="true"
               />
             </span>
@@ -73,7 +73,7 @@ export const EventFilters: FC<Props> = (props) => {
                     </span>
                     {selected ? (
                       <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                        <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        <CheckIcon className="size-5" aria-hidden="true" />
                       </span>
                     ) : null}
                   </>

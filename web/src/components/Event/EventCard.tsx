@@ -78,7 +78,7 @@ export const EventCardBackup: FC<Props> = (props) => {
             width={1000}
             height={800}
             priority={true}
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+            className="size-full object-cover object-center lg:size-full"
             src={getStrapiMedia(event.cover) ?? ''}
           />
         </Link>

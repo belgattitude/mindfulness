@@ -36,17 +36,17 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
 
         <ul className="space-y-4">
           <li className="flex items-center">
-            <IconLotus className="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" />
+            <IconLotus className="size-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" />
             <p className="ml-4">
               Ateliers et cycles de mindfulness / pleine conscience.
             </p>
           </li>
           <li className="flex items-center">
-            <IconYoga className="h-6 w-6 flex-none fill-transparent stroke-sky-100 stroke-2" />
+            <IconYoga className="size-6 flex-none fill-transparent stroke-sky-100 stroke-2" />
             <p className="ml-4">Classes de yoga en présentiel ou en ligne</p>
           </li>
           <li className="flex items-center">
-            <IconMeditation className="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" />
+            <IconMeditation className="size-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" />
             <p className="ml-4">Stages et retraites de yoga et méditation.</p>
           </li>
         </ul>

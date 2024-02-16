@@ -25,7 +25,7 @@ export const EventDetail: FC<Props> = (props) => {
       >
         {event.cover && (
           <Image
-            className={'absolute h-full w-full object-cover'}
+            className={'absolute size-full object-cover'}
             alt="Photo retraite"
             width={1200}
             height={900}

@@ -30,7 +30,7 @@ export const MainFooter: FC<Props> = (props) => {
                 <span className="sr-only">Facebook</span>
 
                 <svg
-                  className="h-6 w-6"
+                  className="size-6"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
