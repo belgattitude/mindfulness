@@ -114,3 +114,4 @@ networks:
   cloud-net:
     name: cloud-net
     driver: bridge
+    external: true
