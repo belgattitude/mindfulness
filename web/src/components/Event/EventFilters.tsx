@@ -1,13 +1,12 @@
-import { Listbox } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { useState, type FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { findEventBySlug, type EventTypeSlugs } from '@/components/Event/utils';
 import { siteConfig } from '@/config/site.config';
+import { clsx } from 'clsx';
 
 const types = [
-  { slug: '', title: 'Tous les événements' },
+  { slug: '', title: 'Tous' },
   ...siteConfig.search.eventTypes,
 ] as const;
 
@@ -38,6 +37,29 @@ export const EventFilters: FC<Props> = (props) => {
     await push(url);
   };
 
+  return (
+    <div className={twMerge('py-5 flex flex-col gap-5 md:flex-row', className)}>
+      {types.map((eventType) => {
+        return (
+          <div
+            key={eventType.slug}
+            className={clsx(
+              'flex-1 rounded bg-gray-200 p-5 drop-shadow hover:cursor-pointer hover:bg-gray-100',
+              {
+                'bg-gray-300 underline': eventType.slug === selected.slug,
+              }
+            )}
+            onClick={async (_e) => {
+              await updateFilters(eventType);
+            }}
+          >
+            {eventType.title}
+          </div>
+        );
+      })}
+    </div>
+  );
+  /*
   return (
     <div className={twMerge('flex flex-col gap-5 md:flex-row', className)}>
       <Listbox value={selected} onChange={updateFilters}>
@@ -84,5 +106,5 @@ export const EventFilters: FC<Props> = (props) => {
         </div>
       </Listbox>
     </div>
-  );
+  ); */
 };
