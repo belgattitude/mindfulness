@@ -2,6 +2,6 @@
   "name": "mindfulness-root",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "packageManager": "yarn@4.1.0"
 }
