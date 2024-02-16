@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-02-16T17:45:54.760Z"
+    "x-generation-date": "2024-02-16T17:49:00.457Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1759,7 +1759,7 @@
                 "enum": [
                   "stages-et-retraites",
                   "cours-reguliers",
-                  "programme-et-cycles"
+                  "programmes-et-cycles"
                 ]
               }
             }
@@ -3159,7 +3159,7 @@
                                         "enum": [
                                           "stages-et-retraites",
                                           "cours-reguliers",
-                                          "programme-et-cycles"
+                                          "programmes-et-cycles"
                                         ]
                                       },
                                       "createdAt": {
@@ -3276,7 +3276,7 @@
             "enum": [
               "stages-et-retraites",
               "cours-reguliers",
-              "programme-et-cycles"
+              "programmes-et-cycles"
             ]
           },
           "createdAt": {
@@ -4857,7 +4857,7 @@
                                         "enum": [
                                           "stages-et-retraites",
                                           "cours-reguliers",
-                                          "programme-et-cycles"
+                                          "programmes-et-cycles"
                                         ]
                                       },
                                       "createdAt": {
@@ -6528,7 +6528,7 @@
                           "enum": [
                             "stages-et-retraites",
                             "cours-reguliers",
-                            "programme-et-cycles"
+                            "programmes-et-cycles"
                           ]
                         },
                         "createdAt": {
@@ -7930,7 +7930,7 @@
                                       "enum": [
                                         "stages-et-retraites",
                                         "cours-reguliers",
-                                        "programme-et-cycles"
+                                        "programmes-et-cycles"
                                       ]
                                     },
                                     "createdAt": {
