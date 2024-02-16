@@ -265,6 +265,7 @@ export enum Enum_Contentreleasesreleaseaction_Type {
 
 export enum Enum_Event_Eventtype {
   CoursReguliers = 'cours_reguliers',
+  ProgrammeEtCycles = 'programme_et_cycles',
   StagesEtRetraites = 'stages_et_retraites'
 }
 
@@ -1886,7 +1887,7 @@ export const useGetEventQuery = <
 export const SearchEventsDocument = `
     query searchEvents($limit: Int = 100, $publicationState: PublicationState = LIVE, $rawFilters: EventFiltersInput = {}) {
   events(
-    sort: ["eventType:ASC", "startAt:ASC", "publishedAt:ASC"]
+    sort: ["startAt:ASC", "publishedAt:ASC"]
     filters: $rawFilters
     pagination: {page: 1, pageSize: $limit}
     publicationState: $publicationState

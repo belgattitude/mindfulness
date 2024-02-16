@@ -58,7 +58,7 @@ const searchEvents = graphql(/* GraphQL */ `
     $rawFilters: EventFiltersInput = {}
   ) {
     events(
-      sort: ["eventType:ASC", "startAt:ASC", "publishedAt:ASC"]
+      sort: ["startAt:ASC", "publishedAt:ASC"]
       filters: $rawFilters
       pagination: { page: 1, pageSize: $limit }
       publicationState: $publicationState

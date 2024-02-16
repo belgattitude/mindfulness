@@ -105,7 +105,8 @@
       "type": "enumeration",
       "enum": [
         "stages-et-retraites",
-        "cours-reguliers"
+        "cours-reguliers",
+        "programme-et-cycles"
       ],
       "required": true
     }

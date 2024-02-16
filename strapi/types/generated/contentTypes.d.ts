@@ -911,7 +911,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'api::programme.programme'
     >;
     eventType: Attribute.Enumeration<
-      ['stages-et-retraites', 'cours-reguliers']
+      ['stages-et-retraites', 'cours-reguliers', 'programme-et-cycles']
     > &
       Attribute.Required;
     createdAt: Attribute.DateTime;
