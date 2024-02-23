@@ -13,8 +13,8 @@ import {
 import { ReactQueryErrorBox } from '@/components/ReactQueryErrorBox';
 import { ReactQueryLoader } from '@/components/ReactQueryLoader';
 import { reactQueryConfig } from '@/config/react-query.config';
-import { assertStringIsoDate } from '@/lib/date/assertStringIsoDate';
 import { convertIsoStringToDate } from '@/lib/date/date.utils';
+import { assertParsableStrictIsoDateZ } from '@httpx/assert';
 
 type Props = {
   dateMinStr: string;
@@ -28,7 +28,7 @@ export default function EventsRoute(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const { dateMinStr, eventType } = props;
-  assertStringIsoDate(dateMinStr);
+  assertParsableStrictIsoDateZ(dateMinStr);
   const { data, isLoading, error } = useQuery({
     queryKey: ['events', limit, dateMinStr, eventType],
     queryFn: async () =>
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 ) => {
   const dateMin = dayjs().subtract(10, 'month').toDate();
   const dateMinStr = dateMin.toISOString();
-  assertStringIsoDate(dateMinStr);
+  assertParsableStrictIsoDateZ(dateMinStr);
 
   const { filters = [] } = context.params ?? {};
 

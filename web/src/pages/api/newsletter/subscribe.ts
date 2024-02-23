@@ -1,6 +1,5 @@
-import { zodReq } from '@nextvalid/zod-request';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { mailerTransport } from '../../../config/mailer.config';
+import { mailerTransport } from '@/config/mailer.config';
 
 type Response =
   | {
@@ -14,17 +13,13 @@ type Response =
       message: string;
     };
 
-const schema = zodReq({
-  method: ['POST', 'GET'],
-});
-
 const transport = mailerTransport;
 
 export default async function newsletterSubscribeHandler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
 ) {
-  const { method } = schema.parse(req);
+  const { method } = req;
 
   const mailData = {
     from: 'belgattitude@gmail.com',

@@ -208,6 +208,7 @@ enum ENUM_CONTENTRELEASESRELEASEACTION_TYPE {
 
 enum ENUM_EVENT_EVENTTYPE {
   cours_reguliers
+  programmes_et_cycles
   stages_et_retraites
 }
 

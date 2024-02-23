@@ -1,12 +1,17 @@
-import { isStringIsoDate } from '@/lib/date/isStringIsoDate';
+import {
+  assertParsableStrictIsoDateZ,
+  type ParsableStrictIsoDateZ,
+} from '@httpx/assert';
 
-export const convertIsoStringToDate = (dateStr: string | Date): Date => {
+export const convertIsoStringToDate = (
+  dateStr: string | ParsableStrictIsoDateZ | Date
+): Date => {
   if (dateStr instanceof Date) {
     return dateStr;
   }
-  if (!isStringIsoDate(dateStr)) {
-    throw new Error(`Invalid date string: ${dateStr}`);
-  }
+  assertParsableStrictIsoDateZ(dateStr, () => {
+    return new TypeError(`Invalid date string: ${dateStr}`);
+  });
   return new Date(dateStr);
 };
 

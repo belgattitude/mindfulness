@@ -249,7 +249,7 @@ export enum Enum_Contentreleasesreleaseaction_Type {
 
 export enum Enum_Event_Eventtype {
   CoursReguliers = 'cours_reguliers',
-  ProgrammeEtCycles = 'programme_et_cycles',
+  ProgrammesEtCycles = 'programmes_et_cycles',
   StagesEtRetraites = 'stages_et_retraites'
 }
 
