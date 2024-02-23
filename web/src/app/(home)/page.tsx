@@ -6,7 +6,6 @@ import { MarkdownText } from '@/components/MarkdownText';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
-
 export default async function Home() {
   const homeData = await fetchHome();
   return (
