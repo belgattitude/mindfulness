@@ -2974,13 +2974,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@httpx/exception@npm:^1.7.0":
-  version: 1.8.3
-  resolution: "@httpx/exception@npm:1.8.3"
-  checksum: 10c0/9400ae279625ed9f4db8312c6f4f4ac25dde78702ba590c6066d32bdc96555041f0cdeb5924a6847adb90d584d865a21eac0f6d45cd35d3202444ebf2007ce5e
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.13
   resolution: "@humanwhocodes/config-array@npm:0.11.13"
@@ -3451,31 +3444,6 @@ __metadata:
   version: 14.1.1-canary.70
   resolution: "@next/swc-win32-x64-msvc@npm:14.1.1-canary.70"
   conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@nextvalid/zod-request@npm:0.4.0":
-  version: 0.4.0
-  resolution: "@nextvalid/zod-request@npm:0.4.0"
-  dependencies:
-    "@httpx/exception": "npm:^1.7.0"
-    zod: "npm:^3.20.2"
-  peerDependencies:
-    "@types/node": "*"
-    next: ^11.0.0 || ^12.0.0 || ^13.0.0
-    react: ^17.0.2 || ^18.2.0
-    react-dom: ^17.0.2 || ^18.2.0
-    typescript: ^4.5.0 || ^5.0.0
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    react:
-      optional: true
-    react-dom:
-      optional: true
-    typescript:
-      optional: true
-  checksum: 10c0/42b3897632a0fe9053a2b097c012ffad35d8a3565e45b6cd318898b42ee8fe04491eab9fb85434fd667e8779bf547ede287ec1f84b5abaac950f795d9e836c5e
   languageName: node
   linkType: hard
 
@@ -19759,7 +19727,6 @@ __metadata:
     "@httpx/assert": "npm:0.7.0"
     "@httpx/exception": "npm:3.0.5"
     "@next/bundle-analyzer": "npm:14.1.1-canary.70"
-    "@nextvalid/zod-request": "npm:0.4.0"
     "@parcel/watcher": "npm:2.4.0"
     "@storybook/addon-essentials": "npm:7.6.17"
     "@storybook/addon-interactions": "npm:7.6.17"
@@ -20326,7 +20293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.22.4, zod@npm:^3.20.2":
+"zod@npm:3.22.4":
   version: 3.22.4
   resolution: "zod@npm:3.22.4"
   checksum: 10c0/7578ab283dac0eee66a0ad0fc4a7f28c43e6745aadb3a529f59a4b851aa10872b3890398b3160f257f4b6817b4ce643debdda4fb21a2c040adda7862cab0a587
