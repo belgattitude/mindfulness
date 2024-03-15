@@ -39,6 +39,6 @@
   "engines": {
     "node": ">=18.10"
   },
-  "packageManager": "yarn@4.1.0",
+  "packageManager": "yarn@4.1.1",
   "license": "MIT"
 }
