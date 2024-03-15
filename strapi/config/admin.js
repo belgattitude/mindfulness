@@ -13,5 +13,5 @@ module.exports = ({ env }) => ({
   telemetryDisabled: true,
   flags: {
     nps: false
-  }
+  },
 });
