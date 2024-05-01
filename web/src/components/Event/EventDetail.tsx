@@ -21,7 +21,7 @@ export const EventDetail: FC<Props> = (props) => {
     <div className={'flex flex-1'}>
       <div
         className={
-          'fixed left-0 top-0 -z-10 m-0 h-screen max-h-screen w-full overflow-hidden p-0 opacity-15'
+          'fixed left-0 top-0 m-0 h-screen max-h-screen w-full overflow-hidden p-0 opacity-15'
         }
       >
         {event.cover && (
@@ -37,7 +37,7 @@ export const EventDetail: FC<Props> = (props) => {
           />
         )}
       </div>
-      <ProseContent>
+      <ProseContent className={'z-10'}>
         <div>
           <h1>{event.displayTitle ?? event.title}</h1>
           <p>

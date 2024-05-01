@@ -22,7 +22,11 @@ export const MainNavHeader: FC<Props> = (props) => {
         }
       >
         <Link href={'/'}>
-          <MainLogo width={90} height={60} className={'mb-[7px]'} />
+          <MainLogo
+            width={90}
+            height={60}
+            className={'mb-[7px] h-[60px] w-auto lg:h-[90px]'}
+          />
         </Link>
         <p className={'font-family-brand text-xl font-normal text-[#34695d]'}>
           Sandrine Rauter

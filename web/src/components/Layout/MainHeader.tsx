@@ -26,10 +26,10 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     <div className={'flex'}>
       <div
         className={clsx(
-          'top-0 z-50 w-full border-brand-color-50 bg-white/90 shadow-brand-color-50 lg:border-b-2'
+          'top-0 z-50 w-full border-brand-color-50 bg-white/95 shadow-brand-color-50 lg:border-b-2'
         )}
       >
-        <MainNavHeader />
+        <MainNavHeader className={'z-50'} />
 
         <div
           className={clsx(

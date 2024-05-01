@@ -13,7 +13,7 @@ export const MainLogo: FC<Props> = (props) => {
     className = '',
     width = 95,
     height = 100,
-    priority = false,
+    priority = true,
     style,
   } = props;
   return (
@@ -24,6 +24,7 @@ export const MainLogo: FC<Props> = (props) => {
       width={width}
       height={height}
       loading={'eager'}
+      priority={priority}
       // quality={90}
       style={style}
     />
