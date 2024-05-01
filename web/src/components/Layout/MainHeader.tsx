@@ -57,7 +57,9 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         <MainSidebar hidden={!isSidebarExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon
           ref={ref}
-          className={cn('absolute right-5 top-3 h-[32px] w-[32px] text-black')}
+          className={cn(
+            'absolute right-5 top-3 h-[32px] w-[32px] *:text-[#EEEEEE]'
+          )}
           handleClick={() => {
             setIsSidebarExpanded((prevState) => !prevState);
           }}
