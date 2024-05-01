@@ -15,7 +15,6 @@
     "noEmit": true,
     "esModuleInterop": true,
     "incremental": true,
-    "newLine": "lf"
   },
   "exclude": ["**/node_modules", "**/.*/"]
 }

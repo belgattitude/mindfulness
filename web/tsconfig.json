@@ -12,11 +12,9 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "verbatimModuleSyntax": true,
@@ -33,6 +31,9 @@
       ],
       "@/features/*": [
         "./features/*"
+      ],
+      "@/fonts/*": [
+        "./fonts/*"
       ],
       "@/gql/*": [
         "./gql/*"
@@ -73,6 +74,8 @@
   ],
   "include": [
     ".eslintrc.*",
+    ".storybook/*.ts",
+    ".storybook/*.tsx",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

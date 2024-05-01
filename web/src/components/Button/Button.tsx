@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { twx } from '@/components/utils';
 
 const button = cva(
-  'rounded-3xl border bg-title-color-400 text-white hover:bg-title-color-300',
+  'rounded-3xl border bg-title-color-400 font-family-button text-white hover:bg-title-color-300',
   {
     variants: {
       $size: {

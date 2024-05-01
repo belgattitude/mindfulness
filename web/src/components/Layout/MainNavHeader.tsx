@@ -5,22 +5,10 @@ import { twMerge } from 'tailwind-merge';
 import { MainLogo } from '@/components/Logo/MainLogo';
 
 type Props = {
-  collapse: boolean;
-  render: boolean;
-  forceWhiteBg?: boolean;
   className?: string;
 };
 export const MainNavHeader: FC<Props> = (props) => {
-  const {
-    collapse = false,
-    render = true,
-    className,
-    forceWhiteBg = false,
-  } = props;
-  if (!render) {
-    return <></>;
-  }
-
+  const { className } = props;
   return (
     <div
       data-test-id={'main-nav-header'}

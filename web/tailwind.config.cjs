@@ -30,6 +30,10 @@ module.exports = {
           'var(--font-family-inter)',
           ...defaultTheme.fontFamily.sans,
         ],
+        'family-button': [
+          'var(--font-family-inter)',
+          ...defaultTheme.fontFamily.sans,
+        ],
         'family-title': [
           'var(--font-family-montserrat)',
           ...defaultTheme.fontFamily.sans,

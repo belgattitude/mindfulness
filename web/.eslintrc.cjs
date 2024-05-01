@@ -17,12 +17,12 @@ module.exports = {
   ],
   extends: [
     '@belgattitude/eslint-config-bases/typescript',
+    '@belgattitude/eslint-config-bases/import-x',
     '@belgattitude/eslint-config-bases/react',
     '@belgattitude/eslint-config-bases/react-query',
     '@belgattitude/eslint-config-bases/tailwind',
     '@belgattitude/eslint-config-bases/storybook',
     'next/core-web-vitals',
-    // Apply prettier and disable incompatible rules
     '@belgattitude/eslint-config-bases/prettier-plugin',
   ],
   rules: {
@@ -36,14 +36,12 @@ module.exports = {
       files: ['next.config.mjs'],
       rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
-        'import/order': 'off',
       },
     },
     {
       files: ['src/gql/**/*.ts'],
       extends: ['plugin:@typescript-eslint/disable-type-checked'],
       rules: {
-        'import/no-named-as-default': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/array-type': 'off',
         '@typescript-eslint/consistent-indexed-object-style': 'off',
