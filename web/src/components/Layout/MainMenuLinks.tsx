@@ -29,7 +29,7 @@ export const MainMenuLinks: FC<Props> = (props) => {
               className={clsx(
                 'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
                 {
-                  ['underline']:
+                  ['underline decoration-gray-400']:
                     currentRouterPath === '/'
                       ? currentRouterPath === href
                       : activePaths.some(

@@ -15,8 +15,6 @@ export default async function EventRoute(props: Props) {
     slug: eventSlug,
   });
   return (
-    <div className={'flex w-full flex-1'}>
-      {data?.attributes && <EventDetail event={data.attributes} />}
-    </div>
+    <div>{data?.attributes && <EventDetail event={data.attributes} />}</div>
   );
 }

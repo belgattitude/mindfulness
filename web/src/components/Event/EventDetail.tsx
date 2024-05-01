@@ -39,18 +39,20 @@ export const EventDetail: FC<Props> = (props) => {
       <div
         className={[
           'font-family-brand',
-          'rounded-xl',
+          'rounded-lg lg:rounded-xl',
           'bg-white/80',
           'prose-slate',
-          'text-neutral-700',
-          'py-10 px-14 mt-10',
-          'prose-xl prose-zinc prose-h1:mb-1 prose-h1:font-normal prose-h1:text-4xl prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
+          '*:text-neutral-700',
+          'py-2 px-5 mt-0 lg:px-14 lg:py-10 lg:mt-10',
+          'prose lg:prose-xl prose-zinc prose-h1:mb-1 prose-h1:font-normal prose-h1:text-3xl lg:prose-h1:text-4xl prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
           'shadow-lg marker:mr-0 marker:text-purple-600 ',
           'max-w-full',
         ].join(' ')}
       >
         <div>
-          <h1 className={''}>{event.displayTitle ?? event.title}</h1>
+          <h1 className={'text-neutral-700'}>
+            {event.displayTitle ?? event.title}
+          </h1>
           <p>
             avec {event.organizers} en {event.location}
           </p>
