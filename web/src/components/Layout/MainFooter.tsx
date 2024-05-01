@@ -49,7 +49,6 @@ export const MainFooter: FC<Props> = (props) => {
         <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
           <div>
             <p className="font-medium text-gray-900">Menu</p>
-
             <nav aria-label="Footer Navigation - Menu" className="mt-6">
               <ul className="space-y-4 text-sm">
                 {mainNavLinks.map((link) => {

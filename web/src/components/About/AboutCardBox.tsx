@@ -1,22 +1,10 @@
-import { clsx } from 'clsx';
-import type { FC, ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+import type { FC, PropsWithChildren } from 'react';
+import { cn } from '@/components/utils';
 
 type AboutCardBoxProps = {
-  children: ReactNode;
-  className?: string;
-};
+  className?: string | undefined;
+} & PropsWithChildren;
 export const AboutCardBox: FC<AboutCardBoxProps> = (props) => {
   const { className = '', children } = props;
-
-  return (
-    <div
-      className={twMerge(
-        clsx('flex justify-center overflow-hidden'),
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn('', className)}>{children}</div>;
 };

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import type { FC } from 'react';
 
 import type { MainNavLinks } from '@/config/site.config';
+import { cn } from '@/components/utils';
 
 type Props = {
   className?: string;
@@ -15,7 +16,7 @@ export const MainMenuLinks: FC<Props> = (props) => {
   const currentRouterPath = usePathname() ?? '';
 
   return (
-    <div className={['items-end', className].join(' ')}>
+    <div className={cn('items-end', className)}>
       {mainNavLinks.map(({ title, href, activeMenu }) => {
         const activePaths = Array.isArray(activeMenu) ? activeMenu : [href];
         return (

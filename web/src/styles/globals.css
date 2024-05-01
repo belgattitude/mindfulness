@@ -5,7 +5,7 @@
 @layer components {
   .radial-gradient {
     background: #FFFFFF;
-    background: radial-gradient(circle at center, #e1f1e6 5%, #a9dac3 55%);
+    background: radial-gradient(circle at center, #e1f1e6 5%, #B8D6C7 25%);
   }
   .image-rendering-unblur {
     image-rendering: -webkit-optimize-contrast;

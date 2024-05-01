@@ -26,32 +26,31 @@ export const MainHeader: FC<MainNavProps> = (props) => {
     <div className={'flex'}>
       <div
         className={clsx(
-          'top-0 z-50 w-full border-b-8 border-brand-color-50  bg-white/90 shadow-brand-color-50' //  border-b-8 shadow-lg backdrop-blur
+          'top-0 z-50 w-full border-brand-color-50 bg-white/90 shadow-brand-color-50 lg:border-b-2'
         )}
       >
         <MainNavHeader />
 
         <div
           className={clsx(
-            `container static top-0 mx-auto hidden gap-2 p-2 md:flex `
+            `container-xl static top-0 mx-auto hidden gap-2 p-2 md:flex `
           )}
         >
           <div
             className={cn(
-              'flex grow flex-row items-center justify-center gap-5 py-2  md:flex'
+              'flex grow flex-row items-center justify-center gap-5 py-2 md:flex'
             )}
           >
             <MainMenuLinks
               mainNavLinks={mainNavLinks}
               className={cn(
-                'font-family-menu text-xl font-extralight transition-opacity duration-700 ease-in-out md:block',
+                'font-family-menu text-xl font-light transition-opacity duration-700 ease-in-out md:block',
                 {
                   ['opacity-0']: isSidebarExpanded,
                 }
               )}
             />
           </div>
-          <div className={'flex items-center justify-center'}></div>
         </div>
         <MainSidebar hidden={!isSidebarExpanded} mainNavLinks={mainNavLinks} />
         <BurgerMenuIcon

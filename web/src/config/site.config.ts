@@ -8,6 +8,7 @@ export type SiteConfig = {
     title: string;
     href: string;
     activeMenu?: string[] | undefined;
+    footerGroup?: ('activities' | 'menu') | undefined;
   }[];
   search: {
     eventTypes: {
@@ -24,12 +25,25 @@ export const siteConfig = {
     siteDescription: '',
   },
   mainNavLinks: [
-    { title: 'Accueil', href: '/' },
-    { title: 'Mindfulness', href: '/activities/mindfulness' },
-    { title: 'Yoga', href: '/activities/yoga' },
-    { title: 'Dialogue Conscient', href: '/activities/dialogue-conscient' },
-    { title: 'Agenda', href: '/agenda', activeMenu: ['/agenda', '/event'] },
-    { title: 'A propos', href: '/about' },
+    { title: 'Accueil', href: '/', footerGroup: 'menu' },
+    {
+      title: 'Mindfulness',
+      href: '/activities/mindfulness',
+      footerGroup: 'activities',
+    },
+    { title: 'Yoga', href: '/activities/yoga', footerGroup: 'activities' },
+    {
+      title: 'Dialogue Conscient',
+      href: '/activities/dialogue-conscient',
+      footerGroup: 'activities',
+    },
+    {
+      title: 'Agenda',
+      href: '/agenda',
+      activeMenu: ['/agenda', '/event'],
+      footerGroup: 'menu',
+    },
+    { title: 'A propos', href: '/about', footerGroup: 'menu' },
     { title: 'Contact', href: '/contact' },
   ],
   search: {

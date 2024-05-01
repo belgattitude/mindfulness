@@ -15426,7 +15426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-external-links@npm:^3.0.0":
+"rehype-external-links@npm:3.0.0, rehype-external-links@npm:^3.0.0":
   version: 3.0.0
   resolution: "rehype-external-links@npm:3.0.0"
   dependencies:
@@ -18187,6 +18187,7 @@ __metadata:
     react-google-recaptcha-v3: "npm:1.10.1"
     react-markdown: "npm:9.0.1"
     react-twc: "npm:1.4.1"
+    rehype-external-links: "npm:3.0.0"
     remark: "npm:15.0.1"
     remark-gfm: "npm:4.0.0"
     remark-html: "npm:16.0.1"

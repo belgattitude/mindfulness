@@ -3,23 +3,22 @@ import { AboutCard } from '@/components/About/AboutCard';
 import { MyActivitiesCard } from '@/components/Sections/MyActivitiesCard';
 import { fetchHome } from '@/api/home.api';
 import { MarkdownText } from '@/components/MarkdownText';
+import { ProseContent } from '@/components/ProseContent';
 
 export const dynamic = 'force-dynamic';
 
 export default async function HomeRoute() {
   const homeData = await fetchHome();
   return (
-    <div className="container mx-auto">
+    <div className="">
       <div className={'grid-row grid gap-5 md:grid-cols-12'}>
-        <AboutCardBox
-          className={'flex px-5 font-family-brand md:col-span-8 md:px-0'}
-        >
-          <div className="border-3 prose mx-auto bg-white/90 text-gray-700 lg:prose-xl">
+        <ProseContent className={'md:col-span-8 md:px-0'}>
+          <div className="">
             {homeData && <MarkdownText text={homeData.introduction} />}
           </div>
-        </AboutCardBox>
-        <AboutCardBox className={'mb-5 flex flex-col md:col-span-4 '}>
-          <AboutCard className={'mx-auto bg-brand-color/60'} />
+        </ProseContent>
+        <AboutCardBox className={'mb-5 flex flex-col md:col-span-4'}>
+          <AboutCard className={'bg-brand-color/60'} />
         </AboutCardBox>
       </div>
       <div>

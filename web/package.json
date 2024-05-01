@@ -55,6 +55,7 @@
     "react-google-recaptcha-v3": "1.10.1",
     "react-markdown": "9.0.1",
     "react-twc": "1.4.1",
+    "rehype-external-links": "3.0.0",
     "remark": "15.0.1",
     "remark-gfm": "4.0.0",
     "remark-html": "16.0.1",
