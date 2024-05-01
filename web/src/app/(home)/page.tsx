@@ -5,8 +5,8 @@ import { fetchHome } from '@/api/home.api';
 import { MarkdownText } from '@/components/MarkdownText';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-export default async function Home() {
+
+export default async function HomeRoute() {
   const homeData = await fetchHome();
   return (
     <div className="container mx-auto">

@@ -17,10 +17,10 @@ export const EventDetail: FC<Props> = (props) => {
   }
 
   return (
-    <>
+    <div className={'flex flex-1'}>
       <div
         className={
-          'fixed left-0 top-0 -z-10 m-0 h-[800px] max-h-[60vh] w-full overflow-hidden p-0 opacity-20'
+          'fixed left-0 top-0 -z-10 m-0 h-screen max-h-screen w-full overflow-hidden p-0 opacity-15'
         }
       >
         {event.cover && (
@@ -37,11 +37,15 @@ export const EventDetail: FC<Props> = (props) => {
         )}
       </div>
       <div
-        className={
-          'border-1 prose m-4 rounded-2xl border-gray-100 bg-white p-4 text-gray-700 shadow-lg md:prose-xl lg:prose-2xl marker:mr-0 marker:text-purple-600 prose-h1:mb-1 prose-h1:font-normal prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0 md:m-8 md:p-8 lg:m-16 lg:p-16'
-        }
+        className={[
+          'rounded-xl',
+          'bg-white',
+          'py-10 px-14 mt-10',
+          'prose text-gray-700 shadow-lg md:prose-xl lg:prose-xl marker:mr-0 marker:text-purple-600 prose-h1:mb-1 prose-h1:font-normal prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
+          'max-w-full',
+        ].join(' ')}
       >
-        <div className={'hello'}>
+        <div className={''}>
           <h1>{event.displayTitle ?? event.title}</h1>
           <p>
             avec {event.organizers} en {event.location}
@@ -55,7 +59,7 @@ export const EventDetail: FC<Props> = (props) => {
         <div className={'description'}>
           {event.cover && (
             <Image
-              className={''}
+              className={'object-cover'}
               alt="Photo retraite"
               width={1200}
               priority={true}
@@ -69,6 +73,6 @@ export const EventDetail: FC<Props> = (props) => {
           <MarkdownText text={event.description ?? ''} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
