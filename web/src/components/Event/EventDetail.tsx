@@ -38,15 +38,19 @@ export const EventDetail: FC<Props> = (props) => {
       </div>
       <div
         className={[
+          'font-family-brand',
           'rounded-xl',
-          'bg-white',
+          'bg-white/80',
+          'prose-slate',
+          'text-neutral-700',
           'py-10 px-14 mt-10',
-          'prose text-gray-700 shadow-lg md:prose-xl lg:prose-xl marker:mr-0 marker:text-purple-600 prose-h1:mb-1 prose-h1:font-normal prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
+          'prose-xl prose-zinc prose-h1:mb-1 prose-h1:font-normal prose-h1:text-4xl prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
+          'shadow-lg marker:mr-0 marker:text-purple-600 ',
           'max-w-full',
         ].join(' ')}
       >
-        <div className={''}>
-          <h1>{event.displayTitle ?? event.title}</h1>
+        <div>
+          <h1 className={''}>{event.displayTitle ?? event.title}</h1>
           <p>
             avec {event.organizers} en {event.location}
           </p>

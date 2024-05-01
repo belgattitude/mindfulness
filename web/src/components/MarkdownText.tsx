@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const MarkdownText: FC<Props> = (props) => {
-  const { text, className = '' } = props;
+  const { text, className } = props;
   return (
     <ReactMarkdown
       className={cn('list-inside list-disc', className)}

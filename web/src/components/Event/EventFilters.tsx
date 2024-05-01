@@ -22,7 +22,7 @@ type Props = {
 export const EventFilters: FC<Props> = (props) => {
   const { className = '', onChange } = props;
 
-  const { push } = useRouter();
+  const router = useRouter();
 
   const [selected, setSelected] = useState<Types>(
     findEventBySlug(props.selected) ?? types[0]
@@ -35,7 +35,7 @@ export const EventFilters: FC<Props> = (props) => {
     const { slug } = selected;
     setSelected(selected);
     const url = ['/agenda', slug].filter((s) => s.length > 0).join('/');
-    push(url);
+    router.push(url);
   };
 
   return (

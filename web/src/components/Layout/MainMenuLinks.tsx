@@ -12,11 +12,12 @@ type Props = {
 
 export const MainMenuLinks: FC<Props> = (props) => {
   const { className = '', mainNavLinks } = props;
-  const currentRouterPath = usePathname();
+  const currentRouterPath = usePathname() ?? '';
 
   return (
     <div className={['items-end', className].join(' ')}>
-      {mainNavLinks.map(({ title, href }) => {
+      {mainNavLinks.map(({ title, href, activeMenu }) => {
+        const activePaths = Array.isArray(activeMenu) ? activeMenu : [href];
         return (
           <Link
             key={`main-links-${href}`}
@@ -31,7 +32,11 @@ export const MainMenuLinks: FC<Props> = (props) => {
                   ['underline']:
                     currentRouterPath === '/'
                       ? currentRouterPath === href
-                      : href.startsWith(currentRouterPath ?? '/null'),
+                      : activePaths.some(
+                          (activePath) =>
+                            href !== '/' &&
+                            currentRouterPath.startsWith(activePath)
+                        ),
                 }
               )}
               href={href}
