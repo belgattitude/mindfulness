@@ -15,14 +15,14 @@
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.20.5",
-    "@strapi/plugin-graphql": "4.20.5",
-    "@strapi/plugin-i18n": "4.20.5",
-    "@strapi/plugin-users-permissions": "4.20.5",
-    "@strapi/strapi": "4.20.5",
-    "better-sqlite3": "9.4.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "@strapi/plugin-documentation": "4.24.0",
+    "@strapi/plugin-graphql": "4.24.0",
+    "@strapi/plugin-i18n": "4.24.0",
+    "@strapi/plugin-users-permissions": "4.24.0",
+    "@strapi/strapi": "4.24.0",
+    "better-sqlite3": "9.6.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-router-dom": "5.3.4",
     "styled-components": "5.3.11"
   },

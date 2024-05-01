@@ -6,4 +6,5 @@
 reject: [
   'styled-components',
   'react-router-dom',
+  'eslint'
 ]

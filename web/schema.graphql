@@ -77,100 +77,6 @@ input ContactInput {
   title: String
 }
 
-type ContentReleasesRelease {
-  actions(filters: ContentReleasesReleaseActionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ContentReleasesReleaseActionRelationResponseCollection
-  createdAt: DateTime
-  name: String!
-  releasedAt: DateTime
-  scheduledAt: DateTime
-  timezone: String
-  updatedAt: DateTime
-}
-
-type ContentReleasesReleaseAction {
-  contentType: String!
-  createdAt: DateTime
-  entry: GenericMorph
-  locale: String
-  release: ContentReleasesReleaseEntityResponse
-  type: ENUM_CONTENTRELEASESRELEASEACTION_TYPE!
-  updatedAt: DateTime
-}
-
-type ContentReleasesReleaseActionEntity {
-  attributes: ContentReleasesReleaseAction
-  id: ID
-}
-
-type ContentReleasesReleaseActionEntityResponse {
-  data: ContentReleasesReleaseActionEntity
-}
-
-type ContentReleasesReleaseActionEntityResponseCollection {
-  data: [ContentReleasesReleaseActionEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input ContentReleasesReleaseActionFiltersInput {
-  and: [ContentReleasesReleaseActionFiltersInput]
-  contentType: StringFilterInput
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  locale: StringFilterInput
-  not: ContentReleasesReleaseActionFiltersInput
-  or: [ContentReleasesReleaseActionFiltersInput]
-  release: ContentReleasesReleaseFiltersInput
-  type: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input ContentReleasesReleaseActionInput {
-  contentType: String
-  locale: String
-  release: ID
-  type: ENUM_CONTENTRELEASESRELEASEACTION_TYPE
-}
-
-type ContentReleasesReleaseActionRelationResponseCollection {
-  data: [ContentReleasesReleaseActionEntity!]!
-}
-
-type ContentReleasesReleaseEntity {
-  attributes: ContentReleasesRelease
-  id: ID
-}
-
-type ContentReleasesReleaseEntityResponse {
-  data: ContentReleasesReleaseEntity
-}
-
-type ContentReleasesReleaseEntityResponseCollection {
-  data: [ContentReleasesReleaseEntity!]!
-  meta: ResponseCollectionMeta!
-}
-
-input ContentReleasesReleaseFiltersInput {
-  actions: ContentReleasesReleaseActionFiltersInput
-  and: [ContentReleasesReleaseFiltersInput]
-  createdAt: DateTimeFilterInput
-  id: IDFilterInput
-  name: StringFilterInput
-  not: ContentReleasesReleaseFiltersInput
-  or: [ContentReleasesReleaseFiltersInput]
-  releasedAt: DateTimeFilterInput
-  scheduledAt: DateTimeFilterInput
-  timezone: StringFilterInput
-  updatedAt: DateTimeFilterInput
-}
-
-input ContentReleasesReleaseInput {
-  actions: [ID]
-  name: String
-  releasedAt: DateTime
-  scheduledAt: DateTime
-  timezone: String
-}
-
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -199,11 +105,6 @@ input DateTimeFilterInput {
   null: Boolean
   or: [DateTime]
   startsWith: DateTime
-}
-
-enum ENUM_CONTENTRELEASESRELEASEACTION_TYPE {
-  publish
-  unpublish
 }
 
 enum ENUM_EVENT_EVENTTYPE {
@@ -345,7 +246,7 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = About | Contact | ContentReleasesRelease | ContentReleasesReleaseAction | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = About | Contact | Event | Home | I18NLocale | Page | Programme | Temoignage | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type Home {
   createdAt: DateTime
@@ -483,8 +384,6 @@ input JSONFilterInput {
 type Mutation {
   """Change user password. Confirm with the current password."""
   changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
-  createContentReleasesRelease(data: ContentReleasesReleaseInput!): ContentReleasesReleaseEntityResponse
-  createContentReleasesReleaseAction(data: ContentReleasesReleaseActionInput!): ContentReleasesReleaseActionEntityResponse
   createEvent(data: EventInput!): EventEntityResponse
   createPage(data: PageInput!): PageEntityResponse
   createProgramme(data: ProgrammeInput!): ProgrammeEntityResponse
@@ -499,8 +398,6 @@ type Mutation {
   createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
   deleteAbout: AboutEntityResponse
   deleteContact: ContactEntityResponse
-  deleteContentReleasesRelease(id: ID!): ContentReleasesReleaseEntityResponse
-  deleteContentReleasesReleaseAction(id: ID!): ContentReleasesReleaseActionEntityResponse
   deleteEvent(id: ID!): EventEntityResponse
   deleteHome: HomeEntityResponse
   deletePage(id: ID!): PageEntityResponse
@@ -533,8 +430,6 @@ type Mutation {
   resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
   updateAbout(data: AboutInput!): AboutEntityResponse
   updateContact(data: ContactInput!): ContactEntityResponse
-  updateContentReleasesRelease(data: ContentReleasesReleaseInput!, id: ID!): ContentReleasesReleaseEntityResponse
-  updateContentReleasesReleaseAction(data: ContentReleasesReleaseActionInput!, id: ID!): ContentReleasesReleaseActionEntityResponse
   updateEvent(data: EventInput!, id: ID!): EventEntityResponse
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
   updateHome(data: HomeInput!): HomeEntityResponse
@@ -683,10 +578,6 @@ enum PublicationState {
 type Query {
   about: AboutEntityResponse
   contact: ContactEntityResponse
-  contentReleasesRelease(id: ID): ContentReleasesReleaseEntityResponse
-  contentReleasesReleaseAction(id: ID): ContentReleasesReleaseActionEntityResponse
-  contentReleasesReleaseActions(filters: ContentReleasesReleaseActionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ContentReleasesReleaseActionEntityResponseCollection
-  contentReleasesReleases(filters: ContentReleasesReleaseFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ContentReleasesReleaseEntityResponseCollection
   event(id: ID): EventEntityResponse
   events(filters: EventFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): EventEntityResponseCollection
   home(publicationState: PublicationState = LIVE): HomeEntityResponse
