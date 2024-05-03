@@ -24,8 +24,6 @@ export function getStrapiMedia(media: StrapiMedia): string | null {
 }
 
 export const isStrapiMedia = (v: unknown): v is StrapiMedia => {
-  if (isPlainObject<StrapiMedia>(v)) {
-  }
   return (
     isPlainObject<StrapiMedia>(v) &&
     typeof v?.data?.attributes?.url === 'string'
