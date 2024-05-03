@@ -3,6 +3,7 @@ import { fullPageFragment, type FetchPage } from '@/api/pages.api';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { ProgrammeListItem } from './ProgrammeListItem';
+import { PageContent } from '@/components/PageContent';
 
 export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   const page = useFragment(fullPageFragment, props.page);
@@ -11,7 +12,7 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div className={'mx-auto mt-5 bg-white font-family-brand'}>
+    <PageContent>
       <h1 className={'hidden text-3xl'}>{page.title}</h1>
 
       <MarkdownText
@@ -33,6 +34,6 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
           )
         );
       })}
-    </div>
+    </PageContent>
   );
 };

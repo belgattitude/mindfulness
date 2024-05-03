@@ -30,7 +30,6 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         )}
       >
         <MainNavHeader className={'z-50'} />
-
         <div
           className={clsx(
             `container-xl static top-0 mx-auto hidden gap-2 p-2 md:flex `

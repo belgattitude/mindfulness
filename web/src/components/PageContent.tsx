@@ -5,15 +5,20 @@ type Props = {
   className?: string | undefined;
 } & PropsWithChildren;
 
-export const ProseContent: FC<Props> = (props) => {
+export const PageContent: FC<Props> = (props) => {
   const { className, children } = props;
   return (
     <div
       className={cn(
         [
-          'prose-slate',
-          'prose lg:prose-xl prose-zinc prose-h1:mb-1 prose-h1:text-neutral-700 prose-h1:font-normal prose-h1:text-3xl lg:prose-h1:text-4xl prose-a:text-blue-600 prose-ul:list-inside prose-ul:list-disc prose-ul:p-0 prose-li:pl-0',
-          'max-w-full',
+          'flex flex-col',
+          'font-family-brand',
+          'rounded-lg lg:rounded-xl',
+          'bg-white/80',
+          'text-neutral-700',
+          'py-2 px-5 mx-5 pt-3 md:px-14 md:py-10 md:mt-10',
+          'marker:mr-0 marker:text-purple-600',
+          'shadow-lg',
         ].join(' '),
         className
       )}

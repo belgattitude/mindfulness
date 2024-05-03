@@ -2754,10 +2754,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@httpx/assert@npm:0.9.0":
-  version: 0.9.0
-  resolution: "@httpx/assert@npm:0.9.0"
-  checksum: 10c0/75be4bc0c95051bb544fa98c1e6170bd6a7d07920b05c9dfdebb2ceeb920e7830bb3f53cfbc1b4fd0c790747843d46c7471316c7be29699757a20b98aa2ac09e
+"@httpx/assert@npm:0.10.2":
+  version: 0.10.2
+  resolution: "@httpx/assert@npm:0.10.2"
+  checksum: 10c0/db22a90dc2afd986815be9dc84ced2410a9268fec5732a024d107142322a3e1f9e02e3fe1e41200e2f48f0fe8e7ee4f3b052d1a21fc295daea1513faf4c7ffd2
   languageName: node
   linkType: hard
 
@@ -5179,12 +5179,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.12.7":
-  version: 20.12.7
-  resolution: "@types/node@npm:20.12.7"
+"@types/node@npm:*, @types/node@npm:20.12.8":
+  version: 20.12.8
+  resolution: "@types/node@npm:20.12.8"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/dce80d63a3b91892b321af823d624995c61e39c6a223cc0ac481a44d337640cc46931d33efb3beeed75f5c85c3bda1d97cef4c5cd4ec333caf5dee59cff6eca0
+  checksum: 10c0/840002d20654e38a9af8cdffa215598fdb28ac4f96c5701ed672ec365ed6ccc66da299edddaa409baf13cd71bbf1128901f633b5e44e070fc236e26415805b78
   languageName: node
   linkType: hard
 
@@ -5197,12 +5197,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/nodemailer@npm:6.4.14":
-  version: 6.4.14
-  resolution: "@types/nodemailer@npm:6.4.14"
+"@types/nodemailer@npm:6.4.15":
+  version: 6.4.15
+  resolution: "@types/nodemailer@npm:6.4.15"
   dependencies:
     "@types/node": "npm:*"
-  checksum: 10c0/b5958843576cde76dc532aa7b726182fef8b466fa9fcaf1aa03f89f02e896bec4e28b593ffa1a289a46bd0b7fdf34da0640ab7ef8f0811948016f58f77e16307
+  checksum: 10c0/553e613fe08fd663bff1fb3647a8ebbcc4ca297a6249296a43f3c92499158acad5955689be2096ff3fe72f145e80d749c1fc66d5549fe665d7ceb6d0946f2a26
   languageName: node
   linkType: hard
 
@@ -17995,9 +17995,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:5.2.10, vite@npm:^5.0.0":
-  version: 5.2.10
-  resolution: "vite@npm:5.2.10"
+"vite@npm:5.2.11, vite@npm:^5.0.0":
+  version: 5.2.11
+  resolution: "vite@npm:5.2.11"
   dependencies:
     esbuild: "npm:^0.20.1"
     fsevents: "npm:~2.3.3"
@@ -18031,7 +18031,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/d50630ac8de807a6185cd9b5763b3969b2950a454cf6a4482f3780f183865e8d6f7e3aa57dd70ede1c493aaa861efb25b43562287efbcf8b471b7f3b88857a33
+  checksum: 10c0/664b8d68e4f5152ae16bd2041af1bbaf11c43630ac461835bc31ff7d019913b33e465386e09f66dc1037d7aeefbb06939e0173787c063319bc2bd30c3b9ad8e4
   languageName: node
   linkType: hard
 
@@ -18138,7 +18138,7 @@ __metadata:
     "@graphql-codegen/typescript-react-query": "npm:6.1.0"
     "@headlessui/react": "npm:1.7.19"
     "@heroicons/react": "npm:2.1.3"
-    "@httpx/assert": "npm:0.9.0"
+    "@httpx/assert": "npm:0.10.2"
     "@httpx/exception": "npm:3.0.6"
     "@next/bundle-analyzer": "npm:14.2.3"
     "@parcel/watcher": "npm:2.4.1"
@@ -18157,8 +18157,8 @@ __metadata:
     "@tailwindcss/forms": "npm:0.5.7"
     "@tailwindcss/typography": "npm:0.5.13"
     "@tanstack/react-query": "npm:5.32.1"
-    "@types/node": "npm:20.12.7"
-    "@types/nodemailer": "npm:6.4.14"
+    "@types/node": "npm:20.12.8"
+    "@types/nodemailer": "npm:6.4.15"
     "@types/react": "npm:18.3.1"
     "@types/react-dom": "npm:18.3.0"
     "@vercel/og": "npm:0.6.2"
@@ -18200,11 +18200,11 @@ __metadata:
     tailwindcss: "npm:3.4.3"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.4.5"
-    vite: "npm:5.2.10"
+    vite: "npm:5.2.11"
     vite-tsconfig-paths: "npm:4.3.2"
     vitest: "npm:1.5.3"
     webpack: "npm:5.91.0"
-    zod: "npm:3.23.5"
+    zod: "npm:3.23.6"
   languageName: unknown
   linkType: soft
 
@@ -18661,10 +18661,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.23.5":
-  version: 3.23.5
-  resolution: "zod@npm:3.23.5"
-  checksum: 10c0/5c74aefe2c0bc2f00d79c5a8724dae863054653bbad640964fdb009c52573349366fa70533f0dfcb912b007421294d437f063d466f9692eb77a2b620640c2794
+"zod@npm:3.23.6":
+  version: 3.23.6
+  resolution: "zod@npm:3.23.6"
+  checksum: 10c0/9181606c656235cf6454c60ded6ec783226acafc0206844e9729b4d3c1c6ade411b195fa2590e882d3368c82580a44869567f7aebab005bf8d8476db6186d43f
   languageName: node
   linkType: hard
 

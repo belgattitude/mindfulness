@@ -1,7 +1,8 @@
 import { isUrlRelativePath } from '@/lib/typeguards';
-import { getStrapiURL } from '../../config/strapi.config';
+import { getStrapiURL } from '@/config/strapi.config';
+import { isPlainObject } from '@httpx/assert';
 
-type StrapiMedia = {
+export type StrapiMedia = {
   data?: {
     attributes?: {
       url?: string | null;
@@ -21,3 +22,12 @@ export function getStrapiMedia(media: StrapiMedia): string | null {
   }
   return url;
 }
+
+export const isStrapiMedia = (v: unknown): v is StrapiMedia => {
+  if (isPlainObject<StrapiMedia>(v)) {
+  }
+  return (
+    isPlainObject<StrapiMedia>(v) &&
+    typeof v?.data?.attributes?.url === 'string'
+  );
+};

@@ -1,14 +1,14 @@
-import { AboutCardBox } from '@/components/About/AboutCardBox';
 import { fetchContactPage } from '@/api/contact.api';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ProseContent } from '@/components/ProseContent';
 
+import { PageContent } from '@/components/PageContent';
 export const dynamic = 'force-dynamic';
 
 export default async function About() {
   const data = await fetchContactPage();
   return (
-    <AboutCardBox className={'mb-5 font-family-brand'}>
+    <PageContent>
       <ProseContent>
         {data && (
           <MarkdownText
@@ -16,6 +16,6 @@ export default async function About() {
           />
         )}
       </ProseContent>
-    </AboutCardBox>
+    </PageContent>
   );
 }

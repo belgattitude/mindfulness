@@ -6,6 +6,7 @@ import type { EventTypeSlugs } from '@/components/Event/utils';
 import { convertIsoStringToDate } from '@/lib/date/date.utils';
 import { assertParsableStrictIsoDateZ } from '@httpx/assert';
 import { z } from 'zod';
+import { PageContent } from '@/components/PageContent';
 
 type Props = {
   params: {
@@ -37,7 +38,7 @@ export default async function AgendaRoute(props: Props) {
     eventType,
   });
   return (
-    <div className={'flex flex-col py-5'}>
+    <PageContent>
       <div className={'flex'}>
         <EventFilters selected={eventType} />
       </div>
@@ -53,7 +54,7 @@ export default async function AgendaRoute(props: Props) {
           </>
         )}
       </div>
-    </div>
+    </PageContent>
   );
 }
 
