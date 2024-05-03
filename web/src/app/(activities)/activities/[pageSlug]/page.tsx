@@ -15,7 +15,7 @@ export default async function ActivityRoute(props: Props) {
     slug: pageSlug,
   });
   return (
-    <div className={'container mx-auto flex flex-col'}>
+    <div className={'flex flex-1'}>
       {data?.attributes && <CustomPage page={data.attributes} />}
     </div>
   );

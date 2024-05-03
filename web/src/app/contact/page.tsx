@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export default async function About() {
   const data = await fetchContactPage();
   return (
-    <PageContent>
+    <PageContent title={'Contact'}>
       <ProseContent>
         {data && (
           <MarkdownText

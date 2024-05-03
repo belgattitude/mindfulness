@@ -9,7 +9,7 @@ export const runtime = 'edge';
 export default async function About() {
   const data = await fetchAboutPage();
   return (
-    <PageContent>
+    <PageContent title={'A mon propos'}>
       <ProseContent>
         {data && (
           <MarkdownText

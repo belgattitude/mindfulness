@@ -38,7 +38,7 @@ export default async function AgendaRoute(props: Props) {
     eventType,
   });
   return (
-    <PageContent>
+    <PageContent title={'Agenda'}>
       <div className={'flex'}>
         <EventFilters selected={eventType} />
       </div>

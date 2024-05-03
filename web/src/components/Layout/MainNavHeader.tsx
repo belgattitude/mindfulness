@@ -25,7 +25,7 @@ export const MainNavHeader: FC<Props> = (props) => {
           <MainLogo
             width={90}
             height={60}
-            className={'mb-[7px] h-[60px] w-auto lg:h-[90px]'}
+            className={'mb-[7px] h-[50px] w-auto lg:h-[70px]'}
           />
         </Link>
         <p className={'font-family-brand text-xl font-normal text-[#34695d]'}>

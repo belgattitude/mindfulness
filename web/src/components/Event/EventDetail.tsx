@@ -22,7 +22,7 @@ export const EventDetail: FC<Props> = (props) => {
   return (
     <div className={'flex flex-1'}>
       <PageBackgroundImg url={getStrapiMedia(event.cover) ?? ''} />
-      <PageContent className={'z-10'}>
+      <PageContent className={'z-10'} title={'Event'}>
         <ProseContent>
           <div>
             <h1>{event.displayTitle ?? event.title}</h1>

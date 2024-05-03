@@ -4,6 +4,8 @@ import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { ProgrammeListItem } from './ProgrammeListItem';
 import { PageContent } from '@/components/PageContent';
+import { getStrapiMedia } from '@/lib/strapi';
+import { PageBackgroundImg } from '@/components/PageBackgroundImg';
 
 export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   const page = useFragment(fullPageFragment, props.page);
@@ -12,28 +14,31 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   }
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <PageContent>
-      <h1 className={'hidden text-3xl'}>{page.title}</h1>
+    <div>
+      <PageBackgroundImg url={getStrapiMedia(page.cover) ?? ''} />
+      <PageContent title={'Activité'}>
+        <h1 className={'hidden text-3xl'}>{page.title}</h1>
 
-      <MarkdownText
-        className={'prose-lg my-5 text-title-color-800'}
-        text={page.introduction ?? ''}
-      />
-      <h1 className={'pt-5 text-3xl text-title-color-800'}>
-        Programmes et cycles
-      </h1>
+        <MarkdownText
+          className={'prose-lg my-5 text-title-color-800'}
+          text={page.introduction ?? ''}
+        />
+        <h1 className={'pt-5 text-3xl text-title-color-800'}>
+          Programmes et cycles
+        </h1>
 
-      {page.programmes?.data.map((programme) => {
-        return (
-          programme.attributes && (
-            <ProgrammeListItem
-              className={'rounded-xl bg-white'}
-              key={programme.id}
-              programme={programme.attributes}
-            />
-          )
-        );
-      })}
-    </PageContent>
+        {page.programmes?.data.map((programme) => {
+          return (
+            programme.attributes && (
+              <ProgrammeListItem
+                className={'rounded-xl bg-white'}
+                key={programme.id}
+                programme={programme.attributes}
+              />
+            )
+          );
+        })}
+      </PageContent>
+    </div>
   );
 };
