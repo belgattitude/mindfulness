@@ -12,11 +12,11 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   if (!page) {
     return <p>NotFound</p>;
   }
-  // const cover = page.cover ? getStrapiMedia(page.cover) : '';
+  const cover = page.cover ? getStrapiMedia(page.cover) : null;
   return (
     <div>
-      <PageBackgroundImg url={getStrapiMedia(page.cover) ?? ''} />
-      <PageContent title={'Activité'}>
+      {cover !== null && <PageBackgroundImg url={cover} />}
+      <PageContent title={'Mes activités'}>
         <h1 className={'hidden text-3xl'}>{page.title}</h1>
 
         <MarkdownText

@@ -20,6 +20,7 @@ export const MainFooter: FC<Props> = (props) => {
           </div>
 
           <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
+            {/*
             <li>
               <a
                 href="/"
@@ -42,7 +43,7 @@ export const MainFooter: FC<Props> = (props) => {
                   />
                 </svg>
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
