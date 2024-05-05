@@ -22,7 +22,7 @@ export const PageContent: FC<Props> = (props) => {
             // padding
             'py-2 px-5 pt-3 md:px-14 md:py-10 ',
             // margin
-            'mx-5 md:mt-10',
+            'mx-5 mt-5 md:mt-10',
             'marker:mr-0 marker:text-brand-color-800',
             'shadow-lg',
           ].join(' '),

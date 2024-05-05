@@ -4,7 +4,6 @@ import { PageContent } from '@/components/PageContent';
 import { ProseContent } from '@/components/ProseContent';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
 
 export default async function About() {
   const data = await fetchAboutPage();

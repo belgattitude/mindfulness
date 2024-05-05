@@ -23,15 +23,17 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
           className={'prose-lg my-5 text-title-color-800'}
           text={page.introduction ?? ''}
         />
-        <h1 className={'pt-5 text-3xl text-title-color-800'}>
-          Programmes et cycles
+        <h1 className={'mb-3 pt-3 text-3xl text-title-color-800'}>
+          {page.programmes?.data?.length === 1
+            ? 'Programme et cycle'
+            : 'Programmes et cycles'}
         </h1>
 
         {page.programmes?.data.map((programme) => {
           return (
             programme.attributes && (
               <ProgrammeListItem
-                className={'rounded-xl bg-white'}
+                className={'rounded-lg bg-white p-5 md:rounded-xl'}
                 key={programme.id}
                 programme={programme.attributes}
               />
