@@ -28,7 +28,7 @@ export type About = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   summary?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -690,7 +690,7 @@ export type Page = {
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   summary?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -1475,7 +1475,7 @@ export type GetHomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetHomePageQuery = { __typename?: 'Query', home?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', introduction?: string | null } | null } | null } | null };
 
-export type FullPageFragmentFragment = { __typename?: 'Page', createdAt?: string | null, updatedAt?: string | null, publishedAt?: string | null, slug: string, title?: string | null, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: (
+export type FullPageFragmentFragment = { __typename?: 'Page', createdAt?: string | null, updatedAt?: string | null, publishedAt?: string | null, slug: string, title: string, summary?: string | null, introduction?: string | null, programmes?: { __typename?: 'ProgrammeRelationResponseCollection', data: Array<{ __typename?: 'ProgrammeEntity', id?: string | null, attributes?: (
         { __typename?: 'Programme' }
         & { ' $fragmentRefs'?: { 'FullProgrammeFragmentFragment': FullProgrammeFragmentFragment } }
       ) | null }> } | null, cover?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, caption?: string | null, alternativeText?: string | null } | null } | null } | null } & { ' $fragmentName'?: 'FullPageFragmentFragment' };

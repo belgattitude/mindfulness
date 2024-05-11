@@ -4,7 +4,8 @@
   "info": {
     "singularName": "about",
     "pluralName": "abouts",
-    "displayName": "About"
+    "displayName": "About",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -15,14 +16,18 @@
       "type": "richtext"
     },
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "minLength": 3,
+      "maxLength": 80
     },
     "summary": {
       "type": "text"

@@ -18,7 +18,10 @@
       "target": "api::programme.programme"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "maxLength": 80,
+      "minLength": 2
     },
     "summary": {
       "type": "text"

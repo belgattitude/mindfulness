@@ -14,6 +14,7 @@ export default async function ActivityRoute(props: Props) {
   const data = await fetchPage({
     slug: pageSlug,
   });
+
   return (
     <div className={'flex flex-1'}>
       {data?.attributes && <CustomPage page={data.attributes} />}

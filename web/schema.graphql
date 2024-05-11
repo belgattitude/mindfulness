@@ -3,7 +3,7 @@ type About {
   createdAt: DateTime
   description: String
   summary: String
-  title: String
+  title: String!
   updatedAt: DateTime
 }
 
@@ -455,7 +455,7 @@ type Page {
   publishedAt: DateTime
   slug: String!
   summary: String
-  title: String
+  title: String!
   updatedAt: DateTime
 }
 

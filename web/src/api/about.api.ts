@@ -1,7 +1,6 @@
-import { GraphQLClient } from 'graphql-request';
 import { graphql } from '@/gql/gql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphQLUrl } from '../config/graphql.config';
+import { getGraphqlClient } from '@/config/graphql-client.config';
 
 export const getAboutPage = graphql(/* GraphQL */ `
   query getAboutPage {
@@ -25,11 +24,7 @@ export const getAboutPage = graphql(/* GraphQL */ `
 `);
 
 export const fetchAboutPage = async () => {
-  // const { slug } = params;
-  const client = new GraphQLClient(getGraphQLUrl(), {
-    fetch,
-  });
-  return client
+  return getGraphqlClient
     .request(getAboutPage)
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {

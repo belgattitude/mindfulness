@@ -8,6 +8,7 @@ import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
 import type { PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
+import { getGraphqlClient } from '@/config/graphql-client.config';
 
 export const fullProgrammeFragment = graphql(/* GraphQL */ `
   fragment FullProgrammeFragment on Programme {
@@ -74,9 +75,10 @@ const getProgramme = graphql(/* GraphQL */ `
 
 export const fetchProgramme = async (params: { slug: string }) => {
   const { slug } = params;
-  return request(getGraphQLUrl(), getProgramme, {
-    slug,
-  })
+  return getGraphqlClient
+    .request(getProgramme, {
+      slug,
+    })
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
       const event = resp.programmes?.data?.[0];

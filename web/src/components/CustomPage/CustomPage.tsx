@@ -16,14 +16,12 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
   return (
     <div>
       {cover !== null && <PageBackgroundImg url={cover} />}
-      <PageContent title={'Mes activités'}>
-        <h1 className={'hidden text-3xl'}>{page.title}</h1>
-
+      <PageContent title={['Mes activités', page.title].join(' > ')}>
         <MarkdownText
-          className={'prose-lg my-5 text-title-color-800'}
+          className={'prose-lg my-5'}
           text={page.introduction ?? ''}
         />
-        <h1 className={'mb-3 pt-3 text-3xl text-title-color-800'}>
+        <h1 className={'mb-3 pt-3 text-3xl'}>
           {page.programmes?.data?.length === 1
             ? 'Programme et cycle'
             : 'Programmes et cycles'}

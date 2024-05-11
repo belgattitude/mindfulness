@@ -5,6 +5,7 @@ import { graphql } from '@/gql/gql';
 import type { PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
 import { getGraphQLUrl } from '../config/graphql.config';
+import { getGraphqlClient } from '@/config/graphql-client.config';
 
 export const fullPageFragment = graphql(/* GraphQL */ `
   fragment FullPageFragment on Page {
@@ -90,9 +91,8 @@ export const fetchPage = async (params: {
   slug: string;
   publicationState?: PublicationState;
 }) => {
-  return request(getGraphQLUrl(), getPage, {
-    ...params,
-  })
+  return getGraphqlClient
+    .request(getPage, params)
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
       const event = resp.pages?.data?.[0];

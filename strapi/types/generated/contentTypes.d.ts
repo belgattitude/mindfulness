@@ -794,6 +794,7 @@ export interface ApiAboutAbout extends Schema.SingleType {
     singularName: 'about';
     pluralName: 'abouts';
     displayName: 'About';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -801,7 +802,12 @@ export interface ApiAboutAbout extends Schema.SingleType {
   attributes: {
     description: Attribute.RichText;
     cover: Attribute.Media;
-    title: Attribute.String;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+        maxLength: 80;
+      }>;
     summary: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -976,7 +982,12 @@ export interface ApiPagePage extends Schema.CollectionType {
       'oneToMany',
       'api::programme.programme'
     >;
-    title: Attribute.String;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 80;
+      }>;
     summary: Attribute.Text;
     introduction: Attribute.RichText;
     cover: Attribute.Media;

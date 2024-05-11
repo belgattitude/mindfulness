@@ -2,13 +2,12 @@
 // - urql
 // - phase out graphql
 import { HttpNotFound } from '@httpx/exception';
-import request, { GraphQLClient } from 'graphql-request';
 import type { EventTypeSlugs } from '@/components/Event/utils';
-import { getGraphQLUrl } from '@/config/graphql.config';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
 import type { EventFiltersInput, PublicationState } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
+import { getGraphqlClient } from '@/config/graphql-client.config';
 
 export const fullEventFragment = graphql(/* GraphQL */ `
   fragment FullEventFragment on Event {
@@ -98,19 +97,18 @@ export const fetchEvents = async (params: {
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 
-  return request(getGraphQLUrl(), searchEvents, {
-    ...params,
-    rawFilters,
-  }).catch(getGraphqlRequestCatcher);
+  return getGraphqlClient
+    .request(searchEvents, {
+      ...params,
+      rawFilters,
+    })
+    .catch(getGraphqlRequestCatcher);
 };
 
 export const fetchEvent = async (params: { slug: string }) => {
   const { slug } = params;
 
-  const client = new GraphQLClient(getGraphQLUrl(), {
-    fetch,
-  });
-  return client
+  return getGraphqlClient
     .request(getEvent, { slug })
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {

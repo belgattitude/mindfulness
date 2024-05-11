@@ -1,7 +1,6 @@
-import { GraphQLClient } from 'graphql-request';
 import { graphql } from '@/gql/gql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphQLUrl } from '../config/graphql.config';
+import { getGraphqlClient } from '@/config/graphql-client.config';
 
 export const getContactPage = graphql(/* GraphQL */ `
   query getContactPage {
@@ -25,10 +24,7 @@ export const getContactPage = graphql(/* GraphQL */ `
 `);
 
 export const fetchContactPage = async () => {
-  const client = new GraphQLClient(getGraphQLUrl(), {
-    fetch,
-  });
-  return client
+  return getGraphqlClient
     .request(getContactPage)
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
