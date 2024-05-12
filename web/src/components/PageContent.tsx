@@ -33,7 +33,7 @@ export const PageContent: FC<Props> = (props) => {
         )}
       >
         {isStringNonEmpty(title) && (
-          <div className={'top absolute flex w-full'}>
+          <div className={'top absolute'}>
             <h2
               className={clsx(
                 'border-1 md:text-md rounded-md border-amber-100 bg-brand-color-700/90 text-sm text-white',
