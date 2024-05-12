@@ -6,8 +6,8 @@ import { Button } from '@/components/Button';
 import { MarkdownText } from '@/components/MarkdownText';
 import { useFragment } from '@/gql/fragment-masking';
 import { getStrapiMedia } from '@/lib/strapi';
-import { cn } from '@/components/utils';
 import { ProseContent } from '../ProseContent';
+import { PageContent } from '@/components/PageContent';
 
 type Props = {
   programme: FetchProgramme;
@@ -24,12 +24,7 @@ export const ProgrammePage: FC<Props> = (props) => {
 
   // const cover = page.cover ? getStrapiMedia(page.cover) : '';
   return (
-    <div
-      className={cn(
-        'border-5 prose-lg my-5 flex flex-col gap-5 py-5',
-        className
-      )}
-    >
+    <PageContent title={'Programme'}>
       <ProseContent>
         <h1 className={'mb-5 text-2xl'}>{data.title}</h1>
         <div className={'w-full flex-none'}>
@@ -66,6 +61,6 @@ export const ProgrammePage: FC<Props> = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </PageContent>
   );
 };
