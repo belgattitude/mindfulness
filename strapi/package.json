@@ -15,12 +15,12 @@
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.24.4",
-    "@strapi/plugin-graphql": "4.24.4",
-    "@strapi/plugin-i18n": "4.24.4",
-    "@strapi/plugin-users-permissions": "4.24.4",
-    "@strapi/strapi": "4.24.4",
-    "better-sqlite3": "10.0.0",
+    "@strapi/plugin-documentation": "4.25.1",
+    "@strapi/plugin-graphql": "4.25.1",
+    "@strapi/plugin-i18n": "4.25.1",
+    "@strapi/plugin-users-permissions": "4.25.1",
+    "@strapi/strapi": "4.25.1",
+    "better-sqlite3": "11.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^5.3.4",
@@ -38,6 +38,6 @@
   "engines": {
     "node": ">=18.14"
   },
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@4.3.1",
   "license": "MIT"
 }
