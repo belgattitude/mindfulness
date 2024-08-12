@@ -15,19 +15,19 @@
     "docker:build": "docker compose build"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.25.1",
-    "@strapi/plugin-graphql": "4.25.1",
-    "@strapi/plugin-i18n": "4.25.1",
-    "@strapi/plugin-users-permissions": "4.25.1",
-    "@strapi/strapi": "4.25.1",
-    "better-sqlite3": "11.0.0",
+    "@strapi/plugin-documentation": "4.25.7",
+    "@strapi/plugin-graphql": "4.25.7",
+    "@strapi/plugin-i18n": "4.25.7",
+    "@strapi/plugin-users-permissions": "4.25.7",
+    "@strapi/strapi": "4.25.7",
+    "better-sqlite3": "11.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^5.3.4",
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
-    "rimraf": "5.0.7"
+    "rimraf": "6.0.1"
   },
   "author": {
     "name": "Sébastien Vanvelthem"
