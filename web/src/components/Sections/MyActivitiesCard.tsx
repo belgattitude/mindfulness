@@ -18,10 +18,9 @@ const activities = [
       <IconMeditation className={props.className} />
     ),
     items: [
-      { title: 'Meditation', href: '/p/mindfulness' },
-      { title: 'Yoga', href: 'p/yoga' },
-      { title: 'Relaxation', href: '/p/relaxation' },
-      { title: 'Dialogue conscient', href: '/p/dialogue-conscient' },
+      { title: 'Meditation', href: '/activities/mindfulness' },
+      { title: 'Yoga', href: '/activities/yoga' },
+      { title: 'Dialogue conscient', href: '/activities/dialogue-conscient' },
     ],
   },
   {
@@ -30,10 +29,9 @@ const activities = [
       <IconLotus className={props.className} />
     ),
     items: [
-      { title: 'Cours', href: '/events' },
-      { title: 'Cycle', href: '/events' },
-      { title: 'Atelier', href: '/events' },
-      { title: 'Retraite', href: '/events' },
+      { title: 'Cours réguliers', href: '/agenda/cours-reguliers' },
+      { title: 'Programmes & cycles', href: '/agenda/programmes-et-cycles' },
+      { title: 'Stages & retraites', href: '/agenda/stages-et-retraites' },
     ],
   },
 ] as const;
@@ -71,6 +69,7 @@ export const MyActivitiesCard: FC<Props> = (props) => {
                     <Link
                       className="p-3 text-lg decoration-white underline-offset-8 outline-green-500 hover:underline"
                       title={title}
+                      prefetch={false}
                       href={href}
                     >
                       {title}

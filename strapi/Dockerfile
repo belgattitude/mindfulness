@@ -5,7 +5,7 @@ ARG ALPINE_VERSION=3.20
 # Stage 1 - Deps installation                               #
 #############################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as deps
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
 RUN apk add --no-cache tzdata bash && corepack enable
 ENV TZ=Europe/Brussels
 
@@ -25,7 +25,7 @@ RUN YARN_ENABLE_GLOBAL_CACHE="false" \
 # Stage 2 - Build from installation in deps stage           #
 #############################################################
 
-FROM deps as builder
+FROM deps AS builder
 RUN corepack enable
 
 ARG DATABASE_FILENAME
@@ -42,7 +42,7 @@ RUN NODE_ENV=production yarn build
 # Stage 3 - Run final / make runnable image ready           #
 #############################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as runner
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
 RUN apk add --no-cache tzdata bash && corepack enable
 ENV TZ=Europe/Brussels
 
