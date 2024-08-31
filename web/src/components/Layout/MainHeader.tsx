@@ -55,7 +55,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         <BurgerMenuIcon
           ref={ref}
           className={cn(
-            'absolute right-5 top-3 h-[32px] w-[32px] *:text-[#EEEEEE]'
+            'absolute right-5 top-3 h-[30px] w-[30px] *:text-title-color-800'
           )}
           handleClick={() => {
             setIsSidebarExpanded((prevState) => !prevState);

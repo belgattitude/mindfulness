@@ -12,6 +12,7 @@ export default async function About() {
       <ProseContent>
         {data && (
           <MarkdownText
+            className={'text-title-color-800'}
             text={data.contact?.data?.attributes?.description ?? ''}
           />
         )}
