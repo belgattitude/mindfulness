@@ -5,6 +5,7 @@ import { fetchHome } from '@/api/home.api';
 import { MarkdownText } from '@/components/MarkdownText';
 import { ProseContent } from '@/components/ProseContent';
 import { PageContent } from '@/components/PageContent';
+import { isPlainObject } from '@httpx/assert';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,11 +14,13 @@ export default async function HomeRoute() {
   return (
     <PageContent>
       <div className={'grid-row grid gap-5 md:grid-cols-12'}>
-        <ProseContent className={'md:col-span-8 md:px-0'}>
-          <div className="">
-            {homeData && <MarkdownText text={homeData.introduction} />}
-          </div>
-        </ProseContent>
+        {isPlainObject(homeData) === true && (
+          <ProseContent className={'md:col-span-8 md:px-0'}>
+            <div className="text-title-color-800">
+              <MarkdownText text={homeData.introduction} />
+            </div>
+          </ProseContent>
+        )}
         <AboutCardBox className={'mb-5 flex flex-col md:col-span-4'}>
           <AboutCard className={'bg-brand-color/60'} />
         </AboutCardBox>

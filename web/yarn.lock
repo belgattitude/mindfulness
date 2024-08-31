@@ -2630,6 +2630,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@httpx/plain-object@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@httpx/plain-object@npm:1.1.1"
+  checksum: 10c0/458662295fa11ff88563e2f2d9da071ee8229e750dc991119ec34acf49d36a03bfcc505f1e9dc23b3632a73d49d60f06172176e578aee0f11225d91ee7517915
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -16937,6 +16944,7 @@ __metadata:
     "@graphql-codegen/typescript-react-query": "npm:6.1.0"
     "@httpx/assert": "npm:0.12.4"
     "@httpx/exception": "npm:3.0.9"
+    "@httpx/plain-object": "npm:1.1.1"
     "@next/bundle-analyzer": "npm:14.2.7"
     "@storybook/addon-essentials": "npm:8.2.9"
     "@storybook/addon-interactions": "npm:8.2.9"

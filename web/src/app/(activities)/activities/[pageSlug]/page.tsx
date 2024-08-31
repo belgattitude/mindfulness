@@ -16,7 +16,7 @@ export default async function ActivityRoute(props: Props) {
   });
 
   return (
-    <div className={'flex flex-1'}>
+    <div className={'mt-5 flex flex-1 lg:mt-1 xl:mt-0'}>
       {data?.attributes && <CustomPage page={data.attributes} />}
     </div>
   );

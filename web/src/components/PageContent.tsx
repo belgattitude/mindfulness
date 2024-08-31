@@ -45,7 +45,7 @@ export const PageContent: FC<Props> = (props) => {
             </h2>
           </div>
         )}
-        {children}
+        <div className={'mt-5 lg:mt-0'}>{children}</div>
       </div>
     </div>
   );

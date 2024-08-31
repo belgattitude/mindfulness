@@ -18,7 +18,7 @@ const activities = [
       <IconMeditation className={props.className} />
     ),
     items: [
-      { title: 'Meditation', href: '/activities/mindfulness' },
+      { title: 'Mindfulness', href: '/activities/mindfulness' },
       { title: 'Yoga', href: '/activities/yoga' },
       { title: 'Dialogue conscient', href: '/activities/dialogue-conscient' },
     ],
