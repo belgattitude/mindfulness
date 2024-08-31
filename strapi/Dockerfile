@@ -1,4 +1,4 @@
-ARG NODE_VERSION=20.16
+ARG NODE_VERSION=20.17
 ARG ALPINE_VERSION=3.20
 
 #############################################################
