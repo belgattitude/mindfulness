@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
@@ -111,6 +112,7 @@ module.exports = {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('@tailwindcss/typography'),
     // require('@tailwindcss/forms'),
   ],
