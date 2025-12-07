@@ -57,8 +57,6 @@ let nextConfig = {
       ]
     : [],
 
-  eslint: { ignoreDuringBuilds: !!process.env.CI },
-
   // @link https://nextjs.org/docs/basic-features/image-optimization
   images: {
     deviceSizes: [750, 828, 1080, 1200], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -122,48 +120,6 @@ let nextConfig = {
   typescript: {
     ignoreBuildErrors: NEXTJS_IGNORE_TYPECHECK,
   },
-
-  webpack: (config, { webpack, isServer }) => {
-    // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find(
-      (/** @type {{ test: { test: (arg0: string) => any; }; }} */ rule) =>
-        rule.test?.test?.('.svg')
-    );
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
-      {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.svg$/i,
-        issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ['@svgr/webpack'],
-      }
-    );
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i;
-
-    return config;
-  },
 };
-
-if (process.env.ANALYZE === 'true') {
-  try {
-    const withBundleAnalyzer = await import('@next/bundle-analyzer').then(
-      (mod) => mod.default
-    );
-    nextConfig = withBundleAnalyzer({
-      enabled: true,
-    })(nextConfig);
-  } catch {
-    // Do nothing, @next/bundle-analyzer is probably purged in prod or not installed
-  }
-}
 
 export default nextConfig;

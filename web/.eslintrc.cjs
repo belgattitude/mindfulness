@@ -22,7 +22,6 @@ module.exports = {
     '@belgattitude/eslint-config-bases/react-query',
     '@belgattitude/eslint-config-bases/tailwind',
     '@belgattitude/eslint-config-bases/storybook',
-    'next/core-web-vitals',
     '@belgattitude/eslint-config-bases/prettier-plugin',
   ],
   rules: {
