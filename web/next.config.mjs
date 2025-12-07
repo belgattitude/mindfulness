@@ -71,11 +71,8 @@ let nextConfig = {
     deviceSizes: [750, 828, 1080, 1200], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [32, 48, 64, 96], // default: [16, 32, 48, 64, 96, 128, 256, 384]
     minimumCacheTTL: 86_400,
-    formats: ['image/webp'],
-    loader: 'default',
     dangerouslyAllowSVG: false,
-    disableStaticImages: false,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -92,6 +89,11 @@ let nextConfig = {
       {
         protocol: 'https',
         hostname: strapiHostname,
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
       },
     ],
     unoptimized: false,

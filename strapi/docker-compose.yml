@@ -41,7 +41,7 @@ services:
 
   mindfulness-caddy:
     container_name: mindfulness-caddy
-    image: caddy:2.6-alpine
+    image: caddy:2.10.2-alpine
     profiles:
       - donotstart
     depends_on:
@@ -54,11 +54,11 @@ services:
     ports:
       # HTTPS
       - target: 443
-        published: ${HTTPS_PORT:-443}
+        published: 443
         protocol: tcp
       # HTTP/3
       - target: 443
-        published: ${HTTP3_PORT:-443}
+        published: 443
         protocol: udp
 
     volumes:

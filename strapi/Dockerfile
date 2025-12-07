@@ -1,5 +1,5 @@
-ARG NODE_VERSION=20.17
-ARG ALPINE_VERSION=3.20
+ARG NODE_VERSION=24.11
+ARG ALPINE_VERSION=3.22
 
 #############################################################
 # Stage 1 - Deps installation                               #
