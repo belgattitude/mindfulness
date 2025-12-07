@@ -21,9 +21,9 @@ const schema = z.object({
 });
 
 export default async function AgendaRoute(props: Props) {
-  const { eventTypeSlugs } = await props.params;
+  const params = await props.params;
 
-  const safeParams = schema.parse(await props.params);
+  const safeParams = schema.parse(params);
 
   const eventType = (safeParams.eventTypeSlugs?.[0] as EventTypeSlugs) ?? null;
 
