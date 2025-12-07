@@ -53,9 +53,18 @@ let nextConfig = {
   transpilePackages: isProd
     ? [
         // dist make usage of nullish ?.
-        'tailwind-merge',
+        // 'tailwind-merge',
       ]
     : [],
+
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+  },
 
   // @link https://nextjs.org/docs/basic-features/image-optimization
   images: {

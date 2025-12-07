@@ -3,9 +3,9 @@ import { fetchProgramme } from '@/api/programmes';
 import { ProgrammePage } from '@/components/Programme/ProgrammePage';
 
 type Props = {
-  params: {
+  params: Promise<{
     programmeSlug: string;
-  };
+  }>;
 };
 
 const schema = z.object({
@@ -15,7 +15,10 @@ const schema = z.object({
 export const dynamic = 'force-dynamic';
 
 export default async function ProgrammeRoute(props: Props) {
-  const data = await fetchProgramme({ slug: props.params.programmeSlug });
+  const params = await props.params;
+  const data = await fetchProgramme({
+    slug: params.programmeSlug,
+  });
   return (
     <div className={'flex flex-1'}>
       {data?.attributes && <ProgrammePage programme={data.attributes} />}

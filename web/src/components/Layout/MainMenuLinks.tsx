@@ -1,10 +1,10 @@
-import { clsx } from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { FC } from 'react';
 
 import type { MainNavLinks } from '@/config/site.config';
 import { cn } from '@/components/utils';
+import { clsx } from 'clsx';
 
 type Props = {
   className?: string;
@@ -22,28 +22,22 @@ export const MainMenuLinks: FC<Props> = (props) => {
         return (
           <Link
             key={`main-links-${href}`}
-            legacyBehavior={true}
-            className={'underline'}
+            className={clsx(
+              'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
+              {
+                ['underline decoration-gray-400']:
+                  currentRouterPath === '/'
+                    ? currentRouterPath === href
+                    : activePaths.some(
+                        (activePath) =>
+                          href !== '/' &&
+                          currentRouterPath.startsWith(activePath)
+                      ),
+              }
+            )}
             href={href}
           >
-            <a
-              className={clsx(
-                'px-4 py-2 text-lg text-neutral-900 decoration-gray-300 underline-offset-8 outline-green-500 hover:underline',
-                {
-                  ['underline decoration-gray-400']:
-                    currentRouterPath === '/'
-                      ? currentRouterPath === href
-                      : activePaths.some(
-                          (activePath) =>
-                            href !== '/' &&
-                            currentRouterPath.startsWith(activePath)
-                        ),
-                }
-              )}
-              href={href}
-            >
-              {title}
-            </a>
+            {title}
           </Link>
         );
       })}
