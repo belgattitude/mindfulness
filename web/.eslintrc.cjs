@@ -38,6 +38,12 @@ module.exports = {
       },
     },
     {
+      files: ['next-env.d.ts'],
+      rules: {
+        'prettier/prettier': 'off',
+      },
+    },
+    {
       files: ['src/gql/**/*.ts'],
       extends: ['plugin:@typescript-eslint/disable-type-checked'],
       rules: {
