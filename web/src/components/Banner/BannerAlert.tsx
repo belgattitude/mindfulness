@@ -25,7 +25,7 @@ export const BannerAlert: FC<Props> = (props) => {
         Inscriptions ouvertes pour nos prochains stages
       </span>
       <Button
-        className={'rounded bg-pink-400 font-light hover:bg-pink-600'}
+        className={'rounded-sm bg-pink-400 font-light hover:bg-pink-600'}
         $size={'sm'}
       >
         Info et réservations

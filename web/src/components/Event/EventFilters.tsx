@@ -45,7 +45,7 @@ export const EventFilters: FC<Props> = (props) => {
           <div
             key={eventType.slug}
             className={clsx(
-              'flex-1 rounded bg-gray-200 p-5 drop-shadow hover:cursor-pointer hover:bg-gray-100',
+              'flex-1 rounded-sm bg-gray-200 p-5 drop-shadow-sm hover:cursor-pointer hover:bg-gray-100',
               {
                 'bg-gray-300 underline': eventType.slug === selected.slug,
               }
