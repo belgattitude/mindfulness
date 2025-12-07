@@ -75,6 +75,10 @@ let nextConfig = {
         hostname: 'images.unsplash.com',
       },
       {
+        protocol: 'https',
+        hostname: 'mindfulness.reflective-resonance.be',
+      },
+      {
         protocol: 'http',
         hostname: strapiHostname,
       },
