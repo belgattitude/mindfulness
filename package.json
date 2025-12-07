@@ -3,5 +3,5 @@
   "version": "0.1.0",
   "private": true,
   "type": "commonjs",
-  "packageManager": "yarn@4.2.0"
+  "packageManager": "yarn@4.12.0"
 }
