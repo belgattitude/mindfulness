@@ -46,7 +46,6 @@ export const ProgrammeListItem: FC<Props> = (props) => {
           />
         </Link>
       </div>
-
       <div className={twMerge('', className)}>
         <h1 className={'mb-5 text-2xl text-title-color-600'}>{data.title}</h1>
 
@@ -57,12 +56,14 @@ export const ProgrammeListItem: FC<Props> = (props) => {
 
         <div className={'flex w-full flex-row justify-start gap-2'}>
           <div>
-            <Link href={`/programme/${data.slug}`} legacyBehavior={true}>
+            <Link href={`/programme/${data.slug}`}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */}
               <Button>Détail</Button>
             </Link>
           </div>
           <div>
-            <Link href={'/agenda'} legacyBehavior={true}>
+            <Link href={'/agenda'}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */}
               <Button>Consultez l'agenda</Button>
             </Link>
           </div>

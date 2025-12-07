@@ -58,7 +58,7 @@ export const MyActivitiesCard: FC<Props> = (props) => {
             key={group.name}
             className={clsx('gap-5', { ['md:ml-[80px]']: idxGroup > 0 })}
           >
-            <div className={'-ml-0 p-1 text-lg font-light underline md:hidden'}>
+            <div className={'ml-0 p-1 text-lg font-light underline md:hidden'}>
               {group.name}
             </div>
             <ul className={'p-1'}>

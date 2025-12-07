@@ -1,27 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
-  .radial-gradient {
-    background: #FFFFFF;
-    background: radial-gradient(circle at center, #e1f1e6 5%, #B8D6C7 45%);
-  }
-  .image-rendering-unblur {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
+@config '../../tailwind.config.cjs';
 
-  .font-shadow-1 {
-    /*-webkit-text-stroke: 4px #EEE;*/
-    text-shadow:
-            -1px -1px 0 #AAA,
-            1px -1px 0 #000,
-            -1px 1px 0 #AAA,
-            1px 1px 0 #AAA;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
 }
 
+@utility radial-gradient {
+  background: #ffffff;
+  background: radial-gradient(circle at center, #e1f1e6 5%, #b8d6c7 45%);
+}
+
+@utility image-rendering-unblur {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+@utility font-shadow-1 {
+  /*-webkit-text-stroke: 4px #EEE;*/
+  text-shadow:
+    -1px -1px 0 #aaa,
+    1px -1px 0 #000,
+    -1px 1px 0 #aaa,
+    1px 1px 0 #aaa;
+}
 
 :root {
   --main-nav-full-height: 60px;

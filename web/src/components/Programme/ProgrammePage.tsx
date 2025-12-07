@@ -55,7 +55,8 @@ export const ProgrammePage: FC<Props> = (props) => {
       <div>
         <div className={'flex w-full flex-row justify-start gap-2'}>
           <div>
-            <Link href={'/agenda'} legacyBehavior={true}>
+            <Link href={'/agenda'}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */}
               <Button>Consultez l'agenda</Button>
             </Link>
           </div>

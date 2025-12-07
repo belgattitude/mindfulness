@@ -20,9 +20,8 @@ module.exports = {
     '@belgattitude/eslint-config-bases/import-x',
     '@belgattitude/eslint-config-bases/react',
     '@belgattitude/eslint-config-bases/react-query',
-    '@belgattitude/eslint-config-bases/tailwind',
-    '@belgattitude/eslint-config-bases/storybook',
-    'next/core-web-vitals',
+    // '@belgattitude/eslint-config-bases/tailwind',
+    // '@belgattitude/eslint-config-bases/storybook',
     '@belgattitude/eslint-config-bases/prettier-plugin',
   ],
   rules: {
@@ -36,6 +35,12 @@ module.exports = {
       files: ['next.config.mjs'],
       rules: {
         '@typescript-eslint/ban-ts-comment': 'off',
+      },
+    },
+    {
+      files: ['next-env.d.ts'],
+      rules: {
+        'prettier/prettier': 'off',
       },
     },
     {

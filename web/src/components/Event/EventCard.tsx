@@ -31,7 +31,7 @@ export const EventCard: FC<Props> = (props) => {
             width={1000}
             height={800}
             priority={true}
-            className="relative h-[200px] rounded object-cover"
+            className="relative h-[200px] rounded-sm object-cover"
             style={{
               objectFit: 'cover',
             }}
@@ -70,7 +70,7 @@ export const EventCardBackup: FC<Props> = (props) => {
   const eventUrl = `/event/${encodeURIComponent(event.slug)}`;
 
   return (
-    <div className="max-w-sm overflow-hidden rounded shadow-lg">
+    <div className="max-w-sm overflow-hidden rounded-sm shadow-lg">
       <div className="aspect-h-9 aspect-w-16 lg:aspect-none h-56">
         <Link href={eventUrl}>
           <Image

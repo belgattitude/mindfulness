@@ -9,9 +9,9 @@ import { z } from 'zod';
 import { PageContent } from '@/components/PageContent';
 
 type Props = {
-  params: {
+  params: Promise<{
     eventTypeSlugs?: EventTypeSlugs[] | undefined;
-  };
+  }>;
 };
 
 export const dynamic = 'force-dynamic';
@@ -21,9 +21,9 @@ const schema = z.object({
 });
 
 export default async function AgendaRoute(props: Props) {
-  const { eventTypeSlugs } = props.params;
+  const { eventTypeSlugs } = await props.params;
 
-  const safeParams = schema.parse(props.params);
+  const safeParams = schema.parse(await props.params);
 
   const eventType = (safeParams.eventTypeSlugs?.[0] as EventTypeSlugs) ?? null;
 

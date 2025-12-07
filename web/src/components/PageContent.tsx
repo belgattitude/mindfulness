@@ -36,7 +36,7 @@ export const PageContent: FC<Props> = (props) => {
           <div className={'top absolute'}>
             <h2
               className={clsx(
-                'border-1 md:text-md rounded-md border-amber-100 bg-brand-color-700/90 text-sm text-white',
+                'border md:text-md rounded-md border-amber-100 bg-brand-color-700/90 text-sm text-white',
                 '-translate-x-2 -translate-y-8 md:-translate-x-8 md:-translate-y-16',
                 'p-3'
               )}
