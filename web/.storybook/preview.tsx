@@ -1,5 +1,5 @@
 import '../src/styles/globals.css';
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/nextjs-vite";
 
 import { Montserrat, Inter } from 'next/font/google';
 

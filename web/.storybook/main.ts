@@ -1,20 +1,21 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from "@storybook/nextjs-vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@storybook/addon-themes",
-    "@storybook/addon-interactions",
-    "@storybook/addon-viewport"
+    "@storybook/addon-docs"
   ],
+
   framework: {
-    name: "@storybook/nextjs",
+    name: "@storybook/nextjs-vite",
     options: {
       useSwc: true
     },
   },
+
   webpackFinal: async (config) => {
     config.module = config.module || {};
     config.module.rules = config.module.rules || [];
@@ -34,9 +35,7 @@ const config: StorybookConfig = {
 
     return config;
   },
-  docs: {
-    autodocs: "tag",
-  },
-  staticDirs: ["../public"],
+
+  staticDirs: ["../public"]
 };
 export default config;

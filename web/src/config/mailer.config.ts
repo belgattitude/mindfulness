@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { createTransport } from 'nodemailer';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -28,6 +28,6 @@ const config = schema.parse({
   },
 });
 
-export const mailerTransport = nodemailer.createTransport({
+export const mailerTransport = createTransport({
   ...config,
 });

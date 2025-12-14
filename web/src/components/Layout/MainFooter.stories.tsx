@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { MainFooter } from '@/components/Layout/MainFooter';
 import { siteConfig } from '@/config/site.config';
 
