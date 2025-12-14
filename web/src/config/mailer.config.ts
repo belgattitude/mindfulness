@@ -1,4 +1,4 @@
-import {createTransport} from 'nodemailer';
+import { createTransport } from 'nodemailer';
 import { z } from 'zod';
 
 const schema = z.object({
