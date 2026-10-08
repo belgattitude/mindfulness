@@ -5,19 +5,11 @@ import { getGraphqlClient } from '@/config/graphql-client.config';
 export const getContactPage = graphql(/* GraphQL */ `
   query getContactPage {
     contact {
-      data {
-        attributes {
-          summary
-          description
-          cover {
-            data {
-              attributes {
-                url
-                alternativeText
-              }
-            }
-          }
-        }
+      summary
+      description
+      cover {
+        url
+        alternativeText
       }
     }
   }

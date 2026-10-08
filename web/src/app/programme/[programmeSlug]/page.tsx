@@ -21,7 +21,7 @@ export default async function ProgrammeRoute(props: Props) {
   });
   return (
     <div className={'flex flex-1'}>
-      {data?.attributes && <ProgrammePage programme={data.attributes} />}
+      {data && <ProgrammePage programme={data} />}
     </div>
   );
 }

@@ -12,8 +12,16 @@ node_modules
 
 # Specific to strapi
 build
+dist
 .cache
+.tmp
+.strapi
+types/generated
 
+# Runtime data and secrets, mounted as volumes (see docker-compose.yml)
+.env
+sqlite
+data
+public/uploads
 
-
-
+*.log

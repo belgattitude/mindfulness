@@ -6,7 +6,7 @@ import request from 'graphql-request';
 import { getGraphQLUrl } from '@/config/graphql.config';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
-import type { PublicationState } from '@/gql/graphql';
+import type { PublicationStatus } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
 import { getGraphqlClient } from '@/config/graphql-client.config';
 
@@ -20,14 +20,10 @@ export const fullProgrammeFragment = graphql(/* GraphQL */ `
     description
     summary
     cover {
-      data {
-        id
-        attributes {
-          url
-          caption
-          alternativeText
-        }
-      }
+      documentId
+      url
+      caption
+      alternativeText
     }
   }
 `);
@@ -35,27 +31,15 @@ export const fullProgrammeFragment = graphql(/* GraphQL */ `
 const searchProgrammes = graphql(/* GraphQL */ `
   query searchProgrammes(
     $limit: Int = 100
-    $publicationState: PublicationState = LIVE
+    $status: PublicationStatus = PUBLISHED
   ) {
     programmes(
       sort: "publishedAt:DESC"
       pagination: { page: 1, pageSize: $limit }
-      publicationState: $publicationState
+      status: $status
     ) {
-      data {
-        id
-        attributes {
-          ...FullProgrammeFragment
-        }
-      }
-      meta {
-        pagination {
-          page
-          pageSize
-          total
-          pageCount
-        }
-      }
+      documentId
+      ...FullProgrammeFragment
     }
   }
 `);
@@ -63,12 +47,8 @@ const searchProgrammes = graphql(/* GraphQL */ `
 const getProgramme = graphql(/* GraphQL */ `
   query getProgramme($slug: String) {
     programmes(filters: { slug: { eq: $slug } }) {
-      data {
-        id
-        attributes {
-          ...FullProgrammeFragment
-        }
-      }
+      documentId
+      ...FullProgrammeFragment
     }
   }
 `);
@@ -81,7 +61,7 @@ export const fetchProgramme = async (params: { slug: string }) => {
     })
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
-      const event = resp.programmes?.data?.[0];
+      const event = resp.programmes?.[0];
       if (!event) {
         throw new HttpNotFound(`Programme '${slug}' not found`);
       }
@@ -91,7 +71,7 @@ export const fetchProgramme = async (params: { slug: string }) => {
 
 export const fetchProgrammes = async (params: {
   limit?: number;
-  publicationState?: PublicationState;
+  status?: PublicationStatus;
 }) => {
   return request(getGraphQLUrl(), searchProgrammes, {
     ...params,

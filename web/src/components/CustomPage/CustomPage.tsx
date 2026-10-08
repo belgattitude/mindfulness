@@ -22,18 +22,18 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
           text={page.introduction ?? ''}
         />
         <h1 className={'mb-3 pt-3 text-3xl'}>
-          {page.programmes?.data?.length === 1
+          {page.programmes?.length === 1
             ? 'Programme et cycle'
             : 'Programmes et cycles'}
         </h1>
 
-        {page.programmes?.data.map((programme) => {
+        {page.programmes?.map((programme) => {
           return (
-            programme.attributes && (
+            programme && (
               <ProgrammeListItem
                 className={'rounded-lg bg-white p-5 md:rounded-xl'}
-                key={programme.id}
-                programme={programme.attributes}
+                key={programme.documentId}
+                programme={programme}
               />
             )
           );

@@ -14,7 +14,5 @@ export default async function EventRoute(props: Props) {
   const data = await fetchEvent({
     slug: eventSlug,
   });
-  return (
-    <div>{data?.attributes && <EventDetail event={data.attributes} />}</div>
-  );
+  return <div>{data && <EventDetail event={data} />}</div>;
 }
