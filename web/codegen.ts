@@ -27,18 +27,15 @@ const config: CodegenConfig = {
       },
     },
     "./src/gql/hooks.ts": {
-      // The live schema declares @deprecated on DIRECTIVE_DEFINITION, which graphql@16
-      // can't parse here; the printed schema.graphql (yarn codegen-schema) omits built-ins
+      // Generated from the printed schema (yarn codegen-schema)
       schema: "./schema.graphql",
       config: {
         useTypeImports: true,
         reactQueryVersion: 5,
       },
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-query",
-      ],
+      // typescript-operations generates the input and enum types it needs since
+      // @graphql-codegen 7, adding the "typescript" plugin would duplicate them
+      plugins: ["typescript-operations", "typescript-react-query"],
     },
   },
   // for better experience with the watcher

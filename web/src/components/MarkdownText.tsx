@@ -13,16 +13,18 @@ interface Props {
 
 export const MarkdownText: FC<Props> = (props) => {
   const { text, className } = props;
+  // react-markdown 10 removed the className prop (it used to wrap the output in a div)
   return (
-    <ReactMarkdown
-      className={cn("list-inside list-disc", className)}
-      urlTransform={(src, _alt, _title) =>
-        /^https?:\/\//u.test(src) ? src : `${getStrapiURL()}${src}`
-      }
-      rehypePlugins={[[rehypeExternalLinks, { target: "_blank" }]]}
-      remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
-    >
-      {text ?? ""}
-    </ReactMarkdown>
+    <div className={cn("list-inside list-disc", className)}>
+      <ReactMarkdown
+        urlTransform={(src, _alt, _title) =>
+          /^https?:\/\//u.test(src) ? src : `${getStrapiURL()}${src}`
+        }
+        rehypePlugins={[[rehypeExternalLinks, { target: "_blank" }]]}
+        remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+      >
+        {text ?? ""}
+      </ReactMarkdown>
+    </div>
   );
 };
