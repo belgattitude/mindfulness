@@ -63,7 +63,7 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
   const online = isOnlineEvent(event);
   const programmes = (event.programmes ?? []).filter((p) => p.slug);
   return (
-    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-6 rounded-2xl p-6 ring-1 lg:sticky lg:top-6">
+    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-6 rounded-2xl p-4 ring-1 sm:p-6 lg:sticky lg:top-6">
       <h2 className="text-title-color-800 text-lg font-medium">
         Infos pratiques
       </h2>
@@ -189,9 +189,9 @@ export const EventDetail: FC<Props> = (props) => {
       : null;
 
   return (
-    <div className="flex flex-1">
+    <div>
       <PageBackgroundImg url={cover ?? ""} />
-      <PageContent className="z-10 w-full" title="Agenda">
+      <PageContent title="Agenda">
         <Link
           href="/agenda"
           className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1.5 text-sm font-medium outline-green-500 transition-colors"

@@ -164,7 +164,7 @@ export const EventCardBackup: FC<Props> = (props) => {
           />
         </Link>
       </div>
-      <article className="typeset px-6 py-4">
+      <article className="typeset p-4 sm:px-6">
         <div className="mb-2 text-xl font-bold">
           <Link href={eventUrl}>{event.title}</Link>
         </div>
@@ -175,7 +175,7 @@ export const EventCardBackup: FC<Props> = (props) => {
         />
         <p className="line-clamp-4 text-base text-gray-700">{event.summary}</p>
       </article>
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-4 pt-4 pb-2 sm:px-6">
         {keywords.map((keyword) => (
           <span
             key={keyword}

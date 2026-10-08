@@ -60,12 +60,12 @@ export const MyActivitiesCard: FC<Props> = (props) => {
   return (
     <section
       className={twMerge(
-        "ring-brand-color-200 flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm ring-1 md:p-8",
+        "ring-brand-color-200 @container flex flex-col gap-6 rounded-2xl bg-white p-4 shadow-sm ring-1 sm:p-6 md:p-8",
         className
       )}
     >
       <div className="flex flex-col gap-1">
-        <h2 className="text-title-color-800 text-2xl font-light">
+        <h2 className="font-display text-title-color-800 text-4xl font-medium">
           Mes activités
         </h2>
         <p className="text-sm text-neutral-600">
@@ -73,7 +73,8 @@ export const MyActivitiesCard: FC<Props> = (props) => {
           Organisations
         </p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
+      {/* Sized by the card, not the screen: it sits in a side column */}
+      <div className="grid gap-6 @xl:grid-cols-2">
         {activities.map((group) => (
           <div key={group.name} className="flex flex-col gap-2">
             <h3 className="text-xs font-medium tracking-wide text-neutral-500 uppercase">

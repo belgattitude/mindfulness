@@ -13,22 +13,26 @@ export const MainNavHeader: FC<Props> = (props) => {
     <div
       data-test-id="main-nav-header"
       className={cn(
-        "radial-gradient bg-brand-color-600 flex flex-col items-center justify-center space-x-3 p-10 font-light",
+        "radial-gradient bg-brand-color-600 font-light",
+        // A slim bar on mobile (room on the right for the fixed burger),
+        // the centered logo and name from md
+        "flex items-center px-4 py-3 pr-18 md:justify-center md:p-10",
         className
       )}
     >
-      <div className="image-rendering-unblur flex flex-col items-center justify-center">
-        <Link href="/">
-          <MainLogo
-            width={90}
-            height={60}
-            className="mb-[7px] h-[50px] w-auto lg:h-[70px]"
-          />
-        </Link>
-        <p className="font-family-brand text-nav-title text-xl font-normal">
+      <Link
+        href="/"
+        className="image-rendering-unblur flex items-center gap-3 outline-green-500 md:flex-col md:gap-[7px]"
+      >
+        <MainLogo
+          width={90}
+          height={60}
+          className="h-10 w-auto md:h-[50px] lg:h-[70px]"
+        />
+        <span className="font-family-brand text-nav-title text-lg font-normal md:text-xl">
           Sandrine Rauter
-        </p>
-      </div>
+        </span>
+      </Link>
     </div>
   );
 };

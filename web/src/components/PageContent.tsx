@@ -21,17 +21,19 @@ export const PageContent: FC<Props> = (props) => {
       <div
         className={cn(
           clsx(
-            "flex flex-col",
+            // Always the full main width, whatever the content: no width
+            // change from one page to another
+            "flex min-w-0 flex-1 flex-col",
             "font-family-brand",
             "rounded-lg lg:rounded-xl",
             "bg-white/90",
             // text-color
             "text-title-color-800",
             "*:text-title-color-800",
-            // padding
-            "px-5 py-2 pt-3 md:px-14 md:py-10",
-            // margin
-            "mx-5 mt-5 md:mt-10",
+            // padding, tight on mobile to give the text the width
+            "px-4 pt-3 pb-6 sm:px-6 md:px-14 md:py-10",
+            // margin, a thin green border kept around on mobile
+            "mx-2 mt-5 mb-2 sm:mx-5 md:mt-10 md:mb-0",
             "marker:text-brand-color-800 marker:mr-0",
             "shadow-lg"
           ),
@@ -58,7 +60,10 @@ export const PageContent: FC<Props> = (props) => {
             </h2>
           </div>
         )}
-        <div className="mt-5 lg:mt-0">{children}</div>
+        {/* Room for the pill, only when there is one */}
+        <div className={cn(crumbs.length > 0 && "mt-5 lg:mt-0")}>
+          {children}
+        </div>
       </div>
     </div>
   );

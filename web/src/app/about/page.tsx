@@ -6,7 +6,6 @@ import {
 
 import { AboutPageContent } from "@/components/About/AboutPageContent";
 import { PageContent } from "@/components/PageContent";
-import { ProseContent } from "@/components/ProseContent";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getGetAboutQueryOptions } from "@/openapi/about/about";
 
@@ -19,11 +18,9 @@ const About = async () => {
 
   return (
     <PageContent title="A mon propos">
-      <ProseContent>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <AboutPageContent />
-        </HydrationBoundary>
-      </ProseContent>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AboutPageContent />
+      </HydrationBoundary>
     </PageContent>
   );
 };

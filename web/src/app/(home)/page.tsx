@@ -30,20 +30,20 @@ const HomeRoute = async () => {
 
   return (
     <PageContent>
+      <AboutCard />
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <div className="grid gap-8 md:grid-cols-12">
+        <div className="mt-10 grid gap-8 md:grid-cols-12">
           <HomeIntroduction />
           <div className="md:col-span-4">
-            <UpcomingEventsCard
-              params={upcomingParams}
-              now={now}
-              className="md:sticky md:top-6"
-            />
+            <MyActivitiesCard className="md:sticky md:top-6" />
           </div>
         </div>
+        <UpcomingEventsCard
+          params={upcomingParams}
+          now={now}
+          className="mt-10"
+        />
       </HydrationBoundary>
-      <AboutCard className="mt-10" />
-      <MyActivitiesCard className="mt-8" />
     </PageContent>
   );
 };

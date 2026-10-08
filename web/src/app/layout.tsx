@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 
 import "../styles/globals.css";
 import type { ReactNode } from "react";
@@ -12,6 +12,14 @@ import { AppProviders } from "@/providers/AppProviders";
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+// A soft serif for the calmer headings (font-display utility)
+const fontDisplay = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
 });
 
 export const metadata: Metadata = {
@@ -49,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
-  <html lang="en" className={fontSans.variable}>
+  <html lang="fr" className={`${fontSans.variable} ${fontDisplay.variable}`}>
     <body>
       <AppProviders>
         <MainLayout>{children}</MainLayout>

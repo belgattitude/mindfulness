@@ -30,7 +30,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="relative z-20 flex">
       <div
         className={clsx(
           "border-brand-color-50 shadow-brand-color-50 top-0 z-40 w-full bg-white/95 lg:border-b-2"
@@ -60,7 +60,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
       <BurgerMenuIcon
         ref={burgerRef}
         controls={sidebarId}
-        className="fixed top-4 right-4 z-60"
+        className="fixed top-2.5 right-4 z-60 md:top-4"
         handleClick={() => {
           setIsSidebarExpanded((prevState) => !prevState);
         }}
