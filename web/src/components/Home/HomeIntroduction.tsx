@@ -22,7 +22,7 @@ export const HomeIntroduction: FC = () => {
   }
   return (
     <ProseContent className="md:col-span-8 md:px-0">
-      <div className="text-title-color-800">
+      <div className="text-title-color-800 [&>*>:first-child]:mt-0">
         <MarkdownText text={data.data?.introduction ?? ""} />
       </div>
     </ProseContent>

@@ -32,11 +32,11 @@ export const UpcomingEventsCard: FC<Props> = (props) => {
   return (
     <section
       className={twMerge(
-        "ring-brand-color-200 flex flex-col gap-4 rounded-2xl bg-white p-6 shadow-sm ring-1",
+        "ring-brand-color-200 @container flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm ring-1 sm:p-6",
         className
       )}
     >
-      <h2 className="text-title-color-800 text-xl font-normal">
+      <h2 className="font-display text-title-color-800 text-3xl font-medium">
         Prochains rendez-vous
       </h2>
       {events.length === 0 ? (
@@ -44,9 +44,13 @@ export const UpcomingEventsCard: FC<Props> = (props) => {
           Aucun événement prévu pour le moment.
         </p>
       ) : (
-        <ul className="divide-brand-color-100 flex flex-col divide-y">
+        // A list in a narrow section, a row of columns in a wide one
+        <ul className="divide-brand-color-100 flex flex-col divide-y @3xl:grid @3xl:grid-cols-3 @3xl:gap-6 @3xl:divide-y-0">
           {events.map((event) => (
-            <li key={event.documentId} className="py-3 first:pt-0 last:pb-0">
+            <li
+              key={event.documentId}
+              className="py-3 first:pt-0 last:pb-0 @3xl:py-0"
+            >
               <Link
                 href={`/event/${encodeURIComponent(event.slug)}`}
                 className="group flex gap-4 rounded-lg outline-green-500"

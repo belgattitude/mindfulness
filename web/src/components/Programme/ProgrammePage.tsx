@@ -41,7 +41,7 @@ const ProgrammeSummaryPanel: FC<{
   const { programme, nextEvents, now, shareText } = props;
   const [nextEvent] = nextEvents;
   return (
-    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-5 rounded-2xl p-6 ring-1 lg:sticky lg:top-6">
+    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-5 rounded-2xl p-4 ring-1 sm:p-6 lg:sticky lg:top-6">
       <div className="flex flex-col gap-3">
         <h2 className="text-title-color-800 flex items-center gap-2 text-lg font-medium">
           <CalendarDays
@@ -175,7 +175,7 @@ export const ProgrammePage: FC<Props> = (props) => {
   const pastEvents = getPastEvents(events, now).slice(0, maxPastEvents);
 
   return (
-    <PageContent className="w-full" title={["Programmes et cycles"]}>
+    <PageContent title={["Programmes et cycles"]}>
       <header className="flex flex-col gap-3">
         <span className="bg-brand-color-100 text-title-color-800 w-fit rounded-full px-2.5 py-1 text-xs font-medium">
           Programme
