@@ -59,6 +59,8 @@ const nextConfig = {
     : [],
 
   turbopack: {
+    // web/ has its own yarn.lock, next to the repository root one
+    root: import.meta.dirname,
     rules: {
       "*.svg": {
         loaders: ["@svgr/webpack"],

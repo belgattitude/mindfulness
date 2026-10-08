@@ -14,7 +14,7 @@
     "?dev-no-tls": "Disable node tls verifications in dev. So we can use self-signed certs",
     "dev-no-tls": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
     "build": "next build",
-    "build-fast": "cross-env NEXTJS_IGNORE_TYPECHECK=1 next build --no-lint",
+    "build-fast": "cross-env NEXTJS_IGNORE_TYPECHECK=1 next build",
     "typegen": "next typegen",
     "start": "next start",
     "lint": "ultracite check",
@@ -84,14 +84,12 @@
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "cross-env": "10.1.0",
-    "css-loader": "7.1.5",
     "dotenv-flow-cli": "1.1.1",
     "graphql-config": "5.1.8",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
     "oxlint-tailwindcss": "1.14.0",
     "postcss": "8.5.29",
-    "postcss-loader": "8.2.1",
     "rimraf": "6.1.3",
     "storybook": "10.6.1",
     "style-loader": "4.0.0",
@@ -100,8 +98,7 @@
     "ultracite": "7.12.4",
     "vite": "8.3.3",
     "vite-tsconfig-paths": "6.1.1",
-    "vitest": "5.0.3",
-    "webpack": "5.111.1"
+    "vitest": "5.0.3"
   },
   "packageManager": "yarn@4.18.0"
 }
