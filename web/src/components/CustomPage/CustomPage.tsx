@@ -5,19 +5,21 @@ import type { FC } from "react";
 import { MarkdownText } from "@/components/MarkdownText";
 import { PageBackgroundImg } from "@/components/PageBackgroundImg";
 import { PageContent } from "@/components/PageContent";
+import { ProgrammeCard } from "@/components/Programme/ProgrammeCard";
+import { ProseContent } from "@/components/ProseContent";
 import { getStrapiMedia } from "@/lib/strapi";
 import type { GetPagesParams } from "@/openapi/model";
 import { useGetPages } from "@/openapi/page/page";
 
-import { ProgrammeListItem } from "./ProgrammeListItem";
-
 interface Props {
   /** The params prefetched by the server component (same query key) */
   params: GetPagesParams;
+  /** Reference date (iso) for the programmes next dates, set by the server */
+  now: string;
 }
 
 export const CustomPage: FC<Props> = (props) => {
-  const { params } = props;
+  const { params, now } = props;
   const { data, error, isPending } = useGetPages(params);
 
   if (isPending) {
@@ -31,27 +33,32 @@ export const CustomPage: FC<Props> = (props) => {
     return <p>NotFound</p>;
   }
   const cover = page.cover ? getStrapiMedia(page.cover) : null;
+  const programmes = page.programmes ?? [];
   return (
     <div>
       {cover !== null && <PageBackgroundImg url={cover} />}
-      <PageContent title={["Mes activités", page.title].join(" > ")}>
-        <MarkdownText
-          className="typeset my-5 text-inherit [--typeset-flow:1.333em] [--typeset-size:1.125rem] [&_h1]:mb-10 [&_h1]:text-5xl [&_h1]:font-normal [&_h1]:text-inherit"
-          text={page.introduction ?? ""}
-        />
-        <h1 className="mb-3 pt-3 text-3xl">
-          {page.programmes?.length === 1
-            ? "Programme et cycle"
-            : "Programmes et cycles"}
-        </h1>
+      <PageContent title={["Mes activités", page.title]}>
+        {/* The introduction starts with the page title (markdown h1) */}
+        <ProseContent className="[&_h1]:text-title-color-800 max-w-3xl [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:leading-tight lg:[&_h1]:text-4xl">
+          <MarkdownText text={page.introduction ?? ""} />
+        </ProseContent>
 
-        {page.programmes?.map((programme) => (
-          <ProgrammeListItem
-            className="rounded-lg bg-white p-5 md:rounded-xl"
-            key={programme.documentId}
-            programme={programme}
-          />
-        ))}
+        {programmes.length > 0 && (
+          <section className="mt-12 flex flex-col gap-5">
+            <h2 className="text-title-color-800 text-2xl font-light">
+              {programmes.length === 1
+                ? "Programme et cycle"
+                : "Programmes et cycles"}
+            </h2>
+            <ul className="flex flex-col gap-5">
+              {programmes.map((programme) => (
+                <li key={programme.documentId}>
+                  <ProgrammeCard programme={programme} now={now} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </PageContent>
     </div>
   );

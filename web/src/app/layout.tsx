@@ -15,6 +15,10 @@ const fontSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  // Absolute urls for the canonical and link preview (open graph) metadata
+  ...(siteConfig.canonicalUrl
+    ? { metadataBase: new URL(siteConfig.canonicalUrl) }
+    : {}),
   description: siteConfig.metadata.siteDescription,
   icons: {
     apple: {
@@ -38,7 +42,10 @@ export const metadata: Metadata = {
       },
     ],
   },
-  title: siteConfig.metadata.siteTitle,
+  title: {
+    default: siteConfig.metadata.siteTitle,
+    template: `%s · ${siteConfig.metadata.siteTitle}`,
+  },
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => (

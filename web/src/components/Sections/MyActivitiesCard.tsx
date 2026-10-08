@@ -1,6 +1,6 @@
 "use client";
 
-import { clsx } from "clsx";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
@@ -31,7 +31,7 @@ const activities = [
         Icon: IconDialogue,
       },
     ],
-    name: "Programmes",
+    name: "Activités",
   },
   {
     items: [
@@ -58,37 +58,45 @@ const activities = [
 export const MyActivitiesCard: FC<Props> = (props) => {
   const { className = "" } = props;
   return (
-    <div
+    <section
       className={twMerge(
-        "radial-gradient font-family-primary bg-brand-color/60 mx-auto flex flex-col gap-5 border p-5 text-neutral-700 shadow-xl sm:rounded-lg sm:px-10",
+        "ring-brand-color-200 flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm ring-1 md:p-8",
         className
       )}
     >
-      <div className="relative flex flex-col items-center justify-center gap-1">
-        <h1 className="text-3xl font-extralight">Mes Activités</h1>
-        <p className="p-3">En personne et en ligne</p>
-        <p className="p-1">France / Belgique - Particuliers / Organisation</p>
+      <div className="flex flex-col gap-1">
+        <h2 className="text-title-color-800 text-2xl font-light">
+          Mes activités
+        </h2>
+        <p className="text-sm text-neutral-600">
+          En personne et en ligne · France / Belgique · Particuliers /
+          Organisations
+        </p>
       </div>
-      <div className="flex flex-col justify-center md:flex-row">
-        {activities.map((group, idxGroup) => (
-          <div
-            key={group.name}
-            className={clsx("gap-5", { "md:ml-[80px]": idxGroup > 0 })}
-          >
-            <div className="ml-0 p-1 text-lg font-light underline md:hidden">
+      <div className="grid gap-6 md:grid-cols-2">
+        {activities.map((group) => (
+          <div key={group.name} className="flex flex-col gap-2">
+            <h3 className="text-xs font-medium tracking-wide text-neutral-500 uppercase">
               {group.name}
-            </div>
-            <ul className="p-1">
+            </h3>
+            <ul className="flex flex-col gap-1">
               {group.items.map(({ title, href, Icon }) => (
-                <li key={`${title}`} className="flex items-center">
-                  <Icon aria-hidden="true" className="size-6 flex-none" />
+                <li key={title}>
                   <Link
-                    className="p-3 text-lg decoration-white underline-offset-8 outline-green-500 hover:underline"
-                    title={title}
+                    className="group hover:bg-brand-color-50 flex items-center gap-3 rounded-xl p-2 outline-green-500 transition-colors"
                     prefetch={false}
                     href={href}
                   >
-                    {title}
+                    <span className="bg-brand-color-50 text-title-color-700 group-hover:bg-brand-color-100 flex size-10 flex-none items-center justify-center rounded-full transition-colors">
+                      <Icon aria-hidden="true" className="size-6" />
+                    </span>
+                    <span className="text-title-color-800 grow text-lg">
+                      {title}
+                    </span>
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="text-title-color-500 size-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100 motion-reduce:transition-none"
+                    />
                   </Link>
                 </li>
               ))}
@@ -96,6 +104,6 @@ export const MyActivitiesCard: FC<Props> = (props) => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };

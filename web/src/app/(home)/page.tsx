@@ -3,35 +3,47 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
+import { getUpcomingEventsParams } from "@/api/events.rest";
 import { AboutCard } from "@/components/About/AboutCard";
-import { AboutCardBox } from "@/components/About/AboutCardBox";
+import { UpcomingEventsCard } from "@/components/Event/UpcomingEventsCard";
 import { HomeIntroduction } from "@/components/Home/HomeIntroduction";
 import { PageContent } from "@/components/PageContent";
 import { MyActivitiesCard } from "@/components/Sections/MyActivitiesCard";
 import { reactQueryConfig } from "@/config/react-query.config";
+import { getGetEventsQueryOptions } from "@/openapi/event/event";
 import { getGetHomeQueryOptions } from "@/openapi/home/home";
 
 export const dynamic = "force-dynamic";
 
 const HomeRoute = async () => {
-  // Prefetched on the server, the client component reads it from the cache
+  const now = dayjs().toISOString();
+  const upcomingParams = getUpcomingEventsParams({ now, limit: 3 });
+
+  // Prefetched on the server, the client components read them from the cache
   const queryClient = new QueryClient(reactQueryConfig);
-  await queryClient.prefetchQuery(getGetHomeQueryOptions());
+  await Promise.all([
+    queryClient.prefetchQuery(getGetHomeQueryOptions()),
+    queryClient.prefetchQuery(getGetEventsQueryOptions(upcomingParams)),
+  ]);
 
   return (
     <PageContent>
-      <div className="grid gap-5 md:grid-cols-12">
-        <HydrationBoundary state={dehydrate(queryClient)}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <div className="grid gap-8 md:grid-cols-12">
           <HomeIntroduction />
-        </HydrationBoundary>
-        <AboutCardBox className="mb-5 flex flex-col md:col-span-4">
-          <AboutCard className="bg-brand-color/60" />
-        </AboutCardBox>
-      </div>
-      <div>
-        <MyActivitiesCard className="mt-5 p-5" />
-      </div>
+          <div className="md:col-span-4">
+            <UpcomingEventsCard
+              params={upcomingParams}
+              now={now}
+              className="md:sticky md:top-6"
+            />
+          </div>
+        </div>
+      </HydrationBoundary>
+      <AboutCard className="mt-10" />
+      <MyActivitiesCard className="mt-8" />
     </PageContent>
   );
 };
