@@ -3,6 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import { notFound } from "next/navigation";
 
 import { getPageParams } from "@/api/pages.rest";
@@ -35,7 +36,7 @@ const ActivityRoute = async (props: Props) => {
   return (
     <div className="mt-5 flex flex-1 lg:mt-1 xl:mt-0">
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <CustomPage params={pageParams} />
+        <CustomPage params={pageParams} now={dayjs().toISOString()} />
       </HydrationBoundary>
     </div>
   );

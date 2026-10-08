@@ -15,7 +15,9 @@ import type { FC, ReactNode } from "react";
 import { DateRangeText } from "@/components/DateRangeText";
 import { MarkdownText } from "@/components/MarkdownText";
 import { ProseContent } from "@/components/ProseContent";
+import { ShareButton } from "@/components/Share/ShareButton";
 import { getStrapiMedia } from "@/lib/strapi";
+import { getTextExcerpt, isRedundantSummary } from "@/lib/text/text.utils";
 import { useGetEvents } from "@/openapi/event/event";
 import type { Event, GetEventsParams } from "@/openapi/model";
 
@@ -54,12 +56,6 @@ const InfoItem: FC<{ icon: ReactNode; label: string; children: ReactNode }> = (
 };
 
 const iconClassName = "size-5";
-
-const normalizeText = (text: string) => text.replaceAll(/\s+/gu, " ").trim();
-
-/** The summary is often the first lines of the description: not shown twice */
-const isSummaryInDescription = (summary: string, description: string) =>
-  normalizeText(description).includes(normalizeText(summary).slice(0, 80));
 
 /** Dates, place, organizers, programmes and actions */
 const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
@@ -151,6 +147,10 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
             Voir sur Facebook
           </a>
         )}
+        <ShareButton
+          title={event.displayTitle ?? event.title}
+          text={event.summary || getTextExcerpt(event.description ?? "")}
+        />
       </div>
     </div>
   );
@@ -181,7 +181,10 @@ export const EventDetail: FC<Props> = (props) => {
   });
   const summary =
     event.summary &&
-    !isSummaryInDescription(event.summary, event.description ?? "")
+    !isRedundantSummary(event.summary, {
+      title: event.displayTitle ?? event.title,
+      description: event.description ?? "",
+    })
       ? event.summary
       : null;
 
