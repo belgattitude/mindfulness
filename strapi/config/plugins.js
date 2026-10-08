@@ -40,14 +40,6 @@ export default ({ env }) => ({
       },
     },
   },
-  graphql: {
-    config: {
-      endpoint: '/graphql',
-      shadowCRUD: true,
-      depthLimit: 7,
-      maxLimit: 100,
-    },
-  },
   email: {
     config: {
       provider: 'nodemailer',

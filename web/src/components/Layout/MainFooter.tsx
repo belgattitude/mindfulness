@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { FC } from "react";
 
+import { siteConfig } from "@/config/site.config";
 import type { MainNavLinks } from "@/config/site.config";
 
 import { MainLogo } from "../Logo/MainLogo";
@@ -8,85 +9,96 @@ import { MainLogo } from "../Logo/MainLogo";
 interface Props {
   mainNavLinks: MainNavLinks;
 }
+
+interface FooterLink {
+  title: string;
+  href: string;
+}
+
+// Evaluated once per server start, good enough for the copyright
+const copyrightYear = new Date().getFullYear();
+
+const linkClassName =
+  "text-neutral-700 decoration-nav-title/40 underline-offset-4 transition-colors outline-green-500 hover:text-nav-title hover:underline";
+
+const FooterColumn: FC<{ title: string; links: FooterLink[] }> = (props) => {
+  const { title, links } = props;
+  return (
+    <nav aria-label={`Pied de page - ${title}`}>
+      <p className="text-nav-title text-sm font-medium tracking-widest uppercase">
+        {title}
+      </p>
+      <ul className="mt-4 space-y-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className={linkClassName}>
+              {link.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
 export const MainFooter: FC<Props> = (props) => {
   const { mainNavLinks } = props;
+  const byGroup = (group: MainNavLinks[number]["footerGroup"]) =>
+    mainNavLinks.filter((link) => link.footerGroup === group);
+
+  const agendaLinks: FooterLink[] = [
+    ...siteConfig.search.eventTypes.map(({ slug, title }) => ({
+      href: `/agenda/${slug}`,
+      title,
+    })),
+    ...byGroup("agenda").map(({ href }) => ({
+      href,
+      title: "Tout l’agenda",
+    })),
+  ];
+
   return (
     <footer
-      aria-label="Site Footer"
-      className="bg-brand-color-200/90 font-family-primary mt-10 w-full"
+      aria-label="Pied de page"
+      className="radial-gradient bg-brand-color-600 font-family-primary mt-10 w-full border-t border-white/60 text-neutral-700"
     >
-      <div className="container mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <div className="text-teal-600">
-            <MainLogo />
+      <div className="mx-auto max-w-[1200px] px-6 pt-14 pb-8">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+          <div className="col-span-2 flex flex-col items-start gap-4 lg:col-span-1">
+            <Link
+              href="/"
+              className="image-rendering-unblur flex items-center gap-3 outline-green-500"
+            >
+              <MainLogo
+                width={90}
+                height={60}
+                priority={false}
+                className="h-[52px] w-auto"
+              />
+              <span className="font-family-brand text-nav-title text-xl">
+                {siteConfig.metadata.siteTitle}
+              </span>
+            </Link>
+            <p className="max-w-xs leading-relaxed">
+              Mindfulness, yoga et dialogue conscient. En personne et en ligne,
+              en France et en Belgique.
+            </p>
+            <Link
+              href="/contact"
+              className="text-nav-title rounded-full bg-white/70 px-5 py-2 text-sm font-medium shadow-sm outline-green-500 transition-colors hover:bg-white"
+            >
+              Me contacter
+            </Link>
           </div>
 
-          <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
-            {/*
-            <li>
-              <a
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                className="text-gray-700 transition hover:opacity-75"
-              >
-                <span className="sr-only">Facebook</span>
-
-                <svg
-                  className="size-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-            </li> */}
-          </ul>
+          <FooterColumn title="Activités" links={byGroup("activities")} />
+          <FooterColumn title="Agenda" links={agendaLinks} />
+          <FooterColumn title="Infos" links={byGroup("menu")} />
         </div>
 
-        <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16">
-          <div>
-            <p className="font-medium text-gray-900">Menu</p>
-            <nav aria-label="Footer Navigation - Menu" className="mt-6">
-              <ul className="space-y-4 text-sm">
-                {mainNavLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-700 transition hover:opacity-75"
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          <div>
-            <p className="font-medium text-gray-900">Liens</p>
-
-            <nav aria-label="Footer Navigation - Company" className="mt-6">
-              <ul className="space-y-4 text-sm">
-                <li>
-                  <Link
-                    href="/contact"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
+        <div className="mt-12 border-t border-white/50 pt-6 text-sm text-neutral-600">
+          © {copyrightYear} {siteConfig.metadata.siteTitle}
         </div>
-
-        <p className="text-xs text-gray-500">Sandrine Rauter</p>
       </div>
     </footer>
   );

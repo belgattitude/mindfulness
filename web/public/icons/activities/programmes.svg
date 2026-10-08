@@ -1,0 +1,8 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Moon phases: a cycle -->
+  <circle cx="4.5" cy="12" r="2.75"/>
+  <path d="M4.5 9.25a2.75 2.75 0 0 1 0 5.5 1.25 2.75 0 0 0 0-5.5z" fill="currentColor"/>
+  <circle cx="12" cy="12" r="2.75"/>
+  <path d="M12 9.25a2.75 2.75 0 0 1 0 5.5z" fill="currentColor"/>
+  <circle cx="19.5" cy="12" r="2.75" fill="currentColor"/>
+</svg>

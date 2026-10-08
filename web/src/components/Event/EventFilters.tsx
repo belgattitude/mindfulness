@@ -42,25 +42,29 @@ export const EventFilters: FC<Props> = (props) => {
   };
 
   return (
-    <div className={twMerge("flex flex-col gap-5 py-5 md:flex-row", className)}>
-      {types.map((eventType) => (
-        <button
-          type="button"
-          key={eventType.slug}
-          className={clsx(
-            "flex-1 rounded-sm bg-gray-200 p-5 text-left drop-shadow-sm hover:cursor-pointer hover:bg-gray-100",
-            {
-              "bg-gray-300 underline": eventType.slug === selected.slug,
-            }
-          )}
-          aria-pressed={eventType.slug === selected.slug}
-          onClick={() => {
-            updateFilters(eventType);
-          }}
-        >
-          {eventType.title}
-        </button>
-      ))}
-    </div>
+    <fieldset className={twMerge("flex flex-wrap gap-2 pb-8", className)}>
+      <legend className="sr-only">Filtrer par type d&apos;activité</legend>
+      {types.map((eventType) => {
+        const isSelected = eventType.slug === selected.slug;
+        return (
+          <button
+            type="button"
+            key={eventType.slug}
+            className={clsx(
+              "cursor-pointer rounded-full border px-4 py-2 text-sm font-medium outline-green-500 transition-colors",
+              isSelected
+                ? "border-title-color-600 bg-title-color-600 text-white"
+                : "border-brand-color-400 text-title-color-800 hover:bg-brand-color-50 bg-white"
+            )}
+            aria-pressed={isSelected}
+            onClick={() => {
+              updateFilters(eventType);
+            }}
+          >
+            {eventType.title}
+          </button>
+        );
+      })}
+    </fieldset>
   );
 };

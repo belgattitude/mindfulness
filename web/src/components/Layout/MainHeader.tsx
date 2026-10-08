@@ -1,9 +1,8 @@
 "use client";
 
 import { clsx } from "clsx";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { FC } from "react";
-import { useOutsideClick } from "rooks";
 
 import { BurgerMenuIcon } from "@/components/Burger/BurgerMenuIcon";
 import { MainMenuLinks } from "@/components/Layout/MainMenuLinks";
@@ -16,22 +15,28 @@ interface MainNavProps {
   mainNavLinks: MainNavLinks;
 }
 
+const sidebarId = "main-sidebar";
+
 export const MainHeader: FC<MainNavProps> = (props) => {
   const { mainNavLinks } = props;
-  const ref = useRef<HTMLButtonElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
 
   const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(false);
 
-  useOutsideClick(ref, () => setIsSidebarExpanded(false));
+  // Focus back on the burger, so keyboard users don't lose their place
+  const closeSidebar = useCallback(() => {
+    setIsSidebarExpanded(false);
+    burgerRef.current?.focus();
+  }, []);
 
   return (
     <div className="flex">
       <div
         className={clsx(
-          "border-brand-color-50 shadow-brand-color-50 top-0 z-50 w-full bg-white/95 lg:border-b-2"
+          "border-brand-color-50 shadow-brand-color-50 top-0 z-40 w-full bg-white/95 lg:border-b-2"
         )}
       >
-        <MainNavHeader className="z-50" />
+        <MainNavHeader />
         <div className={clsx(`static top-0 mx-auto hidden gap-2 p-2 md:flex`)}>
           <div
             className={cn(
@@ -40,27 +45,27 @@ export const MainHeader: FC<MainNavProps> = (props) => {
           >
             <MainMenuLinks
               mainNavLinks={mainNavLinks}
-              className={cn(
-                "font-family-menu text-xl font-light transition-opacity duration-700 ease-in-out md:block",
-                {
-                  "opacity-0": isSidebarExpanded,
-                }
-              )}
+              className="font-family-menu text-xl font-light md:block"
             />
           </div>
         </div>
-        <MainSidebar hidden={!isSidebarExpanded} mainNavLinks={mainNavLinks} />
-        <BurgerMenuIcon
-          ref={ref}
-          className={cn(
-            "*:text-title-color-800 absolute top-3 right-5 size-[30px]"
-          )}
-          handleClick={() => {
-            setIsSidebarExpanded((prevState) => !prevState);
-          }}
-          isOpen={isSidebarExpanded}
-        />
       </div>
+      <MainSidebar
+        id={sidebarId}
+        open={isSidebarExpanded}
+        onClose={closeSidebar}
+        mainNavLinks={mainNavLinks}
+      />
+      {/* Above the sidebar, it becomes its close button */}
+      <BurgerMenuIcon
+        ref={burgerRef}
+        controls={sidebarId}
+        className="fixed top-4 right-4 z-60"
+        handleClick={() => {
+          setIsSidebarExpanded((prevState) => !prevState);
+        }}
+        isOpen={isSidebarExpanded}
+      />
     </div>
   );
 };

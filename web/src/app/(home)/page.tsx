@@ -1,27 +1,30 @@
-import { isPlainObject } from "@httpx/assert";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 
-import { fetchHome } from "@/api/home.api";
 import { AboutCard } from "@/components/About/AboutCard";
 import { AboutCardBox } from "@/components/About/AboutCardBox";
-import { MarkdownText } from "@/components/MarkdownText";
+import { HomeIntroduction } from "@/components/Home/HomeIntroduction";
 import { PageContent } from "@/components/PageContent";
-import { ProseContent } from "@/components/ProseContent";
 import { MyActivitiesCard } from "@/components/Sections/MyActivitiesCard";
+import { reactQueryConfig } from "@/config/react-query.config";
+import { getGetHomeQueryOptions } from "@/openapi/home/home";
 
 export const dynamic = "force-dynamic";
 
 const HomeRoute = async () => {
-  const homeData = await fetchHome();
+  // Prefetched on the server, the client component reads it from the cache
+  const queryClient = new QueryClient(reactQueryConfig);
+  await queryClient.prefetchQuery(getGetHomeQueryOptions());
+
   return (
     <PageContent>
       <div className="grid gap-5 md:grid-cols-12">
-        {isPlainObject(homeData) === true && (
-          <ProseContent className="md:col-span-8 md:px-0">
-            <div className="text-title-color-800">
-              <MarkdownText text={homeData.introduction} />
-            </div>
-          </ProseContent>
-        )}
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <HomeIntroduction />
+        </HydrationBoundary>
         <AboutCardBox className="mb-5 flex flex-col md:col-span-4">
           <AboutCard className="bg-brand-color/60" />
         </AboutCardBox>

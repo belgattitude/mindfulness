@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
 import "../styles/globals.css";
 import type { ReactNode } from "react";
 
 import { MainLayout } from "@/components/Layout";
 import { siteConfig } from "@/config/site.config";
+import { AppProviders } from "@/providers/AppProviders";
 
-const inter = Inter({ subsets: ["latin"] });
+// Exposed as --font-sans, the font of all texts (shadcn theme and font-family-* utilities)
+const fontSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   description: siteConfig.metadata.siteDescription,
@@ -37,9 +42,11 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
-  <html lang="en">
-    <body className={`${inter.className}`}>
-      <MainLayout>{children}</MainLayout>
+  <html lang="en" className={fontSans.variable}>
+    <body>
+      <AppProviders>
+        <MainLayout>{children}</MainLayout>
+      </AppProviders>
     </body>
   </html>
 );

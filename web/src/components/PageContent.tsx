@@ -34,11 +34,12 @@ export const PageContent: FC<Props> = (props) => {
         )}
       >
         {isStringNonEmpty(title) && (
-          <div className="absolute">
+          // Translate the wrapper, not the badge: an untranslated wrapper stays
+          // over the start of the content and swallows its clicks
+          <div className="absolute -translate-x-2 -translate-y-8 md:-translate-x-8 md:-translate-y-16">
             <h2
               className={clsx(
                 "bg-brand-color-700/90 rounded-md border border-amber-100 text-sm text-white",
-                "-translate-x-2 -translate-y-8 md:-translate-x-8 md:-translate-y-16",
                 "p-3"
               )}
             >
