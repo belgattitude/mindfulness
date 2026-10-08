@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * event router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreRouter('api::event.event');
+export default factories.createCoreRouter('api::event.event');

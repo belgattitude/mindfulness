@@ -6,7 +6,7 @@
  *
  * Configuration: REMOTE_SSH and REMOTE_UPLOADS_DIR in .env.deploy, see .env.deploy.example.
  *
- * Usage: yarn copy-remote-uploads
+ * Usage: pnpm copy-remote-uploads
  */
 
 import { fileURLToPath } from 'node:url';

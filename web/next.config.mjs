@@ -1,5 +1,7 @@
 // @ts-check
 
+import path from "node:path";
+
 import { createSecureHeaders } from "next-secure-headers";
 
 import { env } from "./env.mjs";
@@ -59,8 +61,8 @@ const nextConfig = {
     : [],
 
   turbopack: {
-    // web/ has its own yarn.lock, next to the repository root one
-    root: import.meta.dirname,
+    // pnpm monorepo: dependencies are symlinked from the root node_modules/.pnpm
+    root: path.join(import.meta.dirname, ".."),
     rules: {
       "*.svg": {
         loaders: ["@svgr/webpack"],

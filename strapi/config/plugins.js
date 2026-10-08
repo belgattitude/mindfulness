@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * The documentation plugin sets info['x-generation-date'] to the current date
@@ -9,7 +9,7 @@ const path = require('path');
  */
 const keepGenerationDateWhenUnchanged = (draft) => {
   const docPath = path.join(
-    __dirname,
+    import.meta.dirname,
     '..',
     'src/extensions/documentation/documentation',
     draft.info.version,
@@ -32,7 +32,7 @@ const keepGenerationDateWhenUnchanged = (draft) => {
   }
 };
 
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
   documentation: {
     config: {
       'x-strapi-config': {

@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * page service
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreService('api::page.page');
+export default factories.createCoreService('api::page.page');

@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * about controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreController('api::about.about');
+export default factories.createCoreController('api::about.about');

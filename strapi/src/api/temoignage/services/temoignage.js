@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * temoignage service
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreService('api::temoignage.temoignage');
+export default factories.createCoreService('api::temoignage.temoignage');

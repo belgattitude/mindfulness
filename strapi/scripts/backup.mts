@@ -14,7 +14,7 @@
  * Configuration: REMOTE_SSH, DEPLOY_DIR and BACKUP_* variables in .env.deploy,
  * see .env.deploy.example.
  *
- * Usage: yarn backup:db [--no-snapshot] | yarn backup:env
+ * Usage: pnpm backup:db [--no-snapshot] | pnpm backup:env
  */
 
 import { chmod, mkdir, rmdir } from 'node:fs/promises';
@@ -156,7 +156,7 @@ const main = async () => {
           const stderr = error instanceof ExecaError ? String(error.stderr ?? '').trim() : '';
           if (/is not running|No such container/.test(stderr)) {
             throw new Error(
-              `${stderr}\nStrapi is not running, copy the file directly with: yarn backup:db --no-snapshot`
+              `${stderr}\nStrapi is not running, copy the file directly with: pnpm backup:db --no-snapshot`
             );
           }
           throw error;

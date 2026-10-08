@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * temoignage router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreRouter('api::temoignage.temoignage');
+export default factories.createCoreRouter('api::temoignage.temoignage');

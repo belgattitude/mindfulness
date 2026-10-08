@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * about router
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreRouter('api::about.about');
+export default factories.createCoreRouter('api::about.about');

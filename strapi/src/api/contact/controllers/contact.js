@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * contact controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreController('api::contact.contact');
+export default factories.createCoreController('api::contact.contact');
