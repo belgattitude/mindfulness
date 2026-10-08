@@ -1,5 +1,45 @@
+const fs = require('fs');
+const path = require('path');
+
+/**
+ * The documentation plugin sets info['x-generation-date'] to the current date
+ * and rewrites full_documentation.json on every start (in development). Keep
+ * the previous date when nothing else changed, so the file only changes in git
+ * when the documentation does.
+ */
+const keepGenerationDateWhenUnchanged = (draft) => {
+  const docPath = path.join(
+    __dirname,
+    '..',
+    'src/extensions/documentation/documentation',
+    draft.info.version,
+    'full_documentation.json'
+  );
+  let previous;
+  try {
+    previous = JSON.parse(fs.readFileSync(docPath, 'utf8'));
+  } catch {
+    return; // first generation
+  }
+  const previousDate = previous.info?.['x-generation-date'];
+  if (!previousDate) {
+    return;
+  }
+  const generatedDate = draft.info['x-generation-date'];
+  draft.info['x-generation-date'] = previousDate;
+  if (JSON.stringify(draft) !== JSON.stringify(previous)) {
+    draft.info['x-generation-date'] = generatedDate;
+  }
+};
+
 module.exports = ({ env }) => ({
-  //
+  documentation: {
+    config: {
+      'x-strapi-config': {
+        mutateDocumentation: keepGenerationDateWhenUnchanged,
+      },
+    },
+  },
   graphql: {
     config: {
       endpoint: '/graphql',

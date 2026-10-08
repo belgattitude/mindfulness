@@ -1,8 +1,12 @@
+backup
+
 ############################
 # STRAPI                   #
 ############################
 
 .env
+.env.deploy
+.env.keys
 data
 build
 exports

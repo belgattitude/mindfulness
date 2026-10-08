@@ -20,8 +20,13 @@ types/generated
 
 # Runtime data and secrets, mounted as volumes (see docker-compose.yml)
 .env
+.env.deploy
+.env.keys
 sqlite
 data
 public/uploads
+
+# Local backups (yarn backup:*), contain the database and secrets
+backup
 
 *.log
