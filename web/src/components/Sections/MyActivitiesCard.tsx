@@ -62,7 +62,7 @@ export const MyActivitiesCard: FC<Props> = (props) => {
             </div>
             <ul className="p-1">
               {group.items.map(({ title, href }, _idx) => (
-                <li key={`${title}`} className={"flex items-center"}>
+                <li key={`${title}`} className="flex items-center">
                   {group.icon({ className: "h-6 w-6 flex-none" })}
                   <Link
                     className="p-3 text-lg decoration-white underline-offset-8 outline-green-500 hover:underline"

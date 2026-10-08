@@ -31,8 +31,8 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
         <p>
           Je suis Sandrine Rauter, professeur de Yoga et de pleine conscience /
           mindfuless depuis de nombreuses années. Pour celles et ceux dont je
-          n'ai pas encore eu le plaisir de faire connaissance, vous trouverez un
-          aperçu de mon parcours ici.
+          n&apos;ai pas encore eu le plaisir de faire connaissance, vous
+          trouverez un aperçu de mon parcours ici.
         </p>
 
         <ul className="space-y-4">
@@ -52,8 +52,8 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
           </li>
         </ul>
         <p>
-          Un nuage ne meurt jamais. Pour qu'une larme soit éternelle, il suffit
-          de la déposer dans une rivère.
+          Un nuage ne meurt jamais. Pour qu&apos;une larme soit éternelle, il
+          suffit de la déposer dans une rivère.
         </p>
       </div>
 

@@ -1,12 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+const typography = require("@tailwindcss/typography");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.tsx"],
   plugins: [
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require("@tailwindcss/typography"),
+    typography,
     // require('@tailwindcss/forms'),
   ],
   theme: {
@@ -26,6 +25,8 @@ module.exports = {
           DEFAULT: "hsl(150, 27%, 78%)",
         },
         brightRed: "hsl(12, 88%, 59)",
+        // Site name in the navigation header
+        "nav-title": "#34695d",
         "custom-brown": {
           DEFAULT: "rgb(193,160,132)",
         },

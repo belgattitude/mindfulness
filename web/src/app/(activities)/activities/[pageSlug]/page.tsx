@@ -9,7 +9,7 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export default async function ActivityRoute(props: Props) {
+const ActivityRoute = async (props: Props) => {
   const { pageSlug } = await props.params;
   const data = await fetchPage({
     slug: pageSlug,
@@ -20,4 +20,6 @@ export default async function ActivityRoute(props: Props) {
       {data && <CustomPage page={data} />}
     </div>
   );
-}
+};
+
+export default ActivityRoute;

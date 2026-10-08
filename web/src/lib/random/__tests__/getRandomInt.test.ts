@@ -9,11 +9,11 @@ describe("getRandomInt tests", () => {
   });
 
   it("should throw if not a number", () => {
-    expect(() => getRandomInt(Number.NaN, 100)).toThrow(/min/i);
-    expect(() => getRandomInt(10, {} as unknown as number)).toThrow(/max/i);
+    expect(() => getRandomInt(Number.NaN, 100)).toThrow(/min/iu);
+    expect(() => getRandomInt(10, {} as unknown as number)).toThrow(/max/iu);
   });
 
   it("should throw if min > max", () => {
-    expect(() => getRandomInt(100, 10)).toThrow(/greater/i);
+    expect(() => getRandomInt(100, 10)).toThrow(/greater/iu);
   });
 });

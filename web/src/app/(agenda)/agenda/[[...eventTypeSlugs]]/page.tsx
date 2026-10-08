@@ -17,11 +17,13 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
+const limit = 10;
+
 const schema = z.object({
   eventTypeSlugs: z.array(z.string()).max(1).optional(),
 });
 
-export default async function AgendaRoute(props: Props) {
+const AgendaRoute = async (props: Props) => {
   const params = await props.params;
 
   const safeParams = schema.parse(params);
@@ -44,16 +46,12 @@ export default async function AgendaRoute(props: Props) {
         <EventFilters selected={eventType} />
       </div>
       <div className="flex flex-col gap-5">
-        {data && (
-          <>
-            {data.events?.map(
-              (e) => e && <EventCard event={e} key={`event-${e.documentId}`} />
-            )}
-          </>
+        {data?.events?.map(
+          (e) => e && <EventCard event={e} key={`event-${e.documentId}`} />
         )}
       </div>
     </PageContent>
   );
-}
+};
 
-const limit = 10;
+export default AgendaRoute;

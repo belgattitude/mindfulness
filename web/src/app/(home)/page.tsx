@@ -10,11 +10,11 @@ import { MyActivitiesCard } from "@/components/Sections/MyActivitiesCard";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomeRoute() {
+const HomeRoute = async () => {
   const homeData = await fetchHome();
   return (
     <PageContent>
-      <div className="grid-row grid gap-5 md:grid-cols-12">
+      <div className="grid gap-5 md:grid-cols-12">
         {isPlainObject(homeData) === true && (
           <ProseContent className="md:col-span-8 md:px-0">
             <div className="text-title-color-800">
@@ -31,4 +31,6 @@ export default async function HomeRoute() {
       </div>
     </PageContent>
   );
-}
+};
+
+export default HomeRoute;

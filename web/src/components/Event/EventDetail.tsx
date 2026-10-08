@@ -38,7 +38,7 @@ export const EventDetail: FC<Props> = (props) => {
               className="text-indigo-600 first-letter:capitalize"
             />
           </div>
-          <div className="description">
+          <div>
             {event.cover && (
               <Image
                 className="object-cover"

@@ -14,8 +14,26 @@ export const convertIsoStringToDate = (
   return new Date(dateStr);
 };
 
+const defaultOptions = {
+  day: "numeric",
+  hour: undefined,
+  minute: undefined,
+  month: "long",
+  weekday: "long",
+  year: "numeric",
+} as const;
+
+const formatDate = (
+  date: Date,
+  locale: string,
+  options?: Parameters<typeof Intl.DateTimeFormat>[1]
+) =>
+  new Intl.DateTimeFormat(locale, {
+    ...defaultOptions,
+    ...options,
+  }).format(date);
+
 export const getDateRangeStr = (params: {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   startAt: string | Date;
   endAt?: string | Date;
   locale?: string;
@@ -26,32 +44,14 @@ export const getDateRangeStr = (params: {
   const dateEnd = endAt ? convertIsoStringToDate(endAt) : undefined;
 
   return dateEnd === undefined
-    ? `le ${formatDate(dateFrom)}`
-    : `du ${formatDate(dateFrom, {
+    ? `le ${formatDate(dateFrom, locale, { timeZone })}`
+    : `du ${formatDate(dateFrom, locale, {
+        timeZone,
         month:
           dateEnd.getMonth() === dateFrom.getMonth() ? undefined : "numeric",
         year:
           dateEnd.getFullYear() === dateFrom.getFullYear()
             ? undefined
             : "numeric",
-      })} au ${formatDate(dateEnd)}`;
+      })} au ${formatDate(dateEnd, locale, { timeZone })}`;
 };
-
-const defaultOptions = {
-  day: "numeric",
-  hour: undefined,
-  minute: undefined,
-  month: "long",
-  timeZone: "Europe/paris",
-  weekday: "long",
-  year: "numeric",
-} as const;
-
-const formatDate = (
-  date: Date,
-  options?: Parameters<typeof Intl.DateTimeFormat>[1]
-) =>
-  new Intl.DateTimeFormat("fr", {
-    ...defaultOptions,
-    ...options,
-  }).format(date);

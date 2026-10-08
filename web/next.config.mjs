@@ -69,8 +69,10 @@ const nextConfig = {
 
   // @link https://nextjs.org/docs/basic-features/image-optimization
   images: {
-    deviceSizes: [750, 828, 1080, 1200], // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [32, 48, 64, 96], // default: [16, 32, 48, 64, 96, 128, 256, 384]
+    // default: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    deviceSizes: [750, 828, 1080, 1200],
+    // default: [16, 32, 48, 64, 96, 128, 256, 384]
+    imageSizes: [32, 48, 64, 96],
     minimumCacheTTL: 86_400,
     dangerouslyAllowSVG: false,
     dangerouslyAllowLocalIP: true,

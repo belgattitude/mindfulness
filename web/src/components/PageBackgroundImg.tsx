@@ -25,7 +25,7 @@ export const PageBackgroundImg: FC<{
   >
     {isStringNonEmpty(url) && (
       <Image
-        className={"absolute size-full object-cover"}
+        className="absolute size-full object-cover"
         alt={alt}
         width={width}
         height={height}

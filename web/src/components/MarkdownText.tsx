@@ -17,7 +17,7 @@ export const MarkdownText: FC<Props> = (props) => {
     <ReactMarkdown
       className={cn("list-inside list-disc", className)}
       urlTransform={(src, _alt, _title) =>
-        /^https?:\/\//.test(src) ? src : `${getStrapiURL()}${src}`
+        /^https?:\/\//u.test(src) ? src : `${getStrapiURL()}${src}`
       }
       rehypePlugins={[[rehypeExternalLinks, { target: "_blank" }]]}
       remarkPlugins={[[remarkGfm, { singleTilde: false }]]}

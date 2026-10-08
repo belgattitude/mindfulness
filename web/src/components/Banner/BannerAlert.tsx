@@ -10,13 +10,13 @@ interface Props {
 export const BannerAlert: FC<Props> = (props) => {
   const { collapse = false, render = true } = props;
   if (!render) {
-    return <></>;
+    return null;
   }
   return (
     <div
       data-test-id="top-banner"
       className={clsx(
-        "transition-all-1s bg-brand-color-300 font-family-primary flex items-center justify-center space-x-3 p-1 font-light text-white",
+        "bg-brand-color-300 font-family-primary flex items-center justify-center space-x-3 p-1 font-light text-white",
         {
           "h-0 -translate-y-60": collapse,
         }

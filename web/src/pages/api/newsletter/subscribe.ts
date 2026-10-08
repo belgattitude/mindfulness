@@ -20,8 +20,6 @@ export default async function newsletterSubscribeHandler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
 ) {
-  const { method } = req;
-
   const mailData = {
     from: "belgattitude@gmail.com",
     html: `<html><h1>Cool</h1></html>`,

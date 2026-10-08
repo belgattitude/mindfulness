@@ -34,7 +34,7 @@ export const CustomPage: FC<{ page: FetchPage }> = (props) => {
           (programme) =>
             programme && (
               <ProgrammeListItem
-                className={"rounded-lg bg-white p-5 md:rounded-xl"}
+                className="rounded-lg bg-white p-5 md:rounded-xl"
                 key={programme.documentId}
                 programme={programme}
               />

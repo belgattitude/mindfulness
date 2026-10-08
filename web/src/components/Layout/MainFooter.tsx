@@ -58,7 +58,7 @@ export const MainFooter: FC<Props> = (props) => {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={"text-gray-700 transition hover:opacity-75"}
+                      className="text-gray-700 transition hover:opacity-75"
                     >
                       {link.title}
                     </Link>
@@ -74,12 +74,12 @@ export const MainFooter: FC<Props> = (props) => {
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/contact"
                     className="text-gray-700 transition hover:opacity-75"
                   >
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

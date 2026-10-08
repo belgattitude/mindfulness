@@ -18,7 +18,7 @@ interface MainNavProps {
 
 export const MainHeader: FC<MainNavProps> = (props) => {
   const { mainNavLinks } = props;
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
 
   const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(false);
 
@@ -32,11 +32,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         )}
       >
         <MainNavHeader className="z-50" />
-        <div
-          className={clsx(
-            `container-xl static top-0 mx-auto hidden gap-2 p-2 md:flex`
-          )}
-        >
+        <div className={clsx(`static top-0 mx-auto hidden gap-2 p-2 md:flex`)}>
           <div
             className={cn(
               "flex grow flex-row items-center justify-center gap-5 py-2 md:flex"

@@ -18,26 +18,26 @@ const config: StorybookConfig = {
 
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
 
-  webpackFinal: async (config) => {
-    config.module = config.module || {};
-    config.module.rules = config.module.rules || [];
+  webpackFinal: (webpackConfig) => {
+    webpackConfig.module ||= {};
+    webpackConfig.module.rules ||= [];
 
     // This modifies the existing image rule to exclude .svg files
     // since you want to handle those files with @svgr/webpack
-    const imageRule = config.module.rules.find((rule) =>
+    const imageRule = webpackConfig.module.rules.find((rule) =>
       rule?.["test"]?.test(".svg")
     );
     if (imageRule) {
-      imageRule["exclude"] = /\.svg$/;
+      imageRule["exclude"] = /\.svg$/u;
     }
 
     // Configure .svg files to be loaded with @svgr/webpack
-    config.module.rules.push({
-      test: /\.svg$/,
+    webpackConfig.module.rules.push({
+      test: /\.svg$/u,
       use: ["@svgr/webpack"],
     });
 
-    return config;
+    return webpackConfig;
   },
 };
 export default config;

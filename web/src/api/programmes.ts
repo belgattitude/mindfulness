@@ -2,14 +2,14 @@
 // - urql
 // - phase out graphql
 import { HttpNotFound } from "@httpx/exception";
-import request from "graphql-request";
+import { request } from "graphql-request";
 
 import { getGraphqlClient } from "@/config/graphql-client.config";
 import { getGraphQLUrl } from "@/config/graphql.config";
 import type { FragmentType } from "@/gql/fragment-masking";
 import { graphql } from "@/gql/gql";
 import type { PublicationStatus } from "@/gql/graphql";
-import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
+import { withGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const fullProgrammeFragment = graphql(/* GraphQL */ `
   fragment FullProgrammeFragment on Programme {
@@ -56,26 +56,26 @@ const getProgramme = graphql(/* GraphQL */ `
 
 export const fetchProgramme = async (params: { slug: string }) => {
   const { slug } = params;
-  return getGraphqlClient
-    .request(getProgramme, {
+  const resp = await withGraphqlRequestCatcher(
+    getGraphqlClient.request(getProgramme, {
       slug,
     })
-    .catch(getGraphqlRequestCatcher)
-    .then((resp) => {
-      const event = resp.programmes?.[0];
-      if (!event) {
-        throw new HttpNotFound(`Programme '${slug}' not found`);
-      }
-      return event;
-    });
+  );
+  const programme = resp.programmes?.[0];
+  if (!programme) {
+    throw new HttpNotFound(`Programme '${slug}' not found`);
+  }
+  return programme;
 };
 
-export const fetchProgrammes = async (params: {
+export const fetchProgrammes = (params: {
   limit?: number;
   status?: PublicationStatus;
 }) =>
-  request(getGraphQLUrl(), searchProgrammes, {
-    ...params,
-  }).catch(getGraphqlRequestCatcher);
+  withGraphqlRequestCatcher(
+    request(getGraphQLUrl(), searchProgrammes, {
+      ...params,
+    })
+  );
 
 export type FetchProgramme = FragmentType<typeof fullProgrammeFragment>;

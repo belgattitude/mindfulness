@@ -12,7 +12,6 @@ export default defineConfig({
     globals: true,
     environment: "node",
     passWithNoTests: false,
-    setupFiles: "./test/_setup/setupVitest.ts",
     include: testFiles,
     // To mimic Jest behaviour regarding mocks.
     // @link https://vitest.dev/config/#clearmocks

@@ -5,7 +5,7 @@ import { ProseContent } from "@/components/ProseContent";
 
 export const dynamic = "force-dynamic";
 
-export default async function About() {
+const Contact = async () => {
   const data = await fetchContactPage();
   return (
     <PageContent title="Contact">
@@ -19,4 +19,6 @@ export default async function About() {
       </ProseContent>
     </PageContent>
   );
-}
+};
+
+export default Contact;

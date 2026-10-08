@@ -13,7 +13,7 @@ export const MainNavHeader: FC<Props> = (props) => {
     <div
       data-test-id="main-nav-header"
       className={cn(
-        "radial-gradient font-menu bg-brand-color-600 flex flex-col items-center justify-center space-x-3 p-10 font-light",
+        "radial-gradient bg-brand-color-600 flex flex-col items-center justify-center space-x-3 p-10 font-light",
         className
       )}
     >
@@ -25,7 +25,7 @@ export const MainNavHeader: FC<Props> = (props) => {
             className="mb-[7px] h-[50px] w-auto lg:h-[70px]"
           />
         </Link>
-        <p className="font-family-brand text-xl font-normal text-[#34695d]">
+        <p className="font-family-brand text-nav-title text-xl font-normal">
           Sandrine Rauter
         </p>
       </div>

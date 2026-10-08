@@ -31,12 +31,12 @@ export const EventFilters: FC<Props> = (props) => {
     findEventBySlug(props.selected) ?? types[0]
   );
 
-  const updateFilters = async (selected: Types) => {
+  const updateFilters = (eventType: Types) => {
     if (onChange) {
-      // onChange(selected);
+      // onChange(eventType);
     }
-    const { slug } = selected;
-    setSelected(selected);
+    const { slug } = eventType;
+    setSelected(eventType);
     const url = ["/agenda", slug].filter((s) => s.length > 0).join("/");
     router.push(url);
   };
@@ -44,20 +44,22 @@ export const EventFilters: FC<Props> = (props) => {
   return (
     <div className={twMerge("flex flex-col gap-5 py-5 md:flex-row", className)}>
       {types.map((eventType) => (
-        <div
+        <button
+          type="button"
           key={eventType.slug}
           className={clsx(
-            "flex-1 rounded-sm bg-gray-200 p-5 drop-shadow-sm hover:cursor-pointer hover:bg-gray-100",
+            "flex-1 rounded-sm bg-gray-200 p-5 text-left drop-shadow-sm hover:cursor-pointer hover:bg-gray-100",
             {
               "bg-gray-300 underline": eventType.slug === selected.slug,
             }
           )}
-          onClick={async (_e) => {
-            await updateFilters(eventType);
+          aria-pressed={eventType.slug === selected.slug}
+          onClick={() => {
+            updateFilters(eventType);
           }}
         >
           {eventType.title}
-        </div>
+        </button>
       ))}
     </div>
   );

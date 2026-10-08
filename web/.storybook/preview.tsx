@@ -21,7 +21,7 @@ const fontMontserrat = Montserrat({
 });
 
 const decorators = [
-  (Story, context) => (
+  (Story) => (
     <div
       className={`${fontInter.variable} ${fontMontserrat.variable} font-sans`}
     >
@@ -35,8 +35,8 @@ const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
+        color: /(?:background|color)$/iu,
+        date: /Date$/iu,
       },
     },
   },

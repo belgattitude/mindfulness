@@ -17,7 +17,7 @@ const getErrorMsg = (e: unknown) => {
 
 export const ReactQueryErrorBox: FC<Props> = ({ e }) => (
   <div className="container mx-auto flex min-h-[50vh] flex-row items-center justify-center bg-white">
-    <h1>Ooops, sorry we've run into an error</h1>
+    <h1>Ooops, sorry we&apos;ve run into an error</h1>
     <p>{getErrorMsg(e)}</p>
   </div>
 );

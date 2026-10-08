@@ -2,7 +2,7 @@ import { expect, describe, it } from "vitest";
 
 import { ArrayUtils } from "../ArrayUtils";
 
-describe(ArrayUtils, () => {
+describe("array utilities", () => {
   describe("removeItem", () => {
     it("should return remove the first item", () => {
       expect(ArrayUtils.removeItem([1, 2, 2], 2)).toStrictEqual([1, 2]);
@@ -17,7 +17,7 @@ describe(ArrayUtils, () => {
       const arr = ["cool", "test", true, 0];
       const results: typeof arr = [];
       const maxIterations = 20;
-      for (let i = 0; i < maxIterations; i++) {
+      for (let i = 0; i < maxIterations; i += 1) {
         results.push(ArrayUtils.getRandom(arr));
       }
       const unique = results.filter((v, i, a) => a.indexOf(v) === i);
@@ -27,7 +27,7 @@ describe(ArrayUtils, () => {
     it("should always return an element from the array", () => {
       const arr = ["cool", "test", true, 0];
       const maxIterations = 20;
-      for (let i = 0; i < maxIterations; i++) {
+      for (let i = 0; i < maxIterations; i += 1) {
         const el = ArrayUtils.getRandom(arr);
         expect(arr.indexOf(el)).toBeGreaterThanOrEqual(0);
       }

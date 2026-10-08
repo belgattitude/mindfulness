@@ -21,11 +21,7 @@ export const MainSidebar: FC<MainSidebarProps> = (props) => {
       )}
     >
       {mainNavLinks.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={"flex border text-3xl"}
-        >
+        <Link key={link.href} href={link.href} className="flex border text-3xl">
           {link.title}
         </Link>
       ))}

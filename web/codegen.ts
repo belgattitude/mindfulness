@@ -41,7 +41,8 @@ const config: CodegenConfig = {
       ],
     },
   },
-  ignoreNoDocuments: true, // for better experience with the watcher
+  // for better experience with the watcher
+  ignoreNoDocuments: true,
   overwrite: true,
   schema: schemaUrl,
 };

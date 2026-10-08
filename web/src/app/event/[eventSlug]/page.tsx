@@ -9,10 +9,12 @@ interface Props {
 
 export const dynamic = "force-dynamic";
 
-export default async function EventRoute(props: Props) {
+const EventRoute = async (props: Props) => {
   const { eventSlug } = await props.params;
   const data = await fetchEvent({
     slug: eventSlug,
   });
   return <div>{data && <EventDetail event={data} />}</div>;
-}
+};
+
+export default EventRoute;

@@ -1,7 +1,9 @@
 // @ts-check
 
 /** @type {import('graphql-config').IGraphQLConfig} */
-module.exports = {
+export default {
+  schema: "schema.graphql",
+  documents: ["src/**/*.{ts,tsx}"],
   extensions: {
     endpoints: {
       "Local GraphQL Endpoint": {
@@ -13,6 +15,4 @@ module.exports = {
       },
     },
   },
-  name: "Mindfulness graphql schema",
-  schemaPath: "schema.graphql",
 };

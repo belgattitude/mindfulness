@@ -8,7 +8,7 @@ import { getGraphqlClient } from "@/config/graphql-client.config";
 import type { FragmentType } from "@/gql/fragment-masking";
 import { graphql } from "@/gql/gql";
 import type { EventFiltersInput, PublicationStatus } from "@/gql/graphql";
-import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
+import { withGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const fullEventFragment = graphql(/* GraphQL */ `
   fragment FullEventFragment on Event {
@@ -65,7 +65,7 @@ export const eventsApi = {
   fullEventFragment,
 };
 
-export const fetchEvents = async (params: {
+export const fetchEvents = (params: {
   limit?: number;
   dateMin: Date;
   status?: PublicationStatus;
@@ -78,27 +78,25 @@ export const fetchEvents = async (params: {
     ...(eventType ? { eventType: { eq: eventType } } : {}),
   };
 
-  return getGraphqlClient
-    .request(searchEvents, {
+  return withGraphqlRequestCatcher(
+    getGraphqlClient.request(searchEvents, {
       ...params,
       rawFilters,
     })
-    .catch(getGraphqlRequestCatcher);
+  );
 };
 
 export const fetchEvent = async (params: { slug: string }) => {
   const { slug } = params;
 
-  return getGraphqlClient
-    .request(getEvent, { slug })
-    .catch(getGraphqlRequestCatcher)
-    .then((resp) => {
-      const event = resp.events?.[0];
-      if (!event) {
-        throw new HttpNotFound(`Event '${slug}' not found`);
-      }
-      return event;
-    });
+  const resp = await withGraphqlRequestCatcher(
+    getGraphqlClient.request(getEvent, { slug })
+  );
+  const event = resp.events?.[0];
+  if (!event) {
+    throw new HttpNotFound(`Event '${slug}' not found`);
+  }
+  return event;
 };
 
 export type FetchEvent = FragmentType<typeof fullEventFragment>;

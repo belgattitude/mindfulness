@@ -11,9 +11,7 @@ const schema = z.object({
   secure: z
     .string()
     .default("true")
-    .transform((val) => {
-      return !["false", "0", 0].includes(val);
-    }),
+    .transform((val) => !["false", "0", 0].includes(val)),
   service: z.string().optional(),
 });
 

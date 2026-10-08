@@ -11,8 +11,8 @@ export const getCommonPathnameLevels = (
   let stop = false;
   while (i < paths2.length && !stop) {
     if (paths2[i] === paths1[i]) {
-      levels++;
-      i++;
+      levels += 1;
+      i += 1;
     } else {
       stop = true;
     }

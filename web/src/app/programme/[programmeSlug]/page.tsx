@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { fetchProgramme } from "@/api/programmes";
 import { ProgrammePage } from "@/components/Programme/ProgrammePage";
 
@@ -9,13 +7,9 @@ interface Props {
   }>;
 }
 
-const schema = z.object({
-  programmeSlug: z.string().min(3).max(255),
-});
-
 export const dynamic = "force-dynamic";
 
-export default async function ProgrammeRoute(props: Props) {
+const ProgrammeRoute = async (props: Props) => {
   const params = await props.params;
   const data = await fetchProgramme({
     slug: params.programmeSlug,
@@ -25,4 +19,6 @@ export default async function ProgrammeRoute(props: Props) {
       {data && <ProgrammePage programme={data} />}
     </div>
   );
-}
+};
+
+export default ProgrammeRoute;
