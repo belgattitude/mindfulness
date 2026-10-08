@@ -32,8 +32,7 @@ export const ProgrammeListItem: FC<Props> = (props) => {
         <Link href={`/p/i/${data.slug}`}>
           <Image
             alt={`Photo ${
-              data.cover.data?.attributes?.alternativeText ??
-              `programme ${data.title}`
+              data.cover?.alternativeText ?? `programme ${data.title}`
             }`}
             width={500}
             height={500}

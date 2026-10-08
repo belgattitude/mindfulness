@@ -5,7 +5,7 @@ import { HttpNotFound } from '@httpx/exception';
 import type { EventTypeSlugs } from '@/components/Event/utils';
 import type { FragmentType } from '@/gql/fragment-masking';
 import { graphql } from '@/gql/gql';
-import type { EventFiltersInput, PublicationState } from '@/gql/graphql';
+import type { EventFiltersInput, PublicationStatus } from '@/gql/graphql';
 import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
 import { getGraphqlClient } from '@/config/graphql-client.config';
 
@@ -25,14 +25,10 @@ export const fullEventFragment = graphql(/* GraphQL */ `
     startAt
     endAt
     cover {
-      data {
-        id
-        attributes {
-          url
-          caption
-          alternativeText
-        }
-      }
+      documentId
+      url
+      caption
+      alternativeText
     }
   }
 `);
@@ -40,12 +36,8 @@ export const fullEventFragment = graphql(/* GraphQL */ `
 const getEvent = graphql(/* GraphQL */ `
   query getEvent($slug: String) {
     events(filters: { slug: { eq: $slug } }) {
-      data {
-        id
-        attributes {
-          ...FullEventFragment
-        }
-      }
+      documentId
+      ...FullEventFragment
     }
   }
 `);
@@ -53,29 +45,17 @@ const getEvent = graphql(/* GraphQL */ `
 const searchEvents = graphql(/* GraphQL */ `
   query searchEvents(
     $limit: Int = 100
-    $publicationState: PublicationState = LIVE
+    $status: PublicationStatus = PUBLISHED
     $rawFilters: EventFiltersInput = {}
   ) {
     events(
       sort: ["startAt:ASC", "publishedAt:ASC"]
       filters: $rawFilters
       pagination: { page: 1, pageSize: $limit }
-      publicationState: $publicationState
+      status: $status
     ) {
-      data {
-        id
-        attributes {
-          ...FullEventFragment
-        }
-      }
-      meta {
-        pagination {
-          page
-          pageSize
-          total
-          pageCount
-        }
-      }
+      documentId
+      ...FullEventFragment
     }
   }
 `);
@@ -87,7 +67,7 @@ export const eventsApi = {
 export const fetchEvents = async (params: {
   limit?: number;
   dateMin: Date;
-  publicationState?: PublicationState;
+  status?: PublicationStatus;
   eventType?: EventTypeSlugs | null;
 }) => {
   const { dateMin, eventType } = params;
@@ -112,7 +92,7 @@ export const fetchEvent = async (params: { slug: string }) => {
     .request(getEvent, { slug })
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
-      const event = resp.events?.data?.[0];
+      const event = resp.events?.[0];
       if (!event) {
         throw new HttpNotFound(`Event '${slug}' not found`);
       }

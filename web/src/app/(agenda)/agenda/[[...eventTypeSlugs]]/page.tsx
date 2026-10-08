@@ -45,11 +45,8 @@ export default async function AgendaRoute(props: Props) {
       <div className="flex flex-col gap-5">
         {data && (
           <>
-            {data.events?.data?.map(
-              (e) =>
-                e?.attributes && (
-                  <EventCard event={e.attributes} key={`event-${e.id}`} />
-                )
+            {data.events?.map(
+              (e) => e && <EventCard event={e} key={`event-${e.documentId}`} />
             )}
           </>
         )}

@@ -30,6 +30,9 @@ const config: CodegenConfig = {
       },
     },
     './src/gql/hooks.ts': {
+      // The live schema declares @deprecated on DIRECTIVE_DEFINITION, which graphql@16
+      // can't parse here; the printed schema.graphql (yarn codegen-schema) omits built-ins
+      schema: './schema.graphql',
       config: {
         useTypeImports: true,
         reactQueryVersion: 5,

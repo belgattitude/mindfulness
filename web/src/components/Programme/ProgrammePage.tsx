@@ -30,8 +30,7 @@ export const ProgrammePage: FC<Props> = (props) => {
         <div className={'w-full flex-none'}>
           <Image
             alt={`Photo ${
-              data.cover.data?.attributes?.alternativeText ??
-              `programme ${data.title}`
+              data.cover?.alternativeText ?? `programme ${data.title}`
             }`}
             width={1200}
             height={400}

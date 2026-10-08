@@ -3,17 +3,15 @@ import { getStrapiURL } from '@/config/strapi.config';
 import { isPlainObject } from '@httpx/assert';
 
 export type StrapiMedia = {
-  data?: {
-    attributes?: {
-      url?: string | null;
-      caption?: string | null;
-      alternativeText?: string | null;
-    } | null;
-  } | null;
+  url?: string | null;
+  caption?: string | null;
+  alternativeText?: string | null;
 };
 
-export function getStrapiMedia(media: StrapiMedia): string | null {
-  const { url = null } = media.data?.attributes ?? {};
+export function getStrapiMedia(
+  media: StrapiMedia | null | undefined
+): string | null {
+  const url = media?.url ?? null;
   if (!url) {
     return null;
   }
@@ -24,8 +22,5 @@ export function getStrapiMedia(media: StrapiMedia): string | null {
 }
 
 export const isStrapiMedia = (v: unknown): v is StrapiMedia => {
-  return (
-    isPlainObject<StrapiMedia>(v) &&
-    typeof v?.data?.attributes?.url === 'string'
-  );
+  return isPlainObject<StrapiMedia>(v) && typeof v?.url === 'string';
 };

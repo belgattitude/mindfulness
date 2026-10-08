@@ -103,5 +103,5 @@
     "vitest": "4.0.15",
     "webpack": "5.103.0"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.18.0"
 }

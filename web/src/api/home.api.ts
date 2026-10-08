@@ -5,11 +5,7 @@ import { getGraphqlClient } from '@/config/graphql-client.config';
 export const getHomePage = graphql(/* GraphQL */ `
   query getHomePage {
     home {
-      data {
-        attributes {
-          introduction
-        }
-      }
+      introduction
     }
   }
 `);
@@ -20,7 +16,7 @@ export const fetchHome = async () => {
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
       return {
-        introduction: resp.home?.data?.attributes?.introduction ?? '',
+        introduction: resp.home?.introduction ?? '',
       };
     });
 };
