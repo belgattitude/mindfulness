@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * event service
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreService('api::event.event');
+export default factories.createCoreService('api::event.event');

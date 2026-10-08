@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * temoignage controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreController('api::temoignage.temoignage');
+export default factories.createCoreController('api::temoignage.temoignage');

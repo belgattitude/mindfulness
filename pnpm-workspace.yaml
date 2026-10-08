@@ -1,0 +1,87 @@
+packages:
+  - strapi
+  - web
+
+nodeLinker: isolated
+packageImportMethod: auto
+savePrefix: ''
+# @todo enable when https://github.com/pnpm/pnpm/issues/16583 is fixed
+#autoDedupe: true
+forceIgnoresPlatform: false
+ignoreCompatibilityDb: true
+autoInstallPeers: false
+strictPeerDependencies: false
+resolvePeersFromWorkspaceRoot: true
+dedupePeers: true
+preferSymlinkedExecutables: true
+resolutionMode: highest
+optimisticRepeatInstall: true
+trustPolicy: no-downgrade
+trustPolicyExcludePrune: true
+# Older releases published before the package adopted provenance / trusted
+# publishing (same publisher), reviewed one by one
+trustPolicyExclude:
+  - 'semver@6.3.1'
+  - 'react-redux@8.1.3'
+
+verifyDepsBeforeRun: install
+
+# pnpm 12.9.1 has an issue still that makes every run command
+# running postinstall scripts, even id virtualStoreType is project
+enableGlobalVirtualStore: false
+#https://github.com/pnpm/pnpm/issues/14972
+virtualStoreType: project
+
+supportedArchitectures:
+  os:
+    - current
+  cpu:
+    - current
+  libc:
+    - current
+
+allowBuilds:
+  # better-sqlite3 13 ships prebuilt binaries (including musl), its node-gyp
+  # build would require python and a compiler (ie: alpine docker images)
+  better-sqlite3: false
+  esbuild: true
+  # Not needed: version check, funding message, native binding load check
+  '@apollo/protobufjs': false
+  core-js-pure: false
+  '@swc/core': false
+
+strictDepBuilds: false
+
+overrides:
+  sharp: 0.35.5
+
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+  # Strapi pins its own packages to exact versions
+  - '@strapi/*'
+  - '@httpx/*'
+  - '@next/*'
+  - '@oxc-project/*'
+  - '@oxfmt/*'
+  - '@oxlint/*'
+  - '@vitejs/*'
+  - next
+  - oxfmt
+  - oxlint
+  - vite
+  - vitest
+  - zod
+  # Recent releases picked on purpose, remove once older than minimumReleaseAge
+  - '@babel/core@8.0.7'
+  - '@babel/helpers@8.0.7'
+  - '@babel/parser@8.0.7'
+  - '@babel/traverse@8.0.7'
+  - '@graphql-codegen/cli@7.4.5'
+  - '@graphql-codegen/core@6.2.2'
+  - 'graphql-config@5.1.8'
+  - 'nodemailer@10.0.16'
+  - '@babel/helper-compilation-targets@8.0.7'
+  - '@graphql-codegen/client-preset@6.2.2'
+  - '@graphql-codegen/gql-tag-operations@6.1.1'
+  - '@graphql-codegen/plugin-helpers@7.4.2'
+  - '@graphql-codegen/visitor-plugin-common@7.2.9'

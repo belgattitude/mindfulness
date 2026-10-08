@@ -1,13 +1,13 @@
-const path = require('path')
+import path from 'node:path';
 
 // https://docs.strapi.io/dev-docs/configurations/database#connection-parameters
 
-module.exports = ({ env }) => {
+export default ({ env }) => {
   return {
     connection: {
       client: 'sqlite',
       connection: {
-        filename: path.join(__dirname, '..', env('DATABASE_FILENAME')),
+        filename: path.join(import.meta.dirname, '..', env('DATABASE_FILENAME')),
         timezone: 'utc'
       },
       useNullAsDefault: true,

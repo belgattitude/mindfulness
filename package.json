@@ -1,7 +1,23 @@
 {
-  "name": "mindfulness-root",
+  "name": "mindfulness",
   "version": "0.1.0",
   "private": true,
-  "type": "commonjs",
-  "packageManager": "yarn@4.18.0"
+  "scripts": {
+    "dev:strapi": "pnpm --filter mindfulness-strapi develop",
+    "dev:web": "pnpm --filter web dev",
+    "build": "pnpm --recursive build",
+    "lint": "pnpm --recursive --if-present lint",
+    "typecheck": "pnpm --recursive --if-present typecheck",
+    "test": "pnpm --recursive --if-present test"
+  },
+  "engines": {
+    "node": ">=24.21"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.10.1",
+      "onFail": "warn"
+    }
+  }
 }

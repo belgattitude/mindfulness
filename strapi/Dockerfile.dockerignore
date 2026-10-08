@@ -1,32 +1,42 @@
+# Build context is the repository root (pnpm monorepo), paths are relative to it
+
 # Git folder does not need to live in the image
 .git
+.github
+.idea
+
+# Only strapi is built, web/package.json is kept for the pnpm workspace
+docs
+web
+!web/package.json
 
 # Docker files does not need to live in the image
-*Dockerfile*
-*docker-compose*
-docker
+**/*Dockerfile*
+**/*docker-compose*
+strapi/docker
+!strapi/docker/scripts/get-tool-version.mts
 
 # These folders should be handled in the image, not shared/copied from host
-node_modules
-.yarn
+**/node_modules
+**/.yarn
 
 # Specific to strapi
-build
-dist
-.cache
-.tmp
-.strapi
-types/generated
+strapi/build
+strapi/dist
+strapi/.cache
+strapi/.tmp
+strapi/.strapi
+strapi/types/generated
 
 # Runtime data and secrets, mounted as volumes (see docker-compose.yml)
-.env
-.env.deploy
-.env.keys
-sqlite
-data
-public/uploads
+**/.env
+**/.env.deploy
+**/.env.keys
+strapi/sqlite
+strapi/data
+strapi/public/uploads
 
-# Local backups (yarn backup:*), contain the database and secrets
-backup
+# Local backups (pnpm backup:*), contain the database and secrets
+strapi/backup
 
-*.log
+**/*.log

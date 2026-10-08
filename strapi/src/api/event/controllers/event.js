@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * event controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreController('api::event.event');
+export default factories.createCoreController('api::event.event');

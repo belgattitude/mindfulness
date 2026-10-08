@@ -1,9 +1,7 @@
-'use strict';
-
 /**
  * home service
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+import factories from '../../../utils/factories.cjs';
 
-module.exports = createCoreService('api::home.home');
+export default factories.createCoreService('api::home.home');

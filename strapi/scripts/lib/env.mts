@@ -2,7 +2,7 @@ import dotenvx from '@dotenvx/dotenvx';
 
 /**
  * Loads .env.deploy (git ignored) with dotenvx, so values can be encrypted
- * (`yarn dotenvx encrypt -f .env.deploy`), the private key being read from the
+ * (`pnpm dotenvx encrypt -f .env.deploy`), the private key being read from the
  * OS keychain or DOTENV_PRIVATE_KEY_DEPLOY.
  * Variables already defined in the environment take precedence.
  */

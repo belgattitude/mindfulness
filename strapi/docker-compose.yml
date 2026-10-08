@@ -4,8 +4,9 @@ services:
     container_name: mindfulness-strapi
     env_file: ./.env
     build:
-      context: .
-      dockerfile: Dockerfile
+      # pnpm monorepo: the lockfile is at the repository root
+      context: ..
+      dockerfile: strapi/Dockerfile
       args:
         USER_ID: ${USER_ID:-1000}
         GROUP_ID: ${GROUP_ID:-1000}

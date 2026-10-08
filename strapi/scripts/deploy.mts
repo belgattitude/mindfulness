@@ -5,11 +5,14 @@
  * uploads the layers missing on the server. docker-compose.yml is uploaded to
  * DEPLOY_DIR, the server .env (strapi secrets) is never deployed.
  *
+ * After a healthy deploy, older images are removed from the server: only the
+ * last DEPLOY_KEEP_IMAGES commit tags are kept for rollbacks.
+ *
  * Configuration: copy .env.deploy.example to .env.deploy and fill it in. It is
- * loaded with dotenvx, so values can be encrypted (`yarn dotenvx encrypt -f .env.deploy`),
+ * loaded with dotenvx, so values can be encrypted (`pnpm dotenvx encrypt -f .env.deploy`),
  * the private key being read from the OS keychain or DOTENV_PRIVATE_KEY_DEPLOY.
  *
- * Usage: yarn deploy
+ * Usage: pnpm run deploy (`pnpm deploy` would be ambiguous with the pnpm command)
  */
 
 import { fileURLToPath } from 'node:url';
@@ -25,10 +28,17 @@ const SERVICE = 'mindfulness-strapi';
 const NETWORK = 'cloud-net';
 const HEALTH_TIMEOUT_MS = 5 * 60_000;
 const HEALTH_POLL_MS = 5_000;
+/** Set by the Dockerfile, scopes the removal of untagged images to this app */
+const IMAGE_LABEL = 'app.mindfulness.image=strapi';
+const DEFAULT_KEEP_IMAGES = 3;
+/** Tags created by getVersion() */
+const COMMIT_TAG = /^[0-9a-f]{7,40}(-dirty)?$/;
 
 type Config = {
   remote: RemoteSsh;
   dir: string;
+  /** Number of previous commit tags kept on the server for rollbacks */
+  keepImages: number;
 };
 
 const log = (message: string) => console.log(`› ${message}`);
@@ -40,7 +50,19 @@ const loadConfig = (): Config => {
   return {
     remote: getRemoteSsh(),
     dir: requireEnv('DEPLOY_DIR', 'directory holding docker-compose.yml on the server'),
+    keepImages: parseKeepImages(process.env.DEPLOY_KEEP_IMAGES),
   };
+};
+
+const parseKeepImages = (value: string | undefined): number => {
+  if (value === undefined || value.trim() === '') {
+    return DEFAULT_KEEP_IMAGES;
+  }
+  const keep = Number(value);
+  if (!Number.isInteger(keep) || keep < 0) {
+    throw new Error(`Invalid DEPLOY_KEEP_IMAGES: ${value}, expected an integer >= 0`);
+  }
+  return keep;
 };
 
 const createSsh = ({ host, port, keyArgs, sshArgs }: RemoteSsh) => {
@@ -78,7 +100,17 @@ const ensurePussh = async () => {
  */
 const getVersion = async (): Promise<string> => {
   const { stdout: sha } = await execa('git', ['rev-parse', '--short', 'HEAD']);
-  const { stdout: changes } = await execa('git', ['status', '--porcelain', '--', '.']);
+  // The image also depends on the root package.json (pnpm version), the pnpm
+  // lockfile and the workspace config
+  const { stdout: changes } = await execa('git', [
+    'status',
+    '--porcelain',
+    '--',
+    '.',
+    '../package.json',
+    '../pnpm-lock.yaml',
+    '../pnpm-workspace.yaml',
+  ]);
   return changes.trim() === '' ? sha : `${sha}-dirty`;
 };
 
@@ -114,6 +146,38 @@ const waitForHealthy = async (remote: (command: string) => Promise<string>): Pro
   throw new Error(`${SERVICE} is not healthy (status: ${status}), last logs:\n${logs}`);
 };
 
+/**
+ * Removes the server images that are no longer useful for a rollback: keeps
+ * latest, the deployed version and the last `keep` commit tags, removes
+ * the other commit tags (-dirty ones can't be rebuilt from git) and the
+ * untagged images left when a tag is reused by a later deploy.
+ * Tags not created by this script (ie: added by hand) are left alone, and
+ * docker refuses to remove the image of a running container.
+ */
+const removeOldImages = async (
+  remote: (command: string) => Promise<string>,
+  version: string,
+  keep: number
+): Promise<void> => {
+  // Newest first
+  const tags = (await remote(`docker image ls ${IMAGE} --format '{{.Tag}}'`))
+    .split('\n')
+    .map((tag) => tag.trim())
+    .filter((tag) => COMMIT_TAG.test(tag) && tag !== version);
+  const kept = tags.filter((tag) => !tag.endsWith('-dirty')).slice(0, keep);
+  const removed = tags.filter((tag) => !kept.includes(tag));
+
+  log(`Removing old images on the server, keeping: ${[version, ...kept].join(', ')}`);
+  for (const tag of removed) {
+    await remote(`docker image rm ${IMAGE}:${tag}`).then(
+      () => log(`Removed ${IMAGE}:${tag}`),
+      (error: unknown) => log(`Could not remove ${IMAGE}:${tag}: ${error instanceof Error ? error.message : error}`)
+    );
+  }
+  const pruned = await remote(`docker image prune --force --filter label=${IMAGE_LABEL}`);
+  log(pruned.split('\n').at(-1) ?? '');
+};
+
 const main = async () => {
   process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 
@@ -127,7 +191,7 @@ const main = async () => {
   const platform = await getPlatform(remote);
 
   // Fail before the build: compose needs the server .env (strapi secrets),
-  // which is not deployed, see `yarn backup:env` to keep a copy
+  // which is not deployed, see `pnpm backup:env` to keep a copy
   log(`Checking ${config.dir} on the server`);
   await remote(`test -f '${config.dir}/.env'`).catch(() => {
     throw new Error(
@@ -143,7 +207,9 @@ const main = async () => {
     ...['--tag', `${IMAGE}:${version}`],
     ...['--tag', `${IMAGE}:latest`],
     '--load',
-    '.',
+    // pnpm monorepo: the lockfile is at the repository root
+    ...['--file', 'Dockerfile'],
+    '..',
   ]);
 
   log(`Uploading to ${pusshDest}`);
@@ -170,6 +236,9 @@ const main = async () => {
 
   log(`Waiting for ${SERVICE} to be healthy`);
   await waitForHealthy(remote);
+
+  // Only after a healthy deploy, so a failed one keeps every rollback target
+  await removeOldImages(remote, version, config.keepImages);
 
   console.log(`✔ Deployed ${IMAGE}:${version}`);
 };
