@@ -3,7 +3,5 @@
 # @link https://github.com/raineorshine/npm-check-updates
 
 # Add here exclusions on packages if any
-reject: [
-    "eslint"
-    "better-sqlite3"
-]
+reject:
+  - better-sqlite3
