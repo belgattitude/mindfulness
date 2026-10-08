@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [24.x]
+        runtime: ['node@24']
     defaults:
       run:
         shell: bash
@@ -25,33 +25,27 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
+      # pnpm version from devEngines.packageManager in the root package.json,
+      # then `pnpm install` of the workspace
+      - name: ⚙️ Install pnpm, Node.js and dependencies
+        uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: 📥 Monorepo install
-        uses: ./.github/actions/yarn-nm-install
-        with:
-          cwd: web
-
-      - name: Check duplicates
-        run: yarn dedupe --check
+          runtime: ${{ matrix.runtime }}
+          cache: true
+          node-version-file: false
+          require-lockfile: true
 
       - name: Typecheck
-        run: yarn typecheck
+        run: pnpm typecheck
 
-      - name: ESLint checks
-        run: yarn lint
+      - name: Lint
+        run: pnpm lint
 
       - name: Unit tests
-        run: yarn test-unit
+        run: pnpm test-unit
 
       - name: Build nextjs
-        run: yarn build
+        run: pnpm build
         env:
           NEXTJS_IGNORE_TYPECHECK: true
           NEXT_DISABLE_SOURCEMAPS: true
