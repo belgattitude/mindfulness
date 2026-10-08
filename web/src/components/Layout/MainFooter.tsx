@@ -62,7 +62,8 @@ export const MainFooter: FC<Props> = (props) => {
       aria-label="Pied de page"
       className="radial-gradient bg-brand-color-600 font-family-primary mt-10 w-full border-t border-white/60 text-neutral-700"
     >
-      <div className="mx-auto max-w-[1200px] px-6 pt-14 pb-8">
+      {/* Above the page background image, which shows over the gradient */}
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 pt-14 pb-8">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div className="col-span-2 flex flex-col items-start gap-4 lg:col-span-1">
             <Link

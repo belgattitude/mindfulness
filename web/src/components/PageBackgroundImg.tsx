@@ -19,7 +19,10 @@ export const PageBackgroundImg: FC<{
 }) => (
   <div
     className={cn(
-      "fixed top-0 left-0 m-0 h-screen max-h-screen w-full overflow-hidden p-0 opacity-15",
+      // Pinned to the large viewport (no resize when the mobile toolbars
+      // collapse), over the layout and footer backgrounds but under the page
+      // and footer content, and never catching clicks
+      "pointer-events-none fixed inset-x-0 top-0 z-0 h-lvh overflow-hidden opacity-15",
       className
     )}
   >
