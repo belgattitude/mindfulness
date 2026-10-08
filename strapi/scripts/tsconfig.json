@@ -1,0 +1,19 @@
+{
+  // Not at the project root: a root tsconfig.json makes strapi treat the
+  // project as typescript and compile it to dist/
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "noEmit": true,
+    // Scripts are run by node type stripping
+    "erasableSyntaxOnly": true,
+    // node requires explicit .mts extensions in relative imports
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "types": ["node"],
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "**/*.mts"]
+}

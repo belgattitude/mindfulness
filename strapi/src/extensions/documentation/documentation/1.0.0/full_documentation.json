@@ -1,4 +1,10 @@
 {
+  "x-strapi-config": {
+    "plugins": [
+      "upload",
+      "users-permissions"
+    ]
+  },
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
@@ -14,13 +20,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-10-08T06:32:25.453Z"
-  },
-  "x-strapi-config": {
-    "plugins": [
-      "upload",
-      "users-permissions"
-    ]
+    "x-generation-date": "2026-10-08T08:34:25.380Z"
   },
   "servers": [
     {
