@@ -6,25 +6,23 @@ import { twMerge } from "tailwind-merge";
 
 import { Button } from "@/components/Button/Button";
 import { MarkdownText } from "@/components/MarkdownText";
-import { useFragment } from "@/gql/fragment-masking";
 import { getStrapiMedia } from "@/lib/strapi";
-
-import { fullProgrammeFragment } from "../../api/programmes";
-import type { FetchProgramme } from "../../api/programmes";
+import type { Programme } from "@/openapi/model";
 
 interface Props {
   children?: never;
-  programme: FetchProgramme;
+  programme: Programme;
   className?: string;
 }
 
 export const ProgrammeListItem: FC<Props> = (props) => {
-  const { className = "", programme } = props;
-  const data = useFragment(fullProgrammeFragment, programme);
+  const { className = "", programme: data } = props;
   return (
     <div
       className={twMerge(
-        clsx("prose-lg my-5 flex flex-col gap-5 border-5 py-5 md:flex-row"),
+        clsx(
+          "typeset my-5 flex flex-col gap-5 border-5 py-5 text-inherit [--typeset-flow:1.333em] [--typeset-size:1.125rem] md:flex-row [&_h1]:mt-0 [&_h1]:font-normal"
+        ),
         className
       )}
     >

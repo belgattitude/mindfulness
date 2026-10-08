@@ -5,8 +5,12 @@ import Link from "next/link";
 import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
-import IconLotus from "@/public/icons/lotus.svg";
-import IconMeditation from "@/public/icons/meditation.svg";
+import IconDialogue from "@/public/icons/activities/dialogue.svg";
+import IconMindfulness from "@/public/icons/activities/mindfulness.svg";
+import IconProgrammes from "@/public/icons/activities/programmes.svg";
+import IconRegularClasses from "@/public/icons/activities/regular-classes.svg";
+import IconRetreats from "@/public/icons/activities/retreats.svg";
+import IconYoga from "@/public/icons/activities/yoga.svg";
 
 interface Props {
   className?: string;
@@ -14,24 +18,38 @@ interface Props {
 
 const activities = [
   {
-    icon: (props: { className: string }) => (
-      <IconMeditation className={props.className} />
-    ),
     items: [
-      { title: "Mindfulness", href: "/activities/mindfulness" },
-      { title: "Yoga", href: "/activities/yoga" },
-      { title: "Dialogue conscient", href: "/activities/dialogue-conscient" },
+      {
+        title: "Mindfulness",
+        href: "/activities/mindfulness",
+        Icon: IconMindfulness,
+      },
+      { title: "Yoga", href: "/activities/yoga", Icon: IconYoga },
+      {
+        title: "Dialogue conscient",
+        href: "/activities/dialogue-conscient",
+        Icon: IconDialogue,
+      },
     ],
     name: "Programmes",
   },
   {
-    icon: (props: { className: string }) => (
-      <IconLotus className={props.className} />
-    ),
     items: [
-      { title: "Cours réguliers", href: "/agenda/cours-reguliers" },
-      { title: "Programmes & cycles", href: "/agenda/programmes-et-cycles" },
-      { title: "Stages & retraites", href: "/agenda/stages-et-retraites" },
+      {
+        title: "Cours réguliers",
+        href: "/agenda/cours-reguliers",
+        Icon: IconRegularClasses,
+      },
+      {
+        title: "Programmes & cycles",
+        href: "/agenda/programmes-et-cycles",
+        Icon: IconProgrammes,
+      },
+      {
+        title: "Stages & retraites",
+        href: "/agenda/stages-et-retraites",
+        Icon: IconRetreats,
+      },
     ],
     name: "Agenda",
   },
@@ -61,9 +79,9 @@ export const MyActivitiesCard: FC<Props> = (props) => {
               {group.name}
             </div>
             <ul className="p-1">
-              {group.items.map(({ title, href }, _idx) => (
+              {group.items.map(({ title, href, Icon }) => (
                 <li key={`${title}`} className="flex items-center">
-                  {group.icon({ className: "h-6 w-6 flex-none" })}
+                  <Icon aria-hidden="true" className="size-6 flex-none" />
                   <Link
                     className="p-3 text-lg decoration-white underline-offset-8 outline-green-500 hover:underline"
                     title={title}

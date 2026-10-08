@@ -1,26 +1,35 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 
-import { fullProgrammeFragment } from "@/api/programmes";
-import type { FetchProgramme } from "@/api/programmes";
 import { Button } from "@/components/Button";
 import { MarkdownText } from "@/components/MarkdownText";
 import { PageContent } from "@/components/PageContent";
-import { useFragment } from "@/gql/fragment-masking";
 import { getStrapiMedia } from "@/lib/strapi";
+import type { GetProgrammesParams } from "@/openapi/model";
+import { useGetProgrammes } from "@/openapi/programme/programme";
 
 import { ProseContent } from "../ProseContent";
 
 interface Props {
-  programme: FetchProgramme;
+  /** The params prefetched by the server component (same query key) */
+  params: GetProgrammesParams;
   className?: string;
 }
 
 export const ProgrammePage: FC<Props> = (props) => {
-  const { programme } = props;
-  const data = useFragment(fullProgrammeFragment, programme);
+  const { params } = props;
+  const { data: response, error, isPending } = useGetProgrammes(params);
 
+  if (isPending) {
+    return null;
+  }
+  if (error) {
+    return <p className="text-red-700">Impossible de charger le programme.</p>;
+  }
+  const data = response.data?.[0];
   if (!data) {
     return <p>NotFound</p>;
   }

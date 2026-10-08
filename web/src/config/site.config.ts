@@ -8,7 +8,7 @@ export interface SiteConfig {
     title: string;
     href: string;
     activeMenu?: string[] | undefined;
-    footerGroup?: ("activities" | "menu") | undefined;
+    footerGroup?: ("activities" | "agenda" | "menu") | undefined;
   }[];
   search: {
     eventTypes: {
@@ -36,11 +36,11 @@ export const siteConfig = {
     {
       title: "Agenda",
       href: "/agenda",
-      activeMenu: ["/agenda", "/event"],
-      footerGroup: "menu",
+      activeMenu: ["/agenda", "/event", "/programme"],
+      footerGroup: "agenda",
     },
     { title: "A propos", href: "/about", footerGroup: "menu" },
-    { title: "Contact", href: "/contact" },
+    { title: "Contact", href: "/contact", footerGroup: "menu" },
   ],
   metadata: {
     siteDescription: "",

@@ -20,7 +20,6 @@
       "@/config/*": ["./src/config/*"],
       "@/features/*": ["./src/features/*"],
       "@/fonts/*": ["./src/fonts/*"],
-      "@/gql/*": ["./src/gql/*"],
       "@/layout/*": ["./src/layout/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/openapi/*": ["./src/openapi/*"],

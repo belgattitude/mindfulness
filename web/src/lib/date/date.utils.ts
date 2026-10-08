@@ -55,3 +55,21 @@ export const getDateRangeStr = (params: {
             : "numeric",
       })} au ${formatDate(dateEnd, locale, { timeZone })}`;
 };
+
+/** Day number and short month of a date, ie: { day: "6", month: "janv." } */
+export const getDayMonthParts = (params: {
+  date: string | Date;
+  locale?: string;
+  timeZone?: string;
+}): { day: string; month: string } => {
+  const { date, locale = "fr", timeZone = "Europe/Paris" } = params;
+  const d = convertIsoStringToDate(date);
+  return {
+    day: new Intl.DateTimeFormat(locale, { day: "numeric", timeZone }).format(
+      d
+    ),
+    month: new Intl.DateTimeFormat(locale, { month: "short", timeZone }).format(
+      d
+    ),
+  };
+};
