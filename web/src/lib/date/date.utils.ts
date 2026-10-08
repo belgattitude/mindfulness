@@ -1,7 +1,5 @@
-import {
-  assertParsableStrictIsoDateZ,
-  type ParsableStrictIsoDateZ,
-} from '@httpx/assert';
+import { assertParsableStrictIsoDateZ } from "@httpx/assert";
+import type { ParsableStrictIsoDateZ } from "@httpx/assert";
 
 export const convertIsoStringToDate = (
   dateStr: string | ParsableStrictIsoDateZ | Date
@@ -9,9 +7,10 @@ export const convertIsoStringToDate = (
   if (dateStr instanceof Date) {
     return dateStr;
   }
-  assertParsableStrictIsoDateZ(dateStr, () => {
-    return new TypeError(`Invalid date string: ${dateStr}`);
-  });
+  assertParsableStrictIsoDateZ(
+    dateStr,
+    () => new TypeError(`Invalid date string: ${dateStr}`)
+  );
   return new Date(dateStr);
 };
 
@@ -22,38 +21,37 @@ export const getDateRangeStr = (params: {
   locale?: string;
   timeZone?: string;
 }): string => {
-  const { startAt, endAt, locale = 'fr', timeZone = 'Europe/Paris' } = params;
+  const { startAt, endAt, locale = "fr", timeZone = "Europe/Paris" } = params;
   const dateFrom = convertIsoStringToDate(startAt);
   const dateEnd = endAt ? convertIsoStringToDate(endAt) : undefined;
 
   return dateEnd === undefined
     ? `le ${formatDate(dateFrom)}`
     : `du ${formatDate(dateFrom, {
+        month:
+          dateEnd.getMonth() === dateFrom.getMonth() ? undefined : "numeric",
         year:
           dateEnd.getFullYear() === dateFrom.getFullYear()
             ? undefined
-            : 'numeric',
-        month:
-          dateEnd.getMonth() === dateFrom.getMonth() ? undefined : 'numeric',
+            : "numeric",
       })} au ${formatDate(dateEnd)}`;
 };
 
 const defaultOptions = {
-  weekday: 'long',
-  month: 'long',
-  day: 'numeric',
-  year: 'numeric',
+  day: "numeric",
   hour: undefined,
   minute: undefined,
-  timeZone: 'Europe/paris',
+  month: "long",
+  timeZone: "Europe/paris",
+  weekday: "long",
+  year: "numeric",
 } as const;
 
 const formatDate = (
   date: Date,
   options?: Parameters<typeof Intl.DateTimeFormat>[1]
-) => {
-  return new Intl.DateTimeFormat('fr', {
+) =>
+  new Intl.DateTimeFormat("fr", {
     ...defaultOptions,
     ...options,
   }).format(date);
-};

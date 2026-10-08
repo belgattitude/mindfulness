@@ -1,7 +1,7 @@
-import type { QueryClientConfig } from '@tanstack/react-query';
+import type { QueryClientConfig } from "@tanstack/react-query";
 
-const isServer = typeof window === 'undefined';
-const isProd = process.env.NODE_ENV === 'production';
+const isServer = typeof window === "undefined";
+const isProd = process.env.NODE_ENV === "production";
 
 export const reactQueryConfig: QueryClientConfig = {
   defaultOptions: {

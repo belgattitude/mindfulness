@@ -1,32 +1,33 @@
-import { clsx } from 'clsx';
-import Image from 'next/image';
-import type { FC } from 'react';
-import { twMerge } from 'tailwind-merge';
-import IconLotus from '@/public/icons/lotus.svg';
-import IconMeditation from '@/public/icons/meditation.svg';
-import IconYoga from '@/public/icons/yoga.svg';
+import { clsx } from "clsx";
+import Image from "next/image";
+import type { FC } from "react";
+import { twMerge } from "tailwind-merge";
+
+import IconLotus from "@/public/icons/lotus.svg";
+import IconMeditation from "@/public/icons/meditation.svg";
+import IconYoga from "@/public/icons/yoga.svg";
 
 export const AboutCard: FC<{ className?: string }> = (props) => {
-  const { className = '' } = props;
+  const { className = "" } = props;
   return (
     <div
       className={twMerge(
-        clsx('rounded-lg px-6 pb-8 pt-10 shadow-lg sm:px-10'),
+        clsx("rounded-lg px-6 pt-10 pb-8 shadow-lg sm:px-10"),
         className
       )}
     >
-      <div className="space-y-6 text-base font-normal leading-7 text-neutral-800">
+      <div className="space-y-6 text-base leading-7 font-normal text-neutral-800">
         <div className="">
           <Image
             src="/images/sandrine-photo.jpg"
             className=""
             width={800}
             height={800}
-            alt={'Photo profil Sandrine'}
+            alt="Photo profil Sandrine"
           />
         </div>
 
-        <p className={'text-3xl font-extralight'}>Bonjour, à mon propos</p>
+        <p className="text-3xl font-extralight">Bonjour, à mon propos</p>
         <p>
           Je suis Sandrine Rauter, professeur de Yoga et de pleine conscience /
           mindfuless depuis de nombreuses années. Pour celles et ceux dont je
@@ -56,11 +57,11 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
         </p>
       </div>
 
-      <div className="pt-8 text-base font-light leading-10">
+      <div className="pt-8 text-base leading-10 font-light">
         <p className="text-gray-900">Liens vers mes formations</p>
         <p>
           <a
-            target={'_blank'}
+            target="_blank"
             href="https://www.brusselsmindfulness.be/team/sandrine-rauter"
             className="text-white underline hover:text-sky-600"
             rel="noreferrer"
@@ -73,17 +74,15 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
       <div className="divide-y divide-gray-300/50">
         <div className="">
           <Image
-            src={
-              'https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-            }
+            src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
             className=""
             width={800}
             height={800}
-            alt={'Photo profile Sandrine'}
+            alt="Photo profile Sandrine"
           />
         </div>
 
-        <div className={'pt-5 text-2xl font-extralight uppercase leading-8'}>
+        <div className="pt-5 text-2xl leading-8 font-extralight uppercase">
           Pleine conscience et yoga. Teintée de nature et sa profondeur. Loving
           soul.
         </div>

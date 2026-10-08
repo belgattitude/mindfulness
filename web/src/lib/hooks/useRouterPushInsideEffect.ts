@@ -1,5 +1,6 @@
-import { useRouter, type NextRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useRouter } from "next/router";
+import type { NextRouter } from "next/router";
+import { useRef, useState } from "react";
 
 /**
  * Allow to use nextjs router.push() inside an effect or callback.
@@ -18,13 +19,13 @@ import { useRef, useState } from 'react';
  * }, [push])
  * ```
  */
-export function useRouterPushInsideEffect(): NextRouter['push'] {
+export function useRouterPushInsideEffect(): NextRouter["push"] {
   const router = useRouter();
   const routerRef = useRef(router);
 
   routerRef.current = router;
 
-  const [{ push }] = useState<Pick<NextRouter, 'push'>>({
+  const [{ push }] = useState<Pick<NextRouter, "push">>({
     push: (path) => routerRef.current.push(path),
   });
 

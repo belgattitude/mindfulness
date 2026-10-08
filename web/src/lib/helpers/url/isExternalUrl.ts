@@ -1,3 +1,2 @@
-export const isExternalUrl = (url: string): boolean => {
-  return !(url.startsWith('/') || url.startsWith('./'));
-};
+export const isExternalUrl = (url: string): boolean =>
+  !(url.startsWith("/") || url.startsWith("./"));

@@ -1,6 +1,6 @@
-import { graphql } from '@/gql/gql';
-import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphqlClient } from '@/config/graphql-client.config';
+import { getGraphqlClient } from "@/config/graphql-client.config";
+import { graphql } from "@/gql/gql";
+import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const getContactPage = graphql(/* GraphQL */ `
   query getContactPage {
@@ -15,11 +15,10 @@ export const getContactPage = graphql(/* GraphQL */ `
   }
 `);
 
-export const fetchContactPage = async () => {
-  return getGraphqlClient
+export const fetchContactPage = async () =>
+  getGraphqlClient
     .request(getContactPage)
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
       return resp;
     });
-};

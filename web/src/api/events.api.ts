@@ -1,13 +1,14 @@
 // Temporary api with graphql-request - will have to change this, either
 // - urql
 // - phase out graphql
-import { HttpNotFound } from '@httpx/exception';
-import type { EventTypeSlugs } from '@/components/Event/utils';
-import type { FragmentType } from '@/gql/fragment-masking';
-import { graphql } from '@/gql/gql';
-import type { EventFiltersInput, PublicationStatus } from '@/gql/graphql';
-import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphqlClient } from '@/config/graphql-client.config';
+import { HttpNotFound } from "@httpx/exception";
+
+import type { EventTypeSlugs } from "@/components/Event/utils";
+import { getGraphqlClient } from "@/config/graphql-client.config";
+import type { FragmentType } from "@/gql/fragment-masking";
+import { graphql } from "@/gql/gql";
+import type { EventFiltersInput, PublicationStatus } from "@/gql/graphql";
+import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const fullEventFragment = graphql(/* GraphQL */ `
   fragment FullEventFragment on Event {

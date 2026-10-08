@@ -1,11 +1,12 @@
-import { clsx } from 'clsx';
-import type { FC } from 'react';
-import { Button } from '@/components/Button/Button';
+import { clsx } from "clsx";
+import type { FC } from "react";
 
-type Props = {
+import { Button } from "@/components/Button/Button";
+
+interface Props {
   collapse: boolean;
   render: boolean;
-};
+}
 export const BannerAlert: FC<Props> = (props) => {
   const { collapse = false, render = true } = props;
   if (!render) {
@@ -13,20 +14,20 @@ export const BannerAlert: FC<Props> = (props) => {
   }
   return (
     <div
-      data-test-id={'top-banner'}
+      data-test-id="top-banner"
       className={clsx(
-        'transition-all-1s flex items-center justify-center space-x-3 bg-brand-color-300 p-1 font-family-primary font-light text-white',
+        "transition-all-1s bg-brand-color-300 font-family-primary flex items-center justify-center space-x-3 p-1 font-light text-white",
         {
-          ['-translate-y-60 h-0']: collapse,
+          "h-0 -translate-y-60": collapse,
         }
       )}
     >
-      <span className={'text-lg font-light'}>
+      <span className="text-lg font-light">
         Inscriptions ouvertes pour nos prochains stages
       </span>
       <Button
-        className={'rounded-sm bg-pink-400 font-light hover:bg-pink-600'}
-        $size={'sm'}
+        className="rounded-sm bg-pink-400 font-light hover:bg-pink-600"
+        $size="sm"
       >
         Info et réservations
       </Button>

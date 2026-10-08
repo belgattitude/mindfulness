@@ -1,4 +1,4 @@
-export type SiteConfig = {
+export interface SiteConfig {
   canonicalUrl: string;
   metadata: {
     siteTitle: string;
@@ -8,7 +8,7 @@ export type SiteConfig = {
     title: string;
     href: string;
     activeMenu?: string[] | undefined;
-    footerGroup?: ('activities' | 'menu') | undefined;
+    footerGroup?: ("activities" | "menu") | undefined;
   }[];
   search: {
     eventTypes: {
@@ -16,43 +16,43 @@ export type SiteConfig = {
       title: string;
     }[];
   };
-};
+}
 
 export const siteConfig = {
-  canonicalUrl: process.env.NEXT_PUBLIC_SITE_URL ?? '',
-  metadata: {
-    siteTitle: 'Sandrine Rauter',
-    siteDescription: '',
-  },
+  canonicalUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "",
   mainNavLinks: [
-    { title: 'Accueil', href: '/', footerGroup: 'menu' },
+    { title: "Accueil", href: "/", footerGroup: "menu" },
     {
-      title: 'Mindfulness',
-      href: '/activities/mindfulness',
-      footerGroup: 'activities',
+      title: "Mindfulness",
+      href: "/activities/mindfulness",
+      footerGroup: "activities",
     },
-    { title: 'Yoga', href: '/activities/yoga', footerGroup: 'activities' },
+    { title: "Yoga", href: "/activities/yoga", footerGroup: "activities" },
     {
-      title: 'Dialogue Conscient',
-      href: '/activities/dialogue-conscient',
-      footerGroup: 'activities',
+      title: "Dialogue Conscient",
+      href: "/activities/dialogue-conscient",
+      footerGroup: "activities",
     },
     {
-      title: 'Agenda',
-      href: '/agenda',
-      activeMenu: ['/agenda', '/event'],
-      footerGroup: 'menu',
+      title: "Agenda",
+      href: "/agenda",
+      activeMenu: ["/agenda", "/event"],
+      footerGroup: "menu",
     },
-    { title: 'A propos', href: '/about', footerGroup: 'menu' },
-    { title: 'Contact', href: '/contact' },
+    { title: "A propos", href: "/about", footerGroup: "menu" },
+    { title: "Contact", href: "/contact" },
   ],
+  metadata: {
+    siteDescription: "",
+    siteTitle: "Sandrine Rauter",
+  },
   search: {
     eventTypes: [
-      { slug: 'stages-et-retraites', title: 'Stages et retraites' },
-      { slug: 'programmes-et-cycles', title: 'Programmes et cycles' },
-      { slug: 'cours-reguliers', title: 'Cours réguliers' },
+      { slug: "stages-et-retraites", title: "Stages et retraites" },
+      { slug: "programmes-et-cycles", title: "Programmes et cycles" },
+      { slug: "cours-reguliers", title: "Cours réguliers" },
     ],
   },
 } as const satisfies SiteConfig;
 
-export type MainNavLinks = SiteConfig['mainNavLinks'];
+export type MainNavLinks = SiteConfig["mainNavLinks"];

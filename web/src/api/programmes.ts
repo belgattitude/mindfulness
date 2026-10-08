@@ -1,14 +1,15 @@
 // Temporary api with graphql-request - will have to change this, either
 // - urql
 // - phase out graphql
-import { HttpNotFound } from '@httpx/exception';
-import request from 'graphql-request';
-import { getGraphQLUrl } from '@/config/graphql.config';
-import type { FragmentType } from '@/gql/fragment-masking';
-import { graphql } from '@/gql/gql';
-import type { PublicationStatus } from '@/gql/graphql';
-import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphqlClient } from '@/config/graphql-client.config';
+import { HttpNotFound } from "@httpx/exception";
+import request from "graphql-request";
+
+import { getGraphqlClient } from "@/config/graphql-client.config";
+import { getGraphQLUrl } from "@/config/graphql.config";
+import type { FragmentType } from "@/gql/fragment-masking";
+import { graphql } from "@/gql/gql";
+import type { PublicationStatus } from "@/gql/graphql";
+import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const fullProgrammeFragment = graphql(/* GraphQL */ `
   fragment FullProgrammeFragment on Programme {
@@ -72,10 +73,9 @@ export const fetchProgramme = async (params: { slug: string }) => {
 export const fetchProgrammes = async (params: {
   limit?: number;
   status?: PublicationStatus;
-}) => {
-  return request(getGraphQLUrl(), searchProgrammes, {
+}) =>
+  request(getGraphQLUrl(), searchProgrammes, {
     ...params,
   }).catch(getGraphqlRequestCatcher);
-};
 
 export type FetchProgramme = FragmentType<typeof fullProgrammeFragment>;

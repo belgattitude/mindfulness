@@ -138,8 +138,16 @@ type Event {
   location: String
   online: Boolean!
   organizers: String
-  programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [Programme]!
-  programmes_connection(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ProgrammeRelationResponseCollection
+  programmes(
+    filters: ProgrammeFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [Programme]!
+  programmes_connection(
+    filters: ProgrammeFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ProgrammeRelationResponseCollection
   publishedAt: DateTime
   slug: String!
   startAt: DateTime!
@@ -234,7 +242,21 @@ input FloatFilterInput {
   startsWith: Float
 }
 
-union GenericMorph = About | Contact | Event | Home | I18NLocale | Page | Programme | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | Temoignage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph =
+  | About
+  | Contact
+  | Event
+  | Home
+  | I18NLocale
+  | Page
+  | Programme
+  | ReviewWorkflowsWorkflow
+  | ReviewWorkflowsWorkflowStage
+  | Temoignage
+  | UploadFile
+  | UsersPermissionsPermission
+  | UsersPermissionsRole
+  | UsersPermissionsUser
 
 type Home {
   createdAt: DateTime
@@ -357,20 +379,46 @@ input JSONFilterInput {
 }
 
 type Mutation {
-  """Change user password. Confirm with the current password."""
-  changePassword(currentPassword: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  """
+  Change user password. Confirm with the current password.
+  """
+  changePassword(
+    currentPassword: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
   createEvent(data: EventInput!, status: PublicationStatus = PUBLISHED): Event
   createPage(data: PageInput!, status: PublicationStatus = PUBLISHED): Page
-  createProgramme(data: ProgrammeInput!, status: PublicationStatus = PUBLISHED): Programme
-  createReviewWorkflowsWorkflow(data: ReviewWorkflowsWorkflowInput!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
-  createReviewWorkflowsWorkflowStage(data: ReviewWorkflowsWorkflowStageInput!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
-  createTemoignage(data: TemoignageInput!, status: PublicationStatus = PUBLISHED): Temoignage
+  createProgramme(
+    data: ProgrammeInput!
+    status: PublicationStatus = PUBLISHED
+  ): Programme
+  createReviewWorkflowsWorkflow(
+    data: ReviewWorkflowsWorkflowInput!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflow
+  createReviewWorkflowsWorkflowStage(
+    data: ReviewWorkflowsWorkflowStageInput!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStage
+  createTemoignage(
+    data: TemoignageInput!
+    status: PublicationStatus = PUBLISHED
+  ): Temoignage
 
-  """Create a new role"""
-  createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+  """
+  Create a new role
+  """
+  createUsersPermissionsRole(
+    data: UsersPermissionsRoleInput!
+  ): UsersPermissionsCreateRolePayload
 
-  """Create a new user"""
-  createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  """
+  Create a new user
+  """
+  createUsersPermissionsUser(
+    data: UsersPermissionsUserInput!
+  ): UsersPermissionsUserEntityResponse!
   deleteAbout: DeleteMutationResponse
   deleteContact: DeleteMutationResponse
   deleteEvent(documentId: ID!): DeleteMutationResponse
@@ -382,42 +430,93 @@ type Mutation {
   deleteTemoignage(documentId: ID!): DeleteMutationResponse
   deleteUploadFile(id: ID!): UploadFile
 
-  """Delete an existing role"""
+  """
+  Delete an existing role
+  """
   deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
 
-  """Delete an existing user"""
+  """
+  Delete an existing user
+  """
   deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
 
-  """Confirm an email users email address"""
+  """
+  Confirm an email users email address
+  """
   emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
 
-  """Request a reset password token"""
+  """
+  Request a reset password token
+  """
   forgotPassword(email: String!): UsersPermissionsPasswordPayload
   login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
 
-  """Register a user"""
+  """
+  Register a user
+  """
   register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
 
   """
   Reset user password. Confirm with a code (resetToken from forgotPassword)
   """
-  resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  resetPassword(
+    code: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
   updateAbout(data: AboutInput!, status: PublicationStatus = PUBLISHED): About
-  updateContact(data: ContactInput!, status: PublicationStatus = PUBLISHED): Contact
-  updateEvent(data: EventInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): Event
+  updateContact(
+    data: ContactInput!
+    status: PublicationStatus = PUBLISHED
+  ): Contact
+  updateEvent(
+    data: EventInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): Event
   updateHome(data: HomeInput!, status: PublicationStatus = PUBLISHED): Home
-  updatePage(data: PageInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): Page
-  updateProgramme(data: ProgrammeInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): Programme
-  updateReviewWorkflowsWorkflow(data: ReviewWorkflowsWorkflowInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
-  updateReviewWorkflowsWorkflowStage(data: ReviewWorkflowsWorkflowStageInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
-  updateTemoignage(data: TemoignageInput!, documentId: ID!, status: PublicationStatus = PUBLISHED): Temoignage
+  updatePage(
+    data: PageInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): Page
+  updateProgramme(
+    data: ProgrammeInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): Programme
+  updateReviewWorkflowsWorkflow(
+    data: ReviewWorkflowsWorkflowInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflow
+  updateReviewWorkflowsWorkflowStage(
+    data: ReviewWorkflowsWorkflowStageInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStage
+  updateTemoignage(
+    data: TemoignageInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): Temoignage
   updateUploadFile(id: ID!, info: FileInfoInput): UploadFile!
 
-  """Update an existing role"""
-  updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
+  """
+  Update an existing role
+  """
+  updateUsersPermissionsRole(
+    data: UsersPermissionsRoleInput!
+    id: ID!
+  ): UsersPermissionsUpdateRolePayload
 
-  """Update an existing user"""
-  updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
+  """
+  Update an existing user
+  """
+  updateUsersPermissionsUser(
+    data: UsersPermissionsUserInput!
+    id: ID!
+  ): UsersPermissionsUserEntityResponse!
 }
 
 type Page {
@@ -425,8 +524,16 @@ type Page {
   createdAt: DateTime
   documentId: ID!
   introduction: String
-  programmes(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [Programme]!
-  programmes_connection(filters: ProgrammeFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ProgrammeRelationResponseCollection
+  programmes(
+    filters: ProgrammeFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [Programme]!
+  programmes_connection(
+    filters: ProgrammeFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ProgrammeRelationResponseCollection
   publishedAt: DateTime
   slug: String!
   summary: String
@@ -484,8 +591,16 @@ type Programme {
   createdAt: DateTime
   description: String
   documentId: ID!
-  events(filters: EventFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [Event]!
-  events_connection(filters: EventFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): EventRelationResponseCollection
+  events(
+    filters: EventFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [Event]!
+  events_connection(
+    filters: EventFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): EventRelationResponseCollection
   publishedAt: DateTime
   slug: String
   summary: String
@@ -548,40 +663,242 @@ enum PublicationStatus {
 }
 
 type Query {
-  about(hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): About
-  contact(hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Contact
-  event(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Event
-  events(filters: EventFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Event]!
-  events_connection(filters: EventFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): EventEntityResponseCollection
-  home(hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Home
-  i18NLocale(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): I18NLocale
-  i18NLocales(filters: I18NLocaleFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [I18NLocale]!
-  i18NLocales_connection(filters: I18NLocaleFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): I18NLocaleEntityResponseCollection
+  about(
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): About
+  contact(
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Contact
+  event(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Event
+  events(
+    filters: EventFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [Event]!
+  events_connection(
+    filters: EventFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): EventEntityResponseCollection
+  home(
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Home
+  i18NLocale(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): I18NLocale
+  i18NLocales(
+    filters: I18NLocaleFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [I18NLocale]!
+  i18NLocales_connection(
+    filters: I18NLocaleFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): I18NLocaleEntityResponseCollection
   me: UsersPermissionsMe
-  page(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Page
-  pages(filters: PageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Page]!
-  pages_connection(filters: PageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): PageEntityResponseCollection
-  programme(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Programme
-  programmes(filters: ProgrammeFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Programme]!
-  programmes_connection(filters: ProgrammeFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): ProgrammeEntityResponseCollection
-  reviewWorkflowsWorkflow(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
-  reviewWorkflowsWorkflowStage(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
-  reviewWorkflowsWorkflowStages(filters: ReviewWorkflowsWorkflowStageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflowStage]!
-  reviewWorkflowsWorkflowStages_connection(filters: ReviewWorkflowsWorkflowStageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStageEntityResponseCollection
-  reviewWorkflowsWorkflows(filters: ReviewWorkflowsWorkflowFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [ReviewWorkflowsWorkflow]!
-  reviewWorkflowsWorkflows_connection(filters: ReviewWorkflowsWorkflowFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowEntityResponseCollection
-  temoignage(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): Temoignage
-  temoignages(filters: TemoignageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [Temoignage]!
-  temoignages_connection(filters: TemoignageFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): TemoignageEntityResponseCollection
-  uploadFile(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): UploadFile
-  uploadFiles(filters: UploadFileFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UploadFile]!
-  uploadFiles_connection(filters: UploadFileFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): UploadFileEntityResponseCollection
-  usersPermissionsRole(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): UsersPermissionsRole
-  usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsRole]!
-  usersPermissionsRoles_connection(filters: UsersPermissionsRoleFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsRoleEntityResponseCollection
-  usersPermissionsUser(documentId: ID!, hasPublishedVersion: Boolean, publicationFilter: PublicationFilter, status: PublicationStatus = PUBLISHED): UsersPermissionsUser
-  usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): [UsersPermissionsUser]!
-  usersPermissionsUsers_connection(filters: UsersPermissionsUserFiltersInput, hasPublishedVersion: Boolean, pagination: PaginationArg = {}, publicationFilter: PublicationFilter, sort: [String] = [], status: PublicationStatus = PUBLISHED): UsersPermissionsUserEntityResponseCollection
+  page(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Page
+  pages(
+    filters: PageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [Page]!
+  pages_connection(
+    filters: PageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): PageEntityResponseCollection
+  programme(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Programme
+  programmes(
+    filters: ProgrammeFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [Programme]!
+  programmes_connection(
+    filters: ProgrammeFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): ProgrammeEntityResponseCollection
+  reviewWorkflowsWorkflow(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflow
+  reviewWorkflowsWorkflowStage(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStage
+  reviewWorkflowsWorkflowStages(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [ReviewWorkflowsWorkflowStage]!
+  reviewWorkflowsWorkflowStages_connection(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStageEntityResponseCollection
+  reviewWorkflowsWorkflows(
+    filters: ReviewWorkflowsWorkflowFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [ReviewWorkflowsWorkflow]!
+  reviewWorkflowsWorkflows_connection(
+    filters: ReviewWorkflowsWorkflowFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowEntityResponseCollection
+  temoignage(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): Temoignage
+  temoignages(
+    filters: TemoignageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [Temoignage]!
+  temoignages_connection(
+    filters: TemoignageFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): TemoignageEntityResponseCollection
+  uploadFile(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): UploadFile
+  uploadFiles(
+    filters: UploadFileFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UploadFile]!
+  uploadFiles_connection(
+    filters: UploadFileFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UploadFileEntityResponseCollection
+  usersPermissionsRole(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsRole
+  usersPermissionsRoles(
+    filters: UsersPermissionsRoleFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UsersPermissionsRole]!
+  usersPermissionsRoles_connection(
+    filters: UsersPermissionsRoleFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsUser(
+    documentId: ID!
+    hasPublishedVersion: Boolean
+    publicationFilter: PublicationFilter
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsUser
+  usersPermissionsUsers(
+    filters: UsersPermissionsUserFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UsersPermissionsUser]!
+  usersPermissionsUsers_connection(
+    filters: UsersPermissionsUserFiltersInput
+    hasPublishedVersion: Boolean
+    pagination: PaginationArg = {}
+    publicationFilter: PublicationFilter
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsUserEntityResponseCollection
 }
 
 type ReviewWorkflowsWorkflow {
@@ -591,8 +908,16 @@ type ReviewWorkflowsWorkflow {
   name: String!
   publishedAt: DateTime
   stageRequiredToPublish: ReviewWorkflowsWorkflowStage
-  stages(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [ReviewWorkflowsWorkflowStage]!
-  stages_connection(filters: ReviewWorkflowsWorkflowStageFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): ReviewWorkflowsWorkflowStageRelationResponseCollection
+  stages(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ReviewWorkflowsWorkflowStage]!
+  stages_connection(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ReviewWorkflowsWorkflowStageRelationResponseCollection
   updatedAt: DateTime
 }
 
@@ -862,13 +1187,29 @@ type UsersPermissionsRole {
   description: String
   documentId: ID!
   name: String!
-  permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UsersPermissionsPermission]!
-  permissions_connection(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+  permissions(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [UsersPermissionsPermission]!
+  permissions_connection(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsPermissionRelationResponseCollection
   publishedAt: DateTime
   type: String
   updatedAt: DateTime
-  users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [UsersPermissionsUser]!
-  users_connection(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+  users(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [UsersPermissionsUser]!
+  users_connection(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserRelationResponseCollection
 }
 
 type UsersPermissionsRoleEntityResponseCollection {

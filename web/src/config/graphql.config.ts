@@ -1,5 +1,3 @@
-import { getStrapiURL } from './strapi.config';
+import { getStrapiURL } from "./strapi.config";
 
-export const getGraphQLUrl = (): string => {
-  return getStrapiURL('/graphql');
-};
+export const getGraphQLUrl = (): string => getStrapiURL("/graphql");

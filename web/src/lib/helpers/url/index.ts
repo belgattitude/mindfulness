@@ -1,2 +1,2 @@
-export { isExternalUrl } from './isExternalUrl';
-export { getCommonPathnameLevels } from './getCommonPathnameLevels';
+export { isExternalUrl } from "./isExternalUrl";
+export { getCommonPathnameLevels } from "./getCommonPathnameLevels";

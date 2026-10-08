@@ -5,10 +5,10 @@ export const getCommonPathnameLevels = (
   pathname2: string
 ): number => {
   let levels = 0;
-  const paths1 = pathname1.split('/').filter(Boolean);
-  const paths2 = pathname2.split('/').filter(Boolean);
-  let i = 0,
-    stop = false;
+  const paths1 = pathname1.split("/").filter(Boolean);
+  const paths2 = pathname2.split("/").filter(Boolean);
+  let i = 0;
+  let stop = false;
   while (i < paths2.length && !stop) {
     if (paths2[i] === paths1[i]) {
       levels++;

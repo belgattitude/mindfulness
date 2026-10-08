@@ -1,11 +1,13 @@
-import { HttpNotFound } from '@httpx/exception';
-import request from 'graphql-request';
-import type { FragmentType } from '@/gql/fragment-masking';
-import { graphql } from '@/gql/gql';
-import type { PublicationStatus } from '@/gql/graphql';
-import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphQLUrl } from '../config/graphql.config';
-import { getGraphqlClient } from '@/config/graphql-client.config';
+import { HttpNotFound } from "@httpx/exception";
+import request from "graphql-request";
+
+import { getGraphqlClient } from "@/config/graphql-client.config";
+import type { FragmentType } from "@/gql/fragment-masking";
+import { graphql } from "@/gql/gql";
+import type { PublicationStatus } from "@/gql/graphql";
+import { getGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
+
+import { getGraphQLUrl } from "../config/graphql.config";
 
 export const fullPageFragment = graphql(/* GraphQL */ `
   fragment FullPageFragment on Page {
@@ -54,17 +56,16 @@ const getPage = graphql(/* GraphQL */ `
 export const fetchPages = async (params: {
   limit?: number;
   status?: PublicationStatus;
-}) => {
-  return request(getGraphQLUrl(), searchPages, {
+}) =>
+  request(getGraphQLUrl(), searchPages, {
     ...params,
   }).catch(getGraphqlRequestCatcher);
-};
 
 export const fetchPage = async (params: {
   slug: string;
   status?: PublicationStatus;
-}) => {
-  return getGraphqlClient
+}) =>
+  getGraphqlClient
     .request(getPage, params)
     .catch(getGraphqlRequestCatcher)
     .then((resp) => {
@@ -74,6 +75,5 @@ export const fetchPage = async (params: {
       }
       return event;
     });
-};
 
 export type FetchPage = FragmentType<typeof fullPageFragment>;

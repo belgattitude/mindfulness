@@ -1,6 +1,6 @@
-import type { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from "react";
 
-import { ReactQueryClientProvider } from './ReactQueryClientProvider';
+import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
 
 type Props = PropsWithChildren;
 

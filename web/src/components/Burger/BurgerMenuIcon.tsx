@@ -1,25 +1,26 @@
-import { clsx } from 'clsx';
-import { forwardRef } from 'react';
-import BurgerOpenIcon from '@/public/icons/burger-simple-svgrepo-com.svg';
-import BurgerCloseIcon from '@/public/icons/cross-svgrepo-com.svg';
-import { cn } from '@/components/utils';
+import { clsx } from "clsx";
+import { forwardRef } from "react";
 
-type Props = {
+import { cn } from "@/components/utils";
+import BurgerOpenIcon from "@/public/icons/burger-simple-svgrepo-com.svg";
+import BurgerCloseIcon from "@/public/icons/cross-svgrepo-com.svg";
+
+interface Props {
   handleClick: () => void;
   isOpen: boolean;
   className?: string;
   // ref?: { current: HTMLDivElement | undefined | null };
-};
+}
 
 export const BurgerMenuIcon = forwardRef<HTMLDivElement, Props>(
   /** prefer named function to not have to set the displayName */
-  function BurgerMenuIcon(props, ref) {
+  (props, ref) => {
     const { isOpen, handleClick, className, ...restBtnProps } = props;
 
     return (
       <div
         className={cn(
-          'size-[32px] cursor-pointer transition-opacity relative',
+          "relative size-[32px] cursor-pointer transition-opacity",
           className
         )}
         onClick={() => {
@@ -30,17 +31,17 @@ export const BurgerMenuIcon = forwardRef<HTMLDivElement, Props>(
       >
         <BurgerOpenIcon
           className={clsx(
-            'delay-450 absolute left-0 top-0 size-full transition-opacity duration-300 ease-in-out',
+            "absolute top-0 left-0 size-full transition-opacity delay-450 duration-300 ease-in-out",
             {
-              ['opacity-0']: isOpen,
+              ["opacity-0"]: isOpen,
             }
           )}
         />
         <BurgerCloseIcon
           className={clsx(
-            'delay-450 absolute size-full opacity-0 transition-opacity duration-300 ease-in-out',
+            "absolute size-full opacity-0 transition-opacity delay-450 duration-300 ease-in-out",
             {
-              ['opacity-100']: isOpen,
+              ["opacity-100"]: isOpen,
             }
           )}
         />

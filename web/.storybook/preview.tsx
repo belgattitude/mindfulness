@@ -1,39 +1,37 @@
-import '../src/styles/globals.css';
+import "../src/styles/globals.css";
 import type { Preview } from "@storybook/nextjs-vite";
-
-import { Montserrat, Inter } from 'next/font/google';
+import { Montserrat, Inter } from "next/font/google";
 
 const fontInter = Inter({
-  subsets: ['latin'],
-  weight: 'variable',
-  variable: '--font-family-inter',
-  style: ['normal'],
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-family-inter",
+  style: ["normal"],
   //preload: true,
-  display: 'block',
+  display: "block",
 });
 
 const fontMontserrat = Montserrat({
-  subsets: ['latin'],
-  weight: 'variable',
-  variable: '--font-family-montserrat',
-  style: ['normal', 'italic'],
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-family-montserrat",
+  style: ["normal", "italic"],
   //preload: true,
-  display: 'block',
+  display: "block",
 });
 
 const decorators = [
-  (Story, context) => {
-    return (
-      <div className={`${fontInter.variable} ${fontMontserrat.variable} font-sans`}>
-        <Story />
-      </div>
-    )
-  }
-] as const satisfies Preview['decorators']
-
+  (Story, context) => (
+    <div
+      className={`${fontInter.variable} ${fontMontserrat.variable} font-sans`}
+    >
+      <Story />
+    </div>
+  ),
+] as const satisfies Preview["decorators"];
 
 const preview: Preview = {
-  decorators: decorators,
+  decorators,
   parameters: {
     controls: {
       matchers: {
@@ -43,6 +41,5 @@ const preview: Preview = {
     },
   },
 };
-
 
 export default preview;

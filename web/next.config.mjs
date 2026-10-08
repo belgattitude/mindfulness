@@ -1,14 +1,15 @@
 // @ts-check
 
-import { createSecureHeaders } from 'next-secure-headers';
-import { env } from './env.mjs';
+import { createSecureHeaders } from "next-secure-headers";
 
-const isProd = process.env.NODE_ENV === 'production';
+import { env } from "./env.mjs";
+
+const isProd = process.env.NODE_ENV === "production";
 const enableCSP = isProd;
 
-const trueEnv = ['true', '1', 'yes'];
+const trueEnv = ["true", "1", "yes"];
 const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
-  process.env?.NEXTJS_IGNORE_TYPECHECK ?? 'false'
+  process.env?.NEXTJS_IGNORE_TYPECHECK ?? "false"
 );
 
 const strapiUrl = env.NEXT_PUBLIC_STRAPI_API_URL;
@@ -27,11 +28,11 @@ const secureHeaders = createSecureHeaders({
           frameSrc: ["'self'"],
           connectSrc: [
             "'self'",
-            'https://vitals.vercel-insights.com',
+            "https://vitals.vercel-insights.com",
             strapiUrl,
           ],
-          imgSrc: ["'self'", 'https:', 'http:', 'data:'],
-          workerSrc: ['blob:'],
+          imgSrc: ["'self'", "https:", "http:", "data:"],
+          workerSrc: ["blob:"],
         }
       : {},
   },
@@ -39,15 +40,15 @@ const secureHeaders = createSecureHeaders({
     ? {
         forceHTTPSRedirect: [
           true,
-          { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true },
+          { includeSubDomains: true, maxAge: 60 * 60 * 24 * 4 },
         ],
       }
     : {}),
-  referrerPolicy: 'same-origin',
+  referrerPolicy: "same-origin",
 });
 
 /** @type {import('next').NextConfig} */
-let nextConfig = {
+const nextConfig = {
   reactStrictMode: true,
 
   transpilePackages: isProd
@@ -59,9 +60,9 @@ let nextConfig = {
 
   turbopack: {
     rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
       },
     },
   },
@@ -75,25 +76,25 @@ let nextConfig = {
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: 'mindfulness.reflective-resonance.be',
+        protocol: "https",
+        hostname: "mindfulness.reflective-resonance.be",
       },
       {
-        protocol: 'http',
+        protocol: "http",
         hostname: strapiHostname,
       },
       {
-        protocol: 'https',
+        protocol: "https",
         hostname: strapiHostname,
       },
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
       },
     ],
     unoptimized: false,
@@ -102,7 +103,7 @@ let nextConfig = {
   async redirects() {
     return [
       {
-        source: '/admin123',
+        source: "/admin123",
         destination: `${strapiUrl}/admin`,
         permanent: false,
       },
@@ -113,11 +114,11 @@ let nextConfig = {
     return [
       {
         // All page routes, not the api ones
-        source: '/:path((?!api).*)*',
+        source: "/:path((?!api).*)*",
         headers: [
           ...secureHeaders,
-          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
-          { key: 'Cross-Origin-Embedder-Policy', value: 'same-origin' },
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Embedder-Policy", value: "same-origin" },
         ],
       },
     ];

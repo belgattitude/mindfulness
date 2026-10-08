@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type Response =
   | {
@@ -13,9 +13,9 @@ export default async function revalidateHandler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
 ) {
-  console.log('revalidate.headers', req.headers);
-  console.log('revalidate.body', req.body);
-  console.log('revalidate.query', req.query);
+  console.log("revalidate.headers", req.headers);
+  console.log("revalidate.body", req.body);
+  console.log("revalidate.query", req.query);
   /**
    * revalidate.body {
    *   event: 'entry.create',
@@ -38,11 +38,11 @@ export default async function revalidateHandler(
       `/event/stage-de-yoga-et-meditation-en-sept-2023-en-drome`
     );
     return res.json({ revalidated: true });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
       revalidated: false,
       message: `Revalidation failed: ${
-        (e as Error)?.message ?? 'Unknown error'
+        (error as Error)?.message ?? "Unknown error"
       }`,
     });
   }

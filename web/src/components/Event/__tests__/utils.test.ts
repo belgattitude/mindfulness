@@ -1,8 +1,12 @@
-import { siteConfig } from '@/config/site.config';
-import { getEventTypeSlugs, findEventBySlug } from '../utils';
-describe('getEventTypeSlugs', () => {
-  it('should work', () => {
-    expect(getEventTypeSlugs().length).toStrictEqual(
+import { expect, describe, it } from "vitest";
+
+import { siteConfig } from "@/config/site.config";
+
+import { getEventTypeSlugs, findEventBySlug } from "../utils";
+
+describe(getEventTypeSlugs, () => {
+  it("should work", () => {
+    expect(getEventTypeSlugs()).toHaveLength(
       siteConfig.search.eventTypes.length
     );
     expect(getEventTypeSlugs()?.[0]).toStrictEqual(
@@ -11,11 +15,11 @@ describe('getEventTypeSlugs', () => {
   });
 });
 
-describe('findEventBySlug', () => {
-  it('should work', () => {
-    expect(findEventBySlug('cours-reguliers')).toStrictEqual({
-      slug: 'cours-reguliers',
-      title: 'Cours réguliers',
+describe(findEventBySlug, () => {
+  it("should work", () => {
+    expect(findEventBySlug("cours-reguliers")).toStrictEqual({
+      slug: "cours-reguliers",
+      title: "Cours réguliers",
     });
   });
 });
