@@ -38,13 +38,14 @@ yarn deploy
 
 Builds the image for the server architecture, uploads it with
 [docker pussh](https://github.com/psviderski/unregistry) (only the missing layers,
-no registry), uploads `docker-compose.yml` to `DEPLOY_DIR`, restarts strapi and
-waits for it to be healthy. The server `.env` is never deployed, it must exist in
-`DEPLOY_DIR`.
+no registry), uploads `docker-compose.yml` to `DEPLOY_DIR`, creates the
+`cloud-net` network if missing, restarts strapi and waits for it to be healthy.
+The server `.env` is never deployed, it must exist in `DEPLOY_DIR`.
 
-The image runs strapi in production mode (`strapi start`, admin built in the
-image): the content-type builder is disabled on the server, content types are
-edited locally with `yarn develop` and deployed with the image.
+The image runs strapi on [bun](https://bun.sh) in production mode (`yarn start-bun`,
+admin built in the image with node): the content-type builder is disabled on the
+server, content types are edited locally with `yarn develop` and deployed with
+the image.
 
 Requirements:
 
@@ -83,6 +84,12 @@ Copies the server uploads into `public/uploads`, so the local strapi serves the
 same media as the server database. Local files missing on the server are kept.
 
 ## Docker
+
+The compose services use the external `cloud-net` network, create it once:
+
+```bash
+docker network create --driver bridge cloud-net
+```
 
 ```bash
 docker compose run mindfulness-strapi sh

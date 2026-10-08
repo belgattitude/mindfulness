@@ -88,10 +88,13 @@ const createSnapshot = async (
   timestamp: string
 ): Promise<Snapshot> => {
   const snapshotName = `.snapshot-${timestamp}.db`;
-  // The script is sent on stdin to avoid nested shell quoting
+  // The script is sent on stdin to avoid nested shell quoting, and written to a
+  // file in the container: bun (the image runtime) cannot run `node -` from stdin
+  // (.cjs: the script uses require)
+  const runScript = `f=/tmp/strapi-snapshot-$$.cjs && cat > "$f" && node "$f"; rc=$?; rm -f "$f"; exit $rc`;
   const { stdout } = await execa(
     'ssh',
-    [...sshArgs, host, `docker exec -i ${STRAPI_CONTAINER} node -`],
+    [...sshArgs, host, `docker exec -i ${STRAPI_CONTAINER} sh -c '${runScript}'`],
     { input: getSnapshotScript(snapshotName) }
   );
   const { databaseName, containerPath } = JSON.parse(stdout.trim().split('\n').at(-1) ?? '{}') as {

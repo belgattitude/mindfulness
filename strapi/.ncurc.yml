@@ -6,7 +6,5 @@
 reject: [
   'styled-components',
   'react-router-dom',
-  'eslint',
-  # 13.x ships no prebuilt binaries (no linuxmusl for the alpine image), keep 12.x
-  'better-sqlite3'
+  'eslint'
 ]

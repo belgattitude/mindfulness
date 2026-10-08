@@ -5,7 +5,9 @@
   "description": "Mindfulness website",
   "scripts": {
     "develop": "strapi develop",
+    "develop-bun": "bun --bun run strapi develop",
     "start": "strapi start",
+    "start-bun": "bun --bun run strapi start",
     "build": "strapi build",
     "strapi": "strapi",
     "deps:check": "npx npm-check-updates@latest --configFileName .ncurc.yml",
@@ -25,7 +27,7 @@
     "@strapi/plugin-users-permissions": "5.57.0",
     "@strapi/provider-email-nodemailer": "5.57.0",
     "@strapi/strapi": "5.57.0",
-    "better-sqlite3": "12.8.0",
+    "better-sqlite3": "13.0.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^6.0.0",
@@ -37,6 +39,11 @@
     "execa": "10.0.1",
     "rimraf": "6.1.3",
     "typescript": "7.0.2"
+  },
+  "dependenciesMeta": {
+    "better-sqlite3": {
+      "built": false
+    }
   },
   "author": {
     "name": "Sébastien Vanvelthem"

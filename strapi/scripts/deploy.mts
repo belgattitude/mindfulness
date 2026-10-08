@@ -21,6 +21,8 @@ import { getRemoteSsh, type RemoteSsh } from './lib/remote.mts';
 
 const IMAGE = 'mindfulness-strapi';
 const SERVICE = 'mindfulness-strapi';
+/** External network of docker-compose.yml, not created by docker compose */
+const NETWORK = 'cloud-net';
 const HEALTH_TIMEOUT_MS = 5 * 60_000;
 const HEALTH_POLL_MS = 5_000;
 
@@ -157,6 +159,11 @@ const main = async () => {
     'docker-compose.yml',
     `${config.remote.host}:${config.dir}/docker-compose.yml`,
   ]);
+
+  log(`Ensuring the ${NETWORK} network exists`);
+  await remote(
+    `docker network inspect ${NETWORK} >/dev/null 2>&1 || docker network create --driver bridge ${NETWORK}`
+  );
 
   log(`Restarting ${SERVICE}`);
   await remoteInherit(`cd '${config.dir}' && docker compose up -d --no-build ${SERVICE}`);

@@ -1,13 +1,17 @@
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=24.21
-ARG ALPINE_VERSION=3.24
+# Same debian release as the oven/bun image, so native modules installed in the
+# node stages match the runtime glibc
+ARG DEBIAN_RELEASE=trixie
+# Runtime only: dependencies are installed and the admin built with node
+ARG BUN_VERSION=1.4.2
 
 #############################################################
 # Stage 1 - Production deps installation                    #
 #############################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
+FROM node:${NODE_VERSION}-${DEBIAN_RELEASE} AS deps
 RUN corepack enable
 
 WORKDIR /app
@@ -63,8 +67,10 @@ RUN find node_modules -type f \( -name '*.d.ts' -o -name '*.d.mts' -o -name '*.d
 # Stage 4 - Run final / make runnable image ready           #
 #############################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
-RUN apk add --no-cache tzdata bash
+# Strapi runs on bun (debian slim, includes bash and tzdata). Native modules
+# load from their prebuilds: better-sqlite3 13 (N-API, earlier versions are not
+# supported by bun) and sharp.
+FROM oven/bun:${BUN_VERSION}-slim AS runner
 ENV TZ=Europe/Brussels
 ENV NODE_ENV=production
 
@@ -82,9 +88,11 @@ COPY --link ./public ./public
 
 EXPOSE 1337
 
+# No wget/curl in the image, bun fetch is used instead
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-    CMD wget -q --spider http://127.0.0.1:1337/_health || exit 1
+    CMD ["bun", "-e", "fetch('http://127.0.0.1:1337/_health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
 
 # Production mode: the content-type builder is disabled, content types are
 # edited locally with `yarn develop` and deployed with the image.
-CMD ["./node_modules/.bin/strapi", "start"]
+# start-bun: bun --bun run strapi start
+CMD ["bun", "run", "start-bun"]
