@@ -31,6 +31,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -52,82 +53,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getContactResponse200 = {
-  data: ContactResponse
-  status: 200
-}
-
-export type getContactResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getContactResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getContactResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getContactResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getContactResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getContactResponseSuccess = (getContactResponse200) & {
-  headers: Headers;
-};
-export type getContactResponseError = (getContactResponse400 | getContactResponse401 | getContactResponse403 | getContactResponse404 | getContactResponse500) & {
-  headers: Headers;
-};
-
-export type getContactResponse = (getContactResponseSuccess | getContactResponseError)
-
 export const getGetContactUrl = (params?: GetContactParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/contact?${stringifiedParams}` : `/contact`
 }
 
-export const getContact = async (params?: GetContactParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getContactResponse> => {
+export const getContact = async (params?: GetContactParams, options?: Parameters<typeof strapiFetch>[1]): Promise<ContactResponse> => {
 
-  return strapiFetch<getContactResponse>(getGetContactUrl(params),
+  return strapiFetch<ContactResponse>(getGetContactUrl(params),
   {
     ...options,
     method: 'GET'
@@ -211,54 +145,13 @@ export function useGetContact<TData = Awaited<ReturnType<typeof getContact>>, TE
 
 
 
-export type putContactResponse200 = {
-  data: ContactResponse
-  status: 200
-}
-
-export type putContactResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putContactResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putContactResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putContactResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putContactResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putContactResponseSuccess = (putContactResponse200) & {
-  headers: Headers;
-};
-export type putContactResponseError = (putContactResponse400 | putContactResponse401 | putContactResponse403 | putContactResponse404 | putContactResponse500) & {
-  headers: Headers;
-};
-
-export type putContactResponse = (putContactResponseSuccess | putContactResponseError)
-
 export const getPutContactUrl = () => {
-
-
 
 
   return `/contact`
 }
 
-export const putContact = async (contactRequest: ContactRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putContactResponse> => {
+export const putContact = async (contactRequest: ContactRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<ContactResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -274,7 +167,7 @@ export const putContact = async (contactRequest: ContactRequest, options?: Param
     }
     return headers;
   };
-return strapiFetch<putContactResponse>(getPutContactUrl(),
+return strapiFetch<ContactResponse>(getPutContactUrl(),
   {
     ...options,
     method: 'PUT',
@@ -331,56 +224,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutContactMutationOptions(options), queryClient);
     }
-    export type deleteContactResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteContactResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteContactResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteContactResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteContactResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteContactResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteContactResponseSuccess = (deleteContactResponse200) & {
-  headers: Headers;
-};
-export type deleteContactResponseError = (deleteContactResponse400 | deleteContactResponse401 | deleteContactResponse403 | deleteContactResponse404 | deleteContactResponse500) & {
-  headers: Headers;
-};
-
-export type deleteContactResponse = (deleteContactResponseSuccess | deleteContactResponseError)
-
-export const getDeleteContactUrl = () => {
-
-
+    export const getDeleteContactUrl = () => {
 
 
   return `/contact`
 }
 
-export const deleteContact = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<deleteContactResponse> => {
+export const deleteContact = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteContactResponse>(getDeleteContactUrl(),
+  return strapiFetch<number>(getDeleteContactUrl(),
   {
     ...options,
     method: 'DELETE'

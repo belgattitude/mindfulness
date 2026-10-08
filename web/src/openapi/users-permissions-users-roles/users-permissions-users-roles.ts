@@ -40,13 +40,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
-
-export type HTTPStatusCode1xx = 100 | 101 | 102 | 103;
-export type HTTPStatusCode2xx = 200 | 201 | 202 | 203 | 204 | 205 | 206 | 207;
-export type HTTPStatusCode3xx = 300 | 301 | 302 | 303 | 304 | 305 | 307 | 308;
-export type HTTPStatusCode4xx = 400 | 401 | 402 | 403 | 404 | 405 | 406 | 407 | 408 | 409 | 410 | 411 | 412 | 413 | 414 | 415 | 416 | 417 | 418 | 419 | 420 | 421 | 422 | 423 | 424 | 426 | 428 | 429 | 431 | 451;
-export type HTTPStatusCode5xx = 500 | 501 | 502 | 503 | 504 | 505 | 507 | 511;
-export type HTTPStatusCodes = HTTPStatusCode1xx | HTTPStatusCode2xx | HTTPStatusCode3xx | HTTPStatusCode4xx | HTTPStatusCode5xx;
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -68,28 +62,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getUsersPermissionsPermissionsResponse200 = {
-  data: GetUsersPermissionsPermissions200
-  status: 200
-}
-
-export type getUsersPermissionsPermissionsResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersPermissionsPermissionsResponseSuccess = (getUsersPermissionsPermissionsResponse200) & {
-  headers: Headers;
-};
-export type getUsersPermissionsPermissionsResponseError = (getUsersPermissionsPermissionsResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersPermissionsPermissionsResponse = (getUsersPermissionsPermissionsResponseSuccess | getUsersPermissionsPermissionsResponseError)
-
 export const getGetUsersPermissionsPermissionsUrl = () => {
-
-
 
 
   return `/users-permissions/permissions`
@@ -98,9 +71,9 @@ export const getGetUsersPermissionsPermissionsUrl = () => {
 /**
  * @summary Get default generated permissions
  */
-export const getUsersPermissionsPermissions = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersPermissionsPermissionsResponse> => {
+export const getUsersPermissionsPermissions = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<GetUsersPermissionsPermissions200> => {
 
-  return strapiFetch<getUsersPermissionsPermissionsResponse>(getGetUsersPermissionsPermissionsUrl(),
+  return strapiFetch<GetUsersPermissionsPermissions200>(getGetUsersPermissionsPermissionsUrl(),
   {
     ...options,
     method: 'GET'
@@ -187,28 +160,7 @@ export function useGetUsersPermissionsPermissions<TData = Awaited<ReturnType<typ
 
 
 
-export type getUsersPermissionsRolesResponse200 = {
-  data: GetUsersPermissionsRoles200
-  status: 200
-}
-
-export type getUsersPermissionsRolesResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersPermissionsRolesResponseSuccess = (getUsersPermissionsRolesResponse200) & {
-  headers: Headers;
-};
-export type getUsersPermissionsRolesResponseError = (getUsersPermissionsRolesResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersPermissionsRolesResponse = (getUsersPermissionsRolesResponseSuccess | getUsersPermissionsRolesResponseError)
-
 export const getGetUsersPermissionsRolesUrl = () => {
-
-
 
 
   return `/users-permissions/roles`
@@ -217,9 +169,9 @@ export const getGetUsersPermissionsRolesUrl = () => {
 /**
  * @summary List roles
  */
-export const getUsersPermissionsRoles = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersPermissionsRolesResponse> => {
+export const getUsersPermissionsRoles = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<GetUsersPermissionsRoles200> => {
 
-  return strapiFetch<getUsersPermissionsRolesResponse>(getGetUsersPermissionsRolesUrl(),
+  return strapiFetch<GetUsersPermissionsRoles200>(getGetUsersPermissionsRolesUrl(),
   {
     ...options,
     method: 'GET'
@@ -306,28 +258,7 @@ export function useGetUsersPermissionsRoles<TData = Awaited<ReturnType<typeof ge
 
 
 
-export type postUsersPermissionsRolesResponse200 = {
-  data: PostUsersPermissionsRoles200
-  status: 200
-}
-
-export type postUsersPermissionsRolesResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postUsersPermissionsRolesResponseSuccess = (postUsersPermissionsRolesResponse200) & {
-  headers: Headers;
-};
-export type postUsersPermissionsRolesResponseError = (postUsersPermissionsRolesResponseDefault) & {
-  headers: Headers;
-};
-
-export type postUsersPermissionsRolesResponse = (postUsersPermissionsRolesResponseSuccess | postUsersPermissionsRolesResponseError)
-
 export const getPostUsersPermissionsRolesUrl = () => {
-
-
 
 
   return `/users-permissions/roles`
@@ -336,7 +267,7 @@ export const getPostUsersPermissionsRolesUrl = () => {
 /**
  * @summary Create a role
  */
-export const postUsersPermissionsRoles = async (usersPermissionsRoleRequestBody: UsersPermissionsRoleRequestBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postUsersPermissionsRolesResponse> => {
+export const postUsersPermissionsRoles = async (usersPermissionsRoleRequestBody: UsersPermissionsRoleRequestBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PostUsersPermissionsRoles200> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -352,7 +283,7 @@ export const postUsersPermissionsRoles = async (usersPermissionsRoleRequestBody:
     }
     return headers;
   };
-return strapiFetch<postUsersPermissionsRolesResponse>(getPostUsersPermissionsRolesUrl(),
+return strapiFetch<PostUsersPermissionsRoles200>(getPostUsersPermissionsRolesUrl(),
   {
     ...options,
     method: 'POST',
@@ -412,28 +343,7 @@ export const usePostUsersPermissionsRoles = <TError = Error,
       > => {
       return useMutation(getPostUsersPermissionsRolesMutationOptions(options), queryClient);
     }
-    export type getUsersPermissionsRolesIdResponse200 = {
-  data: GetUsersPermissionsRolesId200
-  status: 200
-}
-
-export type getUsersPermissionsRolesIdResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersPermissionsRolesIdResponseSuccess = (getUsersPermissionsRolesIdResponse200) & {
-  headers: Headers;
-};
-export type getUsersPermissionsRolesIdResponseError = (getUsersPermissionsRolesIdResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersPermissionsRolesIdResponse = (getUsersPermissionsRolesIdResponseSuccess | getUsersPermissionsRolesIdResponseError)
-
-export const getGetUsersPermissionsRolesIdUrl = (id: string,) => {
-
-
+    export const getGetUsersPermissionsRolesIdUrl = (id: string,) => {
 
 
   return `/users-permissions/roles/${id}`
@@ -442,9 +352,9 @@ export const getGetUsersPermissionsRolesIdUrl = (id: string,) => {
 /**
  * @summary Get a role
  */
-export const getUsersPermissionsRolesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersPermissionsRolesIdResponse> => {
+export const getUsersPermissionsRolesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<GetUsersPermissionsRolesId200> => {
 
-  return strapiFetch<getUsersPermissionsRolesIdResponse>(getGetUsersPermissionsRolesIdUrl(id),
+  return strapiFetch<GetUsersPermissionsRolesId200>(getGetUsersPermissionsRolesIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -531,28 +441,7 @@ export function useGetUsersPermissionsRolesId<TData = Awaited<ReturnType<typeof 
 
 
 
-export type putUsersPermissionsRolesRoleResponse200 = {
-  data: PutUsersPermissionsRolesRole200
-  status: 200
-}
-
-export type putUsersPermissionsRolesRoleResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type putUsersPermissionsRolesRoleResponseSuccess = (putUsersPermissionsRolesRoleResponse200) & {
-  headers: Headers;
-};
-export type putUsersPermissionsRolesRoleResponseError = (putUsersPermissionsRolesRoleResponseDefault) & {
-  headers: Headers;
-};
-
-export type putUsersPermissionsRolesRoleResponse = (putUsersPermissionsRolesRoleResponseSuccess | putUsersPermissionsRolesRoleResponseError)
-
 export const getPutUsersPermissionsRolesRoleUrl = (role: string,) => {
-
-
 
 
   return `/users-permissions/roles/${role}`
@@ -562,7 +451,7 @@ export const getPutUsersPermissionsRolesRoleUrl = (role: string,) => {
  * @summary Update a role
  */
 export const putUsersPermissionsRolesRole = async (role: string,
-    usersPermissionsRoleRequestBody: UsersPermissionsRoleRequestBody, options?: Parameters<typeof strapiFetch>[1]): Promise<putUsersPermissionsRolesRoleResponse> => {
+    usersPermissionsRoleRequestBody: UsersPermissionsRoleRequestBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PutUsersPermissionsRolesRole200> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -578,7 +467,7 @@ export const putUsersPermissionsRolesRole = async (role: string,
     }
     return headers;
   };
-return strapiFetch<putUsersPermissionsRolesRoleResponse>(getPutUsersPermissionsRolesRoleUrl(role),
+return strapiFetch<PutUsersPermissionsRolesRole200>(getPutUsersPermissionsRolesRoleUrl(role),
   {
     ...options,
     method: 'PUT',
@@ -638,28 +527,7 @@ export const usePutUsersPermissionsRolesRole = <TError = Error,
       > => {
       return useMutation(getPutUsersPermissionsRolesRoleMutationOptions(options), queryClient);
     }
-    export type deleteUsersPermissionsRolesRoleResponse200 = {
-  data: DeleteUsersPermissionsRolesRole200
-  status: 200
-}
-
-export type deleteUsersPermissionsRolesRoleResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type deleteUsersPermissionsRolesRoleResponseSuccess = (deleteUsersPermissionsRolesRoleResponse200) & {
-  headers: Headers;
-};
-export type deleteUsersPermissionsRolesRoleResponseError = (deleteUsersPermissionsRolesRoleResponseDefault) & {
-  headers: Headers;
-};
-
-export type deleteUsersPermissionsRolesRoleResponse = (deleteUsersPermissionsRolesRoleResponseSuccess | deleteUsersPermissionsRolesRoleResponseError)
-
-export const getDeleteUsersPermissionsRolesRoleUrl = (role: string,) => {
-
-
+    export const getDeleteUsersPermissionsRolesRoleUrl = (role: string,) => {
 
 
   return `/users-permissions/roles/${role}`
@@ -668,9 +536,9 @@ export const getDeleteUsersPermissionsRolesRoleUrl = (role: string,) => {
 /**
  * @summary Delete a role
  */
-export const deleteUsersPermissionsRolesRole = async (role: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteUsersPermissionsRolesRoleResponse> => {
+export const deleteUsersPermissionsRolesRole = async (role: string, options?: Parameters<typeof strapiFetch>[1]): Promise<DeleteUsersPermissionsRolesRole200> => {
 
-  return strapiFetch<deleteUsersPermissionsRolesRoleResponse>(getDeleteUsersPermissionsRolesRoleUrl(role),
+  return strapiFetch<DeleteUsersPermissionsRolesRole200>(getDeleteUsersPermissionsRolesRoleUrl(role),
   {
     ...options,
     method: 'DELETE'
@@ -730,28 +598,7 @@ export const useDeleteUsersPermissionsRolesRole = <TError = Error,
       > => {
       return useMutation(getDeleteUsersPermissionsRolesRoleMutationOptions(options), queryClient);
     }
-    export type getUsersResponse200 = {
-  data: UsersPermissionsUser[]
-  status: 200
-}
-
-export type getUsersResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersResponseSuccess = (getUsersResponse200) & {
-  headers: Headers;
-};
-export type getUsersResponseError = (getUsersResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersResponse = (getUsersResponseSuccess | getUsersResponseError)
-
-export const getGetUsersUrl = () => {
-
-
+    export const getGetUsersUrl = () => {
 
 
   return `/users`
@@ -760,9 +607,9 @@ export const getGetUsersUrl = () => {
 /**
  * @summary Get list of users
  */
-export const getUsers = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersResponse> => {
+export const getUsers = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUser[]> => {
 
-  return strapiFetch<getUsersResponse>(getGetUsersUrl(),
+  return strapiFetch<UsersPermissionsUser[]>(getGetUsersUrl(),
   {
     ...options,
     method: 'GET'
@@ -849,28 +696,7 @@ export function useGetUsers<TData = Awaited<ReturnType<typeof getUsers>>, TError
 
 
 
-export type postUsersResponse201 = {
-  data: PostUsers201
-  status: 201
-}
-
-export type postUsersResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 201>
-}
-
-export type postUsersResponseSuccess = (postUsersResponse201) & {
-  headers: Headers;
-};
-export type postUsersResponseError = (postUsersResponseDefault) & {
-  headers: Headers;
-};
-
-export type postUsersResponse = (postUsersResponseSuccess | postUsersResponseError)
-
 export const getPostUsersUrl = () => {
-
-
 
 
   return `/users`
@@ -879,7 +705,7 @@ export const getPostUsersUrl = () => {
 /**
  * @summary Create a user
  */
-export const postUsers = async (postUsersBody: PostUsersBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postUsersResponse> => {
+export const postUsers = async (postUsersBody: PostUsersBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PostUsers201> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -895,7 +721,7 @@ export const postUsers = async (postUsersBody: PostUsersBody, options?: Paramete
     }
     return headers;
   };
-return strapiFetch<postUsersResponse>(getPostUsersUrl(),
+return strapiFetch<PostUsers201>(getPostUsersUrl(),
   {
     ...options,
     method: 'POST',
@@ -955,28 +781,7 @@ export const usePostUsers = <TError = Error,
       > => {
       return useMutation(getPostUsersMutationOptions(options), queryClient);
     }
-    export type getUsersIdResponse200 = {
-  data: UsersPermissionsUser
-  status: 200
-}
-
-export type getUsersIdResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersIdResponseSuccess = (getUsersIdResponse200) & {
-  headers: Headers;
-};
-export type getUsersIdResponseError = (getUsersIdResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersIdResponse = (getUsersIdResponseSuccess | getUsersIdResponseError)
-
-export const getGetUsersIdUrl = (id: string,) => {
-
-
+    export const getGetUsersIdUrl = (id: string,) => {
 
 
   return `/users/${id}`
@@ -985,9 +790,9 @@ export const getGetUsersIdUrl = (id: string,) => {
 /**
  * @summary Get a user
  */
-export const getUsersId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersIdResponse> => {
+export const getUsersId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUser> => {
 
-  return strapiFetch<getUsersIdResponse>(getGetUsersIdUrl(id),
+  return strapiFetch<UsersPermissionsUser>(getGetUsersIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -1074,28 +879,7 @@ export function useGetUsersId<TData = Awaited<ReturnType<typeof getUsersId>>, TE
 
 
 
-export type putUsersIdResponse200 = {
-  data: PutUsersId200
-  status: 200
-}
-
-export type putUsersIdResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type putUsersIdResponseSuccess = (putUsersIdResponse200) & {
-  headers: Headers;
-};
-export type putUsersIdResponseError = (putUsersIdResponseDefault) & {
-  headers: Headers;
-};
-
-export type putUsersIdResponse = (putUsersIdResponseSuccess | putUsersIdResponseError)
-
 export const getPutUsersIdUrl = (id: string,) => {
-
-
 
 
   return `/users/${id}`
@@ -1105,7 +889,7 @@ export const getPutUsersIdUrl = (id: string,) => {
  * @summary Update a user
  */
 export const putUsersId = async (id: string,
-    putUsersIdBody: PutUsersIdBody, options?: Parameters<typeof strapiFetch>[1]): Promise<putUsersIdResponse> => {
+    putUsersIdBody: PutUsersIdBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PutUsersId200> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -1121,7 +905,7 @@ export const putUsersId = async (id: string,
     }
     return headers;
   };
-return strapiFetch<putUsersIdResponse>(getPutUsersIdUrl(id),
+return strapiFetch<PutUsersId200>(getPutUsersIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -1181,28 +965,7 @@ export const usePutUsersId = <TError = Error,
       > => {
       return useMutation(getPutUsersIdMutationOptions(options), queryClient);
     }
-    export type deleteUsersIdResponse200 = {
-  data: UsersPermissionsUser
-  status: 200
-}
-
-export type deleteUsersIdResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type deleteUsersIdResponseSuccess = (deleteUsersIdResponse200) & {
-  headers: Headers;
-};
-export type deleteUsersIdResponseError = (deleteUsersIdResponseDefault) & {
-  headers: Headers;
-};
-
-export type deleteUsersIdResponse = (deleteUsersIdResponseSuccess | deleteUsersIdResponseError)
-
-export const getDeleteUsersIdUrl = (id: string,) => {
-
-
+    export const getDeleteUsersIdUrl = (id: string,) => {
 
 
   return `/users/${id}`
@@ -1211,9 +974,9 @@ export const getDeleteUsersIdUrl = (id: string,) => {
 /**
  * @summary Delete a user
  */
-export const deleteUsersId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteUsersIdResponse> => {
+export const deleteUsersId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUser> => {
 
-  return strapiFetch<deleteUsersIdResponse>(getDeleteUsersIdUrl(id),
+  return strapiFetch<UsersPermissionsUser>(getDeleteUsersIdUrl(id),
   {
     ...options,
     method: 'DELETE'
@@ -1273,28 +1036,7 @@ export const useDeleteUsersId = <TError = Error,
       > => {
       return useMutation(getDeleteUsersIdMutationOptions(options), queryClient);
     }
-    export type getUsersMeResponse200 = {
-  data: UsersPermissionsUser
-  status: 200
-}
-
-export type getUsersMeResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersMeResponseSuccess = (getUsersMeResponse200) & {
-  headers: Headers;
-};
-export type getUsersMeResponseError = (getUsersMeResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersMeResponse = (getUsersMeResponseSuccess | getUsersMeResponseError)
-
-export const getGetUsersMeUrl = () => {
-
-
+    export const getGetUsersMeUrl = () => {
 
 
   return `/users/me`
@@ -1303,9 +1045,9 @@ export const getGetUsersMeUrl = () => {
 /**
  * @summary Get authenticated user info
  */
-export const getUsersMe = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersMeResponse> => {
+export const getUsersMe = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUser> => {
 
-  return strapiFetch<getUsersMeResponse>(getGetUsersMeUrl(),
+  return strapiFetch<UsersPermissionsUser>(getGetUsersMeUrl(),
   {
     ...options,
     method: 'GET'
@@ -1392,28 +1134,7 @@ export function useGetUsersMe<TData = Awaited<ReturnType<typeof getUsersMe>>, TE
 
 
 
-export type getUsersCountResponse200 = {
-  data: number
-  status: 200
-}
-
-export type getUsersCountResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getUsersCountResponseSuccess = (getUsersCountResponse200) & {
-  headers: Headers;
-};
-export type getUsersCountResponseError = (getUsersCountResponseDefault) & {
-  headers: Headers;
-};
-
-export type getUsersCountResponse = (getUsersCountResponseSuccess | getUsersCountResponseError)
-
 export const getGetUsersCountUrl = () => {
-
-
 
 
   return `/users/count`
@@ -1422,9 +1143,9 @@ export const getGetUsersCountUrl = () => {
 /**
  * @summary Get user count
  */
-export const getUsersCount = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUsersCountResponse> => {
+export const getUsersCount = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<getUsersCountResponse>(getGetUsersCountUrl(),
+  return strapiFetch<number>(getGetUsersCountUrl(),
   {
     ...options,
     method: 'GET'

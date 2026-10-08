@@ -13,6 +13,9 @@ export const reactQueryConfig: QueryClientConfig = {
       // or set staleTime and refetchOnWindowFocus to false in each getSSP.
       // refetchOnWindowFocus: !isProd,
       // staleTime: 5 * 60_000,
+      // Data prefetched in server components is not refetched right away
+      // after hydration
+      staleTime: 60_000,
       retry: isServer ? false : 2,
       retryDelay: isProd ? 1000 : 250,
     },

@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 
 import { MainLayout } from "@/components/Layout";
 import { siteConfig } from "@/config/site.config";
+import { AppProviders } from "@/providers/AppProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +40,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <body className={`${inter.className}`}>
-      <MainLayout>{children}</MainLayout>
+      <AppProviders>
+        <MainLayout>{children}</MainLayout>
+      </AppProviders>
     </body>
   </html>
 );

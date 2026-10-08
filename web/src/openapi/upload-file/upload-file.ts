@@ -29,6 +29,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -50,21 +51,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type postUploadResponse200 = {
-  data: UploadFile[]
-  status: 200
-}
-
-export type postUploadResponseSuccess = (postUploadResponse200) & {
-  headers: Headers;
-};
-;
-
-export type postUploadResponse = (postUploadResponseSuccess)
-
 export const getPostUploadUrl = () => {
-
-
 
 
   return `/upload`
@@ -73,7 +60,7 @@ export const getPostUploadUrl = () => {
 /**
  * Upload files
  */
-export const postUpload = async (postUploadBody: PostUploadBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postUploadResponse> => {
+export const postUpload = async (postUploadBody: PostUploadBody, options?: Parameters<typeof strapiFetch>[1]): Promise<UploadFile[]> => {
     const formData = new FormData();
 if(postUploadBody.path !== undefined) {
  formData.append(`path`, postUploadBody.path);
@@ -89,7 +76,7 @@ if(postUploadBody.field !== undefined) {
  }
 postUploadBody.files.forEach(value => formData.append(`files`, value));
 
-  return strapiFetch<postUploadResponse>(getPostUploadUrl(),
+  return strapiFetch<UploadFile[]>(getPostUploadUrl(),
   {
     ...options,
     method: 'POST'
@@ -146,29 +133,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostUploadMutationOptions(options), queryClient);
     }
-    export type getUploadFilesResponse200 = {
-  data: UploadFile[]
-  status: 200
-}
-
-export type getUploadFilesResponseSuccess = (getUploadFilesResponse200) & {
-  headers: Headers;
-};
-;
-
-export type getUploadFilesResponse = (getUploadFilesResponseSuccess)
-
-export const getGetUploadFilesUrl = () => {
-
-
+    export const getGetUploadFilesUrl = () => {
 
 
   return `/upload/files`
 }
 
-export const getUploadFiles = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<getUploadFilesResponse> => {
+export const getUploadFiles = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<UploadFile[]> => {
 
-  return strapiFetch<getUploadFilesResponse>(getGetUploadFilesUrl(),
+  return strapiFetch<UploadFile[]>(getGetUploadFilesUrl(),
   {
     ...options,
     method: 'GET'
@@ -252,29 +225,15 @@ export function useGetUploadFiles<TData = Awaited<ReturnType<typeof getUploadFil
 
 
 
-export type getUploadFilesIdResponse200 = {
-  data: UploadFile
-  status: 200
-}
-
-export type getUploadFilesIdResponseSuccess = (getUploadFilesIdResponse200) & {
-  headers: Headers;
-};
-;
-
-export type getUploadFilesIdResponse = (getUploadFilesIdResponseSuccess)
-
 export const getGetUploadFilesIdUrl = (id: string,) => {
-
-
 
 
   return `/upload/files/${id}`
 }
 
-export const getUploadFilesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getUploadFilesIdResponse> => {
+export const getUploadFilesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<UploadFile> => {
 
-  return strapiFetch<getUploadFilesIdResponse>(getGetUploadFilesIdUrl(id),
+  return strapiFetch<UploadFile>(getGetUploadFilesIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -358,29 +317,15 @@ export function useGetUploadFilesId<TData = Awaited<ReturnType<typeof getUploadF
 
 
 
-export type deleteUploadFilesIdResponse200 = {
-  data: UploadFile
-  status: 200
-}
-
-export type deleteUploadFilesIdResponseSuccess = (deleteUploadFilesIdResponse200) & {
-  headers: Headers;
-};
-;
-
-export type deleteUploadFilesIdResponse = (deleteUploadFilesIdResponseSuccess)
-
 export const getDeleteUploadFilesIdUrl = (id: string,) => {
-
-
 
 
   return `/upload/files/${id}`
 }
 
-export const deleteUploadFilesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteUploadFilesIdResponse> => {
+export const deleteUploadFilesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<UploadFile> => {
 
-  return strapiFetch<deleteUploadFilesIdResponse>(getDeleteUploadFilesIdUrl(id),
+  return strapiFetch<UploadFile>(getDeleteUploadFilesIdUrl(id),
   {
     ...options,
     method: 'DELETE'

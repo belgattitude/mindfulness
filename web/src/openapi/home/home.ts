@@ -31,6 +31,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -52,82 +53,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getHomeResponse200 = {
-  data: HomeResponse
-  status: 200
-}
-
-export type getHomeResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getHomeResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getHomeResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getHomeResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getHomeResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getHomeResponseSuccess = (getHomeResponse200) & {
-  headers: Headers;
-};
-export type getHomeResponseError = (getHomeResponse400 | getHomeResponse401 | getHomeResponse403 | getHomeResponse404 | getHomeResponse500) & {
-  headers: Headers;
-};
-
-export type getHomeResponse = (getHomeResponseSuccess | getHomeResponseError)
-
 export const getGetHomeUrl = (params?: GetHomeParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/home?${stringifiedParams}` : `/home`
 }
 
-export const getHome = async (params?: GetHomeParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getHomeResponse> => {
+export const getHome = async (params?: GetHomeParams, options?: Parameters<typeof strapiFetch>[1]): Promise<HomeResponse> => {
 
-  return strapiFetch<getHomeResponse>(getGetHomeUrl(params),
+  return strapiFetch<HomeResponse>(getGetHomeUrl(params),
   {
     ...options,
     method: 'GET'
@@ -211,54 +145,13 @@ export function useGetHome<TData = Awaited<ReturnType<typeof getHome>>, TError =
 
 
 
-export type putHomeResponse200 = {
-  data: HomeResponse
-  status: 200
-}
-
-export type putHomeResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putHomeResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putHomeResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putHomeResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putHomeResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putHomeResponseSuccess = (putHomeResponse200) & {
-  headers: Headers;
-};
-export type putHomeResponseError = (putHomeResponse400 | putHomeResponse401 | putHomeResponse403 | putHomeResponse404 | putHomeResponse500) & {
-  headers: Headers;
-};
-
-export type putHomeResponse = (putHomeResponseSuccess | putHomeResponseError)
-
 export const getPutHomeUrl = () => {
-
-
 
 
   return `/home`
 }
 
-export const putHome = async (homeRequest: HomeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putHomeResponse> => {
+export const putHome = async (homeRequest: HomeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<HomeResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -274,7 +167,7 @@ export const putHome = async (homeRequest: HomeRequest, options?: Parameters<typ
     }
     return headers;
   };
-return strapiFetch<putHomeResponse>(getPutHomeUrl(),
+return strapiFetch<HomeResponse>(getPutHomeUrl(),
   {
     ...options,
     method: 'PUT',
@@ -331,56 +224,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutHomeMutationOptions(options), queryClient);
     }
-    export type deleteHomeResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteHomeResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteHomeResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteHomeResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteHomeResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteHomeResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteHomeResponseSuccess = (deleteHomeResponse200) & {
-  headers: Headers;
-};
-export type deleteHomeResponseError = (deleteHomeResponse400 | deleteHomeResponse401 | deleteHomeResponse403 | deleteHomeResponse404 | deleteHomeResponse500) & {
-  headers: Headers;
-};
-
-export type deleteHomeResponse = (deleteHomeResponseSuccess | deleteHomeResponseError)
-
-export const getDeleteHomeUrl = () => {
-
-
+    export const getDeleteHomeUrl = () => {
 
 
   return `/home`
 }
 
-export const deleteHome = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<deleteHomeResponse> => {
+export const deleteHome = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteHomeResponse>(getDeleteHomeUrl(),
+  return strapiFetch<number>(getDeleteHomeUrl(),
   {
     ...options,
     method: 'DELETE'

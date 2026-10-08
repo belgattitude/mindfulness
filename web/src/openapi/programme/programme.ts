@@ -32,6 +32,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -53,82 +54,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getProgrammesResponse200 = {
-  data: ProgrammeListResponse
-  status: 200
-}
-
-export type getProgrammesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getProgrammesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getProgrammesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getProgrammesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getProgrammesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getProgrammesResponseSuccess = (getProgrammesResponse200) & {
-  headers: Headers;
-};
-export type getProgrammesResponseError = (getProgrammesResponse400 | getProgrammesResponse401 | getProgrammesResponse403 | getProgrammesResponse404 | getProgrammesResponse500) & {
-  headers: Headers;
-};
-
-export type getProgrammesResponse = (getProgrammesResponseSuccess | getProgrammesResponseError)
-
 export const getGetProgrammesUrl = (params?: GetProgrammesParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/programmes?${stringifiedParams}` : `/programmes`
 }
 
-export const getProgrammes = async (params?: GetProgrammesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getProgrammesResponse> => {
+export const getProgrammes = async (params?: GetProgrammesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<ProgrammeListResponse> => {
 
-  return strapiFetch<getProgrammesResponse>(getGetProgrammesUrl(params),
+  return strapiFetch<ProgrammeListResponse>(getGetProgrammesUrl(params),
   {
     ...options,
     method: 'GET'
@@ -212,54 +146,13 @@ export function useGetProgrammes<TData = Awaited<ReturnType<typeof getProgrammes
 
 
 
-export type postProgrammesResponse200 = {
-  data: ProgrammeResponse
-  status: 200
-}
-
-export type postProgrammesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type postProgrammesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type postProgrammesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type postProgrammesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type postProgrammesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type postProgrammesResponseSuccess = (postProgrammesResponse200) & {
-  headers: Headers;
-};
-export type postProgrammesResponseError = (postProgrammesResponse400 | postProgrammesResponse401 | postProgrammesResponse403 | postProgrammesResponse404 | postProgrammesResponse500) & {
-  headers: Headers;
-};
-
-export type postProgrammesResponse = (postProgrammesResponseSuccess | postProgrammesResponseError)
-
 export const getPostProgrammesUrl = () => {
-
-
 
 
   return `/programmes`
 }
 
-export const postProgrammes = async (programmeRequest: ProgrammeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<postProgrammesResponse> => {
+export const postProgrammes = async (programmeRequest: ProgrammeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<ProgrammeResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -275,7 +168,7 @@ export const postProgrammes = async (programmeRequest: ProgrammeRequest, options
     }
     return headers;
   };
-return strapiFetch<postProgrammesResponse>(getPostProgrammesUrl(),
+return strapiFetch<ProgrammeResponse>(getPostProgrammesUrl(),
   {
     ...options,
     method: 'POST',
@@ -332,56 +225,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostProgrammesMutationOptions(options), queryClient);
     }
-    export type getProgrammesIdResponse200 = {
-  data: ProgrammeResponse
-  status: 200
-}
-
-export type getProgrammesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getProgrammesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getProgrammesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getProgrammesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getProgrammesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getProgrammesIdResponseSuccess = (getProgrammesIdResponse200) & {
-  headers: Headers;
-};
-export type getProgrammesIdResponseError = (getProgrammesIdResponse400 | getProgrammesIdResponse401 | getProgrammesIdResponse403 | getProgrammesIdResponse404 | getProgrammesIdResponse500) & {
-  headers: Headers;
-};
-
-export type getProgrammesIdResponse = (getProgrammesIdResponseSuccess | getProgrammesIdResponseError)
-
-export const getGetProgrammesIdUrl = (id: string,) => {
-
-
+    export const getGetProgrammesIdUrl = (id: string,) => {
 
 
   return `/programmes/${id}`
 }
 
-export const getProgrammesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getProgrammesIdResponse> => {
+export const getProgrammesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<ProgrammeResponse> => {
 
-  return strapiFetch<getProgrammesIdResponse>(getGetProgrammesIdUrl(id),
+  return strapiFetch<ProgrammeResponse>(getGetProgrammesIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -465,55 +317,14 @@ export function useGetProgrammesId<TData = Awaited<ReturnType<typeof getProgramm
 
 
 
-export type putProgrammesIdResponse200 = {
-  data: ProgrammeResponse
-  status: 200
-}
-
-export type putProgrammesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putProgrammesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putProgrammesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putProgrammesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putProgrammesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putProgrammesIdResponseSuccess = (putProgrammesIdResponse200) & {
-  headers: Headers;
-};
-export type putProgrammesIdResponseError = (putProgrammesIdResponse400 | putProgrammesIdResponse401 | putProgrammesIdResponse403 | putProgrammesIdResponse404 | putProgrammesIdResponse500) & {
-  headers: Headers;
-};
-
-export type putProgrammesIdResponse = (putProgrammesIdResponseSuccess | putProgrammesIdResponseError)
-
 export const getPutProgrammesIdUrl = (id: string,) => {
-
-
 
 
   return `/programmes/${id}`
 }
 
 export const putProgrammesId = async (id: string,
-    programmeRequest: ProgrammeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putProgrammesIdResponse> => {
+    programmeRequest: ProgrammeRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<ProgrammeResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -529,7 +340,7 @@ export const putProgrammesId = async (id: string,
     }
     return headers;
   };
-return strapiFetch<putProgrammesIdResponse>(getPutProgrammesIdUrl(id),
+return strapiFetch<ProgrammeResponse>(getPutProgrammesIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -586,56 +397,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutProgrammesIdMutationOptions(options), queryClient);
     }
-    export type deleteProgrammesIdResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteProgrammesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteProgrammesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteProgrammesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteProgrammesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteProgrammesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteProgrammesIdResponseSuccess = (deleteProgrammesIdResponse200) & {
-  headers: Headers;
-};
-export type deleteProgrammesIdResponseError = (deleteProgrammesIdResponse400 | deleteProgrammesIdResponse401 | deleteProgrammesIdResponse403 | deleteProgrammesIdResponse404 | deleteProgrammesIdResponse500) & {
-  headers: Headers;
-};
-
-export type deleteProgrammesIdResponse = (deleteProgrammesIdResponseSuccess | deleteProgrammesIdResponseError)
-
-export const getDeleteProgrammesIdUrl = (id: string,) => {
-
-
+    export const getDeleteProgrammesIdUrl = (id: string,) => {
 
 
   return `/programmes/${id}`
 }
 
-export const deleteProgrammesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteProgrammesIdResponse> => {
+export const deleteProgrammesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteProgrammesIdResponse>(getDeleteProgrammesIdUrl(id),
+  return strapiFetch<number>(getDeleteProgrammesIdUrl(id),
   {
     ...options,
     method: 'DELETE'

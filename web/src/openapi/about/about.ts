@@ -31,6 +31,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -52,82 +53,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getAboutResponse200 = {
-  data: AboutResponse
-  status: 200
-}
-
-export type getAboutResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getAboutResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getAboutResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getAboutResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getAboutResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getAboutResponseSuccess = (getAboutResponse200) & {
-  headers: Headers;
-};
-export type getAboutResponseError = (getAboutResponse400 | getAboutResponse401 | getAboutResponse403 | getAboutResponse404 | getAboutResponse500) & {
-  headers: Headers;
-};
-
-export type getAboutResponse = (getAboutResponseSuccess | getAboutResponseError)
-
 export const getGetAboutUrl = (params?: GetAboutParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/about?${stringifiedParams}` : `/about`
 }
 
-export const getAbout = async (params?: GetAboutParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getAboutResponse> => {
+export const getAbout = async (params?: GetAboutParams, options?: Parameters<typeof strapiFetch>[1]): Promise<AboutResponse> => {
 
-  return strapiFetch<getAboutResponse>(getGetAboutUrl(params),
+  return strapiFetch<AboutResponse>(getGetAboutUrl(params),
   {
     ...options,
     method: 'GET'
@@ -211,54 +145,13 @@ export function useGetAbout<TData = Awaited<ReturnType<typeof getAbout>>, TError
 
 
 
-export type putAboutResponse200 = {
-  data: AboutResponse
-  status: 200
-}
-
-export type putAboutResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putAboutResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putAboutResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putAboutResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putAboutResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putAboutResponseSuccess = (putAboutResponse200) & {
-  headers: Headers;
-};
-export type putAboutResponseError = (putAboutResponse400 | putAboutResponse401 | putAboutResponse403 | putAboutResponse404 | putAboutResponse500) & {
-  headers: Headers;
-};
-
-export type putAboutResponse = (putAboutResponseSuccess | putAboutResponseError)
-
 export const getPutAboutUrl = () => {
-
-
 
 
   return `/about`
 }
 
-export const putAbout = async (aboutRequest: AboutRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putAboutResponse> => {
+export const putAbout = async (aboutRequest: AboutRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<AboutResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -274,7 +167,7 @@ export const putAbout = async (aboutRequest: AboutRequest, options?: Parameters<
     }
     return headers;
   };
-return strapiFetch<putAboutResponse>(getPutAboutUrl(),
+return strapiFetch<AboutResponse>(getPutAboutUrl(),
   {
     ...options,
     method: 'PUT',
@@ -331,56 +224,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutAboutMutationOptions(options), queryClient);
     }
-    export type deleteAboutResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteAboutResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteAboutResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteAboutResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteAboutResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteAboutResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteAboutResponseSuccess = (deleteAboutResponse200) & {
-  headers: Headers;
-};
-export type deleteAboutResponseError = (deleteAboutResponse400 | deleteAboutResponse401 | deleteAboutResponse403 | deleteAboutResponse404 | deleteAboutResponse500) & {
-  headers: Headers;
-};
-
-export type deleteAboutResponse = (deleteAboutResponseSuccess | deleteAboutResponseError)
-
-export const getDeleteAboutUrl = () => {
-
-
+    export const getDeleteAboutUrl = () => {
 
 
   return `/about`
 }
 
-export const deleteAbout = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<deleteAboutResponse> => {
+export const deleteAbout = async ( options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteAboutResponse>(getDeleteAboutUrl(),
+  return strapiFetch<number>(getDeleteAboutUrl(),
   {
     ...options,
     method: 'DELETE'

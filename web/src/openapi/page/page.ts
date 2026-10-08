@@ -32,6 +32,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -53,82 +54,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getPagesResponse200 = {
-  data: PageListResponse
-  status: 200
-}
-
-export type getPagesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getPagesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getPagesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getPagesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getPagesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getPagesResponseSuccess = (getPagesResponse200) & {
-  headers: Headers;
-};
-export type getPagesResponseError = (getPagesResponse400 | getPagesResponse401 | getPagesResponse403 | getPagesResponse404 | getPagesResponse500) & {
-  headers: Headers;
-};
-
-export type getPagesResponse = (getPagesResponseSuccess | getPagesResponseError)
-
 export const getGetPagesUrl = (params?: GetPagesParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/pages?${stringifiedParams}` : `/pages`
 }
 
-export const getPages = async (params?: GetPagesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getPagesResponse> => {
+export const getPages = async (params?: GetPagesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<PageListResponse> => {
 
-  return strapiFetch<getPagesResponse>(getGetPagesUrl(params),
+  return strapiFetch<PageListResponse>(getGetPagesUrl(params),
   {
     ...options,
     method: 'GET'
@@ -212,54 +146,13 @@ export function useGetPages<TData = Awaited<ReturnType<typeof getPages>>, TError
 
 
 
-export type postPagesResponse200 = {
-  data: PageResponse
-  status: 200
-}
-
-export type postPagesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type postPagesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type postPagesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type postPagesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type postPagesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type postPagesResponseSuccess = (postPagesResponse200) & {
-  headers: Headers;
-};
-export type postPagesResponseError = (postPagesResponse400 | postPagesResponse401 | postPagesResponse403 | postPagesResponse404 | postPagesResponse500) & {
-  headers: Headers;
-};
-
-export type postPagesResponse = (postPagesResponseSuccess | postPagesResponseError)
-
 export const getPostPagesUrl = () => {
-
-
 
 
   return `/pages`
 }
 
-export const postPages = async (pageRequest: PageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<postPagesResponse> => {
+export const postPages = async (pageRequest: PageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<PageResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -275,7 +168,7 @@ export const postPages = async (pageRequest: PageRequest, options?: Parameters<t
     }
     return headers;
   };
-return strapiFetch<postPagesResponse>(getPostPagesUrl(),
+return strapiFetch<PageResponse>(getPostPagesUrl(),
   {
     ...options,
     method: 'POST',
@@ -332,56 +225,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostPagesMutationOptions(options), queryClient);
     }
-    export type getPagesIdResponse200 = {
-  data: PageResponse
-  status: 200
-}
-
-export type getPagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getPagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getPagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getPagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getPagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getPagesIdResponseSuccess = (getPagesIdResponse200) & {
-  headers: Headers;
-};
-export type getPagesIdResponseError = (getPagesIdResponse400 | getPagesIdResponse401 | getPagesIdResponse403 | getPagesIdResponse404 | getPagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type getPagesIdResponse = (getPagesIdResponseSuccess | getPagesIdResponseError)
-
-export const getGetPagesIdUrl = (id: string,) => {
-
-
+    export const getGetPagesIdUrl = (id: string,) => {
 
 
   return `/pages/${id}`
 }
 
-export const getPagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getPagesIdResponse> => {
+export const getPagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<PageResponse> => {
 
-  return strapiFetch<getPagesIdResponse>(getGetPagesIdUrl(id),
+  return strapiFetch<PageResponse>(getGetPagesIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -465,55 +317,14 @@ export function useGetPagesId<TData = Awaited<ReturnType<typeof getPagesId>>, TE
 
 
 
-export type putPagesIdResponse200 = {
-  data: PageResponse
-  status: 200
-}
-
-export type putPagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putPagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putPagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putPagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putPagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putPagesIdResponseSuccess = (putPagesIdResponse200) & {
-  headers: Headers;
-};
-export type putPagesIdResponseError = (putPagesIdResponse400 | putPagesIdResponse401 | putPagesIdResponse403 | putPagesIdResponse404 | putPagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type putPagesIdResponse = (putPagesIdResponseSuccess | putPagesIdResponseError)
-
 export const getPutPagesIdUrl = (id: string,) => {
-
-
 
 
   return `/pages/${id}`
 }
 
 export const putPagesId = async (id: string,
-    pageRequest: PageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putPagesIdResponse> => {
+    pageRequest: PageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<PageResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -529,7 +340,7 @@ export const putPagesId = async (id: string,
     }
     return headers;
   };
-return strapiFetch<putPagesIdResponse>(getPutPagesIdUrl(id),
+return strapiFetch<PageResponse>(getPutPagesIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -586,56 +397,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutPagesIdMutationOptions(options), queryClient);
     }
-    export type deletePagesIdResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deletePagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deletePagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deletePagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deletePagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deletePagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deletePagesIdResponseSuccess = (deletePagesIdResponse200) & {
-  headers: Headers;
-};
-export type deletePagesIdResponseError = (deletePagesIdResponse400 | deletePagesIdResponse401 | deletePagesIdResponse403 | deletePagesIdResponse404 | deletePagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type deletePagesIdResponse = (deletePagesIdResponseSuccess | deletePagesIdResponseError)
-
-export const getDeletePagesIdUrl = (id: string,) => {
-
-
+    export const getDeletePagesIdUrl = (id: string,) => {
 
 
   return `/pages/${id}`
 }
 
-export const deletePagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deletePagesIdResponse> => {
+export const deletePagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deletePagesIdResponse>(getDeletePagesIdUrl(id),
+  return strapiFetch<number>(getDeletePagesIdUrl(id),
   {
     ...options,
     method: 'DELETE'

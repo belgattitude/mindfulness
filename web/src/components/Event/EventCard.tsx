@@ -5,20 +5,26 @@ import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { DateRangeText } from "@/components/DateRangeText";
-import { useFragment } from "@/gql/fragment-masking";
 import { getStrapiMedia } from "@/lib/strapi";
+import type { StrapiMedia } from "@/lib/strapi/getStrapiMedia";
 
-import { eventsApi } from "../../api/events.api";
-import type { FetchEvent } from "../../api/events.api";
+/** The fields used by the card, whatever the api (graphql or rest) */
+export interface EventCardEvent {
+  slug: string;
+  title: string;
+  summary?: string | null;
+  startAt: string;
+  endAt: string;
+  cover?: StrapiMedia | null;
+}
 
 interface Props {
-  event: FetchEvent;
+  event: EventCardEvent;
   className?: string;
 }
 
 export const EventCard: FC<Props> = (props) => {
-  const { className = "" } = props;
-  const event = useFragment(eventsApi.fullEventFragment, props.event);
+  const { className = "", event } = props;
   const eventUrl = `/event/${encodeURIComponent(event.slug)}`;
   return (
     <div
@@ -66,7 +72,7 @@ export const EventCard: FC<Props> = (props) => {
 };
 
 export const EventCardBackup: FC<Props> = (props) => {
-  const event = useFragment(eventsApi.fullEventFragment, props.event);
+  const { event } = props;
 
   const keywords = ["cool", "test"];
 

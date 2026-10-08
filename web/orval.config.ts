@@ -28,9 +28,18 @@ export default defineConfig({
       schemas: "./src/openapi/model",
       clean: true,
       override: {
+        // Return the response body only (plain json): it can be dehydrated
+        // from server components, errors are thrown by strapiFetch
+        fetch: {
+          includeHttpResponseReturnType: false,
+        },
         mutator: {
           path: "./src/lib/strapi/strapi-fetch.ts",
           name: "strapiFetch",
+        },
+        paramsSerializer: {
+          path: "./src/lib/strapi/strapi-fetch.ts",
+          name: "strapiParamsSerializer",
         },
       },
     },

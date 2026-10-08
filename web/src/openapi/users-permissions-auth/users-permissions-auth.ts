@@ -38,13 +38,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
-
-export type HTTPStatusCode1xx = 100 | 101 | 102 | 103;
-export type HTTPStatusCode2xx = 200 | 201 | 202 | 203 | 204 | 205 | 206 | 207;
-export type HTTPStatusCode3xx = 300 | 301 | 302 | 303 | 304 | 305 | 307 | 308;
-export type HTTPStatusCode4xx = 400 | 401 | 402 | 403 | 404 | 405 | 406 | 407 | 408 | 409 | 410 | 411 | 412 | 413 | 414 | 415 | 416 | 417 | 418 | 419 | 420 | 421 | 422 | 423 | 424 | 426 | 428 | 429 | 431 | 451;
-export type HTTPStatusCode5xx = 500 | 501 | 502 | 503 | 504 | 505 | 507 | 511;
-export type HTTPStatusCodes = HTTPStatusCode1xx | HTTPStatusCode2xx | HTTPStatusCode3xx | HTTPStatusCode4xx | HTTPStatusCode5xx;
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -66,26 +60,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getConnectProviderResponse301 = {
-  data: void
-  status: 301
-}
-
-export type getConnectProviderResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 301>
-}
-
-;
-export type getConnectProviderResponseError = (getConnectProviderResponse301 | getConnectProviderResponseDefault) & {
-  headers: Headers;
-};
-
-export type getConnectProviderResponse = (getConnectProviderResponseError)
-
 export const getGetConnectProviderUrl = (provider: string,) => {
-
-
 
 
   return `/connect/${provider}`
@@ -95,9 +70,9 @@ export const getGetConnectProviderUrl = (provider: string,) => {
  * Redirects to provider login before being redirect to /auth/{provider}/callback
  * @summary Login with a provider
  */
-export const getConnectProvider = async (provider: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getConnectProviderResponse> => {
+export const getConnectProvider = async (provider: string, options?: Parameters<typeof strapiFetch>[1]): Promise<Error> => {
 
-  return strapiFetch<getConnectProviderResponse>(getGetConnectProviderUrl(provider),
+  return strapiFetch<Error>(getGetConnectProviderUrl(provider),
   {
     ...options,
     method: 'GET'
@@ -184,28 +159,7 @@ export function useGetConnectProvider<TData = Awaited<ReturnType<typeof getConne
 
 
 
-export type postAuthLocalResponse200 = {
-  data: UsersPermissionsUserRegistration
-  status: 200
-}
-
-export type postAuthLocalResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthLocalResponseSuccess = (postAuthLocalResponse200) & {
-  headers: Headers;
-};
-export type postAuthLocalResponseError = (postAuthLocalResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthLocalResponse = (postAuthLocalResponseSuccess | postAuthLocalResponseError)
-
 export const getPostAuthLocalUrl = () => {
-
-
 
 
   return `/auth/local`
@@ -215,7 +169,7 @@ export const getPostAuthLocalUrl = () => {
  * Returns a jwt token and user info
  * @summary Local login
  */
-export const postAuthLocal = async (postAuthLocalBody: PostAuthLocalBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthLocalResponse> => {
+export const postAuthLocal = async (postAuthLocalBody: PostAuthLocalBody, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUserRegistration> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -231,7 +185,7 @@ export const postAuthLocal = async (postAuthLocalBody: PostAuthLocalBody, option
     }
     return headers;
   };
-return strapiFetch<postAuthLocalResponse>(getPostAuthLocalUrl(),
+return strapiFetch<UsersPermissionsUserRegistration>(getPostAuthLocalUrl(),
   {
     ...options,
     method: 'POST',
@@ -291,28 +245,7 @@ export const usePostAuthLocal = <TError = Error,
       > => {
       return useMutation(getPostAuthLocalMutationOptions(options), queryClient);
     }
-    export type postAuthLocalRegisterResponse200 = {
-  data: UsersPermissionsUserRegistration
-  status: 200
-}
-
-export type postAuthLocalRegisterResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthLocalRegisterResponseSuccess = (postAuthLocalRegisterResponse200) & {
-  headers: Headers;
-};
-export type postAuthLocalRegisterResponseError = (postAuthLocalRegisterResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthLocalRegisterResponse = (postAuthLocalRegisterResponseSuccess | postAuthLocalRegisterResponseError)
-
-export const getPostAuthLocalRegisterUrl = () => {
-
-
+    export const getPostAuthLocalRegisterUrl = () => {
 
 
   return `/auth/local/register`
@@ -322,7 +255,7 @@ export const getPostAuthLocalRegisterUrl = () => {
  * Returns a jwt token and user info
  * @summary Register a user
  */
-export const postAuthLocalRegister = async (postAuthLocalRegisterBody: PostAuthLocalRegisterBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthLocalRegisterResponse> => {
+export const postAuthLocalRegister = async (postAuthLocalRegisterBody: PostAuthLocalRegisterBody, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUserRegistration> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -338,7 +271,7 @@ export const postAuthLocalRegister = async (postAuthLocalRegisterBody: PostAuthL
     }
     return headers;
   };
-return strapiFetch<postAuthLocalRegisterResponse>(getPostAuthLocalRegisterUrl(),
+return strapiFetch<UsersPermissionsUserRegistration>(getPostAuthLocalRegisterUrl(),
   {
     ...options,
     method: 'POST',
@@ -398,28 +331,7 @@ export const usePostAuthLocalRegister = <TError = Error,
       > => {
       return useMutation(getPostAuthLocalRegisterMutationOptions(options), queryClient);
     }
-    export type getAuthProviderCallbackResponse200 = {
-  data: UsersPermissionsUserRegistration
-  status: 200
-}
-
-export type getAuthProviderCallbackResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type getAuthProviderCallbackResponseSuccess = (getAuthProviderCallbackResponse200) & {
-  headers: Headers;
-};
-export type getAuthProviderCallbackResponseError = (getAuthProviderCallbackResponseDefault) & {
-  headers: Headers;
-};
-
-export type getAuthProviderCallbackResponse = (getAuthProviderCallbackResponseSuccess | getAuthProviderCallbackResponseError)
-
-export const getGetAuthProviderCallbackUrl = (provider: string,) => {
-
-
+    export const getGetAuthProviderCallbackUrl = (provider: string,) => {
 
 
   return `/auth/${provider}/callback`
@@ -428,9 +340,9 @@ export const getGetAuthProviderCallbackUrl = (provider: string,) => {
 /**
  * @summary Default Callback from provider auth
  */
-export const getAuthProviderCallback = async (provider: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getAuthProviderCallbackResponse> => {
+export const getAuthProviderCallback = async (provider: string, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUserRegistration> => {
 
-  return strapiFetch<getAuthProviderCallbackResponse>(getGetAuthProviderCallbackUrl(provider),
+  return strapiFetch<UsersPermissionsUserRegistration>(getGetAuthProviderCallbackUrl(provider),
   {
     ...options,
     method: 'GET'
@@ -517,28 +429,7 @@ export function useGetAuthProviderCallback<TData = Awaited<ReturnType<typeof get
 
 
 
-export type postAuthForgotPasswordResponse200 = {
-  data: PostAuthForgotPassword200
-  status: 200
-}
-
-export type postAuthForgotPasswordResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthForgotPasswordResponseSuccess = (postAuthForgotPasswordResponse200) & {
-  headers: Headers;
-};
-export type postAuthForgotPasswordResponseError = (postAuthForgotPasswordResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthForgotPasswordResponse = (postAuthForgotPasswordResponseSuccess | postAuthForgotPasswordResponseError)
-
 export const getPostAuthForgotPasswordUrl = () => {
-
-
 
 
   return `/auth/forgot-password`
@@ -547,7 +438,7 @@ export const getPostAuthForgotPasswordUrl = () => {
 /**
  * @summary Send rest password email
  */
-export const postAuthForgotPassword = async (postAuthForgotPasswordBody: PostAuthForgotPasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthForgotPasswordResponse> => {
+export const postAuthForgotPassword = async (postAuthForgotPasswordBody: PostAuthForgotPasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PostAuthForgotPassword200> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -563,7 +454,7 @@ export const postAuthForgotPassword = async (postAuthForgotPasswordBody: PostAut
     }
     return headers;
   };
-return strapiFetch<postAuthForgotPasswordResponse>(getPostAuthForgotPasswordUrl(),
+return strapiFetch<PostAuthForgotPassword200>(getPostAuthForgotPasswordUrl(),
   {
     ...options,
     method: 'POST',
@@ -623,28 +514,7 @@ export const usePostAuthForgotPassword = <TError = Error,
       > => {
       return useMutation(getPostAuthForgotPasswordMutationOptions(options), queryClient);
     }
-    export type postAuthResetPasswordResponse200 = {
-  data: UsersPermissionsUserRegistration
-  status: 200
-}
-
-export type postAuthResetPasswordResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthResetPasswordResponseSuccess = (postAuthResetPasswordResponse200) & {
-  headers: Headers;
-};
-export type postAuthResetPasswordResponseError = (postAuthResetPasswordResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthResetPasswordResponse = (postAuthResetPasswordResponseSuccess | postAuthResetPasswordResponseError)
-
-export const getPostAuthResetPasswordUrl = () => {
-
-
+    export const getPostAuthResetPasswordUrl = () => {
 
 
   return `/auth/reset-password`
@@ -653,7 +523,7 @@ export const getPostAuthResetPasswordUrl = () => {
 /**
  * @summary Rest user password
  */
-export const postAuthResetPassword = async (postAuthResetPasswordBody: PostAuthResetPasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthResetPasswordResponse> => {
+export const postAuthResetPassword = async (postAuthResetPasswordBody: PostAuthResetPasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUserRegistration> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -669,7 +539,7 @@ export const postAuthResetPassword = async (postAuthResetPasswordBody: PostAuthR
     }
     return headers;
   };
-return strapiFetch<postAuthResetPasswordResponse>(getPostAuthResetPasswordUrl(),
+return strapiFetch<UsersPermissionsUserRegistration>(getPostAuthResetPasswordUrl(),
   {
     ...options,
     method: 'POST',
@@ -729,28 +599,7 @@ export const usePostAuthResetPassword = <TError = Error,
       > => {
       return useMutation(getPostAuthResetPasswordMutationOptions(options), queryClient);
     }
-    export type postAuthChangePasswordResponse200 = {
-  data: UsersPermissionsUserRegistration
-  status: 200
-}
-
-export type postAuthChangePasswordResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthChangePasswordResponseSuccess = (postAuthChangePasswordResponse200) & {
-  headers: Headers;
-};
-export type postAuthChangePasswordResponseError = (postAuthChangePasswordResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthChangePasswordResponse = (postAuthChangePasswordResponseSuccess | postAuthChangePasswordResponseError)
-
-export const getPostAuthChangePasswordUrl = () => {
-
-
+    export const getPostAuthChangePasswordUrl = () => {
 
 
   return `/auth/change-password`
@@ -759,7 +608,7 @@ export const getPostAuthChangePasswordUrl = () => {
 /**
  * @summary Update user's own password
  */
-export const postAuthChangePassword = async (postAuthChangePasswordBody: PostAuthChangePasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthChangePasswordResponse> => {
+export const postAuthChangePassword = async (postAuthChangePasswordBody: PostAuthChangePasswordBody, options?: Parameters<typeof strapiFetch>[1]): Promise<UsersPermissionsUserRegistration> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -775,7 +624,7 @@ export const postAuthChangePassword = async (postAuthChangePasswordBody: PostAut
     }
     return headers;
   };
-return strapiFetch<postAuthChangePasswordResponse>(getPostAuthChangePasswordUrl(),
+return strapiFetch<UsersPermissionsUserRegistration>(getPostAuthChangePasswordUrl(),
   {
     ...options,
     method: 'POST',
@@ -835,34 +684,8 @@ export const usePostAuthChangePassword = <TError = Error,
       > => {
       return useMutation(getPostAuthChangePasswordMutationOptions(options), queryClient);
     }
-    export type getAuthEmailConfirmationResponse301 = {
-  data: void
-  status: 301
-}
-
-export type getAuthEmailConfirmationResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 301>
-}
-
-;
-export type getAuthEmailConfirmationResponseError = (getAuthEmailConfirmationResponse301 | getAuthEmailConfirmationResponseDefault) & {
-  headers: Headers;
-};
-
-export type getAuthEmailConfirmationResponse = (getAuthEmailConfirmationResponseError)
-
-export const getGetAuthEmailConfirmationUrl = (params?: GetAuthEmailConfirmationParams,) => {
-  const normalizedParams = new URLSearchParams();
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = normalizedParams.toString();
+    export const getGetAuthEmailConfirmationUrl = (params?: GetAuthEmailConfirmationParams,) => {
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/auth/email-confirmation?${stringifiedParams}` : `/auth/email-confirmation`
 }
@@ -870,9 +693,9 @@ export const getGetAuthEmailConfirmationUrl = (params?: GetAuthEmailConfirmation
 /**
  * @summary Confirm user email
  */
-export const getAuthEmailConfirmation = async (params?: GetAuthEmailConfirmationParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getAuthEmailConfirmationResponse> => {
+export const getAuthEmailConfirmation = async (params?: GetAuthEmailConfirmationParams, options?: Parameters<typeof strapiFetch>[1]): Promise<Error> => {
 
-  return strapiFetch<getAuthEmailConfirmationResponse>(getGetAuthEmailConfirmationUrl(params),
+  return strapiFetch<Error>(getGetAuthEmailConfirmationUrl(params),
   {
     ...options,
     method: 'GET'
@@ -959,28 +782,7 @@ export function useGetAuthEmailConfirmation<TData = Awaited<ReturnType<typeof ge
 
 
 
-export type postAuthSendEmailConfirmationResponse200 = {
-  data: PostAuthSendEmailConfirmation200
-  status: 200
-}
-
-export type postAuthSendEmailConfirmationResponseDefault = {
-  data: Error
-  status: Exclude<HTTPStatusCodes, 200>
-}
-
-export type postAuthSendEmailConfirmationResponseSuccess = (postAuthSendEmailConfirmationResponse200) & {
-  headers: Headers;
-};
-export type postAuthSendEmailConfirmationResponseError = (postAuthSendEmailConfirmationResponseDefault) & {
-  headers: Headers;
-};
-
-export type postAuthSendEmailConfirmationResponse = (postAuthSendEmailConfirmationResponseSuccess | postAuthSendEmailConfirmationResponseError)
-
 export const getPostAuthSendEmailConfirmationUrl = () => {
-
-
 
 
   return `/auth/send-email-confirmation`
@@ -989,7 +791,7 @@ export const getPostAuthSendEmailConfirmationUrl = () => {
 /**
  * @summary Send confirmation email
  */
-export const postAuthSendEmailConfirmation = async (postAuthSendEmailConfirmationBody: PostAuthSendEmailConfirmationBody, options?: Parameters<typeof strapiFetch>[1]): Promise<postAuthSendEmailConfirmationResponse> => {
+export const postAuthSendEmailConfirmation = async (postAuthSendEmailConfirmationBody: PostAuthSendEmailConfirmationBody, options?: Parameters<typeof strapiFetch>[1]): Promise<PostAuthSendEmailConfirmation200> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -1005,7 +807,7 @@ export const postAuthSendEmailConfirmation = async (postAuthSendEmailConfirmatio
     }
     return headers;
   };
-return strapiFetch<postAuthSendEmailConfirmationResponse>(getPostAuthSendEmailConfirmationUrl(),
+return strapiFetch<PostAuthSendEmailConfirmation200>(getPostAuthSendEmailConfirmationUrl(),
   {
     ...options,
     method: 'POST',

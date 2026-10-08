@@ -23,6 +23,8 @@
       "@/gql/*": ["./src/gql/*"],
       "@/layout/*": ["./src/layout/*"],
       "@/lib/*": ["./src/lib/*"],
+      "@/openapi/*": ["./src/openapi/*"],
+      "@/providers/*": ["./src/providers/*"],
       "@/public/*": ["./public/*"],
       "@/styles/*": ["./styles/*"],
       "@/themes/*": ["./src/themes/*"],

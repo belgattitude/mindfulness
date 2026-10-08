@@ -32,6 +32,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -53,82 +54,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getTemoignagesResponse200 = {
-  data: TemoignageListResponse
-  status: 200
-}
-
-export type getTemoignagesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getTemoignagesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getTemoignagesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getTemoignagesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getTemoignagesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getTemoignagesResponseSuccess = (getTemoignagesResponse200) & {
-  headers: Headers;
-};
-export type getTemoignagesResponseError = (getTemoignagesResponse400 | getTemoignagesResponse401 | getTemoignagesResponse403 | getTemoignagesResponse404 | getTemoignagesResponse500) & {
-  headers: Headers;
-};
-
-export type getTemoignagesResponse = (getTemoignagesResponseSuccess | getTemoignagesResponseError)
-
 export const getGetTemoignagesUrl = (params?: GetTemoignagesParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/temoignages?${stringifiedParams}` : `/temoignages`
 }
 
-export const getTemoignages = async (params?: GetTemoignagesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getTemoignagesResponse> => {
+export const getTemoignages = async (params?: GetTemoignagesParams, options?: Parameters<typeof strapiFetch>[1]): Promise<TemoignageListResponse> => {
 
-  return strapiFetch<getTemoignagesResponse>(getGetTemoignagesUrl(params),
+  return strapiFetch<TemoignageListResponse>(getGetTemoignagesUrl(params),
   {
     ...options,
     method: 'GET'
@@ -212,54 +146,13 @@ export function useGetTemoignages<TData = Awaited<ReturnType<typeof getTemoignag
 
 
 
-export type postTemoignagesResponse200 = {
-  data: TemoignageResponse
-  status: 200
-}
-
-export type postTemoignagesResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type postTemoignagesResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type postTemoignagesResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type postTemoignagesResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type postTemoignagesResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type postTemoignagesResponseSuccess = (postTemoignagesResponse200) & {
-  headers: Headers;
-};
-export type postTemoignagesResponseError = (postTemoignagesResponse400 | postTemoignagesResponse401 | postTemoignagesResponse403 | postTemoignagesResponse404 | postTemoignagesResponse500) & {
-  headers: Headers;
-};
-
-export type postTemoignagesResponse = (postTemoignagesResponseSuccess | postTemoignagesResponseError)
-
 export const getPostTemoignagesUrl = () => {
-
-
 
 
   return `/temoignages`
 }
 
-export const postTemoignages = async (temoignageRequest: TemoignageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<postTemoignagesResponse> => {
+export const postTemoignages = async (temoignageRequest: TemoignageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<TemoignageResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -275,7 +168,7 @@ export const postTemoignages = async (temoignageRequest: TemoignageRequest, opti
     }
     return headers;
   };
-return strapiFetch<postTemoignagesResponse>(getPostTemoignagesUrl(),
+return strapiFetch<TemoignageResponse>(getPostTemoignagesUrl(),
   {
     ...options,
     method: 'POST',
@@ -332,56 +225,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostTemoignagesMutationOptions(options), queryClient);
     }
-    export type getTemoignagesIdResponse200 = {
-  data: TemoignageResponse
-  status: 200
-}
-
-export type getTemoignagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getTemoignagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getTemoignagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getTemoignagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getTemoignagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getTemoignagesIdResponseSuccess = (getTemoignagesIdResponse200) & {
-  headers: Headers;
-};
-export type getTemoignagesIdResponseError = (getTemoignagesIdResponse400 | getTemoignagesIdResponse401 | getTemoignagesIdResponse403 | getTemoignagesIdResponse404 | getTemoignagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type getTemoignagesIdResponse = (getTemoignagesIdResponseSuccess | getTemoignagesIdResponseError)
-
-export const getGetTemoignagesIdUrl = (id: string,) => {
-
-
+    export const getGetTemoignagesIdUrl = (id: string,) => {
 
 
   return `/temoignages/${id}`
 }
 
-export const getTemoignagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getTemoignagesIdResponse> => {
+export const getTemoignagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<TemoignageResponse> => {
 
-  return strapiFetch<getTemoignagesIdResponse>(getGetTemoignagesIdUrl(id),
+  return strapiFetch<TemoignageResponse>(getGetTemoignagesIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -465,55 +317,14 @@ export function useGetTemoignagesId<TData = Awaited<ReturnType<typeof getTemoign
 
 
 
-export type putTemoignagesIdResponse200 = {
-  data: TemoignageResponse
-  status: 200
-}
-
-export type putTemoignagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putTemoignagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putTemoignagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putTemoignagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putTemoignagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putTemoignagesIdResponseSuccess = (putTemoignagesIdResponse200) & {
-  headers: Headers;
-};
-export type putTemoignagesIdResponseError = (putTemoignagesIdResponse400 | putTemoignagesIdResponse401 | putTemoignagesIdResponse403 | putTemoignagesIdResponse404 | putTemoignagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type putTemoignagesIdResponse = (putTemoignagesIdResponseSuccess | putTemoignagesIdResponseError)
-
 export const getPutTemoignagesIdUrl = (id: string,) => {
-
-
 
 
   return `/temoignages/${id}`
 }
 
 export const putTemoignagesId = async (id: string,
-    temoignageRequest: TemoignageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putTemoignagesIdResponse> => {
+    temoignageRequest: TemoignageRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<TemoignageResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -529,7 +340,7 @@ export const putTemoignagesId = async (id: string,
     }
     return headers;
   };
-return strapiFetch<putTemoignagesIdResponse>(getPutTemoignagesIdUrl(id),
+return strapiFetch<TemoignageResponse>(getPutTemoignagesIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -586,56 +397,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutTemoignagesIdMutationOptions(options), queryClient);
     }
-    export type deleteTemoignagesIdResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteTemoignagesIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteTemoignagesIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteTemoignagesIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteTemoignagesIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteTemoignagesIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteTemoignagesIdResponseSuccess = (deleteTemoignagesIdResponse200) & {
-  headers: Headers;
-};
-export type deleteTemoignagesIdResponseError = (deleteTemoignagesIdResponse400 | deleteTemoignagesIdResponse401 | deleteTemoignagesIdResponse403 | deleteTemoignagesIdResponse404 | deleteTemoignagesIdResponse500) & {
-  headers: Headers;
-};
-
-export type deleteTemoignagesIdResponse = (deleteTemoignagesIdResponseSuccess | deleteTemoignagesIdResponseError)
-
-export const getDeleteTemoignagesIdUrl = (id: string,) => {
-
-
+    export const getDeleteTemoignagesIdUrl = (id: string,) => {
 
 
   return `/temoignages/${id}`
 }
 
-export const deleteTemoignagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteTemoignagesIdResponse> => {
+export const deleteTemoignagesId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteTemoignagesIdResponse>(getDeleteTemoignagesIdUrl(id),
+  return strapiFetch<number>(getDeleteTemoignagesIdUrl(id),
   {
     ...options,
     method: 'DELETE'

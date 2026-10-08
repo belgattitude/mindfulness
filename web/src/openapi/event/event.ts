@@ -32,6 +32,7 @@ import type {
 } from '../model';
 
 import { strapiFetch } from '../../lib/strapi/strapi-fetch';
+import { strapiParamsSerializer } from '../../lib/strapi/strapi-fetch';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -53,82 +54,15 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
-export type getEventsResponse200 = {
-  data: EventListResponse
-  status: 200
-}
-
-export type getEventsResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getEventsResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getEventsResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getEventsResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getEventsResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getEventsResponseSuccess = (getEventsResponse200) & {
-  headers: Headers;
-};
-export type getEventsResponseError = (getEventsResponse400 | getEventsResponse401 | getEventsResponse403 | getEventsResponse404 | getEventsResponse500) & {
-  headers: Headers;
-};
-
-export type getEventsResponse = (getEventsResponseSuccess | getEventsResponseError)
-
 export const getGetEventsUrl = (params?: GetEventsParams,) => {
-  const normalizedParams = new URLSearchParams();
-  const deepObjectEntries: string[] = [];
-
-  Object.entries(params || {}).forEach(([key, value]) => {
-    const explodeParameters = ["populate"];
-
-    if (Array.isArray(value) && explodeParameters.includes(key)) {
-      value.forEach((v) => {
-        normalizedParams.append(key, v === null ? 'null' : String(v));
-      });
-      return;
-    }
-      const deepObjectParameters = ["filters"];
-
-    if (typeof value === 'object' && value !== null && !Array.isArray(value) && deepObjectParameters.includes(key)) {
-      Object.entries(value).forEach(([subKey, subValue]) => {
-        if (subValue !== undefined) {
-          deepObjectEntries.push(encodeURIComponent(key) + '[' + encodeURIComponent(subKey) + ']=' + (subValue === null ? 'null' : encodeURIComponent(String(subValue))));
-        }
-      });
-      return;
-    }
-
-    if (value !== undefined) {
-      normalizedParams.append(key, value === null ? 'null' : String(value))
-    }
-  });
-
-  const stringifiedParams = [normalizedParams.toString(), deepObjectEntries.join('&')].filter(Boolean).join('&');
+  const stringifiedParams = strapiParamsSerializer(params);
 
   return stringifiedParams.length > 0 ? `/events?${stringifiedParams}` : `/events`
 }
 
-export const getEvents = async (params?: GetEventsParams, options?: Parameters<typeof strapiFetch>[1]): Promise<getEventsResponse> => {
+export const getEvents = async (params?: GetEventsParams, options?: Parameters<typeof strapiFetch>[1]): Promise<EventListResponse> => {
 
-  return strapiFetch<getEventsResponse>(getGetEventsUrl(params),
+  return strapiFetch<EventListResponse>(getGetEventsUrl(params),
   {
     ...options,
     method: 'GET'
@@ -212,54 +146,13 @@ export function useGetEvents<TData = Awaited<ReturnType<typeof getEvents>>, TErr
 
 
 
-export type postEventsResponse200 = {
-  data: EventResponse
-  status: 200
-}
-
-export type postEventsResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type postEventsResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type postEventsResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type postEventsResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type postEventsResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type postEventsResponseSuccess = (postEventsResponse200) & {
-  headers: Headers;
-};
-export type postEventsResponseError = (postEventsResponse400 | postEventsResponse401 | postEventsResponse403 | postEventsResponse404 | postEventsResponse500) & {
-  headers: Headers;
-};
-
-export type postEventsResponse = (postEventsResponseSuccess | postEventsResponseError)
-
 export const getPostEventsUrl = () => {
-
-
 
 
   return `/events`
 }
 
-export const postEvents = async (eventRequest: EventRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<postEventsResponse> => {
+export const postEvents = async (eventRequest: EventRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<EventResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -275,7 +168,7 @@ export const postEvents = async (eventRequest: EventRequest, options?: Parameter
     }
     return headers;
   };
-return strapiFetch<postEventsResponse>(getPostEventsUrl(),
+return strapiFetch<EventResponse>(getPostEventsUrl(),
   {
     ...options,
     method: 'POST',
@@ -332,56 +225,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPostEventsMutationOptions(options), queryClient);
     }
-    export type getEventsIdResponse200 = {
-  data: EventResponse
-  status: 200
-}
-
-export type getEventsIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type getEventsIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type getEventsIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type getEventsIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type getEventsIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type getEventsIdResponseSuccess = (getEventsIdResponse200) & {
-  headers: Headers;
-};
-export type getEventsIdResponseError = (getEventsIdResponse400 | getEventsIdResponse401 | getEventsIdResponse403 | getEventsIdResponse404 | getEventsIdResponse500) & {
-  headers: Headers;
-};
-
-export type getEventsIdResponse = (getEventsIdResponseSuccess | getEventsIdResponseError)
-
-export const getGetEventsIdUrl = (id: string,) => {
-
-
+    export const getGetEventsIdUrl = (id: string,) => {
 
 
   return `/events/${id}`
 }
 
-export const getEventsId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<getEventsIdResponse> => {
+export const getEventsId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<EventResponse> => {
 
-  return strapiFetch<getEventsIdResponse>(getGetEventsIdUrl(id),
+  return strapiFetch<EventResponse>(getGetEventsIdUrl(id),
   {
     ...options,
     method: 'GET'
@@ -465,55 +317,14 @@ export function useGetEventsId<TData = Awaited<ReturnType<typeof getEventsId>>, 
 
 
 
-export type putEventsIdResponse200 = {
-  data: EventResponse
-  status: 200
-}
-
-export type putEventsIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type putEventsIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type putEventsIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type putEventsIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type putEventsIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type putEventsIdResponseSuccess = (putEventsIdResponse200) & {
-  headers: Headers;
-};
-export type putEventsIdResponseError = (putEventsIdResponse400 | putEventsIdResponse401 | putEventsIdResponse403 | putEventsIdResponse404 | putEventsIdResponse500) & {
-  headers: Headers;
-};
-
-export type putEventsIdResponse = (putEventsIdResponseSuccess | putEventsIdResponseError)
-
 export const getPutEventsIdUrl = (id: string,) => {
-
-
 
 
   return `/events/${id}`
 }
 
 export const putEventsId = async (id: string,
-    eventRequest: EventRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<putEventsIdResponse> => {
+    eventRequest: EventRequest, options?: Parameters<typeof strapiFetch>[1]): Promise<EventResponse> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
     if (!h) return {};
@@ -529,7 +340,7 @@ export const putEventsId = async (id: string,
     }
     return headers;
   };
-return strapiFetch<putEventsIdResponse>(getPutEventsIdUrl(id),
+return strapiFetch<EventResponse>(getPutEventsIdUrl(id),
   {
     ...options,
     method: 'PUT',
@@ -586,56 +397,15 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getPutEventsIdMutationOptions(options), queryClient);
     }
-    export type deleteEventsIdResponse200 = {
-  data: number
-  status: 200
-}
-
-export type deleteEventsIdResponse400 = {
-  data: Error
-  status: 400
-}
-
-export type deleteEventsIdResponse401 = {
-  data: Error
-  status: 401
-}
-
-export type deleteEventsIdResponse403 = {
-  data: Error
-  status: 403
-}
-
-export type deleteEventsIdResponse404 = {
-  data: Error
-  status: 404
-}
-
-export type deleteEventsIdResponse500 = {
-  data: Error
-  status: 500
-}
-
-export type deleteEventsIdResponseSuccess = (deleteEventsIdResponse200) & {
-  headers: Headers;
-};
-export type deleteEventsIdResponseError = (deleteEventsIdResponse400 | deleteEventsIdResponse401 | deleteEventsIdResponse403 | deleteEventsIdResponse404 | deleteEventsIdResponse500) & {
-  headers: Headers;
-};
-
-export type deleteEventsIdResponse = (deleteEventsIdResponseSuccess | deleteEventsIdResponseError)
-
-export const getDeleteEventsIdUrl = (id: string,) => {
-
-
+    export const getDeleteEventsIdUrl = (id: string,) => {
 
 
   return `/events/${id}`
 }
 
-export const deleteEventsId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<deleteEventsIdResponse> => {
+export const deleteEventsId = async (id: string, options?: Parameters<typeof strapiFetch>[1]): Promise<number> => {
 
-  return strapiFetch<deleteEventsIdResponse>(getDeleteEventsIdUrl(id),
+  return strapiFetch<number>(getDeleteEventsIdUrl(id),
   {
     ...options,
     method: 'DELETE'
