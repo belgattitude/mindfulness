@@ -1,6 +1,6 @@
-import { graphql } from '@/gql/gql';
-import { getGraphqlRequestCatcher } from '@/lib/getGraphqlRequestCatcher';
-import { getGraphqlClient } from '@/config/graphql-client.config';
+import { getGraphqlClient } from "@/config/graphql-client.config";
+import { graphql } from "@/gql/gql";
+import { withGraphqlRequestCatcher } from "@/lib/getGraphqlRequestCatcher";
 
 export const getHomePage = graphql(/* GraphQL */ `
   query getHomePage {
@@ -11,12 +11,10 @@ export const getHomePage = graphql(/* GraphQL */ `
 `);
 
 export const fetchHome = async () => {
-  return getGraphqlClient
-    .request(getHomePage)
-    .catch(getGraphqlRequestCatcher)
-    .then((resp) => {
-      return {
-        introduction: resp.home?.introduction ?? '',
-      };
-    });
+  const resp = await withGraphqlRequestCatcher(
+    getGraphqlClient.request(getHomePage)
+  );
+  return {
+    introduction: resp.home?.introduction ?? "",
+  };
 };

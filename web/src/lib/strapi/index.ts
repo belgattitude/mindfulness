@@ -1,1 +1,1 @@
-export { getStrapiMedia } from './getStrapiMedia';
+export { getStrapiMedia } from "./getStrapiMedia";

@@ -1,50 +1,52 @@
-import { clsx } from 'clsx';
-import { forwardRef } from 'react';
-import BurgerOpenIcon from '@/public/icons/burger-simple-svgrepo-com.svg';
-import BurgerCloseIcon from '@/public/icons/cross-svgrepo-com.svg';
-import { cn } from '@/components/utils';
+import { clsx } from "clsx";
+import type { Ref } from "react";
 
-type Props = {
+import { cn } from "@/components/utils";
+import BurgerOpenIcon from "@/public/icons/burger-simple-svgrepo-com.svg";
+import BurgerCloseIcon from "@/public/icons/cross-svgrepo-com.svg";
+
+interface Props {
   handleClick: () => void;
   isOpen: boolean;
   className?: string;
-  // ref?: { current: HTMLDivElement | undefined | null };
-};
+  // React 19: ref is a regular prop, no forwardRef needed
+  ref?: Ref<HTMLButtonElement>;
+}
 
-export const BurgerMenuIcon = forwardRef<HTMLDivElement, Props>(
-  /** prefer named function to not have to set the displayName */
-  function BurgerMenuIcon(props, ref) {
-    const { isOpen, handleClick, className, ...restBtnProps } = props;
+export const BurgerMenuIcon = (props: Props) => {
+  const { isOpen, handleClick, className, ref, ...restBtnProps } = props;
 
-    return (
-      <div
-        className={cn(
-          'size-[32px] cursor-pointer transition-opacity relative',
-          className
+  return (
+    <button
+      type="button"
+      ref={ref}
+      aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+      aria-expanded={isOpen}
+      className={cn(
+        "relative block size-[32px] cursor-pointer transition-opacity",
+        className
+      )}
+      onClick={() => {
+        handleClick();
+      }}
+      {...restBtnProps}
+    >
+      <BurgerOpenIcon
+        className={clsx(
+          "absolute top-0 left-0 size-full transition-opacity delay-450 duration-300 ease-in-out",
+          {
+            "opacity-0": isOpen,
+          }
         )}
-        onClick={() => {
-          handleClick();
-        }}
-        {...restBtnProps}
-        ref={ref}
-      >
-        <BurgerOpenIcon
-          className={clsx(
-            'delay-450 absolute left-0 top-0 size-full transition-opacity duration-300 ease-in-out',
-            {
-              ['opacity-0']: isOpen,
-            }
-          )}
-        />
-        <BurgerCloseIcon
-          className={clsx(
-            'delay-450 absolute size-full opacity-0 transition-opacity duration-300 ease-in-out',
-            {
-              ['opacity-100']: isOpen,
-            }
-          )}
-        />
-      </div>
-    );
-  }
-);
+      />
+      <BurgerCloseIcon
+        className={clsx(
+          "absolute size-full opacity-0 transition-opacity delay-450 duration-300 ease-in-out",
+          {
+            "opacity-100": isOpen,
+          }
+        )}
+      />
+    </button>
+  );
+};

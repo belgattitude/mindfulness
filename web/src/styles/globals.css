@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../tailwind.config.cjs';
 
@@ -45,11 +45,9 @@
   --color-brand: hotpink;
 }
 
-
 @media only screen and (max-width: 600px) {
   :root {
     --main-nav-full-height: 60px;
     --main-nav-reduced-height: 40px;
   }
 }
-

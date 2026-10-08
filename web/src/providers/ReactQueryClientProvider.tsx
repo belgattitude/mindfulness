@@ -1,6 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import type { FC, PropsWithChildren } from 'react';
-import { reactQueryConfig } from '@/config/react-query.config';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { FC, PropsWithChildren } from "react";
+
+import { reactQueryConfig } from "@/config/react-query.config";
 
 const queryClient = new QueryClient(reactQueryConfig);
 

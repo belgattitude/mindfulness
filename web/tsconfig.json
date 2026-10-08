@@ -2,11 +2,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,62 +14,29 @@
     "jsx": "preserve",
     "incremental": true,
     "verbatimModuleSyntax": true,
-    "baseUrl": "./src",
     "paths": {
-      "@/api/*": [
-        "./api/*"
-      ],
-      "@/components/*": [
-        "./components/*"
-      ],
-      "@/config/*": [
-        "./config/*"
-      ],
-      "@/features/*": [
-        "./features/*"
-      ],
-      "@/fonts/*": [
-        "./fonts/*"
-      ],
-      "@/gql/*": [
-        "./gql/*"
-      ],
-      "@/layout/*": [
-        "./layout/*"
-      ],
-      "@/lib/*": [
-        "./lib/*"
-      ],
-      "@/public/*": [
-        "../public/*"
-      ],
-      "@/styles/*": [
-        "../styles/*"
-      ],
-      "@/themes/*": [
-        "./themes/*"
-      ],
-      "@/ui/*": [
-        "./ui/*"
-      ]
+      "@/api/*": ["./src/api/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/config/*": ["./src/config/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/fonts/*": ["./src/fonts/*"],
+      "@/gql/*": ["./src/gql/*"],
+      "@/layout/*": ["./src/layout/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/public/*": ["./public/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/themes/*": ["./src/themes/*"],
+      "@/ui/*": ["./src/ui/*"]
     },
-    "types": [
-      "vitest/globals"
-    ],
+    "types": ["vitest/globals"],
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "exclude": [
-    "**/node_modules",
-    ".next",
-    "**/.*/*",
-    "storybook-static"
-  ],
+  "exclude": ["**/node_modules", ".next", "**/.*/*", "storybook-static"],
   "include": [
-    ".eslintrc.*",
     ".storybook/*.ts",
     ".storybook/*.tsx",
     "next-env.d.ts",

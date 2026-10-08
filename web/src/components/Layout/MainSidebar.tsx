@@ -1,34 +1,30 @@
-import Link from 'next/link';
-import type { FC } from 'react';
-import type { MainNavLinks } from '@/config/site.config';
-import { cn } from '../utils';
+import Link from "next/link";
+import type { FC } from "react";
 
-type MainSidebarProps = {
+import type { MainNavLinks } from "@/config/site.config";
+
+import { cn } from "../utils";
+
+interface MainSidebarProps {
   hidden: boolean;
   mainNavLinks: MainNavLinks;
-};
+}
 export const MainSidebar: FC<MainSidebarProps> = (props) => {
   const { hidden, mainNavLinks } = props;
   return (
     <div
       className={cn(
-        'bg-white h-full absolute top-0 flex w-[70vw] border-8 p-5 justify-center flex-col gap-5 transition-all ease-in-out duration-300',
+        "absolute top-0 flex h-full w-[70vw] flex-col justify-center gap-5 border-8 bg-white p-5 transition-all duration-300 ease-in-out",
         hidden
-          ? 'translate-x-[-500px] opacity-0 -z-50 pointer-events-none'
-          : 'translate-x-0 opacity-100 z-50 pointer-events-auto'
+          ? "pointer-events-none -z-50 translate-x-[-500px] opacity-0"
+          : "pointer-events-auto z-50 translate-x-0 opacity-100"
       )}
     >
-      {mainNavLinks.map((link) => {
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={'border flex text-3xl'}
-          >
-            {link.title}
-          </Link>
-        );
-      })}
+      {mainNavLinks.map((link) => (
+        <Link key={link.href} href={link.href} className="flex border text-3xl">
+          {link.title}
+        </Link>
+      ))}
     </div>
   );
 };

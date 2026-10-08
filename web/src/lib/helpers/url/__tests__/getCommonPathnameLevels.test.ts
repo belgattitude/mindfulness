@@ -1,14 +1,19 @@
-import { getCommonPathnameLevels } from '@/lib/helpers/url';
+import { expect, describe, it } from "vitest";
 
-describe('getCommonPathnameLevels', () => {
-  it('should work as expected', () => {
-    expect(getCommonPathnameLevels('/path', '/url')).toStrictEqual(0);
-    expect(getCommonPathnameLevels('/path', '/path')).toStrictEqual(1);
-    expect(getCommonPathnameLevels('/path/about', '/path/about')).toStrictEqual(
-      2
-    );
-    expect(getCommonPathnameLevels('/path/about', '/path')).toStrictEqual(1);
-    expect(getCommonPathnameLevels('/path', '/path/about')).toStrictEqual(1);
-    expect(getCommonPathnameLevels('/', '/')).toStrictEqual(0);
-  });
+import { getCommonPathnameLevels } from "@/lib/helpers/url";
+
+describe(getCommonPathnameLevels, () => {
+  it.each([
+    ["/path", "/url", 0],
+    ["/path", "/path", 1],
+    ["/path/about", "/path/about", 2],
+    ["/path/about", "/path", 1],
+    ["/path", "/path/about", 1],
+    ["/", "/", 0],
+  ] as const)(
+    "should return %i common levels for '%s' and '%s'",
+    (pathname1, pathname2, expected) => {
+      expect(getCommonPathnameLevels(pathname1, pathname2)).toBe(expected);
+    }
+  );
 });

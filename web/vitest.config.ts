@@ -1,18 +1,17 @@
-import tsconfigPaths from 'vite-tsconfig-paths';
-import { defineConfig } from 'vitest/config';
+import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "vitest/config";
 
-const testFiles = ['./src/**/*.test.{js,ts}', './test/**/*.test.{js,ts}'];
+const testFiles = ["./src/**/*.test.{js,ts}", "./test/**/*.test.{js,ts}"];
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
   esbuild: {
-    target: ['node20'],
+    target: ["node20"],
   },
+  plugins: [tsconfigPaths()],
   test: {
     globals: true,
-    environment: 'node',
+    environment: "node",
     passWithNoTests: false,
-    setupFiles: './test/_setup/setupVitest.ts',
     include: testFiles,
     // To mimic Jest behaviour regarding mocks.
     // @link https://vitest.dev/config/#clearmocks
@@ -20,10 +19,10 @@ export default defineConfig({
     mockReset: true,
     restoreMocks: true,
     exclude: [
-      '**/node_modules/**',
-      'dist/**',
-      '**/coverage/**',
-      '**/.{idea,git,cache,output,temp}/**',
+      "**/node_modules/**",
+      "dist/**",
+      "**/coverage/**",
+      "**/.{idea,git,cache,output,temp}/**",
     ],
   },
 });

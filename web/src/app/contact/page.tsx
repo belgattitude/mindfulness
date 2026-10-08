@@ -1,22 +1,24 @@
-import { fetchContactPage } from '@/api/contact.api';
-import { MarkdownText } from '@/components/MarkdownText';
-import { ProseContent } from '@/components/ProseContent';
+import { fetchContactPage } from "@/api/contact.api";
+import { MarkdownText } from "@/components/MarkdownText";
+import { PageContent } from "@/components/PageContent";
+import { ProseContent } from "@/components/ProseContent";
 
-import { PageContent } from '@/components/PageContent';
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-export default async function About() {
+const Contact = async () => {
   const data = await fetchContactPage();
   return (
-    <PageContent title={'Contact'}>
+    <PageContent title="Contact">
       <ProseContent>
         {data && (
           <MarkdownText
-            className={'text-title-color-800'}
-            text={data.contact?.description ?? ''}
+            className="text-title-color-800"
+            text={data.contact?.description ?? ""}
           />
         )}
       </ProseContent>
     </PageContent>
   );
-}
+};
+
+export default Contact;

@@ -1,17 +1,19 @@
-import Link from 'next/link';
-import type { FC } from 'react';
-import type { MainNavLinks } from '@/config/site.config';
-import { MainLogo } from '../Logo/MainLogo';
+import Link from "next/link";
+import type { FC } from "react";
 
-type Props = {
+import type { MainNavLinks } from "@/config/site.config";
+
+import { MainLogo } from "../Logo/MainLogo";
+
+interface Props {
   mainNavLinks: MainNavLinks;
-};
+}
 export const MainFooter: FC<Props> = (props) => {
   const { mainNavLinks } = props;
   return (
     <footer
       aria-label="Site Footer"
-      className={'mt-10 w-full bg-brand-color-200/90 font-family-primary'}
+      className="bg-brand-color-200/90 font-family-primary mt-10 w-full"
     >
       <div className="container mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
@@ -52,18 +54,16 @@ export const MainFooter: FC<Props> = (props) => {
             <p className="font-medium text-gray-900">Menu</p>
             <nav aria-label="Footer Navigation - Menu" className="mt-6">
               <ul className="space-y-4 text-sm">
-                {mainNavLinks.map((link) => {
-                  return (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={'text-gray-700 transition hover:opacity-75'}
-                      >
-                        {link.title}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {mainNavLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-700 transition hover:opacity-75"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
@@ -74,12 +74,12 @@ export const MainFooter: FC<Props> = (props) => {
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    href="/contact"
                     className="text-gray-700 transition hover:opacity-75"
                   >
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

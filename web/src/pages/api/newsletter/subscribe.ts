@@ -1,5 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { mailerTransport } from '@/config/mailer.config';
+import type { NextApiRequest, NextApiResponse } from "next";
+
+import { mailerTransport } from "@/config/mailer.config";
 
 type Response =
   | {
@@ -19,30 +20,28 @@ export default async function newsletterSubscribeHandler(
   req: NextApiRequest,
   res: NextApiResponse<Response>
 ) {
-  const { method } = req;
-
   const mailData = {
-    from: 'belgattitude@gmail.com',
-    to: 's.vanvelthem@gmail.com',
+    from: "belgattitude@gmail.com",
+    html: `<html><h1>Cool</h1></html>`,
     subject: `Test from node mailer`,
     text: `Email content`,
-    html: `<html><h1>Cool</h1></html>`,
+    to: "s.vanvelthem@gmail.com",
   };
 
   // send mail with defined transport object
   try {
     const info = await transport.sendMail(mailData);
     res.status(200).json({
-      success: true,
       data: {
         messageId: info.messageId,
       },
+      success: true,
     });
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: `Email cannot be sent: ${
-        (e as Error)?.message ?? 'Unknown error'
+        (error as Error)?.message ?? "Unknown error"
       }`,
     });
   }

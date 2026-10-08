@@ -1,17 +1,20 @@
-import Image from 'next/image';
-import type { FC } from 'react';
-import { eventsApi, type FetchEvent } from '@/api/events.api';
-import { DateRangeText } from '@/components/DateRangeText';
-import { MarkdownText } from '@/components/MarkdownText';
-import { useFragment } from '@/gql/fragment-masking';
-import { getStrapiMedia } from '@/lib/strapi';
-import { ProseContent } from '@/components/ProseContent';
-import { PageBackgroundImg } from '../PageBackgroundImg';
-import { PageContent } from '../PageContent';
+import Image from "next/image";
+import type { FC } from "react";
 
-type Props = {
+import { eventsApi } from "@/api/events.api";
+import type { FetchEvent } from "@/api/events.api";
+import { DateRangeText } from "@/components/DateRangeText";
+import { MarkdownText } from "@/components/MarkdownText";
+import { ProseContent } from "@/components/ProseContent";
+import { useFragment } from "@/gql/fragment-masking";
+import { getStrapiMedia } from "@/lib/strapi";
+
+import { PageBackgroundImg } from "../PageBackgroundImg";
+import { PageContent } from "../PageContent";
+
+interface Props {
   event: FetchEvent;
-};
+}
 
 export const EventDetail: FC<Props> = (props) => {
   const event = useFragment(eventsApi.fullEventFragment, props.event);
@@ -20,9 +23,9 @@ export const EventDetail: FC<Props> = (props) => {
   }
 
   return (
-    <div className={'flex flex-1'}>
-      <PageBackgroundImg url={getStrapiMedia(event.cover) ?? ''} />
-      <PageContent className={'z-10'} title={'Event'}>
+    <div className="flex flex-1">
+      <PageBackgroundImg url={getStrapiMedia(event.cover) ?? ""} />
+      <PageContent className="z-10" title="Event">
         <ProseContent>
           <div>
             <h1>{event.displayTitle ?? event.title}</h1>
@@ -35,21 +38,21 @@ export const EventDetail: FC<Props> = (props) => {
               className="text-indigo-600 first-letter:capitalize"
             />
           </div>
-          <div className={'description'}>
+          <div>
             {event.cover && (
               <Image
-                className={'object-cover'}
+                className="object-cover"
                 alt="Photo retraite"
                 width={1200}
                 priority={true}
                 height={900}
                 style={{
-                  objectFit: 'cover',
+                  objectFit: "cover",
                 }}
-                src={getStrapiMedia(event.cover) ?? ''}
+                src={getStrapiMedia(event.cover) ?? ""}
               />
             )}
-            <MarkdownText text={event.description ?? ''} />
+            <MarkdownText text={event.description ?? ""} />
           </div>
         </ProseContent>
       </PageContent>
