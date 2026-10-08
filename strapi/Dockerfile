@@ -1,18 +1,12 @@
 # syntax=docker/dockerfile:1
-
-ARG NODE_VERSION=24.21
-# Same debian release as the oven/bun image, so native modules installed in the
-# node stages match the runtime glibc
-ARG DEBIAN_RELEASE=trixie
-# Runtime only: dependencies are installed and the admin built with node
 ARG BUN_VERSION=1.4.2
 
 #############################################################
 # Stage 1 - Production deps installation                    #
 #############################################################
 
-FROM node:${NODE_VERSION}-${DEBIAN_RELEASE} AS deps
-RUN corepack enable
+FROM oven/bun:${BUN_VERSION}-slim AS deps
+RUN bun install corepack -g && corepack enable
 
 WORKDIR /app
 
@@ -30,7 +24,7 @@ COPY --link ./package.json ./yarn.lock ./.yarnrc.yml ./
 #   it is recreated on first use.
 RUN --mount=type=cache,target=/var/cache/yarn,sharing=locked \
     YARN_CACHE_FOLDER=/var/cache/yarn \
-    yarn workspaces focus --production \
+    yarn install --frozen-lockfile \
     && find node_modules -type f \( -name '*.map' -o -iname '*.md' \) -delete \
     && rm -rf /root/.cache/swc-native-0
 
@@ -57,9 +51,6 @@ RUN ./node_modules/.bin/strapi build
 # Stage 3 - Runtime deps                                    #
 #############################################################
 
-# Type declarations are only needed to build or generate types (~80MB), not by
-# `strapi start`. Removed in a separate stage so the build keeps them, the
-# runner only copies the resulting files.
 FROM deps AS prod-deps
 RUN find node_modules -type f \( -name '*.d.ts' -o -name '*.d.mts' -o -name '*.d.cts' \) -delete
 
@@ -67,9 +58,6 @@ RUN find node_modules -type f \( -name '*.d.ts' -o -name '*.d.mts' -o -name '*.d
 # Stage 4 - Run final / make runnable image ready           #
 #############################################################
 
-# Strapi runs on bun (debian slim, includes bash and tzdata). Native modules
-# load from their prebuilds: better-sqlite3 13 (N-API, earlier versions are not
-# supported by bun) and sharp.
 FROM oven/bun:${BUN_VERSION}-slim AS runner
 ENV TZ=Europe/Brussels
 ENV NODE_ENV=production
@@ -95,4 +83,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
 # Production mode: the content-type builder is disabled, content types are
 # edited locally with `yarn develop` and deployed with the image.
 # start-bun: bun --bun run strapi start
-CMD ["bun", "run", "start-bun"]
+CMD ["bun", "--bun", "run", "strapi", "start"]

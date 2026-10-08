@@ -166,7 +166,7 @@ const main = async () => {
   );
 
   log(`Restarting ${SERVICE}`);
-  await remoteInherit(`cd '${config.dir}' && docker compose up -d --no-build ${SERVICE}`);
+  await remoteInherit(`cd '${config.dir}' && docker compose up -d --no-build --renew-anon-volumes ${SERVICE}`);
 
   log(`Waiting for ${SERVICE} to be healthy`);
   await waitForHealthy(remote);

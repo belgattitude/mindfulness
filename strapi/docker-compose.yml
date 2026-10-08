@@ -33,7 +33,8 @@ services:
       # to prevent platform/ownership issues between host and container
       #- mindfulness-strapi-vlm-build:/app/build
       #- mindfulness-strapi-vlm-cache:/app/.cache
-      - /app/node_modules
+      # No /app/node_modules volume: it would keep the node_modules of the first
+      # deployed image (ie: musl binaries) over the ones of newer images
     ports:
       - '1337:1337'
     networks:

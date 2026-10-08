@@ -26,4 +26,7 @@ sqlite
 data
 public/uploads
 
+# Local backups (yarn backup:*), contain the database and secrets
+backup
+
 *.log

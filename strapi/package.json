@@ -31,6 +31,7 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router-dom": "^6.0.0",
+    "sharp": "0.35.5",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
@@ -44,6 +45,9 @@
     "better-sqlite3": {
       "built": false
     }
+  },
+  "resolutions": {
+    "sharp": "0.35.5"
   },
   "author": {
     "name": "Sébastien Vanvelthem"
