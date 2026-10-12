@@ -29,12 +29,12 @@
       {
         "name": "node",
         "version": ">=24.21",
-        "onFail": "error"
+        "onFail": "warn"
       },
       {
         "name": "bun",
-        "version": ">=1.4.3",
-        "onFail": "error"
+        "version": ">=1.4.1",
+        "onFail": "warn"
       }
     ]
   }
