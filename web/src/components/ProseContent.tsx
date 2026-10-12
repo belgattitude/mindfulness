@@ -21,9 +21,13 @@ export const ProseContent: FC<Props> = (props) => {
       className={cn(
         [
           "typeset max-w-full text-lg leading-8 text-neutral-700",
-          // Headings as the site ones: green, not bold
-          "[&_:is(h1,h2,h3,h4)]:text-title-color-800 [&_:is(h1,h2,h3,h4)]:font-normal",
-          "[&_h1]:mt-6 [&_h1]:mb-1 [&_h1]:text-3xl lg:[&_h1]:text-4xl",
+          // Headings as the site ones (globals.css heading-*): h1 and h2 in
+          // the soft serif, h3 and h4 in the sans serif
+          "[&_:is(h1,h2,h3,h4)]:text-title-color-800",
+          "[&_:is(h1,h2)]:font-display [&_:is(h1,h2)]:leading-tight [&_:is(h1,h2)]:font-medium",
+          "[&_h1]:mt-8 [&_h1]:mb-1 [&_h1]:text-[2rem] md:[&_h1]:text-4xl",
+          "[&_h2]:text-[1.75rem] md:[&_h2]:text-[2rem]",
+          "[&_:is(h3,h4)]:font-medium",
           "[&_img]:my-[2em] [&_img]:rounded-none",
           "[&_a]:text-title-color-700 [&_a:hover]:text-title-color-800",
           "[&_li]:pl-0 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:p-0",

@@ -218,11 +218,9 @@ export const EventDetail: FC<Props> = (props) => {
 
         <header className="mt-6 flex flex-col gap-3">
           <EventTags eventType={event.eventType} status={status} />
-          <h1 className="text-title-color-800 text-3xl leading-tight font-normal lg:text-4xl">
-            {event.displayTitle ?? event.title}
-          </h1>
+          <h1 className="heading-page">{event.displayTitle ?? event.title}</h1>
           {summary !== null && (
-            <p className="max-w-3xl text-lg leading-8 text-neutral-600">
+            <p className="max-w-3xl text-lg leading-8 text-neutral-700">
               {summary}
             </p>
           )}
@@ -251,7 +249,7 @@ export const EventDetail: FC<Props> = (props) => {
             <EventInfoPanel event={event} status={status} />
           </aside>
 
-          <ProseContent className="lg:col-start-1 lg:row-start-1 [&_h1]:text-2xl lg:[&_h1]:text-2xl [&_h2]:text-xl [&_h2]:font-normal">
+          <ProseContent className="lg:col-start-1 lg:row-start-1">
             <BlocksText content={event.description} />
           </ProseContent>
         </div>

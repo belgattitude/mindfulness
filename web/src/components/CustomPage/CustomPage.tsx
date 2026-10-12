@@ -39,13 +39,13 @@ export const CustomPage: FC<Props> = (props) => {
       {cover !== null && <PageBackgroundImg url={cover} />}
       <PageContent eyebrow={{ label: "Mes activités" }}>
         {/* The introduction starts with the page title (an h1) */}
-        <ProseContent className="[&_h1]:text-title-color-800 max-w-3xl [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:leading-tight lg:[&_h1]:text-4xl">
+        <ProseContent className="max-w-3xl [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-[2.25rem] [&_h1]:leading-[1.1] [&_h1]:text-balance md:[&_h1]:text-5xl">
           <BlocksText content={page.introduction} />
         </ProseContent>
 
         {programmes.length > 0 && (
           <section className="mt-12 flex flex-col gap-5">
-            <h2 className="text-title-color-800 text-2xl font-light">
+            <h2 className="heading-section">
               {programmes.length === 1
                 ? "Programme et cycle"
                 : "Programmes et cycles"}

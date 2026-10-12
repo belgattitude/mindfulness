@@ -62,9 +62,7 @@ const InspiringLinks: FC<{ links: string[] }> = (props) => {
   const { links } = props;
   return (
     <section className="border-brand-color-200 mt-12 border-t pt-10">
-      <h2 className="text-title-color-800 text-2xl font-light">
-        Liens inspirants
-      </h2>
+      <h2 className="heading-section">Liens inspirants</h2>
       <p className="mt-1 text-sm text-neutral-600">
         Des lieux et des communautés qui nourrissent ma pratique.
       </p>
@@ -115,10 +113,8 @@ export const AboutPageContent: FC = () => {
           />
         </div>
         <div className="flex flex-col gap-3">
-          <h1 className="text-title-color-800 text-3xl leading-tight font-normal lg:text-4xl">
-            Sandrine Rauter
-          </h1>
-          <p className="text-title-color-600 text-lg italic">
+          <h1 className="heading-page">Sandrine Rauter</h1>
+          <p className="text-tagline">
             {data.data?.summary ?? sandrineTagline}
           </p>
           <div className="mt-2 flex flex-wrap gap-3">
@@ -140,9 +136,7 @@ export const AboutPageContent: FC = () => {
       </header>
 
       <section className="mt-10 md:mt-12">
-        <h2 className="text-title-color-800 text-2xl font-light">
-          Mon parcours
-        </h2>
+        <h2 className="heading-section">Mon parcours</h2>
         {/* A readable line length, the card is wide on desktop */}
         <ProseContent className="mt-4 max-w-prose [&_p:first-child]:mt-0">
           <BlocksText content={career} />
