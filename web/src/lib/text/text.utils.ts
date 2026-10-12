@@ -16,17 +16,38 @@ export const isRedundantSummary = (
   );
 };
 
+/** A strapi "blocks" node, only what the plain text needs */
+interface BlocksNode {
+  type: string;
+  text?: string;
+  children?: BlocksNode[];
+}
+
+const getNodeText = (node: BlocksNode): string =>
+  node.type === "text"
+    ? (node.text ?? "")
+    : (node.children ?? [])
+        .map(getNodeText)
+        .join(node.type === "list" ? "\n" : "");
+
 /**
- * Plain text excerpt of a markdown text, for meta descriptions (link previews):
- * markdown syntax removed, cut on a word around maxLength.
+ * Plain text of a strapi "blocks" rich text field (typed unknown by the
+ * openapi spec), one paragraph per block: images are dropped.
  */
-export const getTextExcerpt = (markdown: string, maxLength = 160): string => {
-  const text = markdown
-    .replaceAll(/!\[[^\]]*\]\([^)]*\)/gu, "")
-    .replaceAll(/\[(?<label>[^\]]*)\]\([^)]*\)/gu, "$<label>")
-    .replaceAll(/[#>*_`~]+/gu, "")
-    .replaceAll(/\s+/gu, " ")
-    .trim();
+export const getBlocksText = (blocks: unknown): string =>
+  Array.isArray(blocks)
+    ? (blocks as BlocksNode[])
+        .map(getNodeText)
+        .filter((text) => text.trim() !== "")
+        .join("\n\n")
+    : "";
+
+/**
+ * Plain text excerpt, for meta descriptions (link previews): whitespace
+ * collapsed, cut on a word around maxLength.
+ */
+export const getTextExcerpt = (value: string, maxLength = 160): string => {
+  const text = value.replaceAll(/\s+/gu, " ").trim();
   if (text.length <= maxLength) {
     return text;
   }

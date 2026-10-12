@@ -83,6 +83,25 @@ const unsupported = (type: string, line?: number): never => {
   );
 };
 
+/** Same rule as the strapi blocks validator: relative or one of these protocols */
+const LINK_PROTOCOLS = new Set(['http:', 'https:', 'ftp:', 'mailto:', 'tel:']);
+const isValidLink = (url: string) => {
+  const absolute = url.startsWith('/') ? `https://localhost${url}` : url;
+  return URL.canParse(absolute) && LINK_PROTOCOLS.has(new URL(absolute).protocol);
+};
+
+/**
+ * The blocks validator rejects an invalid url, the link could not be saved
+ * again from the admin. A placeholder url ("[www.site.org](link)") is
+ * replaced by the link text when it is an url.
+ */
+const toLinkUrl = (url: string, text: string, line?: number): string => {
+  if (isValidLink(url)) return url;
+  const fromText = text.trim().replace(/^www\./u, 'https://www.');
+  if (/^https?:\/\//u.test(fromText) && isValidLink(fromText)) return fromText;
+  throw new Error(`Invalid link url "${url}"${line ? ` at line ${line}` : ''}, convert it by hand`);
+};
+
 const toInline = (nodes: PhrasingContent[], modifiers: Modifiers = {}): InlineNode[] =>
   nodes.flatMap((node): InlineNode[] => {
     switch (node.type) {
@@ -102,7 +121,8 @@ const toInline = (nodes: PhrasingContent[], modifiers: Modifiers = {}): InlineNo
         const children = toInline(node.children, modifiers).filter(
           (child): child is TextNode => child.type === 'text'
         );
-        return [{ type: 'link', url: node.url, children: children.length > 0 ? children : [emptyText()] }];
+        const url = toLinkUrl(node.url, children.map((child) => child.text).join(''), node.position?.start.line);
+        return [{ type: 'link', url, children: children.length > 0 ? children : [emptyText()] }];
       }
       default:
         return unsupported(node.type, node.position?.start.line);

@@ -6,8 +6,7 @@
  */
 
 export type HomeRequestData = {
-  introduction?: string;
-  content?: unknown;
+  introduction?: unknown;
   locale?: string;
   localizations?: (number | string)[];
 };

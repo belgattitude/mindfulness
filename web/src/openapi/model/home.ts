@@ -10,8 +10,7 @@ import type { HomeUpdatedBy } from './homeUpdatedBy';
 export interface Home {
   id?: string | number;
   documentId?: string;
-  introduction?: string;
-  content?: unknown;
+  introduction?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

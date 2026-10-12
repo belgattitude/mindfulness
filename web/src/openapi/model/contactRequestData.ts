@@ -9,10 +9,11 @@ export type ContactRequestData = {
   title?: string;
   summary?: string;
   cover?: number | string;
-  description?: string;
+  description?: unknown;
   phone?: string;
   email?: string;
-  content?: unknown;
+  whatsapp?: boolean;
+  linkedin?: string;
   locale?: string;
   localizations?: (number | string)[];
 };

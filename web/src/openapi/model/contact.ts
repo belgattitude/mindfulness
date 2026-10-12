@@ -14,10 +14,11 @@ export interface Contact {
   title?: string;
   summary?: string;
   cover?: ContactCover;
-  description?: string;
+  description?: unknown;
   phone?: string;
   email?: string;
-  content?: unknown;
+  whatsapp?: boolean;
+  linkedin?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

@@ -1,13 +1,18 @@
 import Link from "next/link";
 import type { FC } from "react";
 
+import type { ContactDetails } from "@/components/Contact/contact.utils";
+import { LinkedinIcon } from "@/components/Contact/ContactIcons";
 import { siteConfig } from "@/config/site.config";
 import type { MainNavLinks } from "@/config/site.config";
 
 import { MainLogo } from "../Logo/MainLogo";
+import { EmailPopover, PhonePopover } from "./ContactPopovers";
 
 interface Props {
   mainNavLinks: MainNavLinks;
+  /** From strapi, null when it could not be loaded */
+  contact: ContactDetails | null;
 }
 
 interface FooterLink {
@@ -17,6 +22,9 @@ interface FooterLink {
 
 // Evaluated once per server start, good enough for the copyright
 const copyrightYear = new Date().getFullYear();
+
+const iconButtonClassName =
+  "text-nav-title flex size-9 cursor-pointer items-center justify-center rounded-full bg-white/70 shadow-sm outline-green-500 transition-colors hover:bg-white";
 
 const linkClassName =
   "text-neutral-700 decoration-nav-title/40 underline-offset-4 transition-colors outline-green-500 hover:text-nav-title hover:underline";
@@ -42,7 +50,7 @@ const FooterColumn: FC<{ title: string; links: FooterLink[] }> = (props) => {
 };
 
 export const MainFooter: FC<Props> = (props) => {
-  const { mainNavLinks } = props;
+  const { mainNavLinks, contact } = props;
   const byGroup = (group: MainNavLinks[number]["footerGroup"]) =>
     mainNavLinks.filter((link) => link.footerGroup === group);
 
@@ -84,12 +92,39 @@ export const MainFooter: FC<Props> = (props) => {
               Mindfulness, yoga et dialogue conscient. En personne et en ligne,
               en France et en Belgique.
             </p>
-            <Link
-              href="/contact"
-              className="text-nav-title rounded-full bg-white/70 px-5 py-2 text-sm font-medium shadow-sm outline-green-500 transition-colors hover:bg-white"
-            >
-              Me contacter
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/contact"
+                className="text-nav-title rounded-full bg-white/70 px-5 py-2 text-sm font-medium shadow-sm outline-green-500 transition-colors hover:bg-white"
+              >
+                Me contacter
+              </Link>
+              {contact?.linkedin && (
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn de Sandrine Rauter"
+                  title="LinkedIn"
+                  className={iconButtonClassName}
+                >
+                  <LinkedinIcon className="size-4" />
+                </a>
+              )}
+              {contact?.phone && (
+                <PhonePopover
+                  phone={contact.phone}
+                  whatsapp={contact.whatsapp ?? false}
+                  className={iconButtonClassName}
+                />
+              )}
+              {contact?.email && (
+                <EmailPopover
+                  email={contact.email}
+                  className={iconButtonClassName}
+                />
+              )}
+            </div>
           </div>
 
           <FooterColumn title="Activités" links={byGroup("activities")} />

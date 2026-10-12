@@ -11,7 +11,7 @@ import type { AboutUpdatedBy } from './aboutUpdatedBy';
 export interface About {
   id?: string | number;
   documentId?: string;
-  description?: string;
+  description?: unknown;
   cover?: AboutCover;
   title: string;
   summary?: string;

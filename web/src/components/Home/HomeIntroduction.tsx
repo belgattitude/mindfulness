@@ -2,8 +2,8 @@
 
 import type { FC } from "react";
 
+import { BlocksText } from "@/components/BlocksText";
 import { ProseContent } from "@/components/ProseContent";
-import { RichText } from "@/components/RichText";
 import { useGetHome } from "@/openapi/home/home";
 
 /** The home introduction, prefetched by the server component */
@@ -23,10 +23,7 @@ export const HomeIntroduction: FC = () => {
   return (
     <ProseContent className="md:col-span-8 md:px-0">
       <div className="text-title-color-800 [&>*>:first-child]:mt-0">
-        <RichText
-          blocks={data.data?.content}
-          markdown={data.data?.introduction}
-        />
+        <BlocksText content={data.data?.introduction} />
       </div>
     </ProseContent>
   );

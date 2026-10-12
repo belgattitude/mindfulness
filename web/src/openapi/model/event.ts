@@ -19,7 +19,7 @@ export interface Event {
   summary?: string;
   cover: EventCover;
   universe?: EventUniverse;
-  description: string;
+  description: unknown;
   startAt: string;
   endAt: string;
   flyer?: EventFlyer;

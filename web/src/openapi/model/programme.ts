@@ -15,7 +15,7 @@ export interface Programme {
   documentId?: string;
   title?: string;
   cover: ProgrammeCover;
-  description?: string;
+  description?: unknown;
   universe?: ProgrammeUniverse;
   slug?: string;
   events?: Event[];

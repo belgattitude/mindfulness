@@ -12,12 +12,16 @@ import Image from "next/image";
 import Link from "next/link";
 import type { FC, ReactNode } from "react";
 
+import { BlocksText } from "@/components/BlocksText";
 import { DateRangeText } from "@/components/DateRangeText";
-import { MarkdownText } from "@/components/MarkdownText";
 import { ProseContent } from "@/components/ProseContent";
 import { ShareButton } from "@/components/Share/ShareButton";
 import { getStrapiMedia } from "@/lib/strapi";
-import { getTextExcerpt, isRedundantSummary } from "@/lib/text/text.utils";
+import {
+  getBlocksText,
+  getTextExcerpt,
+  isRedundantSummary,
+} from "@/lib/text/text.utils";
 import { useGetEvents } from "@/openapi/event/event";
 import type { Event, GetEventsParams } from "@/openapi/model";
 
@@ -149,7 +153,9 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
         )}
         <ShareButton
           title={event.displayTitle ?? event.title}
-          text={event.summary || getTextExcerpt(event.description ?? "")}
+          text={
+            event.summary || getTextExcerpt(getBlocksText(event.description))
+          }
         />
       </div>
     </div>
@@ -183,7 +189,7 @@ export const EventDetail: FC<Props> = (props) => {
     event.summary &&
     !isRedundantSummary(event.summary, {
       title: event.displayTitle ?? event.title,
-      description: event.description ?? "",
+      description: getBlocksText(event.description),
     })
       ? event.summary
       : null;
@@ -236,7 +242,7 @@ export const EventDetail: FC<Props> = (props) => {
           </aside>
 
           <ProseContent className="lg:col-start-1 lg:row-start-1 [&_h1]:text-2xl lg:[&_h1]:text-2xl [&_h2]:text-xl [&_h2]:font-normal">
-            <MarkdownText text={event.description ?? ""} />
+            <BlocksText content={event.description} />
           </ProseContent>
         </div>
       </PageContent>

@@ -11,7 +11,7 @@ import { getProgrammeParams } from "@/api/programmes.rest";
 import { ProgrammePage } from "@/components/Programme/ProgrammePage";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getStrapiMedia } from "@/lib/strapi";
-import { getTextExcerpt } from "@/lib/text/text.utils";
+import { getBlocksText, getTextExcerpt } from "@/lib/text/text.utils";
 import {
   getGetProgrammesQueryOptions,
   getProgrammes,
@@ -37,7 +37,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   }
   const title = programme.title ?? "";
   const description = getTextExcerpt(
-    programme.summary || programme.description || ""
+    programme.summary || getBlocksText(programme.description)
   );
   const cover = getStrapiMedia(programme.cover);
   return {

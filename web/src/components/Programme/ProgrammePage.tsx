@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 
+import { BlocksText } from "@/components/BlocksText";
 import { EventCard } from "@/components/Event/EventCard";
 import { getEventStatus } from "@/components/Event/EventMeta";
 import {
@@ -12,12 +13,15 @@ import {
   getNextEvents,
   getPastEvents,
 } from "@/components/Event/EventMiniItem";
-import { MarkdownText } from "@/components/MarkdownText";
 import { PageContent } from "@/components/PageContent";
 import { ProseContent } from "@/components/ProseContent";
 import { ShareButton } from "@/components/Share/ShareButton";
 import { getStrapiMedia } from "@/lib/strapi";
-import { getTextExcerpt, isRedundantSummary } from "@/lib/text/text.utils";
+import {
+  getBlocksText,
+  getTextExcerpt,
+  isRedundantSummary,
+} from "@/lib/text/text.utils";
 import type { Event, GetProgrammesParams, Programme } from "@/openapi/model";
 import { useGetProgrammes } from "@/openapi/programme/programme";
 
@@ -161,7 +165,7 @@ export const ProgrammePage: FC<Props> = (props) => {
   }
 
   const cover = getStrapiMedia(programme.cover);
-  const description = programme.description ?? "";
+  const description = getBlocksText(programme.description);
   const summary =
     programme.summary &&
     !isRedundantSummary(programme.summary, {
@@ -224,7 +228,7 @@ export const ProgrammePage: FC<Props> = (props) => {
         </aside>
         <div className="flex flex-col gap-12 lg:col-start-1 lg:row-start-1">
           <ProseContent className="[&_h1]:text-2xl lg:[&_h1]:text-2xl [&_h2]:text-xl [&_h2]:font-normal">
-            <MarkdownText text={description} />
+            <BlocksText content={programme.description} />
           </ProseContent>
           <ProgrammeDates
             nextEvents={nextEvents}

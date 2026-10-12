@@ -20,7 +20,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-10-08T15:18:37.261Z"
+    "x-generation-date": "2026-10-12T20:10:19.565Z"
   },
   "servers": [
     {
@@ -4565,9 +4565,7 @@
             ],
             "type": "object",
             "properties": {
-              "description": {
-                "type": "string"
-              },
+              "description": {},
               "cover": {
                 "oneOf": [
                   {
@@ -4660,9 +4658,7 @@
           "documentId": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
-          },
+          "description": {},
           "cover": {
             "type": "object",
             "properties": {
@@ -4937,13 +4933,18 @@
                 ],
                 "example": "string or id"
               },
-              "description": {
-                "type": "string"
-              },
+              "description": {},
               "phone": {
                 "type": "string"
               },
               "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "whatsapp": {
+                "type": "boolean"
+              },
+              "linkedin": {
                 "type": "string"
               },
               "locale": {
@@ -5196,13 +5197,18 @@
               }
             }
           },
-          "description": {
-            "type": "string"
-          },
+          "description": {},
           "phone": {
             "type": "string"
           },
           "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "whatsapp": {
+            "type": "boolean"
+          },
+          "linkedin": {
             "type": "string"
           },
           "createdAt": {
@@ -5319,9 +5325,7 @@
                   "dialogue"
                 ]
               },
-              "description": {
-                "type": "string"
-              },
+              "description": {},
               "startAt": {
                 "type": "string",
                 "format": "date-time"
@@ -5649,9 +5653,7 @@
               "dialogue"
             ]
           },
-          "description": {
-            "type": "string"
-          },
+          "description": {},
           "startAt": {
             "type": "string",
             "format": "date-time"
@@ -5943,9 +5945,7 @@
           "data": {
             "type": "object",
             "properties": {
-              "introduction": {
-                "type": "string"
-              },
+              "introduction": {},
               "locale": {
                 "type": "string"
               },
@@ -6018,9 +6018,7 @@
           "documentId": {
             "type": "string"
           },
-          "introduction": {
-            "type": "string"
-          },
+          "introduction": {},
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -6124,9 +6122,7 @@
               "summary": {
                 "type": "string"
               },
-              "introduction": {
-                "type": "string"
-              },
+              "introduction": {},
               "cover": {
                 "oneOf": [
                   {
@@ -6229,9 +6225,7 @@
           "summary": {
             "type": "string"
           },
-          "introduction": {
-            "type": "string"
-          },
+          "introduction": {},
           "cover": {
             "type": "object",
             "properties": {
@@ -6503,9 +6497,7 @@
                 ],
                 "example": "string or id"
               },
-              "description": {
-                "type": "string"
-              },
+              "description": {},
               "universe": {
                 "type": "string",
                 "enum": [
@@ -6784,9 +6776,7 @@
               }
             }
           },
-          "description": {
-            "type": "string"
-          },
+          "description": {},
           "universe": {
             "type": "string",
             "enum": [

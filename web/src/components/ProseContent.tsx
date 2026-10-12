@@ -23,6 +23,9 @@ export const ProseContent: FC<Props> = (props) => {
           "[&_img]:my-[2em] [&_img]:rounded-none",
           "[&_a]:text-blue-600",
           "[&_li]:pl-0 [&_ul]:list-inside [&_ul]:list-disc [&_ul]:p-0",
+          // Quotes in the soft serif, as the home quote (AboutCard): it is
+          // smaller than the body font at the same size
+          "[&_blockquote]:font-display [&_blockquote]:text-title-color-700 [&_blockquote]:text-[1.3em] [&_blockquote]:leading-snug [&_blockquote]:italic",
         ].join(" "),
         className
       )}

@@ -2,7 +2,7 @@
 
 import type { FC } from "react";
 
-import { MarkdownText } from "@/components/MarkdownText";
+import { BlocksText } from "@/components/BlocksText";
 import { PageBackgroundImg } from "@/components/PageBackgroundImg";
 import { PageContent } from "@/components/PageContent";
 import { ProgrammeCard } from "@/components/Programme/ProgrammeCard";
@@ -38,9 +38,9 @@ export const CustomPage: FC<Props> = (props) => {
     <div>
       {cover !== null && <PageBackgroundImg url={cover} />}
       <PageContent title={["Mes activités", page.title]}>
-        {/* The introduction starts with the page title (markdown h1) */}
+        {/* The introduction starts with the page title (an h1) */}
         <ProseContent className="[&_h1]:text-title-color-800 max-w-3xl [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:leading-tight lg:[&_h1]:text-4xl">
-          <MarkdownText text={page.introduction ?? ""} />
+          <BlocksText content={page.introduction} />
         </ProseContent>
 
         {programmes.length > 0 && (
