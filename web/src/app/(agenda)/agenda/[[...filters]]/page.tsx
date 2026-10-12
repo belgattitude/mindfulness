@@ -38,10 +38,13 @@ const pastLimit = 10;
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const filters = parseAgendaSegments(params.filters ?? []);
-  const filtersTitle = filters ? getAgendaFiltersTitle(filters) : "";
+  if (filters === null) {
+    return { title: "Agenda introuvable" };
+  }
+  const filtersTitle = getAgendaFiltersTitle(filters);
   return {
     title: filtersTitle ? `Agenda · ${filtersTitle}` : "Agenda",
-    ...(filters ? { alternates: { canonical: getAgendaUrl(filters) } } : {}),
+    alternates: { canonical: getAgendaUrl(filters) },
   };
 };
 

@@ -18,34 +18,22 @@
  * Usage: pnpm pull:prod [--yes]
  */
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import { rename, rm } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { DatabaseSync } from 'node:sqlite';
 import { fileURLToPath } from 'node:url';
-import dotenvx from '@dotenvx/dotenvx';
 import { execa } from 'execa';
 import { loadEnv, requireEnv } from './lib/env.mts';
 import { exitWithError } from './lib/errors.mts';
+import { getLocalDatabasePath } from './lib/local-database.mts';
 import { getRemoteSsh } from './lib/remote.mts';
 import { createSnapshot, getTimestamp, removeSnapshot } from './lib/snapshot.mts';
 
 const LOCAL_UPLOADS_DIR = 'public/uploads';
 /** sqlite companion files, stale ones would be applied to the new database */
 const SQLITE_SUFFIXES = ['-wal', '-shm', '-journal'];
-
-/** DATABASE_FILENAME from the environment or the local .env (as config/database.js) */
-const getLocalDatabasePath = (): string => {
-  const fromEnvFile = existsSync('.env')
-    ? dotenvx.parse(readFileSync('.env'), { processEnv: {} }).DATABASE_FILENAME
-    : undefined;
-  const filename = process.env.DATABASE_FILENAME?.trim() || fromEnvFile?.trim();
-  if (!filename) {
-    throw new Error('Missing DATABASE_FILENAME in .env, see .env.example');
-  }
-  return resolve(filename);
-};
 
 type LocalProcess = { pid: string; command: string };
 

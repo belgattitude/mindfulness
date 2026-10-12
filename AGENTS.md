@@ -52,6 +52,7 @@ From the root (recursive): `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm bui
 | `deploy`              | builds and deploys the docker image over ssh: **production, ask first**                |
 | `backup:db`, `backup:env` | copies the server database / secrets into `strapi/backup/`                          |
 | `pull:prod`           | replaces the local database and uploads with the server ones, without backup: **ask first** |
+| `push:prod`           | replaces the server database with the local one (backup kept on the server, typed `yes` confirmation): **production, ask first** |
 
 The server scripts read `strapi/.env.deploy`, see `strapi/README.md`.
 

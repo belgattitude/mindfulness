@@ -21,6 +21,7 @@
     "backup:env": "node scripts/backup.mts env",
     "copy-remote-uploads": "node scripts/copy-remote-uploads.mts",
     "pull:prod": "node scripts/pull-prod.mts",
+    "push:prod": "node scripts/push-prod.mts",
     "migrate:blocks": "node scripts/migrate-markdown-to-blocks.mts",
     "typecheck": "tsc -p scripts"
   },

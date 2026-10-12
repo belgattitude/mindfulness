@@ -117,10 +117,7 @@ export const ContactPageContent: FC = () => {
           </p>
         )}
         <ProseContent className="[&_p:first-child]:mt-0">
-          <BlocksText
-            className="text-title-color-800"
-            content={contact.description}
-          />
+          <BlocksText content={contact.description} />
         </ProseContent>
       </header>
       <ContactCards contact={contact} />

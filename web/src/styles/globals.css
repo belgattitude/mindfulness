@@ -39,6 +39,16 @@
   }
 }
 
+/* The mist of the 404 forest (ForestIllustration) */
+@keyframes mist-drift {
+  from {
+    transform: translateX(-36px);
+  }
+  to {
+    transform: translateX(36px);
+  }
+}
+
 @utility radial-gradient {
   background: #ffffff;
   background: radial-gradient(circle at center, #e1f1e6 5%, #b8d6c7 45%);

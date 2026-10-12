@@ -145,7 +145,7 @@ export const AboutPageContent: FC = () => {
         </h2>
         {/* A readable line length, the card is wide on desktop */}
         <ProseContent className="mt-4 max-w-prose [&_p:first-child]:mt-0">
-          <BlocksText className="text-title-color-800" content={career} />
+          <BlocksText content={career} />
         </ProseContent>
       </section>
 

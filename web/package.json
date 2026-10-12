@@ -69,7 +69,6 @@
     "@storybook/addon-themes": "10.6.1",
     "@storybook/nextjs-vite": "10.6.1",
     "@svgr/webpack": "8.1.0",
-    "@tailwindcss/forms": "0.5.11",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.6.5",
     "@types/nodemailer": "8.0.2",

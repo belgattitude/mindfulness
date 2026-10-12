@@ -32,7 +32,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const response = await getEvents(getEventParams({ slug: eventSlug }));
   const event = response.data?.[0];
   if (!event) {
-    return {};
+    return { title: "Événement introuvable" };
   }
   const title = event.displayTitle ?? event.title;
   const dates = getDateRangeStr({ startAt: event.startAt, endAt: event.endAt });

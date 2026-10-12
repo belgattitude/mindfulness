@@ -35,7 +35,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   );
   const programme = response.data?.[0];
   if (!programme) {
-    return {};
+    return { title: "Programme introuvable" };
   }
   const title = programme.title ?? "";
   const description = getTextExcerpt(

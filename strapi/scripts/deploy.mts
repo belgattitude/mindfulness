@@ -16,9 +16,9 @@
  */
 
 import { fileURLToPath } from 'node:url';
-import { setTimeout as sleep } from 'node:timers/promises';
 import { execa } from 'execa';
 import { loadEnv, requireEnv } from './lib/env.mts';
+import { waitForHealthy } from './lib/health.mts';
 import { exitWithError } from './lib/errors.mts';
 import { getRemoteSsh, type RemoteSsh } from './lib/remote.mts';
 
@@ -26,8 +26,6 @@ const IMAGE = 'mindfulness-strapi';
 const SERVICE = 'mindfulness-strapi';
 /** External network of docker-compose.yml, not created by docker compose */
 const NETWORK = 'cloud-net';
-const HEALTH_TIMEOUT_MS = 5 * 60_000;
-const HEALTH_POLL_MS = 5_000;
 /** Set by the Dockerfile, scopes the removal of untagged images to this app */
 const IMAGE_LABEL = 'app.mindfulness.image=strapi';
 const DEFAULT_KEEP_IMAGES = 3;
@@ -127,25 +125,6 @@ const getPlatform = async (remote: (command: string) => Promise<string>): Promis
   }
 };
 
-const waitForHealthy = async (remote: (command: string) => Promise<string>): Promise<void> => {
-  const deadline = Date.now() + HEALTH_TIMEOUT_MS;
-  let status = 'unknown';
-  while (Date.now() < deadline) {
-    status = await remote(`docker inspect --format '{{.State.Health.Status}}' ${SERVICE}`).catch(
-      () => 'unknown'
-    );
-    if (status === 'healthy') {
-      return;
-    }
-    if (status === 'unhealthy') {
-      break;
-    }
-    await sleep(HEALTH_POLL_MS);
-  }
-  const logs = await remote(`docker logs --tail 50 ${SERVICE} 2>&1`).catch(() => '');
-  throw new Error(`${SERVICE} is not healthy (status: ${status}), last logs:\n${logs}`);
-};
-
 /**
  * Removes the server images that are no longer useful for a rollback: keeps
  * latest, the deployed version and the last `keep` commit tags, removes
@@ -235,7 +214,7 @@ const main = async () => {
   await remoteInherit(`cd '${config.dir}' && docker compose up -d --no-build --renew-anon-volumes ${SERVICE}`);
 
   log(`Waiting for ${SERVICE} to be healthy`);
-  await waitForHealthy(remote);
+  await waitForHealthy(remote, SERVICE);
 
   // Only after a healthy deploy, so a failed one keeps every rollback target
   await removeOldImages(remote, version, config.keepImages);

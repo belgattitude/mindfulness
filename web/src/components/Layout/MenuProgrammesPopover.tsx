@@ -51,8 +51,29 @@ export const MenuProgrammesPopover: FC<Props> = (props) => {
         {children}
       </PreviewCard.Trigger>
       <PreviewCard.Portal>
-        <PreviewCard.Positioner side="bottom" sideOffset={6} className="z-50">
+        {/* Below the menu bar (the link is ~14px above its bottom), the
+            arrow on the green */}
+        <PreviewCard.Positioner side="bottom" sideOffset={24} className="z-50">
           <PreviewCard.Popup className="font-family-primary w-80 origin-(--transform-origin) rounded-2xl bg-white p-2 text-neutral-700 shadow-lg ring-1 ring-black/5 transition-[transform,opacity] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
+            {/* Points at the menu link, placed by base-ui */}
+            <PreviewCard.Arrow className="data-[side=bottom]:top-[-9px]">
+              <svg
+                width="20"
+                height="10"
+                viewBox="0 0 20 10"
+                aria-hidden="true"
+                className="block"
+              >
+                <path
+                  d="M0 10 9 1.4a1.4 1.4 0 0 1 2 0L20 10Z"
+                  className="fill-white"
+                />
+                <path
+                  d="M0 10 9 1.4a1.4 1.4 0 0 1 2 0L20 10"
+                  className="fill-none stroke-black/10"
+                />
+              </svg>
+            </PreviewCard.Arrow>
             <p className="text-title-color-600 px-3 pt-2 pb-1 text-xs font-medium tracking-widest uppercase">
               {programmes.length === 1 ? "Programme" : "Programmes"}
             </p>
