@@ -15,9 +15,6 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        runtime: ['node@24']
     defaults:
       run:
         shell: bash
@@ -25,12 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # pnpm version from devEngines.packageManager in the root package.json,
-      # then `pnpm install` of the workspace
-      - name: ⚙️ Install pnpm, Node.js and dependencies
+      # pnpm version from devEngines.packageManager and the runtimes (node
+      # and bun) from devEngines.runtime in the root package.json, then
+      # `pnpm install` of the workspace
+      - name: ⚙️ Install pnpm, Node.js, Bun and dependencies
         uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
         with:
-          runtime: ${{ matrix.runtime }}
           cache: true
           node-version-file: false
           require-lockfile: true

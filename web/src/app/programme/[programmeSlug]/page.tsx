@@ -11,7 +11,7 @@ import { getProgrammePagesParams } from "@/api/pages.rest";
 import { getProgrammeParams } from "@/api/programmes.rest";
 import { ProgrammePage } from "@/components/Programme/ProgrammePage";
 import { reactQueryConfig } from "@/config/react-query.config";
-import { getStrapiMedia } from "@/lib/strapi";
+import { getPageMetadata } from "@/lib/metadata/page-metadata";
 import { getBlocksText, getTextExcerpt } from "@/lib/text/text.utils";
 import { getGetPagesQueryOptions } from "@/openapi/page/page";
 import {
@@ -41,19 +41,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const description = getTextExcerpt(
     programme.summary || getBlocksText(programme.description)
   );
-  const cover = getStrapiMedia(programme.cover);
-  return {
-    alternates: { canonical: `/programme/${programmeSlug}` },
-    description,
-    openGraph: {
-      description,
-      images: cover === null ? [] : [{ url: cover }],
-      title,
-      type: "article",
-      url: `/programme/${programmeSlug}`,
-    },
+  return getPageMetadata({
     title,
-  };
+    description,
+    path: `/programme/${programmeSlug}`,
+    type: "article",
+    // The image is opengraph-image.tsx: the poster with the title
+    hasOwnImage: true,
+  });
 };
 
 const ProgrammeRoute = async (props: Props) => {

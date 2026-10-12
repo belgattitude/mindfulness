@@ -21,6 +21,7 @@ import {
 import { EventFilters } from "@/components/Event/EventFilters";
 import { PageContent } from "@/components/PageContent";
 import { reactQueryConfig } from "@/config/react-query.config";
+import { getPageMetadata } from "@/lib/metadata/page-metadata";
 import { getGetEventsQueryOptions } from "@/openapi/event/event";
 
 interface Props {
@@ -42,10 +43,11 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
     return { title: "Agenda introuvable" };
   }
   const filtersTitle = getAgendaFiltersTitle(filters);
-  return {
+  return getPageMetadata({
     title: filtersTitle ? `Agenda · ${filtersTitle}` : "Agenda",
-    alternates: { canonical: getAgendaUrl(filters) },
-  };
+    description: `Les prochaines dates${filtersTitle ? ` (${filtersTitle})` : ""} : stages et retraites, programmes et cycles, cours réguliers, en personne et en ligne.`,
+    path: getAgendaUrl(filters),
+  });
 };
 
 const AgendaRoute = async (props: Props) => {

@@ -5,10 +5,8 @@
   "version": "0.1.0",
   "description": "Mindfulness website",
   "scripts": {
-    "develop": "strapi develop",
-    "develop-bun": "bun --bun run strapi develop",
-    "start": "strapi start",
-    "start-bun": "bun --bun run strapi start",
+    "develop": "bun --bun run strapi develop",
+    "start": "bun --bun run strapi start",
     "build": "strapi build",
     "strapi": "strapi",
     "deps:check": "npx npm-check-updates@latest --configFileName .ncurc.yml",

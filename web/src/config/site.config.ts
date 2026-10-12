@@ -3,6 +3,8 @@ export interface SiteConfig {
   metadata: {
     siteTitle: string;
     siteDescription: string;
+    /** The author meta tag */
+    author: string;
   };
   mainNavLinks: {
     title: string;
@@ -49,8 +51,10 @@ export const siteConfig = {
     { title: "Contact", href: "/contact", footerGroup: "menu" },
   ],
   metadata: {
-    siteDescription: "",
+    siteDescription:
+      "Mindfulness, yoga et dialogue conscient avec Sandrine Rauter : cours, programmes, stages et retraites, en personne et en ligne, en Belgique et en France.",
     siteTitle: "Sandrine Rauter",
+    author: "Sandrine Rauter",
   },
   search: {
     eventTypes: [

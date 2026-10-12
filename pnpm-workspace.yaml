@@ -5,17 +5,27 @@ packages:
 nodeLinker: isolated
 packageImportMethod: auto
 savePrefix: ''
-# @todo enable when https://github.com/pnpm/pnpm/issues/16583 is fixed
+
+# uncomment the autodedupe and lockfile.includeResolutionSettings
+# when turbo repo prune supports the settings entry in pnpm lock
 #autoDedupe: true
-forceIgnoresPlatform: false
-ignoreCompatibilityDb: true
+#lockfile:
+#  includeResolutionSettings: true
 autoInstallPeers: false
 strictPeerDependencies: false
 resolvePeersFromWorkspaceRoot: true
 dedupePeers: true
+# This fixes most typescript errors because of missing peer @types/*
+addMissingPeerTypes: true
+
+forceIgnoresPlatform: false
+ignoreCompatibilityDb: true
+
+# Set it to true for deno
 preferSymlinkedExecutables: true
 resolutionMode: highest
 optimisticRepeatInstall: true
+
 trustPolicy: no-downgrade
 trustPolicyExcludePrune: true
 # Older releases published before the package adopted provenance / trusted
@@ -72,4 +82,13 @@ minimumReleaseAgeExclude:
   - vitest
   - zod
   - npm-check-updates@23.1.1
+  - '@vitest/mocker@5.0.4'
+  - '@vitest/spy@5.0.4'
 
+permissions:
+  ultracite:
+    skills: true
+
+skills:
+  dirs:
+    - .claude/skills

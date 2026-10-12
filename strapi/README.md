@@ -1,7 +1,7 @@
 ## Development
 
 ```bash
-pnpm develop     # strapi on http://localhost:1337/admin
+pnpm develop     # strapi (on bun) on http://localhost:1337/admin
 pnpm typecheck   # typecheck the scripts/ folder (typescript 7)
 ```
 
@@ -45,7 +45,7 @@ no registry), uploads `docker-compose.yml` to `DEPLOY_DIR`, creates the
 `cloud-net` network if missing, restarts strapi and waits for it to be healthy.
 The server `.env` is never deployed, it must exist in `DEPLOY_DIR`.
 
-The image runs strapi on [bun](https://bun.sh) in production mode (`pnpm start-bun`,
+The image runs strapi on [bun](https://bun.sh) in production mode (`bun --bun run strapi start`,
 admin built in the image with node): the content-type builder is disabled on the
 server, content types are edited locally with `pnpm develop` and deployed with
 the image.

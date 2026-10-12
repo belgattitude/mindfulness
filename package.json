@@ -24,6 +24,18 @@
       "name": "pnpm",
       "version": "12.12.1",
       "onFail": "warn"
-    }
+    },
+    "runtime": [
+      {
+        "name": "node",
+        "version": ">=24.21",
+        "onFail": "error"
+      },
+      {
+        "name": "bun",
+        "version": ">=1.4.3",
+        "onFail": "error"
+      }
+    ]
   }
 }
