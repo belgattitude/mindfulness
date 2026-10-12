@@ -9,7 +9,10 @@ import { getUpcomingEventsParams } from "@/api/events.rest";
 import { AboutCard } from "@/components/About/AboutCard";
 import { UpcomingEventsCard } from "@/components/Event/UpcomingEventsCard";
 import { HomeIntroduction } from "@/components/Home/HomeIntroduction";
-import { PageContent } from "@/components/PageContent";
+import {
+  PageContent,
+  pageContentBleedClassName,
+} from "@/components/PageContent";
 import { MyActivitiesCard } from "@/components/Sections/MyActivitiesCard";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getGetEventsQueryOptions } from "@/openapi/event/event";
@@ -30,9 +33,9 @@ const HomeRoute = async () => {
 
   return (
     <PageContent>
-      <AboutCard />
+      <AboutCard className={pageContentBleedClassName} />
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <div className="mt-10 grid gap-8 md:grid-cols-12">
+        <div className="mt-2 grid gap-8 md:grid-cols-12">
           <HomeIntroduction />
           <div className="md:col-span-4">
             <MyActivitiesCard className="md:sticky md:top-6" />

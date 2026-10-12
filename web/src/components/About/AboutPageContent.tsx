@@ -5,29 +5,47 @@ import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 
-import { MarkdownText } from "@/components/MarkdownText";
+import { BlocksText } from "@/components/BlocksText";
 import { ProseContent } from "@/components/ProseContent";
+import { getBlocksText } from "@/lib/text/text.utils";
 import { useGetAbout } from "@/openapi/about/about";
 
 import { sandrinePortrait, sandrineTagline } from "./sandrinePortrait";
 
+/** A blocks node, only what the split needs */
+interface BlocksNode {
+  type: string;
+  url?: string;
+  children?: BlocksNode[];
+}
+
 /** The "Liens inspirants" heading of the description, any level */
-const linksHeadingRegex = /^#{1,6}\s+liens inspirants\s*$/imu;
-const urlRegex = /https?:\/\/[^\s)>\]]+/gu;
+const isLinksHeading = (node: BlocksNode) =>
+  node.type === "heading" &&
+  /^\s*liens inspirants\s*$/iu.test(getBlocksText([node]));
+
+const getLinkUrls = (nodes: BlocksNode[]): string[] =>
+  nodes.flatMap((node) =>
+    node.type === "link" && node.url
+      ? [node.url]
+      : getLinkUrls(node.children ?? [])
+  );
 
 /**
  * The description ends with a list of inspiring links: they are shown as
- * cards, the text before as the career. Without the heading, all is text.
+ * cards, the blocks before as the career. Without the heading, all is text.
  */
-const splitDescription = (description: string) => {
-  const match = linksHeadingRegex.exec(description);
-  if (match === null) {
-    return { career: description, links: [] };
+const splitDescription = (description: unknown) => {
+  const blocks = Array.isArray(description)
+    ? (description as BlocksNode[])
+    : [];
+  const index = blocks.findIndex(isLinksHeading);
+  if (index === -1) {
+    return { career: blocks, links: [] };
   }
-  const linksText = description.slice(match.index + match[0].length);
   return {
-    career: description.slice(0, match.index).trim(),
-    links: [...new Set(linksText.match(urlRegex))],
+    career: blocks.slice(0, index),
+    links: [...new Set(getLinkUrls(blocks.slice(index + 1)))],
   };
 };
 
@@ -82,7 +100,7 @@ export const AboutPageContent: FC = () => {
   if (error) {
     return <p className="text-red-700">Impossible de charger la page.</p>;
   }
-  const { career, links } = splitDescription(data.data?.description ?? "");
+  const { career, links } = splitDescription(data.data?.description);
   return (
     <>
       <header className="grid items-center gap-6 sm:grid-cols-[12rem_1fr] md:gap-10 lg:grid-cols-[16rem_1fr]">
@@ -127,7 +145,7 @@ export const AboutPageContent: FC = () => {
         </h2>
         {/* A readable line length, the card is wide on desktop */}
         <ProseContent className="mt-4 max-w-prose [&_p:first-child]:mt-0">
-          <MarkdownText className="text-title-color-800" text={career} />
+          <BlocksText content={career} />
         </ProseContent>
       </section>
 

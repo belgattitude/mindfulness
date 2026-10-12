@@ -11,3 +11,18 @@ export const getPageParams = (params: { slug: string }): GetPagesParams => ({
   filters: { slug: { $eq: params.slug } },
   populate: ["cover", "programmes.cover", "programmes.events"],
 });
+
+/** The pages linked from the main menu, with their programmes (menu popups) */
+export const getMenuPagesParams = (params: {
+  slugs: string[];
+}): GetPagesParams => ({
+  filters: { slug: { $in: params.slugs } },
+  populate: ["programmes"],
+});
+
+/** The activity pages presenting a programme (it can be in several) */
+export const getProgrammePagesParams = (params: {
+  slug: string;
+}): GetPagesParams => ({
+  filters: { programmes: { slug: { $eq: params.slug } } },
+});

@@ -9,7 +9,7 @@ import type { ProgrammeRequestDataUniverse } from './programmeRequestDataUnivers
 export type ProgrammeRequestData = {
   title?: string;
   cover: number | string;
-  description?: string;
+  description?: unknown;
   universe?: ProgrammeRequestDataUniverse;
   slug?: string;
   events?: (number | string)[];

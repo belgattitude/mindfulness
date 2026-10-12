@@ -11,14 +11,17 @@ import { MainSidebar } from "@/components/Layout/MainSidebar";
 import { cn } from "@/components/utils";
 import type { MainNavLinks } from "@/config/site.config";
 
+import type { MenuProgrammes } from "./menuProgrammes";
+
 interface MainNavProps {
   mainNavLinks: MainNavLinks;
+  menuProgrammes: MenuProgrammes;
 }
 
 const sidebarId = "main-sidebar";
 
 export const MainHeader: FC<MainNavProps> = (props) => {
-  const { mainNavLinks } = props;
+  const { mainNavLinks, menuProgrammes } = props;
   const burgerRef = useRef<HTMLButtonElement>(null);
 
   const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(false);
@@ -45,6 +48,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
           >
             <MainMenuLinks
               mainNavLinks={mainNavLinks}
+              menuProgrammes={menuProgrammes}
               className="font-family-menu text-xl font-light md:block"
             />
           </div>
@@ -55,6 +59,7 @@ export const MainHeader: FC<MainNavProps> = (props) => {
         open={isSidebarExpanded}
         onClose={closeSidebar}
         mainNavLinks={mainNavLinks}
+        menuProgrammes={menuProgrammes}
       />
       {/* Above the sidebar, it becomes its close button */}
       <BurgerMenuIcon

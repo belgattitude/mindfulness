@@ -28,6 +28,10 @@ export const BurgerMenuIcon = (props: Props) => {
       aria-controls={controls}
       className={cn(
         "ring-brand-color-800/40 flex size-11 cursor-pointer items-center justify-center rounded-full bg-white/80 shadow-sm ring-1 outline-green-500 backdrop-blur-sm transition-colors hover:bg-white",
+        // Discreet on mobile while closed: no ring nor shadow, a light glass,
+        // softer lines. Open, it is the close button of the menu
+        !isOpen &&
+          "max-md:bg-white/35 max-md:shadow-none max-md:ring-0 max-md:[&_span>span]:opacity-70",
         className
       )}
       onClick={handleClick}

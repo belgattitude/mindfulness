@@ -27,13 +27,21 @@
       ]
     },
     "description": {
-      "type": "richtext"
+      "type": "blocks"
     },
     "phone": {
       "type": "string"
     },
     "email": {
-      "type": "string"
+      "type": "email"
+    },
+    "whatsapp": {
+      "type": "boolean",
+      "default": true
+    },
+    "linkedin": {
+      "type": "string",
+      "regex": "^https://"
     }
   }
 }

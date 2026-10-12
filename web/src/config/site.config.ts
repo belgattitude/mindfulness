@@ -15,6 +15,12 @@ export interface SiteConfig {
       slug: string;
       title: string;
     }[];
+    /** The strapi event "universe", slug in the agenda url */
+    universes: {
+      slug: string;
+      title: string;
+      value: string;
+    }[];
   };
 }
 
@@ -51,6 +57,15 @@ export const siteConfig = {
       { slug: "stages-et-retraites", title: "Stages et retraites" },
       { slug: "programmes-et-cycles", title: "Programmes et cycles" },
       { slug: "cours-reguliers", title: "Cours réguliers" },
+    ],
+    universes: [
+      { slug: "mindfulness", title: "Mindfulness", value: "mindfulness" },
+      { slug: "yoga", title: "Yoga", value: "yoga" },
+      {
+        slug: "dialogue-conscient",
+        title: "Dialogue conscient",
+        value: "dialogue",
+      },
     ],
   },
 } as const satisfies SiteConfig;

@@ -17,7 +17,7 @@ const About = async () => {
   await queryClient.prefetchQuery(getGetAboutQueryOptions());
 
   return (
-    <PageContent title="A mon propos">
+    <PageContent eyebrow={{ label: "À propos" }}>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <AboutPageContent />
       </HydrationBoundary>

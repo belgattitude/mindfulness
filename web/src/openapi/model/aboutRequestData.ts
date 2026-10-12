@@ -6,7 +6,7 @@
  */
 
 export type AboutRequestData = {
-  description?: string;
+  description?: unknown;
   cover?: number | string;
   title: string;
   summary?: string;

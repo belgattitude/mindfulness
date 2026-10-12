@@ -14,6 +14,12 @@ const meta: Meta<typeof MainFooter> = {
   },
   args: {
     mainNavLinks: siteConfig.mainNavLinks,
+    contact: {
+      email: "sandrine_rauter@hotmail.com",
+      phone: "+32 476 298 224",
+      whatsapp: true,
+      linkedin: "https://www.linkedin.com/in/sandrine-rauter-5a57b420/",
+    },
   },
 };
 

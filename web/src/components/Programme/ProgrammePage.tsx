@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowDown, ArrowRight, CalendarDays } from "lucide-react";
+import { ArrowDown, ArrowRight, BookOpen, CalendarDays } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
 
+import { BlocksText } from "@/components/BlocksText";
 import { EventCard } from "@/components/Event/EventCard";
 import { getEventStatus } from "@/components/Event/EventMeta";
 import {
@@ -12,24 +13,69 @@ import {
   getNextEvents,
   getPastEvents,
 } from "@/components/Event/EventMiniItem";
-import { MarkdownText } from "@/components/MarkdownText";
 import { PageContent } from "@/components/PageContent";
 import { ProseContent } from "@/components/ProseContent";
 import { ShareButton } from "@/components/Share/ShareButton";
 import { getStrapiMedia } from "@/lib/strapi";
-import { getTextExcerpt, isRedundantSummary } from "@/lib/text/text.utils";
-import type { Event, GetProgrammesParams, Programme } from "@/openapi/model";
+import {
+  getBlocksText,
+  getTextExcerpt,
+  isRedundantSummary,
+} from "@/lib/text/text.utils";
+import type {
+  Event,
+  GetPagesParams,
+  GetProgrammesParams,
+  Page,
+  Programme,
+} from "@/openapi/model";
+import { useGetPages } from "@/openapi/page/page";
 import { useGetProgrammes } from "@/openapi/programme/programme";
 
 interface Props {
   /** The params prefetched by the server component (same query key) */
   params: GetProgrammesParams;
+  /** The activity pages presenting the programme, prefetched as well */
+  pagesParams: GetPagesParams;
   /** Reference date (iso) for the sessions, set by the server */
   now: string;
 }
 
 /** Past sessions are only a reminder, the agenda has them all */
 const maxPastEvents = 3;
+
+/** Links to the activity pages presenting the programme (Mindfulness…) */
+const ProgrammePagesCard: FC<{ pages: Page[] }> = (props) => {
+  const { pages } = props;
+  return (
+    <nav
+      aria-label="En savoir plus sur le programme"
+      className="ring-brand-color-200 flex flex-col gap-3 rounded-2xl bg-white p-4 ring-1 sm:p-6"
+    >
+      <h2 className="text-title-color-800 flex items-start gap-2 text-lg leading-snug font-medium">
+        {/* On the first line when the title wraps */}
+        <BookOpen
+          aria-hidden="true"
+          className="text-title-color-500 mt-0.5 size-5 flex-none"
+        />
+        En savoir plus sur le programme
+      </h2>
+      <ul className="flex flex-col gap-1">
+        {pages.map((page) => (
+          <li key={page.slug}>
+            <Link
+              href={`/activities/${page.slug}`}
+              className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1 text-sm font-medium outline-green-500 transition-colors"
+            >
+              Découvrir {page.title}
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 /** At a glance: next session, contact and share */
 const ProgrammeSummaryPanel: FC<{
@@ -41,7 +87,7 @@ const ProgrammeSummaryPanel: FC<{
   const { programme, nextEvents, now, shareText } = props;
   const [nextEvent] = nextEvents;
   return (
-    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-5 rounded-2xl p-4 ring-1 sm:p-6 lg:sticky lg:top-6">
+    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-5 rounded-2xl p-4 ring-1 sm:p-6">
       <div className="flex flex-col gap-3">
         <h2 className="text-title-color-800 flex items-center gap-2 text-lg font-medium">
           <CalendarDays
@@ -146,8 +192,10 @@ const ProgrammeDates: FC<{
 };
 
 export const ProgrammePage: FC<Props> = (props) => {
-  const { params, now } = props;
+  const { params, pagesParams, now } = props;
   const { data: response, error, isPending } = useGetProgrammes(params);
+  // Optional: the page still renders without it
+  const { data: pagesResponse } = useGetPages(pagesParams);
 
   if (isPending) {
     return null;
@@ -160,8 +208,9 @@ export const ProgrammePage: FC<Props> = (props) => {
     return <p>NotFound</p>;
   }
 
+  const pages = (pagesResponse?.data ?? []).filter((page) => page.slug);
   const cover = getStrapiMedia(programme.cover);
-  const description = programme.description ?? "";
+  const description = getBlocksText(programme.description);
   const summary =
     programme.summary &&
     !isRedundantSummary(programme.summary, {
@@ -175,11 +224,13 @@ export const ProgrammePage: FC<Props> = (props) => {
   const pastEvents = getPastEvents(events, now).slice(0, maxPastEvents);
 
   return (
-    <PageContent title={["Programmes et cycles"]}>
+    <PageContent
+      eyebrow={{
+        label: "Programmes et cycles",
+        href: "/agenda/programmes-et-cycles",
+      }}
+    >
       <header className="flex flex-col gap-3">
-        <span className="bg-brand-color-100 text-title-color-800 w-fit rounded-full px-2.5 py-1 text-xs font-medium">
-          Programme
-        </span>
         <h1 className="text-title-color-800 text-3xl leading-tight font-normal lg:text-4xl">
           {programme.title}
         </h1>
@@ -214,7 +265,9 @@ export const ProgrammePage: FC<Props> = (props) => {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         {/* First on small screens, next to the description on large ones */}
-        <aside className="lg:col-start-2 lg:row-start-1">
+        {/* Sticky together on large screens */}
+        <aside className="flex flex-col gap-4 self-start lg:sticky lg:top-6 lg:col-start-2 lg:row-start-1">
+          {pages.length > 0 && <ProgrammePagesCard pages={pages} />}
           <ProgrammeSummaryPanel
             programme={programme}
             nextEvents={nextEvents}
@@ -224,7 +277,7 @@ export const ProgrammePage: FC<Props> = (props) => {
         </aside>
         <div className="flex flex-col gap-12 lg:col-start-1 lg:row-start-1">
           <ProseContent className="[&_h1]:text-2xl lg:[&_h1]:text-2xl [&_h2]:text-xl [&_h2]:font-normal">
-            <MarkdownText text={description} />
+            <BlocksText content={programme.description} />
           </ProseContent>
           <ProgrammeDates
             nextEvents={nextEvents}

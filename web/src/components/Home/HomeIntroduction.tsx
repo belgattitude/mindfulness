@@ -2,7 +2,7 @@
 
 import type { FC } from "react";
 
-import { MarkdownText } from "@/components/MarkdownText";
+import { BlocksText } from "@/components/BlocksText";
 import { ProseContent } from "@/components/ProseContent";
 import { useGetHome } from "@/openapi/home/home";
 
@@ -22,8 +22,8 @@ export const HomeIntroduction: FC = () => {
   }
   return (
     <ProseContent className="md:col-span-8 md:px-0">
-      <div className="text-title-color-800 [&>*>:first-child]:mt-0">
-        <MarkdownText text={data.data?.introduction ?? ""} />
+      <div className="[&>*>:first-child]:mt-0">
+        <BlocksText content={data.data?.introduction} />
       </div>
     </ProseContent>
   );

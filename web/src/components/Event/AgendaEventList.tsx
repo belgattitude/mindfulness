@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import type { FC } from "react";
 
 import { useGetEvents } from "@/openapi/event/event";
@@ -16,10 +18,12 @@ interface Props {
   title: string;
   /** Shown when there is no event, the section is hidden when not set */
   emptyText?: string;
+  /** A way out of an empty list (ie: clear the filters) */
+  emptyLink?: { href: string; label: string } | undefined;
 }
 
 export const AgendaEventList: FC<Props> = (props) => {
-  const { params, now, title, emptyText } = props;
+  const { params, now, title, emptyText, emptyLink } = props;
   const { data, error, isPending } = useGetEvents(params);
 
   if (isPending) {
@@ -38,7 +42,19 @@ export const AgendaEventList: FC<Props> = (props) => {
     <section className="flex flex-col gap-5">
       <h2 className="text-title-color-800 text-2xl font-light">{title}</h2>
       {events.length === 0 ? (
-        <p className="text-neutral-600">{emptyText}</p>
+        <div className="flex flex-col gap-3">
+          <p className="text-neutral-600">{emptyText}</p>
+          {emptyLink && (
+            <Link
+              href={emptyLink.href}
+              scroll={false}
+              className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1 text-sm font-medium outline-green-500 transition-colors"
+            >
+              {emptyLink.label}
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          )}
+        </div>
       ) : (
         <ul className="flex flex-col gap-5">
           {events.map((e) => (

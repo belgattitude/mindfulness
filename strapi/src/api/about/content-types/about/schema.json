@@ -13,7 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "description": {
-      "type": "richtext"
+      "type": "blocks"
     },
     "cover": {
       "type": "media",

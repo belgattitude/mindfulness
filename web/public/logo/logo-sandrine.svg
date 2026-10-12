@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="459" height="443" viewBox="0 0 459 443">
+  <!-- Endless knot on a green disc, redrawn from logo-sandrine-transparent.png -->
+  <ellipse cx="228.5" cy="220.5" rx="217.5" ry="210.5" fill="#75b6a0"/>
+  <path fill="none" stroke="#fff" stroke-width="6.5" stroke-linejoin="round" d="M127 146.7L327.4 292.9A31.5 31.5 0 0 1 290.2 343.9L88 196.2C61.3 176.7 29.5 199 29.5 218C29.5 237 66.2 262.7 88 246.8L269 114.5C294.9 95.6 261.5 56 229.5 56C197.5 56 164.1 95.6 190 114.5L371 246.8C392.8 262.7 429.5 237 429.5 218C429.5 199 397.7 176.7 371 196.2L168.8 343.9A31.5 31.5 0 0 1 131.6 292.9L332 146.7"/>
+</svg>

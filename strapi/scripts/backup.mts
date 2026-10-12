@@ -20,14 +20,13 @@
 import { chmod, mkdir, rmdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execa, ExecaError } from 'execa';
+import { execa } from 'execa';
 import { loadEnv, requireEnv } from './lib/env.mts';
 import { exitWithError } from './lib/errors.mts';
-import { getRemoteSsh, type RemoteSsh } from './lib/remote.mts';
+import { getRemoteSsh } from './lib/remote.mts';
+import { createSnapshot, getTimestamp, removeSnapshot, STRAPI_CONTAINER } from './lib/snapshot.mts';
 
 const BACKUP_DIR = 'backup';
-/** docker compose container_name of strapi on the server */
-const STRAPI_CONTAINER = 'mindfulness-strapi';
 
 /** file: backup a single file of the remote dir instead of the whole dir */
 const targets = {
@@ -39,82 +38,6 @@ type Target = keyof typeof targets;
 
 const isTarget = (value: unknown): value is Target =>
   typeof value === 'string' && Object.hasOwn(targets, value);
-
-/** Local time, sortable and filesystem safe: 2026-10-08_14-05-09 */
-const getTimestamp = (date = new Date()): string => {
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return [
-    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`,
-    `${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`,
-  ].join('_');
-};
-
-type Snapshot = {
-  /** snapshot path on the server, in the database folder (mounted volume) */
-  remotePath: string;
-  /** snapshot path in the container */
-  containerPath: string;
-  /** database file name, used for the local copy */
-  databaseName: string;
-};
-
-/**
- * Runs in the strapi container (node, better-sqlite3). The snapshot is written
- * next to the database, in the mounted folder, so it can be fetched by rsync.
- */
-const getSnapshotScript = (snapshotName: string) => `
-const fs = require('node:fs');
-const path = require('node:path');
-const Database = require('better-sqlite3');
-const dbPath = path.resolve('/app', process.env.DATABASE_FILENAME);
-const snapshotPath = path.join(path.dirname(dbPath), ${JSON.stringify(snapshotName)});
-const db = new Database(dbPath, { readonly: true, fileMustExist: true });
-db.backup(snapshotPath)
-  .then(() => {
-    const result = new Database(snapshotPath, { readonly: true }).pragma('integrity_check', { simple: true });
-    if (result !== 'ok') throw new Error('integrity_check: ' + result);
-    console.log(JSON.stringify({ databaseName: path.basename(dbPath), containerPath: snapshotPath }));
-  })
-  .catch((e) => {
-    fs.rmSync(snapshotPath, { force: true });
-    console.error(e.message);
-    process.exit(1);
-  });
-`;
-
-const createSnapshot = async (
-  { host, sshArgs }: RemoteSsh,
-  remoteDir: string,
-  timestamp: string
-): Promise<Snapshot> => {
-  const snapshotName = `.snapshot-${timestamp}.db`;
-  // The script is sent on stdin to avoid nested shell quoting, and written to a
-  // file in the container: bun (the image runtime) cannot run `node -` from stdin
-  // (.cjs: the script uses require)
-  const runScript = `f=/tmp/strapi-snapshot-$$.cjs && cat > "$f" && node "$f"; rc=$?; rm -f "$f"; exit $rc`;
-  const { stdout } = await execa(
-    'ssh',
-    [...sshArgs, host, `docker exec -i ${STRAPI_CONTAINER} sh -c '${runScript}'`],
-    { input: getSnapshotScript(snapshotName) }
-  );
-  const { databaseName, containerPath } = JSON.parse(stdout.trim().split('\n').at(-1) ?? '{}') as {
-    databaseName?: string;
-    containerPath?: string;
-  };
-  if (!databaseName || !containerPath) {
-    throw new Error(`Unexpected snapshot output: ${stdout}`);
-  }
-  return { remotePath: `${remoteDir}/${snapshotName}`, containerPath, databaseName };
-};
-
-const removeSnapshot = async ({ host, sshArgs }: RemoteSsh, snapshot: Snapshot) => {
-  // Created by the container (root), so removed from the container too
-  await execa('ssh', [
-    ...sshArgs,
-    host,
-    `docker exec ${STRAPI_CONTAINER} rm -f '${snapshot.containerPath}'`,
-  ]);
-};
 
 const main = async () => {
   process.chdir(fileURLToPath(new URL('..', import.meta.url)));
@@ -151,16 +74,11 @@ const main = async () => {
   try {
     if (useSnapshot) {
       console.log(`› Creating a snapshot in the ${STRAPI_CONTAINER} container`);
-      const snapshot = await createSnapshot(remote, remoteDir, timestamp).catch(
-        (error: unknown) => {
-          const stderr = error instanceof ExecaError ? String(error.stderr ?? '').trim() : '';
-          if (/is not running|No such container/.test(stderr)) {
-            throw new Error(
-              `${stderr}\nStrapi is not running, copy the file directly with: pnpm backup:db --no-snapshot`
-            );
-          }
-          throw error;
-        }
+      const snapshot = await createSnapshot(
+        remote,
+        remoteDir,
+        timestamp,
+        'Strapi is not running, copy the file directly with: pnpm backup:db --no-snapshot'
       );
       try {
         await rsync(snapshot.remotePath, join(destination, snapshot.databaseName));

@@ -6,7 +6,6 @@ import {
 
 import { ContactPageContent } from "@/components/Contact/ContactPageContent";
 import { PageContent } from "@/components/PageContent";
-import { ProseContent } from "@/components/ProseContent";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getGetContactQueryOptions } from "@/openapi/contact/contact";
 
@@ -18,12 +17,10 @@ const Contact = async () => {
   await queryClient.prefetchQuery(getGetContactQueryOptions());
 
   return (
-    <PageContent title="Contact">
-      <ProseContent>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ContactPageContent />
-        </HydrationBoundary>
-      </ProseContent>
+    <PageContent>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ContactPageContent />
+      </HydrationBoundary>
     </PageContent>
   );
 };

@@ -12,7 +12,7 @@ import { EventDetail } from "@/components/Event/EventDetail";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getDateRangeStr } from "@/lib/date/date.utils";
 import { getStrapiMedia } from "@/lib/strapi";
-import { getTextExcerpt } from "@/lib/text/text.utils";
+import { getBlocksText, getTextExcerpt } from "@/lib/text/text.utils";
 import { getEvents, getGetEventsQueryOptions } from "@/openapi/event/event";
 
 interface Props {
@@ -32,14 +32,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const response = await getEvents(getEventParams({ slug: eventSlug }));
   const event = response.data?.[0];
   if (!event) {
-    return {};
+    return { title: "Événement introuvable" };
   }
   const title = event.displayTitle ?? event.title;
   const dates = getDateRangeStr({ startAt: event.startAt, endAt: event.endAt });
   const description = getTextExcerpt(
     [
       `${dates.charAt(0).toUpperCase()}${dates.slice(1)}.`,
-      event.summary || event.description || "",
+      event.summary || getBlocksText(event.description),
     ].join(" ")
   );
   const cover = getStrapiMedia(event.cover);

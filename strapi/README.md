@@ -89,6 +89,38 @@ pnpm copy-remote-uploads
 Copies the server uploads into `public/uploads`, so the local strapi serves the
 same media as the server database. Local files missing on the server are kept.
 
+### Start from the production content
+
+```bash
+pnpm pull:prod         # asks for confirmation
+pnpm pull:prod --yes
+```
+
+Replaces, without backup, the local sqlite database (`DATABASE_FILENAME`) with a
+consistent snapshot of the server one, and syncs `public/uploads` with the
+server uploads (local only files are deleted). Stop the local strapi first: the
+script refuses to run when the local database is open by a process or locked.
+
+### Push the local database to production
+
+```bash
+pnpm push:prod
+```
+
+Replaces the server database with the local one (`DATABASE_FILENAME`), for
+example after preparing content locally. Only the database (the content) is
+pushed: not the code nor the docker image (`pnpm run deploy`), not the uploads. Before asking anything, it backs up
+the server database and compares it with the local one: content counts,
+content types (deploy first when they changed locally, strapi adapts the
+database to the deployed code on start) and media files missing on the server
+(uploads are not copied). The push has to be confirmed by typing `yes`.
+
+The backup is kept on the server in `<sqlite folder>/backups/`, the restore
+command is printed at the end (and on failure). Strapi is stopped during the
+copy (about a minute), then restarted and awaited until healthy. The local
+strapi can keep running: the local database is copied with the sqlite online
+backup API.
+
 ## Docker
 
 The compose services use the external `cloud-net` network, create it once:

@@ -22,11 +22,17 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
   return (
     <section
       className={twMerge(
-        "from-brand-color-50 to-brand-color-50/40 grid items-center gap-8 rounded-[2rem] bg-linear-to-br via-white px-5 py-8 sm:px-8 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12 md:p-12",
+        // A tinted wash fading into the page: no edge at the bottom
+        "from-brand-color-100 via-brand-color-50/60 relative isolate grid items-center gap-8 overflow-hidden bg-linear-to-b to-transparent pt-8 pb-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-12 md:pt-14 md:pb-16",
         className
       )}
     >
-      <div className="ring-brand-color-200 relative mx-auto aspect-4/5 w-full max-w-56 overflow-hidden rounded-3xl ring-1 md:max-w-none">
+      {/* A soft light behind the portrait */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-24 -left-24 -z-10 size-96 rounded-full bg-white/70 blur-3xl"
+      />
+      <div className="shadow-title-color-800/10 relative mx-auto aspect-4/5 w-full max-w-56 overflow-hidden rounded-3xl shadow-xl md:max-w-none">
         <Image
           src={sandrinePortrait.src}
           fill={true}

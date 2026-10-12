@@ -9,7 +9,7 @@ export type PageRequestData = {
   programmes?: (number | string)[];
   title: string;
   summary?: string;
-  introduction?: string;
+  introduction?: unknown;
   cover?: number | string;
   slug: string;
   locale?: string;

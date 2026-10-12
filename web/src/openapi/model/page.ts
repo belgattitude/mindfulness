@@ -15,7 +15,7 @@ export interface Page {
   programmes?: Programme[];
   title: string;
   summary?: string;
-  introduction?: string;
+  introduction?: unknown;
   cover?: PageCover;
   slug: string;
   createdAt?: string;

@@ -12,7 +12,7 @@ export type EventRequestData = {
   summary?: string;
   cover: number | string;
   universe?: EventRequestDataUniverse;
-  description: string;
+  description: unknown;
   startAt: string;
   endAt: string;
   flyer?: number | string;
