@@ -39,6 +39,23 @@
   }
 }
 
+/*
+  Typographic scale: the titles in the soft serif (Cormorant, font-display),
+  as the home ones. Cards and panels keep the sans serif for their titles.
+*/
+@utility heading-page {
+  @apply font-display text-title-color-800 text-[2.25rem] leading-[1.1] font-medium text-balance md:text-5xl;
+}
+
+@utility heading-section {
+  @apply font-display text-title-color-800 text-[2rem] leading-tight font-medium text-balance md:text-4xl;
+}
+
+/* The tagline under a page title, as the home one (AboutCard) */
+@utility text-tagline {
+  @apply font-display text-title-color-600 text-xl italic md:text-2xl;
+}
+
 /* The mist of the 404 forest (ForestIllustration) */
 @keyframes mist-drift {
   from {

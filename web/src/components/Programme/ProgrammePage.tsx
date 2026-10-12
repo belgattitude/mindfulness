@@ -142,9 +142,7 @@ const ProgrammeDates: FC<{
   const { nextEvents, pastEvents, now } = props;
   return (
     <section id="dates" className="flex scroll-mt-6 flex-col gap-5">
-      <h2 className="text-title-color-800 text-2xl font-light">
-        Dates à l&rsquo;agenda
-      </h2>
+      <h2 className="heading-section">Dates à l&rsquo;agenda</h2>
       {nextEvents.length === 0 ? (
         <p className="text-neutral-600">
           Aucune date prévue pour le moment, n&rsquo;hésitez pas à me contacter
@@ -168,7 +166,7 @@ const ProgrammeDates: FC<{
       )}
       {pastEvents.length > 0 && (
         <>
-          <h3 className="text-title-color-800 mt-4 text-xl font-light">
+          <h3 className="font-display text-title-color-800 mt-4 text-2xl font-medium">
             Sessions passées
           </h3>
           <ul className="flex flex-col gap-5">
@@ -231,11 +229,9 @@ export const ProgrammePage: FC<Props> = (props) => {
       }}
     >
       <header className="flex flex-col gap-3">
-        <h1 className="text-title-color-800 text-3xl leading-tight font-normal lg:text-4xl">
-          {programme.title}
-        </h1>
+        <h1 className="heading-page">{programme.title}</h1>
         {summary !== null && (
-          <p className="max-w-3xl text-lg leading-8 text-neutral-600">
+          <p className="max-w-3xl text-lg leading-8 text-neutral-700">
             {summary}
           </p>
         )}
@@ -276,7 +272,7 @@ export const ProgrammePage: FC<Props> = (props) => {
           />
         </aside>
         <div className="flex flex-col gap-12 lg:col-start-1 lg:row-start-1">
-          <ProseContent className="[&_h1]:text-2xl lg:[&_h1]:text-2xl [&_h2]:text-xl [&_h2]:font-normal">
+          <ProseContent>
             <BlocksText content={programme.description} />
           </ProseContent>
           <ProgrammeDates

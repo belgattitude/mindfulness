@@ -108,14 +108,8 @@ export const ContactPageContent: FC = () => {
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-3">
-        <h1 className="text-title-color-800 text-3xl leading-tight font-normal lg:text-4xl">
-          {contact.title ?? "Contact"}
-        </h1>
-        {contact.summary && (
-          <p className="text-title-color-600 text-lg italic">
-            {contact.summary}
-          </p>
-        )}
+        <h1 className="heading-page">{contact.title ?? "Contact"}</h1>
+        {contact.summary && <p className="text-tagline">{contact.summary}</p>}
         <ProseContent className="[&_p:first-child]:mt-0">
           <BlocksText content={contact.description} />
         </ProseContent>

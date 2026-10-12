@@ -40,7 +40,7 @@ export const AgendaEventList: FC<Props> = (props) => {
   }
   return (
     <section className="flex flex-col gap-5">
-      <h2 className="text-title-color-800 text-2xl font-light">{title}</h2>
+      <h2 className="heading-section">{title}</h2>
       {events.length === 0 ? (
         <div className="flex flex-col gap-3">
           <p className="text-neutral-600">{emptyText}</p>

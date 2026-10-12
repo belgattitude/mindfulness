@@ -36,9 +36,7 @@ export const UpcomingEventsCard: FC<Props> = (props) => {
         className
       )}
     >
-      <h2 className="font-display text-title-color-800 text-3xl font-medium">
-        Prochains rendez-vous
-      </h2>
+      <h2 className="heading-section">Prochains rendez-vous</h2>
       {events.length === 0 ? (
         <p className="text-sm text-neutral-600">
           Aucun événement prévu pour le moment.
