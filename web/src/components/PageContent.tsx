@@ -11,6 +11,17 @@ type Props = {
   title?: string | readonly string[] | undefined;
 } & PropsWithChildren;
 
+/**
+ * Negative margins cancelling the top and side paddings of the content (keep
+ * in sync): a first section spanning the whole card, from its top edge, with
+ * the same rounded corners. The content paddings, to align its own content.
+ */
+export const pageContentBleedClassName = clsx(
+  "-mx-4 -mt-3 sm:-mx-6 md:-mx-14 md:-mt-10",
+  "px-4 sm:px-6 md:px-14",
+  "rounded-t-lg lg:rounded-t-xl"
+);
+
 export const PageContent: FC<Props> = (props) => {
   const { className, children, title } = props;
   const crumbs = (typeof title === "string" ? [title] : (title ?? [])).filter(
@@ -30,7 +41,8 @@ export const PageContent: FC<Props> = (props) => {
             // text-color
             "text-title-color-800",
             "*:text-title-color-800",
-            // padding, tight on mobile to give the text the width
+            // padding, tight on mobile to give the text the width (see
+            // pageContentBleedClassName)
             "px-4 pt-3 pb-6 sm:px-6 md:px-14 md:py-10",
             // margin, a thin green border kept around on mobile
             "mx-2 mt-5 mb-2 sm:mx-5 md:mt-10 md:mb-0",
