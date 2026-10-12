@@ -13,10 +13,6 @@ import { ContactCard } from "./ContactCard";
 import type { ContactCardAction } from "./ContactCard";
 import { LinkedinIcon, WhatsappIcon } from "./ContactIcons";
 
-/** https://www.linkedin.com/in/name/ → linkedin.com/in/name */
-const getDisplayUrl = (url: string) =>
-  url.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
-
 const ContactCards: FC<{ contact: Contact }> = (props) => {
   const { email, phone, whatsapp, linkedin } = props.contact;
   const callAction: ContactCardAction | null = phone
@@ -79,7 +75,7 @@ const ContactCards: FC<{ contact: Contact }> = (props) => {
           <ContactCard
             title="LinkedIn"
             icon={<LinkedinIcon className="size-5" />}
-            value={getDisplayUrl(linkedin)}
+            value="Sandrine Rauter"
             actions={[
               {
                 href: linkedin,

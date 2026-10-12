@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Copy } from "lucide-react";
+import { Fragment } from "react";
 import type { FC, ReactNode } from "react";
 
 import { cn } from "@/components/utils";
@@ -55,21 +56,36 @@ const CopyButton: FC<{ value: string; label: string; copiedLabel: string }> = (
   );
 };
 
+/**
+ * Line break opportunities in a long value (an email address), only at
+ * natural places: before an @, after a dot or a slash.
+ */
+const BreakableText: FC<{ text: string }> = (props) => {
+  const parts = props.text.split(/(?=@)|(?<=[./])/u);
+  return parts.map((part, index) => (
+    // oxlint-disable-next-line react/no-array-index-key -- static split
+    <Fragment key={index}>
+      {index > 0 && <wbr />}
+      {part}
+    </Fragment>
+  ));
+};
+
 /** A contact channel: its value, the links to use it and a copy button */
 export const ContactCard: FC<Props> = (props) => {
   const { title, icon, value, actions, copy } = props;
   return (
     <div className="flex h-full flex-col gap-5 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-neutral-200 md:p-6">
       <div className="flex items-center gap-4">
-        <span className="bg-brand-color-50 text-title-color-700 flex size-12 flex-none items-center justify-center rounded-full">
+        <span className="bg-brand-color-50 text-title-color-700 flex size-11 flex-none items-center justify-center rounded-full md:size-12">
           {icon}
         </span>
         <div className="min-w-0">
           <h2 className="text-title-color-600 text-xs font-medium tracking-widest uppercase">
             {title}
           </h2>
-          <p className="text-title-color-800 mt-1 text-lg font-medium break-all tabular-nums">
-            {value}
+          <p className="text-title-color-800 mt-1 font-medium wrap-anywhere tabular-nums sm:text-lg">
+            <BreakableText text={value} />
           </p>
         </div>
       </div>

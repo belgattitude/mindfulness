@@ -1,10 +1,21 @@
 // Events from the strapi REST api, for the orval generated react-query hooks
 // (src/openapi)
+import { getUniverseValue } from "@/components/Event/agendaFilters";
+import type { UniverseSlug } from "@/components/Event/agendaFilters";
 import type { EventTypeSlugs } from "@/components/Event/utils";
 import type { GetEventsParams } from "@/openapi/model";
 
-const getEventTypeFilter = (eventType?: EventTypeSlugs | null) =>
-  eventType ? { eventType: { $eq: eventType } } : {};
+/** The agenda filters (null or unset for all) as strapi filters */
+const getAgendaStrapiFilters = (params: {
+  eventType?: EventTypeSlugs | null;
+  universe?: UniverseSlug | null;
+}) => {
+  const universe = getUniverseValue(params.universe ?? null);
+  return {
+    ...(params.eventType ? { eventType: { $eq: params.eventType } } : {}),
+    ...(universe ? { universe: { $eq: universe } } : {}),
+  };
+};
 
 /**
  * Events not finished yet (ongoing or upcoming), soonest first. Built in the
@@ -15,12 +26,13 @@ export const getUpcomingEventsParams = (params: {
   limit?: number;
   now: string;
   eventType?: EventTypeSlugs | null;
+  universe?: UniverseSlug | null;
 }): GetEventsParams => {
-  const { limit = 100, now, eventType } = params;
+  const { limit = 100, now } = params;
   return {
     filters: {
       endAt: { $gte: now },
-      ...getEventTypeFilter(eventType),
+      ...getAgendaStrapiFilters(params),
     },
     "pagination[page]": 1,
     "pagination[pageSize]": limit,
@@ -39,13 +51,14 @@ export const getPastEventsParams = (params: {
   now: string;
   dateMin: string;
   eventType?: EventTypeSlugs | null;
+  universe?: UniverseSlug | null;
 }): GetEventsParams => {
-  const { limit = 100, now, dateMin, eventType } = params;
+  const { limit = 100, now, dateMin } = params;
   return {
     filters: {
       endAt: { $lt: now },
       startAt: { $gte: dateMin },
-      ...getEventTypeFilter(eventType),
+      ...getAgendaStrapiFilters(params),
     },
     "pagination[page]": 1,
     "pagination[pageSize]": limit,

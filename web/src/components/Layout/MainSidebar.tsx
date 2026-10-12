@@ -1,8 +1,9 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { FC } from "react";
 
 import { MainLogo } from "@/components/Logo/MainLogo";
@@ -11,18 +12,22 @@ import type { MainNavLinks } from "@/config/site.config";
 
 import { cn } from "../utils";
 import { isActiveNavLink } from "./isActiveNavLink";
+import type { MenuProgrammes } from "./menuProgrammes";
 
 interface MainSidebarProps {
   id: string;
   open: boolean;
   onClose: () => void;
   mainNavLinks: MainNavLinks;
+  menuProgrammes: MenuProgrammes;
 }
 
 /** Burger menu: a panel sliding from the right, over a blurred backdrop */
 export const MainSidebar: FC<MainSidebarProps> = (props) => {
-  const { id, open, onClose, mainNavLinks } = props;
+  const { id, open, onClose, mainNavLinks, menuProgrammes } = props;
   const currentPath = usePathname() ?? "";
+  // The menu link whose programmes are unfolded
+  const [expandedHref, setExpandedHref] = useState<string | null>(null);
 
   // Escape closes the menu, the page does not scroll behind it
   useEffect(() => {
@@ -66,14 +71,9 @@ export const MainSidebar: FC<MainSidebarProps> = (props) => {
         <Link
           href="/"
           onClick={onClose}
-          className="image-rendering-unblur flex items-center gap-3 self-start outline-green-500"
+          className="flex items-center gap-3 self-start outline-green-500"
         >
-          <MainLogo
-            width={90}
-            height={60}
-            priority={false}
-            className="h-[44px] w-auto"
-          />
+          <MainLogo className="h-[44px] w-auto" />
           <span className="font-family-brand text-nav-title text-lg">
             {siteConfig.metadata.siteTitle}
           </span>
@@ -83,19 +83,68 @@ export const MainSidebar: FC<MainSidebarProps> = (props) => {
           <ul className="space-y-1">
             {mainNavLinks.map((link) => {
               const active = isActiveNavLink(currentPath, link);
+              const programmes = menuProgrammes[link.href] ?? [];
+              const expanded = expandedHref === link.href;
+              const programmesId = `${id}-programmes-${link.href.replaceAll("/", "-")}`;
               return (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={onClose}
-                    aria-current={active ? "page" : undefined}
-                    className={cn(
-                      "font-family-menu block rounded-lg px-3 py-2.5 text-xl font-light text-neutral-800 outline-green-500 transition-colors hover:bg-white/50",
-                      active && "text-nav-title bg-white/60 font-normal"
+                  <div className="flex items-center gap-1">
+                    <Link
+                      href={link.href}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "font-family-menu block flex-1 rounded-lg px-3 py-2.5 text-xl font-light text-neutral-800 outline-green-500 transition-colors hover:bg-white/50",
+                        active && "text-nav-title bg-white/60 font-normal"
+                      )}
+                    >
+                      {link.title}
+                    </Link>
+                    {programmes.length > 0 && (
+                      <button
+                        type="button"
+                        aria-expanded={expanded}
+                        aria-controls={programmesId}
+                        aria-label={`Programmes ${link.title}`}
+                        onClick={() => {
+                          setExpandedHref(expanded ? null : link.href);
+                        }}
+                        className="text-nav-title flex size-10 flex-none cursor-pointer items-center justify-center rounded-full outline-green-500 transition-colors hover:bg-white/50"
+                      >
+                        <ChevronDown
+                          aria-hidden="true"
+                          className={cn(
+                            "size-5 transition-transform duration-200 motion-reduce:transition-none",
+                            expanded && "rotate-180"
+                          )}
+                        />
+                      </button>
                     )}
-                  >
-                    {link.title}
-                  </Link>
+                  </div>
+                  {programmes.length > 0 && (
+                    <ul
+                      id={programmesId}
+                      hidden={!expanded}
+                      className="mt-1 mb-2 ml-3 space-y-1 border-l border-white/70 pl-3"
+                    >
+                      {programmes.map((programme) => (
+                        <li key={programme.href}>
+                          <Link
+                            href={programme.href}
+                            onClick={onClose}
+                            aria-current={
+                              currentPath === programme.href
+                                ? "page"
+                                : undefined
+                            }
+                            className="hover:text-nav-title block rounded-lg px-2 py-1.5 leading-snug text-neutral-700 outline-green-500 transition-colors hover:bg-white/40"
+                          >
+                            {programme.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               );
             })}

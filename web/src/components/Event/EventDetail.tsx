@@ -197,7 +197,7 @@ export const EventDetail: FC<Props> = (props) => {
   return (
     <div>
       <PageBackgroundImg url={cover ?? ""} />
-      <PageContent title="Agenda">
+      <PageContent>
         <Link
           href="/agenda"
           className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1.5 text-sm font-medium outline-green-500 transition-colors"

@@ -76,14 +76,9 @@ export const MainFooter: FC<Props> = (props) => {
           <div className="col-span-2 flex flex-col items-start gap-4 lg:col-span-1">
             <Link
               href="/"
-              className="image-rendering-unblur flex items-center gap-3 outline-green-500"
+              className="flex items-center gap-3 outline-green-500"
             >
-              <MainLogo
-                width={90}
-                height={60}
-                priority={false}
-                className="h-[52px] w-auto"
-              />
+              <MainLogo className="h-[52px] w-auto" />
               <span className="font-family-brand text-nav-title text-xl">
                 {siteConfig.metadata.siteTitle}
               </span>

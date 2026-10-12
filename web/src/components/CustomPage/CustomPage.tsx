@@ -37,7 +37,7 @@ export const CustomPage: FC<Props> = (props) => {
   return (
     <div>
       {cover !== null && <PageBackgroundImg url={cover} />}
-      <PageContent title={["Mes activités", page.title]}>
+      <PageContent eyebrow={{ label: "Mes activités" }}>
         {/* The introduction starts with the page title (an h1) */}
         <ProseContent className="[&_h1]:text-title-color-800 max-w-3xl [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:leading-tight lg:[&_h1]:text-4xl">
           <BlocksText content={page.introduction} />

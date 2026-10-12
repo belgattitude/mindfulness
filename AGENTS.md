@@ -90,6 +90,9 @@ The server scripts read `strapi/.env.deploy`, see `strapi/README.md`.
 - Contact details (email, phone, whatsapp, linkedin) come from the strapi
   `contact` single type: the contact page and the footer (fetched in
   `MainLayout`) read them, nothing is hardcoded.
+- Agenda filters are path segments, the universe first:
+  `/agenda/yoga/stages-et-retraites` (`src/components/Event/agendaFilters.ts`,
+  values in `siteConfig.search`). Other orders redirect, unknown segments 404.
 - Strapi media urls: `getStrapiMedia` (`src/lib/strapi`).
 - Lucide has no brand icons: they are inline svgs (`src/components/Contact/ContactIcons.tsx`).
 - No hardcoded colors (lint rule): use the theme colors (`brand-color-*`,

@@ -1,14 +1,16 @@
-import { isStringNonEmpty } from "@httpx/assert";
 import { clsx } from "clsx";
-import { Fragment } from "react";
+import Link from "next/link";
 import type { FC, PropsWithChildren } from "react";
 
 import { cn } from "@/components/utils";
 
 type Props = {
   className?: string | undefined;
-  /** Shown in a pill over the top edge, several levels as a breadcrumb */
-  title?: string | readonly string[] | undefined;
+  /**
+   * The section of the page, a small label above its title: a link to the
+   * section page when there is one (a one level breadcrumb)
+   */
+  eyebrow?: { label: string; href?: string | undefined } | undefined;
 } & PropsWithChildren;
 
 /**
@@ -17,16 +19,41 @@ type Props = {
  * the same rounded corners. The content paddings, to align its own content.
  */
 export const pageContentBleedClassName = clsx(
-  "-mx-4 -mt-3 sm:-mx-6 md:-mx-14 md:-mt-10",
+  "-mx-4 -mt-6 sm:-mx-6 md:-mx-14 md:-mt-10",
   "px-4 sm:px-6 md:px-14",
   "rounded-t-lg lg:rounded-t-xl"
 );
 
-export const PageContent: FC<Props> = (props) => {
-  const { className, children, title } = props;
-  const crumbs = (typeof title === "string" ? [title] : (title ?? [])).filter(
-    (crumb) => isStringNonEmpty(crumb)
+const eyebrowClassName =
+  "text-title-color-600 mb-3 block w-fit text-xs font-medium tracking-widest uppercase";
+
+const Eyebrow: FC<{ label: string; href?: string | undefined }> = (props) => {
+  const { label, href } = props;
+  // Wrapped: the card colors its direct children (*:text-title-color-800)
+  if (href === undefined) {
+    return (
+      <div>
+        <p className={eyebrowClassName}>{label}</p>
+      </div>
+    );
+  }
+  return (
+    <nav aria-label="Fil d’Ariane">
+      <Link
+        href={href}
+        className={cn(
+          eyebrowClassName,
+          "hover:text-title-color-800 decoration-current/30 underline-offset-4 outline-green-500 transition-colors hover:underline"
+        )}
+      >
+        {label}
+      </Link>
+    </nav>
   );
+};
+
+export const PageContent: FC<Props> = (props) => {
+  const { className, children, eyebrow } = props;
   return (
     <div className="relative flex">
       <div
@@ -43,7 +70,7 @@ export const PageContent: FC<Props> = (props) => {
             "*:text-title-color-800",
             // padding, tight on mobile to give the text the width (see
             // pageContentBleedClassName)
-            "px-4 pt-3 pb-6 sm:px-6 md:px-14 md:py-10",
+            "px-4 py-6 sm:px-6 md:px-14 md:py-10",
             // margin, a thin green border kept around on mobile
             "mx-2 mt-5 mb-2 sm:mx-5 md:mt-10 md:mb-0",
             "marker:text-brand-color-800 marker:mr-0",
@@ -52,30 +79,8 @@ export const PageContent: FC<Props> = (props) => {
           className
         )}
       >
-        {crumbs.length > 0 && (
-          // Translate the wrapper, not the pill: an untranslated wrapper stays
-          // over the start of the content and swallows its clicks
-          <div className="absolute -translate-x-2 -translate-y-8 md:-translate-x-8 md:translate-y-[-58px]">
-            <h2 className="ring-brand-color-300 text-nav-title shadow-nav-title/20 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-[13px]/none font-medium whitespace-nowrap shadow-md ring-1">
-              {crumbs.map((crumb, idx) =>
-                idx < crumbs.length - 1 ? (
-                  <Fragment key={crumb}>
-                    <span className="opacity-70">{crumb}</span>
-                    <span aria-hidden="true" className="opacity-50">
-                      ›
-                    </span>
-                  </Fragment>
-                ) : (
-                  <span key={crumb}>{crumb}</span>
-                )
-              )}
-            </h2>
-          </div>
-        )}
-        {/* Room for the pill, only when there is one */}
-        <div className={cn(crumbs.length > 0 && "mt-5 lg:mt-0")}>
-          {children}
-        </div>
+        {eyebrow && <Eyebrow label={eyebrow.label} href={eyebrow.href} />}
+        <div>{children}</div>
       </div>
     </div>
   );

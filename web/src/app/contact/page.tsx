@@ -17,7 +17,7 @@ const Contact = async () => {
   await queryClient.prefetchQuery(getGetContactQueryOptions());
 
   return (
-    <PageContent title="Contact">
+    <PageContent>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ContactPageContent />
       </HydrationBoundary>

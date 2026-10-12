@@ -7,11 +7,13 @@ import dayjs from "dayjs";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { getProgrammePagesParams } from "@/api/pages.rest";
 import { getProgrammeParams } from "@/api/programmes.rest";
 import { ProgrammePage } from "@/components/Programme/ProgrammePage";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getStrapiMedia } from "@/lib/strapi";
 import { getBlocksText, getTextExcerpt } from "@/lib/text/text.utils";
+import { getGetPagesQueryOptions } from "@/openapi/page/page";
 import {
   getGetProgrammesQueryOptions,
   getProgrammes,
@@ -60,10 +62,12 @@ const ProgrammeRoute = async (props: Props) => {
   // Fetched on the server (to answer a 404 for an unknown slug), the client
   // component reads it from the cache
   const programmeParams = getProgrammeParams({ slug: programmeSlug });
+  const pagesParams = getProgrammePagesParams({ slug: programmeSlug });
   const queryClient = new QueryClient(reactQueryConfig);
-  const data = await queryClient.fetchQuery(
-    getGetProgrammesQueryOptions(programmeParams)
-  );
+  const [data] = await Promise.all([
+    queryClient.fetchQuery(getGetProgrammesQueryOptions(programmeParams)),
+    queryClient.prefetchQuery(getGetPagesQueryOptions(pagesParams)),
+  ]);
   if (!data.data?.length) {
     notFound();
   }
@@ -71,7 +75,11 @@ const ProgrammeRoute = async (props: Props) => {
   return (
     <div className="flex flex-1">
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <ProgrammePage params={programmeParams} now={dayjs().toISOString()} />
+        <ProgrammePage
+          params={programmeParams}
+          pagesParams={pagesParams}
+          now={dayjs().toISOString()}
+        />
       </HydrationBoundary>
     </div>
   );
