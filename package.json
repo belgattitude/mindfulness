@@ -2,21 +2,27 @@
   "name": "mindfulness",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev:strapi": "pnpm --filter mindfulness-strapi develop",
     "dev:web": "pnpm --filter web dev",
     "build": "pnpm --recursive build",
     "lint": "pnpm --recursive --if-present lint",
     "typecheck": "pnpm --recursive --if-present typecheck",
-    "test": "pnpm --recursive --if-present test"
+    "test": "pnpm --recursive --if-present test",
+    "deps:check": "ncu --configFileName .ncurc.mjs",
+    "deps:update": "ncu --configFileName .ncurc.mjs -u"
   },
   "engines": {
     "node": ">=24.21"
   },
+  "devDependencies": {
+    "npm-check-updates": "23.1.1"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.10.1",
+      "version": "12.12.1",
       "onFail": "warn"
     }
   }

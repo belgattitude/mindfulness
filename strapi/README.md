@@ -89,6 +89,18 @@ pnpm copy-remote-uploads
 Copies the server uploads into `public/uploads`, so the local strapi serves the
 same media as the server database. Local files missing on the server are kept.
 
+### Start from the production content
+
+```bash
+pnpm pull:prod         # asks for confirmation
+pnpm pull:prod --yes
+```
+
+Replaces, without backup, the local sqlite database (`DATABASE_FILENAME`) with a
+consistent snapshot of the server one, and syncs `public/uploads` with the
+server uploads (local only files are deleted). Stop the local strapi first: the
+script refuses to run when the local database is open by a process or locked.
+
 ## Docker
 
 The compose services use the external `cloud-net` network, create it once:

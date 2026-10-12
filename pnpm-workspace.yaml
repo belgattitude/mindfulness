@@ -71,17 +71,5 @@ minimumReleaseAgeExclude:
   - vite
   - vitest
   - zod
-  # Recent releases picked on purpose, remove once older than minimumReleaseAge
-  - '@babel/core@8.0.7'
-  - '@babel/helpers@8.0.7'
-  - '@babel/parser@8.0.7'
-  - '@babel/traverse@8.0.7'
-  - '@graphql-codegen/cli@7.4.5'
-  - '@graphql-codegen/core@6.2.2'
-  - 'graphql-config@5.1.8'
-  - 'nodemailer@10.0.16'
-  - '@babel/helper-compilation-targets@8.0.7'
-  - '@graphql-codegen/client-preset@6.2.2'
-  - '@graphql-codegen/gql-tag-operations@6.1.1'
-  - '@graphql-codegen/plugin-helpers@7.4.2'
-  - '@graphql-codegen/visitor-plugin-common@7.2.9'
+  - npm-check-updates@23.1.1
+

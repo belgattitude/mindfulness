@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 
+import { BlocksText } from "@/components/BlocksText";
 import { MarkdownText } from "@/components/MarkdownText";
 import { useGetContact } from "@/openapi/contact/contact";
 
@@ -16,9 +17,15 @@ export const ContactPageContent: FC = () => {
     return <p className="text-red-700">Impossible de charger la page.</p>;
   }
   return (
-    <MarkdownText
-      className="text-title-color-800"
-      text={data.data?.description ?? ""}
-    />
+    <>
+      <MarkdownText
+        className="text-title-color-800"
+        text={data.data?.description ?? ""}
+      />
+      <BlocksText
+        className="text-title-color-800"
+        content={data.data?.content}
+      />
+    </>
   );
 };

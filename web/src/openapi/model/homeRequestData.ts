@@ -7,6 +7,7 @@
 
 export type HomeRequestData = {
   introduction?: string;
+  content?: unknown;
   locale?: string;
   localizations?: (number | string)[];
 };

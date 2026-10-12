@@ -11,6 +11,7 @@ export interface Home {
   id?: string | number;
   documentId?: string;
   introduction?: string;
+  content?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

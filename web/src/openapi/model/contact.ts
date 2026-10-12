@@ -17,6 +17,7 @@ export interface Contact {
   description?: string;
   phone?: string;
   email?: string;
+  content?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

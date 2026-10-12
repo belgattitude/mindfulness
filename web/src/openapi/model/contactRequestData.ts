@@ -12,6 +12,7 @@ export type ContactRequestData = {
   description?: string;
   phone?: string;
   email?: string;
+  content?: unknown;
   locale?: string;
   localizations?: (number | string)[];
 };
