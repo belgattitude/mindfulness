@@ -5,7 +5,9 @@ import "../styles/globals.css";
 import type { ReactNode } from "react";
 
 import { MainLayout } from "@/components/Layout";
+import { getSiteUrl, isVercelPreview } from "@/config/site-url";
 import { siteConfig } from "@/config/site.config";
+import { getPageMetadata } from "@/lib/metadata/page-metadata";
 import { AppProviders } from "@/providers/AppProviders";
 
 // Exposed as --font-sans, the font of all texts (shadcn theme and font-family-* utilities)
@@ -22,12 +24,29 @@ const fontDisplay = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
   // Absolute urls for the canonical and link preview (open graph) metadata
-  ...(siteConfig.canonicalUrl
-    ? { metadataBase: new URL(siteConfig.canonicalUrl) }
-    : {}),
-  description: siteConfig.metadata.siteDescription,
+  // The preview url on a Vercel preview, see getSiteUrl()
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  // Link previews of the pages without their own metadata (home)
+  ...getPageMetadata({ path: "/", canonical: false }),
+  authors: [{ name: siteConfig.metadata.author }],
+  creator: siteConfig.metadata.author,
+  // Indexed, with large image previews in search results (next adds noindex
+  // to the 404 pages on its own)
+  // Previews are not indexed (they would duplicate the site)
+  robots: {
+    index: !isVercelPreview(),
+    follow: true,
+    googleBot: {
+      index: !isVercelPreview(),
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     apple: {
       sizes: "180x180",

@@ -5,7 +5,10 @@ the content are in French.
 
 ## Apps
 
-pnpm workspace (`pnpm-workspace.yaml`), Node >= 24.21, pnpm 12.
+pnpm workspace (`pnpm-workspace.yaml`), pnpm 12, Node >= 24.21 and Bun >= 1.4.3
+(`devEngines` in the root `package.json`, also read by the CI). Strapi
+`develop`/`start` and the web `build` run on Bun, the maintenance scripts
+(`node scripts/*.mts`) on Node.
 
 | Folder    | Package             | What                    | Tech                                                                                                                                                                       |
 | --------- | ------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -18,7 +21,7 @@ pnpm workspace (`pnpm-workspace.yaml`), Node >= 24.21, pnpm 12.
 
 ```bash
 pnpm install
-cp strapi/.env.example strapi/.env   # web/.env needs NEXT_PUBLIC_STRAPI_API_URL and NEXT_PUBLIC_SITE_URL
+cp strapi/.env.example strapi/.env   # web/.env holds the production values, web/.env.development the local site url (next dev)
 pnpm dev:strapi                      # http://localhost:1337/admin
 pnpm dev:web                         # http://localhost:3000, needs strapi running
 ```
@@ -94,6 +97,10 @@ The server scripts read `strapi/.env.deploy`, see `strapi/README.md`.
 - Agenda filters are path segments, the universe first:
   `/agenda/yoga/stages-et-retraites` (`src/components/Event/agendaFilters.ts`,
   values in `siteConfig.search`). Other orders redirect, unknown segments 404.
+- Page metadata: always `getPageMetadata()` (`src/lib/metadata/page-metadata.ts`),
+  it sets the link previews (open graph, twitter) that a page would otherwise
+  lose (shallow merge). Shared images are `opengraph-image.tsx` routes using
+  `renderOgImage()` (`src/lib/og/og-image.tsx`, fonts in `web/assets/fonts`).
 - Strapi media urls: `getStrapiMedia` (`src/lib/strapi`).
 - Lucide has no brand icons: they are inline svgs (`src/components/Contact/ContactIcons.tsx`).
 - No hardcoded colors (lint rule): use the theme colors (`brand-color-*`,

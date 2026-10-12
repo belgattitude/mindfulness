@@ -54,3 +54,20 @@ export const getTextExcerpt = (value: string, maxLength = 160): string => {
   const cut = text.slice(0, maxLength);
   return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 0) || maxLength)}…`;
 };
+
+/**
+ * Excerpt of a page introduction (blocks) without its headings: the
+ * introduction starts with the page title (an h1)
+ */
+export const getPageIntroductionText = (
+  blocks: unknown,
+  maxLength = 160
+): string =>
+  getTextExcerpt(
+    getBlocksText(
+      Array.isArray(blocks)
+        ? (blocks as BlocksNode[]).filter((block) => block.type !== "heading")
+        : []
+    ),
+    maxLength
+  );

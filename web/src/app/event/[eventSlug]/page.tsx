@@ -11,7 +11,7 @@ import { getEventParams } from "@/api/events.rest";
 import { EventDetail } from "@/components/Event/EventDetail";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getDateRangeStr } from "@/lib/date/date.utils";
-import { getStrapiMedia } from "@/lib/strapi";
+import { getPageMetadata } from "@/lib/metadata/page-metadata";
 import { getBlocksText, getTextExcerpt } from "@/lib/text/text.utils";
 import { getEvents, getGetEventsQueryOptions } from "@/openapi/event/event";
 
@@ -42,19 +42,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
       event.summary || getBlocksText(event.description),
     ].join(" ")
   );
-  const cover = getStrapiMedia(event.cover);
-  return {
-    alternates: { canonical: `/event/${eventSlug}` },
-    description,
-    openGraph: {
-      description,
-      images: cover === null ? [] : [{ url: cover }],
-      title,
-      type: "article",
-      url: `/event/${eventSlug}`,
-    },
+  return getPageMetadata({
     title,
-  };
+    description,
+    path: `/event/${eventSlug}`,
+    type: "article",
+    // The image is opengraph-image.tsx: the cover with the title and dates
+    hasOwnImage: true,
+  });
 };
 
 const EventRoute = async (props: Props) => {

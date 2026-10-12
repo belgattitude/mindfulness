@@ -179,6 +179,8 @@ export const EventDetail: FC<Props> = (props) => {
     return <p>NotFound</p>;
   }
 
+  const shareText =
+    event.summary || getTextExcerpt(getBlocksText(event.description));
   const cover = getStrapiMedia(event.cover);
   const status = getEventStatus({
     startAt: event.startAt,
@@ -198,13 +200,21 @@ export const EventDetail: FC<Props> = (props) => {
     <div>
       <PageBackgroundImg url={cover ?? ""} />
       <PageContent>
-        <Link
-          href="/agenda"
-          className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1.5 text-sm font-medium outline-green-500 transition-colors"
-        >
-          <ArrowLeft aria-hidden="true" className="size-4" />
-          Retour à l&rsquo;agenda
-        </Link>
+        {/* Sharing at hand, before the details (also in the info panel) */}
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/agenda"
+            className="text-title-color-600 hover:text-title-color-800 flex w-fit items-center gap-1.5 text-sm font-medium outline-green-500 transition-colors"
+          >
+            <ArrowLeft aria-hidden="true" className="size-4" />
+            Retour à l&rsquo;agenda
+          </Link>
+          <ShareButton
+            title={event.displayTitle ?? event.title}
+            text={shareText}
+            className="py-2"
+          />
+        </div>
 
         <header className="mt-6 flex flex-col gap-3">
           <EventTags eventType={event.eventType} status={status} />
