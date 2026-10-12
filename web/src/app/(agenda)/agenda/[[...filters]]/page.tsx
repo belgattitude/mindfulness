@@ -20,6 +20,7 @@ import {
 } from "@/components/Event/agendaFilters";
 import { EventFilters } from "@/components/Event/EventFilters";
 import { PageContent } from "@/components/PageContent";
+import { ShareButton } from "@/components/Share/ShareButton";
 import { reactQueryConfig } from "@/config/react-query.config";
 import { getPageMetadata } from "@/lib/metadata/page-metadata";
 import { getGetEventsQueryOptions } from "@/openapi/event/event";
@@ -36,6 +37,10 @@ export const dynamic = "force-dynamic";
 // Upcoming events are all shown, past ones are only a reminder
 const pastLimit = 10;
 
+/** The agenda description: link previews and share text */
+const getAgendaDescription = (filtersTitle: string) =>
+  `Les prochaines dates${filtersTitle ? ` (${filtersTitle})` : ""} : stages et retraites, programmes et cycles, cours réguliers, en personne et en ligne.`;
+
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const filters = parseAgendaSegments(params.filters ?? []);
@@ -45,7 +50,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const filtersTitle = getAgendaFiltersTitle(filters);
   return getPageMetadata({
     title: filtersTitle ? `Agenda · ${filtersTitle}` : "Agenda",
-    description: `Les prochaines dates${filtersTitle ? ` (${filtersTitle})` : ""} : stages et retraites, programmes et cycles, cours réguliers, en personne et en ligne.`,
+    description: getAgendaDescription(filtersTitle),
     path: getAgendaUrl(filters),
   });
 };
@@ -83,9 +88,19 @@ const AgendaRoute = async (props: Props) => {
   ]);
 
   const isFiltered = filters.universe !== null || filters.eventType !== null;
+  const filtersTitle = getAgendaFiltersTitle(filters);
+  const agendaDescription = getAgendaDescription(filtersTitle);
   return (
     <PageContent eyebrow={{ label: "Agenda" }}>
-      <EventFilters selected={filters} />
+      {/* Shares the url: with its filters */}
+      <div className="flex flex-col-reverse gap-4 md:flex-row md:items-start md:justify-between">
+        <EventFilters selected={filters} />
+        <ShareButton
+          title={filtersTitle ? `Agenda · ${filtersTitle}` : "Agenda"}
+          text={agendaDescription}
+          className="self-end py-2 md:self-start"
+        />
+      </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <div className="flex flex-col gap-12">
           <AgendaEventList

@@ -127,6 +127,7 @@ const getTitleSize = (title: string, hasImage: boolean) => {
 
 const getHost = () => {
   try {
+    // Branding: the public domain, also on a preview deployment
     return new URL(siteConfig.canonicalUrl).host.replace(/^www\./u, "");
   } catch {
     return null;
