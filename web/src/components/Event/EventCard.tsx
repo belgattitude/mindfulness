@@ -79,7 +79,7 @@ export const EventCard: FC<Props> = (props) => {
       <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
         <EventTags eventType={event.eventType} status={status} />
 
-        <h3 className="text-title-color-800 group-hover:text-title-color-600 text-xl leading-snug font-medium transition-colors">
+        <h3 className="heading-card group-hover:text-title-color-600 transition-colors">
           {event.displayTitle ?? event.title}
         </h3>
 

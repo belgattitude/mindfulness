@@ -67,7 +67,7 @@ export const UpcomingEventsCard: FC<Props> = (props) => {
                     })}
                     className="text-[0.6875rem]"
                   />
-                  <h3 className="text-title-color-800 group-hover:text-title-color-600 leading-snug font-medium transition-colors">
+                  <h3 className="font-display text-title-color-800 group-hover:text-title-color-600 text-xl leading-tight font-medium transition-colors">
                     {event.displayTitle ?? event.title}
                   </h3>
                   <DateRangeText

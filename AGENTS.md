@@ -104,8 +104,8 @@ The server scripts read `strapi/.env.deploy`, see `strapi/README.md`.
 - Strapi media urls: `getStrapiMedia` (`src/lib/strapi`).
 - Lucide has no brand icons: they are inline svgs (`src/components/Contact/ContactIcons.tsx`).
 - Typography (`globals.css`): page titles `heading-page`, section titles
-  `heading-section` (Cormorant), taglines `text-tagline`; card and panel
-  titles stay in the sans serif. Body text `text-lg leading-8 text-neutral-700`
+  `heading-section`, event and programme cards `heading-card` (Cormorant),
+  taglines `text-tagline`; panel titles stay in the sans serif. Body text `text-lg leading-8 text-neutral-700`
   (as `ProseContent`, which styles the strapi rich text the same way).
 - No hardcoded colors (lint rule): use the theme colors (`brand-color-*`,
   `title-color-*`, `nav-title`, neutral…).

@@ -54,7 +54,7 @@ export const ProgrammeCard: FC<Props> = (props) => {
 
       <div className="flex flex-1 flex-col gap-4 p-5 md:p-6">
         <div className="flex flex-col gap-2">
-          <h3 className="text-xl leading-snug font-medium">
+          <h3 className="heading-card">
             <Link
               href={programmeUrl}
               className="text-title-color-800 hover:text-title-color-600 outline-green-500 transition-colors"

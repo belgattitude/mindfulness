@@ -41,7 +41,7 @@
 
 /*
   Typographic scale: the titles in the soft serif (Cormorant, font-display),
-  as the home ones. Cards and panels keep the sans serif for their titles.
+  as the home ones. Panels ("Prochaine session"…) keep the sans serif.
 */
 @utility heading-page {
   @apply font-display text-title-color-800 text-[2.25rem] leading-[1.1] font-medium text-balance md:text-5xl;
@@ -49,6 +49,11 @@
 
 @utility heading-section {
   @apply font-display text-title-color-800 text-[2rem] leading-tight font-medium text-balance md:text-4xl;
+}
+
+/* Event and programme cards (Cormorant reads smaller: a size up) */
+@utility heading-card {
+  @apply font-display text-title-color-800 text-2xl leading-tight font-medium md:text-[1.625rem];
 }
 
 /* The tagline under a page title, as the home one (AboutCard) */
