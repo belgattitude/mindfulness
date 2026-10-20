@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { FC } from "react";
@@ -96,15 +96,6 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
             Découvrir mon parcours
             <ArrowRight aria-hidden="true" className="size-4" />
           </Link>
-          <a
-            target="_blank"
-            href="https://www.brusselsmindfulness.be/team/sandrine-rauter"
-            className="text-title-color-600 hover:text-title-color-800 flex items-center gap-1.5 text-sm font-medium underline decoration-current/30 underline-offset-4 outline-green-500 transition-colors hover:decoration-current"
-            rel="noreferrer"
-          >
-            Mes formations sur Brussels Mindfulness
-            <ExternalLink aria-hidden="true" className="size-4" />
-          </a>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import { ExternalLink, Mail, Phone } from "lucide-react";
 import type { FC } from "react";
 
 import { BlocksText } from "@/components/BlocksText";
+import { NewsletterForm } from "@/components/Newsletter/NewsletterForm";
 import { ProseContent } from "@/components/ProseContent";
 import { useGetContact } from "@/openapi/contact/contact";
 import type { Contact } from "@/openapi/model";
@@ -115,6 +116,20 @@ export const ContactPageContent: FC = () => {
         </ProseContent>
       </header>
       <ContactCards contact={contact} />
+      <section
+        aria-labelledby="newsletter-title"
+        className="bg-brand-color-50 flex flex-col gap-4 rounded-2xl p-5 ring-1 ring-neutral-200 md:p-6"
+      >
+        <div className="flex flex-col gap-1">
+          <h2 id="newsletter-title" className="heading-card">
+            Recevoir la newsletter
+          </h2>
+          <p className="text-neutral-700">
+            Les prochains cours, stages et retraites, quelques fois par an.
+          </p>
+        </div>
+        <NewsletterForm source="contact" className="max-w-xl" />
+      </section>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import type { FC } from "react";
 
 import type { ContactDetails } from "@/components/Contact/contact.utils";
 import { LinkedinIcon } from "@/components/Contact/ContactIcons";
+import { NewsletterForm } from "@/components/Newsletter/NewsletterForm";
 import { siteConfig } from "@/config/site.config";
 import type { MainNavLinks } from "@/config/site.config";
 
@@ -127,7 +128,25 @@ export const MainFooter: FC<Props> = (props) => {
           <FooterColumn title="Infos" links={byGroup("menu")} />
         </div>
 
-        <div className="mt-12 border-t border-white/50 pt-6 text-sm text-neutral-600">
+        <section
+          aria-labelledby="footer-newsletter-title"
+          className="mt-12 flex flex-col gap-4 rounded-2xl bg-white/50 p-5 md:flex-row md:items-center md:justify-between md:gap-8 md:p-6"
+        >
+          <div>
+            <p
+              id="footer-newsletter-title"
+              className="text-nav-title text-sm font-medium tracking-widest uppercase"
+            >
+              Newsletter
+            </p>
+            <p className="mt-2 leading-relaxed">
+              Les prochains cours, stages et retraites, quelques fois par an.
+            </p>
+          </div>
+          <NewsletterForm source="footer" className="w-full md:max-w-md" />
+        </section>
+
+        <div className="mt-10 border-t border-white/50 pt-6 text-sm text-neutral-600">
           © {copyrightYear} {siteConfig.metadata.siteTitle}
         </div>
       </div>
