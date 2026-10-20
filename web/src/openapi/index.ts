@@ -2,6 +2,7 @@ export * from './about/about';
 export * from './contact/contact';
 export * from './event/event';
 export * from './home/home';
+export * from './newsletter-subscriber/newsletter-subscriber';
 export * from './page/page';
 export * from './programme/programme';
 export * from './temoignage/temoignage';
