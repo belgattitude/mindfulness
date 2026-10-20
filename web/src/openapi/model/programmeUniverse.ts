@@ -10,6 +10,6 @@ export type ProgrammeUniverse = typeof ProgrammeUniverse[keyof typeof ProgrammeU
 
 export const ProgrammeUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

@@ -536,9 +536,15 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         maxLength: 140;
         minLength: 10;
       }>;
-    endAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    endDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    endTime: Schema.Attribute.Time;
     eventType: Schema.Attribute.Enumeration<
-      ['stages-et-retraites', 'cours-reguliers', 'programmes-et-cycles']
+      [
+        'stages-et-retraites',
+        'cours-reguliers',
+        'programmes-et-cycles',
+        'atelier-ponctuel',
+      ]
     > &
       Schema.Attribute.Required;
     facebookLink: Schema.Attribute.String &
@@ -547,6 +553,11 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         minLength: 10;
       }>;
     flyer: Schema.Attribute.Media<'images' | 'videos' | 'files'>;
+    link: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 10;
+      }>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
@@ -568,8 +579,14 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
       'api::programme.programme'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    registrationFormUrl: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 180;
+        minLength: 10;
+      }>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    startAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    startDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    startTime: Schema.Attribute.Time;
     summary: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 1024;
@@ -581,7 +598,7 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
         maxLength: 255;
         minLength: 15;
       }>;
-    universe: Schema.Attribute.Enumeration<['yoga', 'mindfulness', 'dialogue']>;
+    universe: Schema.Attribute.Enumeration<['yoga', 'meditation', 'dialogue']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -719,7 +736,7 @@ export interface ApiProgrammeProgramme extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.UID<'title'>;
     summary: Schema.Attribute.Text;
     title: Schema.Attribute.String;
-    universe: Schema.Attribute.Enumeration<['yoga', 'mindfulness', 'dialogue']>;
+    universe: Schema.Attribute.Enumeration<['yoga', 'meditation', 'dialogue']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -760,7 +777,7 @@ export interface ApiTemoignageTemoignage extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 10;
       }>;
-    universe: Schema.Attribute.Enumeration<['yoga', 'mindfulness', 'dialogue']>;
+    universe: Schema.Attribute.Enumeration<['yoga', 'meditation', 'dialogue']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

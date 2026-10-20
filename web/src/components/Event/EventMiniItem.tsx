@@ -3,15 +3,15 @@ import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { DateRangeText } from "@/components/DateRangeText";
+import { getStartKey } from "@/lib/date/date.utils";
+import type { EventPeriod } from "@/lib/date/date.utils";
 
 import { EventDateBadge, EventTags, getEventStatus } from "./EventMeta";
 
-interface EventMiniItemEvent {
+interface EventMiniItemEvent extends EventPeriod {
   slug: string;
   title: string;
   displayTitle?: string | null;
-  startAt: string;
-  endAt: string;
   eventType?: string | null;
 }
 
@@ -21,8 +21,8 @@ export const getNextEvents = <T extends EventMiniItemEvent>(
   now: string
 ): T[] =>
   events
-    .filter((event) => event.endAt >= now)
-    .toSorted((a, b) => a.startAt.localeCompare(b.startAt));
+    .filter((event) => getEventStatus(event, now) !== "past")
+    .toSorted((a, b) => getStartKey(a).localeCompare(getStartKey(b)));
 
 /** Finished events, most recent first */
 export const getPastEvents = <T extends EventMiniItemEvent>(
@@ -30,8 +30,8 @@ export const getPastEvents = <T extends EventMiniItemEvent>(
   now: string
 ): T[] =>
   events
-    .filter((event) => event.endAt < now)
-    .toSorted((a, b) => b.startAt.localeCompare(a.startAt));
+    .filter((event) => getEventStatus(event, now) === "past")
+    .toSorted((a, b) => getStartKey(b).localeCompare(getStartKey(a)));
 
 /** A compact event row (date badge, title, tags), linking to the event page */
 export const EventMiniItem: FC<{
@@ -50,7 +50,7 @@ export const EventMiniItem: FC<{
       )}
     >
       <EventDateBadge
-        startAt={event.startAt}
+        period={event}
         className="bg-brand-color-50 ring-brand-color-200 flex-none shadow-none ring-1 group-hover:bg-white"
       />
       <div className="flex min-w-0 flex-col gap-1">
@@ -60,16 +60,11 @@ export const EventMiniItem: FC<{
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <EventTags
             eventType={event.eventType}
-            status={getEventStatus({
-              startAt: event.startAt,
-              endAt: event.endAt,
-              now,
-            })}
+            status={getEventStatus(event, now)}
             className="text-[0.6875rem]"
           />
           <DateRangeText
-            startAt={event.startAt}
-            endAt={event.endAt}
+            period={event}
             className="text-xs text-neutral-500 first-letter:capitalize"
           />
         </div>

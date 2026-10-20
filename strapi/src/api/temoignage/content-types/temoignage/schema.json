@@ -14,8 +14,8 @@
   "attributes": {
     "summary": {
       "type": "text",
-      "required": true,
-      "minLength": 10
+      "minLength": 10,
+      "required": true
     },
     "person": {
       "type": "string",
@@ -43,7 +43,7 @@
       "type": "enumeration",
       "enum": [
         "yoga",
-        "mindfulness",
+        "meditation",
         "dialogue"
       ]
     }

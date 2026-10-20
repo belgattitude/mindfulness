@@ -1,8 +1,14 @@
 import { clsx } from "clsx";
+import { ArrowDown } from "lucide-react";
 import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { getDayMonthParts } from "@/lib/date/date.utils";
+import {
+  getDateBadgeParts,
+  getSiteNow,
+  getStartKey,
+} from "@/lib/date/date.utils";
+import type { EventPeriod } from "@/lib/date/date.utils";
 
 import { findEventBySlug } from "./utils";
 import type { EventTypeSlugs } from "./utils";
@@ -17,17 +23,21 @@ const statusLabels: Record<EventStatus, string> = {
   upcoming: "À venir",
 };
 
-/** Dates are iso strings, compared as is. `now` comes from the server render. */
-export const getEventStatus = (params: {
-  startAt: string;
-  endAt: string;
-  now: string;
-}): EventStatus => {
-  const { startAt, endAt, now } = params;
-  if (endAt < now) {
+/**
+ * Over once its end day is over, ongoing from its start time, in the site
+ * time zone. `now` (iso) comes from the server render.
+ */
+export const getEventStatus = (
+  period: EventPeriod,
+  now: string
+): EventStatus => {
+  const site = getSiteNow(now);
+  if (period.endDate < site.date) {
     return "past";
   }
-  return startAt <= now ? "ongoing" : "upcoming";
+  return getStartKey(period) <= `${site.date}T${site.time}`
+    ? "ongoing"
+    : "upcoming";
 };
 
 /** The location is sometimes filled with "online" instead of the online flag */
@@ -67,23 +77,46 @@ export const EventTags: FC<{
   );
 };
 
-/** Calendar sheet with the first day of an event */
-export const EventDateBadge: FC<{ startAt: string; className?: string }> = (
-  props
-) => {
-  const { startAt, className } = props;
-  const { day, month } = getDayMonthParts({ date: startAt });
+/**
+ * Calendar sheet of an event: the day, the days ("6–13 sept.") or, over a
+ * week, the months. A period should not read as a single date.
+ */
+export const EventDateBadge: FC<{
+  period: EventPeriod;
+  className?: string;
+}> = (props) => {
+  const { period, className } = props;
+  const parts = getDateBadgeParts(period);
   return (
     <div
       className={twMerge(
-        "flex min-w-14 flex-col items-center rounded-xl bg-white/95 px-2 py-1.5 leading-none shadow-sm",
+        "flex min-w-14 flex-col items-center rounded-xl bg-white/95 px-2 py-1.5 leading-none whitespace-nowrap shadow-sm",
         className
       )}
     >
-      <span className="text-title-color-800 text-2xl font-semibold">{day}</span>
-      <span className="text-title-color-600 mt-1 text-xs uppercase">
-        {month}
-      </span>
+      {parts.kind === "period" ? (
+        <>
+          <span className="text-title-color-800 text-xs font-semibold uppercase">
+            {parts.from}
+          </span>
+          <ArrowDown
+            aria-hidden="true"
+            className="text-title-color-500 my-0.5 size-3"
+          />
+          <span className="text-title-color-800 text-xs font-semibold uppercase">
+            {parts.end}
+          </span>
+        </>
+      ) : (
+        <>
+          <span className="text-title-color-800 text-2xl font-semibold">
+            {parts.kind === "day" ? parts.day : parts.days}
+          </span>
+          <span className="text-title-color-600 mt-1 text-xs uppercase">
+            {parts.kind === "day" ? parts.month : parts.months}
+          </span>
+        </>
+      )}
     </div>
   );
 };

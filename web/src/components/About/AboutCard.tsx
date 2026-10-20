@@ -4,14 +4,14 @@ import Link from "next/link";
 import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
-import IconMindfulness from "@/public/icons/activities/mindfulness.svg";
+import IconMeditation from "@/public/icons/activities/meditation.svg";
 import IconRetreats from "@/public/icons/activities/retreats.svg";
 import IconYoga from "@/public/icons/activities/yoga.svg";
 
 import { sandrinePortrait, sandrineTagline } from "./sandrinePortrait";
 
 const offers = [
-  { Icon: IconMindfulness, text: "Mindfulness · pleine conscience" },
+  { Icon: IconMeditation, text: "Méditation · pleine conscience" },
   { Icon: IconYoga, text: "Yoga en présentiel ou en ligne" },
   { Icon: IconRetreats, text: "Stages et retraites" },
 ] as const;

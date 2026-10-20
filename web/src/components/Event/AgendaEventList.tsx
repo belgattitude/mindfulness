@@ -59,14 +59,7 @@ export const AgendaEventList: FC<Props> = (props) => {
         <ul className="flex flex-col gap-5">
           {events.map((e) => (
             <li key={`event-${e.documentId}`}>
-              <EventCard
-                event={e}
-                status={getEventStatus({
-                  startAt: e.startAt,
-                  endAt: e.endAt,
-                  now,
-                })}
-              />
+              <EventCard event={e} status={getEventStatus(e, now)} />
             </li>
           ))}
         </ul>

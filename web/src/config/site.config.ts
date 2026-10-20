@@ -31,8 +31,8 @@ export const siteConfig = {
   mainNavLinks: [
     { title: "Accueil", href: "/", footerGroup: "menu" },
     {
-      title: "Mindfulness",
-      href: "/activities/mindfulness",
+      title: "Méditation",
+      href: "/activities/meditation",
       footerGroup: "activities",
     },
     { title: "Yoga", href: "/activities/yoga", footerGroup: "activities" },
@@ -52,18 +52,19 @@ export const siteConfig = {
   ],
   metadata: {
     siteDescription:
-      "Mindfulness, yoga et dialogue conscient avec Sandrine Rauter : cours, programmes, stages et retraites, en personne et en ligne, en Belgique et en France.",
+      "Méditation, yoga et dialogue conscient avec Sandrine Rauter : cours, programmes, stages et retraites, en personne et en ligne, en Belgique et en France.",
     siteTitle: "Sandrine Rauter",
     author: "Sandrine Rauter",
   },
   search: {
     eventTypes: [
+      { slug: "cours-reguliers", title: "Cours réguliers" },
+      { slug: "atelier-ponctuel", title: "Ateliers" },
       { slug: "stages-et-retraites", title: "Stages et retraites" },
       { slug: "programmes-et-cycles", title: "Programmes et cycles" },
-      { slug: "cours-reguliers", title: "Cours réguliers" },
     ],
     universes: [
-      { slug: "mindfulness", title: "Mindfulness", value: "mindfulness" },
+      { slug: "meditation", title: "Méditation", value: "meditation" },
       { slug: "yoga", title: "Yoga", value: "yoga" },
       {
         slug: "dialogue-conscient",

@@ -10,6 +10,6 @@ export type EventUniverse = typeof EventUniverse[keyof typeof EventUniverse];
 
 export const EventUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

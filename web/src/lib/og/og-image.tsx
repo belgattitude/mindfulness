@@ -253,7 +253,7 @@ export const renderDefaultOgImage = async () => {
     path.join(process.cwd(), "public/images/sandrine-portrait.jpg")
   );
   return renderOgImage({
-    title: "Mindfulness, yoga et dialogue conscient",
+    title: "Méditation, yoga et dialogue conscient",
     subtitle: "Cours, programmes, stages et retraites, en personne et en ligne",
     image: {
       src: `data:image/jpeg;base64,${portrait.toString("base64")}`,

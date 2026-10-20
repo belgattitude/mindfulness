@@ -10,6 +10,6 @@ export type ProgrammeRequestDataUniverse = typeof ProgrammeRequestDataUniverse[k
 
 export const ProgrammeRequestDataUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

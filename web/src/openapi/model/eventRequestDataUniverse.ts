@@ -10,6 +10,6 @@ export type EventRequestDataUniverse = typeof EventRequestDataUniverse[keyof typ
 
 export const EventRequestDataUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

@@ -6,10 +6,11 @@ import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import IconDialogue from "@/public/icons/activities/dialogue.svg";
-import IconMindfulness from "@/public/icons/activities/mindfulness.svg";
+import IconMeditation from "@/public/icons/activities/meditation.svg";
 import IconProgrammes from "@/public/icons/activities/programmes.svg";
 import IconRegularClasses from "@/public/icons/activities/regular-classes.svg";
 import IconRetreats from "@/public/icons/activities/retreats.svg";
+import IconWorkshops from "@/public/icons/activities/workshops.svg";
 import IconYoga from "@/public/icons/activities/yoga.svg";
 
 interface Props {
@@ -20,9 +21,9 @@ const activities = [
   {
     items: [
       {
-        title: "Mindfulness",
-        href: "/activities/mindfulness",
-        Icon: IconMindfulness,
+        title: "Méditation",
+        href: "/activities/meditation",
+        Icon: IconMeditation,
       },
       { title: "Yoga", href: "/activities/yoga", Icon: IconYoga },
       {
@@ -41,14 +42,19 @@ const activities = [
         Icon: IconRegularClasses,
       },
       {
-        title: "Programmes & cycles",
-        href: "/agenda/programmes-et-cycles",
-        Icon: IconProgrammes,
+        title: "Ateliers",
+        href: "/agenda/atelier-ponctuel",
+        Icon: IconWorkshops,
       },
       {
         title: "Stages & retraites",
         href: "/agenda/stages-et-retraites",
         Icon: IconRetreats,
+      },
+      {
+        title: "Programmes & cycles",
+        href: "/agenda/programmes-et-cycles",
+        Icon: IconProgrammes,
       },
     ],
     name: "Agenda",
