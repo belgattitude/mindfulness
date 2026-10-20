@@ -26,7 +26,7 @@ const Image = async (props: Props) => {
   if (!event) {
     return renderDefaultOgImage();
   }
-  const dates = getDateRangeStr({ startAt: event.startAt, endAt: event.endAt });
+  const dates = getDateRangeStr(event);
   // Some events have "online" as location instead of the online flag
   const place =
     event.online || event.location?.trim().toLowerCase() === "online"

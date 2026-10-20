@@ -3,7 +3,9 @@
 import {
   ArrowLeft,
   CalendarDays,
+  ClipboardPen,
   ExternalLink,
+  Info,
   MapPin,
   MonitorPlay,
   Users,
@@ -27,6 +29,8 @@ import type { Event, GetEventsParams } from "@/openapi/model";
 
 import { PageBackgroundImg } from "../PageBackgroundImg";
 import { PageContent } from "../PageContent";
+import { AddToCalendarButton } from "./AddToCalendarButton";
+import { canAddToCalendar } from "./eventCalendar";
 import {
   EventDateBadge,
   EventTags,
@@ -61,13 +65,17 @@ const InfoItem: FC<{ icon: ReactNode; label: string; children: ReactNode }> = (
 
 const iconClassName = "size-5";
 
+/** The strapi link may omit the protocol (www.example.com) */
+const getExternalUrl = (link: string) =>
+  /^https?:\/\//u.test(link) ? link : `https://${link.replace(/^\/\//u, "")}`;
+
 /** Dates, place, organizers, programmes and actions */
 const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
   const { event, status } = props;
   const online = isOnlineEvent(event);
   const programmes = (event.programmes ?? []).filter((p) => p.slug);
   return (
-    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-6 rounded-2xl p-4 ring-1 sm:p-6 lg:sticky lg:top-6">
+    <div className="bg-brand-color-50 ring-brand-color-200 flex flex-col gap-6 rounded-2xl p-4 ring-1 sm:p-6">
       <h2 className="text-title-color-800 text-lg font-medium">
         Infos pratiques
       </h2>
@@ -76,11 +84,7 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
           label="Dates"
           icon={<CalendarDays aria-hidden="true" className={iconClassName} />}
         >
-          <DateRangeText
-            startAt={event.startAt}
-            endAt={event.endAt}
-            className="first-letter:capitalize"
-          />
+          <DateRangeText period={event} className="first-letter:capitalize" />
         </InfoItem>
         {online ? (
           <InfoItem
@@ -140,6 +144,9 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
             ? "Être informé·e des prochaines dates"
             : "Me contacter pour participer"}
         </Link>
+        {status !== "past" && canAddToCalendar(event) && (
+          <AddToCalendarButton event={event} />
+        )}
         {event.facebookLink && (
           <a
             href={event.facebookLink}
@@ -159,6 +166,62 @@ const EventInfoPanel: FC<{ event: Event; status: EventStatus }> = (props) => {
         />
       </div>
     </div>
+  );
+};
+
+/** The registration form and the external page, opened in a new tab */
+const EventLinksCard: FC<{
+  registrationUrl: string | null;
+  link: string | null;
+}> = (props) => {
+  const { registrationUrl, link } = props;
+  return (
+    <section className="ring-brand-color-200 flex flex-col gap-4 rounded-2xl bg-white p-4 ring-1 sm:p-6">
+      <h2 className="text-title-color-800 flex items-start gap-2 text-lg leading-snug font-medium">
+        {/* On the first line when the title wraps */}
+        {registrationUrl === null ? (
+          <Info
+            aria-hidden="true"
+            className="text-title-color-500 mt-0.5 size-5 flex-none"
+          />
+        ) : (
+          <ClipboardPen
+            aria-hidden="true"
+            className="text-title-color-500 mt-0.5 size-5 flex-none"
+          />
+        )}
+        {registrationUrl === null ? "Plus d’informations" : "Inscription"}
+      </h2>
+      {registrationUrl !== null && (
+        <p className="text-sm text-neutral-700">
+          L&rsquo;inscription se fait en ligne, via le formulaire.
+        </p>
+      )}
+      <div className="flex flex-col gap-2">
+        {registrationUrl !== null && (
+          <a
+            href={getExternalUrl(registrationUrl)}
+            target="_blank"
+            rel="noreferrer"
+            className="bg-title-color-600 hover:bg-title-color-700 flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-white outline-green-500 transition-colors"
+          >
+            <ExternalLink aria-hidden="true" className="size-4" />
+            S&rsquo;inscrire
+          </a>
+        )}
+        {link !== null && (
+          <a
+            href={getExternalUrl(link)}
+            target="_blank"
+            rel="noreferrer"
+            className="border-brand-color-400 text-title-color-800 hover:bg-brand-color-100 flex items-center justify-center gap-2 rounded-full border bg-white px-4 py-2.5 text-sm font-medium outline-green-500 transition-colors"
+          >
+            <ExternalLink aria-hidden="true" className="size-4" />
+            En savoir plus
+          </a>
+        )}
+      </div>
+    </section>
   );
 };
 
@@ -182,11 +245,7 @@ export const EventDetail: FC<Props> = (props) => {
   const shareText =
     event.summary || getTextExcerpt(getBlocksText(event.description));
   const cover = getStrapiMedia(event.cover);
-  const status = getEventStatus({
-    startAt: event.startAt,
-    endAt: event.endAt,
-    now,
-  });
+  const status = getEventStatus(event, now);
   const summary =
     event.summary &&
     !isRedundantSummary(event.summary, {
@@ -195,6 +254,13 @@ export const EventDetail: FC<Props> = (props) => {
     })
       ? event.summary
       : null;
+
+  // No registration once the event is over
+  const registrationUrl =
+    event.registrationFormUrl && status !== "past"
+      ? event.registrationFormUrl
+      : null;
+  const link = event.link || null;
 
   return (
     <div>
@@ -236,17 +302,17 @@ export const EventDetail: FC<Props> = (props) => {
               className="object-cover"
               src={cover}
             />
-            <EventDateBadge
-              startAt={event.startAt}
-              className="absolute top-4 left-4"
-            />
+            <EventDateBadge period={event} className="absolute top-4 left-4" />
           </div>
         )}
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
           {/* First on small screens, next to the description on large ones */}
-          <aside className="lg:col-start-2 lg:row-start-1">
+          <aside className="flex flex-col gap-6 lg:sticky lg:top-6 lg:col-start-2 lg:row-start-1 lg:self-start">
             <EventInfoPanel event={event} status={status} />
+            {(registrationUrl !== null || link !== null) && (
+              <EventLinksCard registrationUrl={registrationUrl} link={link} />
+            )}
           </aside>
 
           <ProseContent className="lg:col-start-1 lg:row-start-1">

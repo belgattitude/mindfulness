@@ -44,7 +44,7 @@ interface Props {
 /** Past sessions are only a reminder, the agenda has them all */
 const maxPastEvents = 3;
 
-/** Links to the activity pages presenting the programme (Mindfulness…) */
+/** Links to the activity pages presenting the programme (Méditation…) */
 const ProgrammePagesCard: FC<{ pages: Page[] }> = (props) => {
   const { pages } = props;
   return (
@@ -152,14 +152,7 @@ const ProgrammeDates: FC<{
         <ul className="flex flex-col gap-5">
           {nextEvents.map((event) => (
             <li key={event.documentId}>
-              <EventCard
-                event={event}
-                status={getEventStatus({
-                  startAt: event.startAt,
-                  endAt: event.endAt,
-                  now,
-                })}
-              />
+              <EventCard event={event} status={getEventStatus(event, now)} />
             </li>
           ))}
         </ul>

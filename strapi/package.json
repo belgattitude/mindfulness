@@ -24,22 +24,22 @@
     "typecheck": "tsc -p scripts"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "5.57.0",
-    "@strapi/plugin-users-permissions": "5.57.0",
-    "@strapi/provider-email-nodemailer": "5.57.0",
-    "@strapi/strapi": "5.57.0",
+    "@strapi/plugin-documentation": "5.58.0",
+    "@strapi/plugin-users-permissions": "5.58.0",
+    "@strapi/provider-email-nodemailer": "5.58.0",
+    "@strapi/strapi": "5.58.0",
     "better-sqlite3": "13.0.3",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "react-router-dom": "^6.30.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.4",
     "sharp": "0.35.5",
-    "styled-components": "^6.5.3"
+    "styled-components": "^6.6.0"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "2.34.2",
+    "@dotenvx/dotenvx": "2.38.0",
     "@types/mdast": "4.0.4",
     "@types/node": "26.6.5",
-    "execa": "10.1.0",
+    "execa": "10.2.0",
     "mdast-util-from-markdown": "2.1.0",
     "mdast-util-gfm": "3.1.0",
     "micromark-extension-gfm": "3.0.0",

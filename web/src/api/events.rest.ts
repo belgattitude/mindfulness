@@ -3,6 +3,7 @@
 import { getUniverseValue } from "@/components/Event/agendaFilters";
 import type { UniverseSlug } from "@/components/Event/agendaFilters";
 import type { EventTypeSlugs } from "@/components/Event/utils";
+import { getSiteNow } from "@/lib/date/date.utils";
 import type { GetEventsParams } from "@/openapi/model";
 
 /** The agenda filters (null or unset for all) as strapi filters */
@@ -31,13 +32,14 @@ export const getUpcomingEventsParams = (params: {
   const { limit = 100, now } = params;
   return {
     filters: {
-      endAt: { $gte: now },
+      // Strapi dates are wall clock dates, compared to the site day
+      endDate: { $gte: getSiteNow(now).date },
       ...getAgendaStrapiFilters(params),
     },
     "pagination[page]": 1,
     "pagination[pageSize]": limit,
     populate: ["cover"],
-    sort: "startAt:asc,publishedAt:asc",
+    sort: "startDate:asc,startTime:asc,publishedAt:asc",
   };
 };
 
@@ -56,14 +58,14 @@ export const getPastEventsParams = (params: {
   const { limit = 100, now, dateMin } = params;
   return {
     filters: {
-      endAt: { $lt: now },
-      startAt: { $gte: dateMin },
+      endDate: { $lt: getSiteNow(now).date },
+      startDate: { $gte: getSiteNow(dateMin).date },
       ...getAgendaStrapiFilters(params),
     },
     "pagination[page]": 1,
     "pagination[pageSize]": limit,
     populate: ["cover"],
-    sort: "startAt:desc,publishedAt:desc",
+    sort: "startDate:desc,startTime:desc,publishedAt:desc",
   };
 };
 

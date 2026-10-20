@@ -5,10 +5,11 @@ import { twMerge } from "tailwind-merge";
 
 import { siteConfig } from "@/config/site.config";
 import IconDialogue from "@/public/icons/activities/dialogue.svg";
-import IconMindfulness from "@/public/icons/activities/mindfulness.svg";
+import IconMeditation from "@/public/icons/activities/meditation.svg";
 import IconProgrammes from "@/public/icons/activities/programmes.svg";
 import IconRegularClasses from "@/public/icons/activities/regular-classes.svg";
 import IconRetreats from "@/public/icons/activities/retreats.svg";
+import IconWorkshops from "@/public/icons/activities/workshops.svg";
 import IconYoga from "@/public/icons/activities/yoga.svg";
 
 import { getAgendaUrl } from "./agendaFilters";
@@ -17,12 +18,13 @@ import type { AgendaFilters } from "./agendaFilters";
 type Icon = FC<SVGProps<SVGSVGElement>>;
 
 const icons: Record<string, Icon> = {
-  mindfulness: IconMindfulness,
+  meditation: IconMeditation,
   yoga: IconYoga,
   "dialogue-conscient": IconDialogue,
   "stages-et-retraites": IconRetreats,
   "programmes-et-cycles": IconProgrammes,
   "cours-reguliers": IconRegularClasses,
+  "atelier-ponctuel": IconWorkshops,
 };
 
 interface Option {

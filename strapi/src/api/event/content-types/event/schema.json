@@ -14,10 +14,10 @@
   "attributes": {
     "title": {
       "type": "string",
-      "unique": true,
-      "maxLength": 255,
       "minLength": 15,
-      "required": true
+      "maxLength": 255,
+      "required": true,
+      "unique": true
     },
     "summary": {
       "type": "text",
@@ -34,24 +34,30 @@
     },
     "universe": {
       "type": "enumeration",
+      "required": false,
       "enum": [
         "yoga",
-        "mindfulness",
+        "meditation",
         "dialogue"
-      ],
-      "required": false
+      ]
     },
     "description": {
       "type": "blocks",
       "required": true
     },
-    "startAt": {
-      "type": "datetime",
+    "startDate": {
+      "type": "date",
       "required": true
     },
-    "endAt": {
-      "type": "datetime",
+    "startTime": {
+      "type": "time"
+    },
+    "endDate": {
+      "type": "date",
       "required": true
+    },
+    "endTime": {
+      "type": "time"
     },
     "flyer": {
       "type": "media",
@@ -75,18 +81,28 @@
     },
     "location": {
       "type": "string",
-      "maxLength": 100,
-      "minLength": 3
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "online"
+            },
+            false
+          ]
+        }
+      },
+      "minLength": 3,
+      "maxLength": 100
     },
     "organizers": {
       "type": "string",
-      "maxLength": 150,
-      "minLength": 3
+      "minLength": 3,
+      "maxLength": 150
     },
     "online": {
       "type": "boolean",
-      "default": false,
-      "required": true
+      "required": true,
+      "default": false
     },
     "facebookLink": {
       "type": "string",
@@ -102,12 +118,25 @@
     },
     "eventType": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "stages-et-retraites",
         "cours-reguliers",
-        "programmes-et-cycles"
-      ],
-      "required": true
+        "programmes-et-cycles",
+        "atelier-ponctuel"
+      ]
+    },
+    "link": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 160,
+      "regex": "^(https?:)?(//)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$"
+    },
+    "registrationFormUrl": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 180,
+      "regex": "^(https?:)?(//)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?$"
     }
   }
 }

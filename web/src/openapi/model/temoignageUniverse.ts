@@ -10,6 +10,6 @@ export type TemoignageUniverse = typeof TemoignageUniverse[keyof typeof Temoigna
 
 export const TemoignageUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

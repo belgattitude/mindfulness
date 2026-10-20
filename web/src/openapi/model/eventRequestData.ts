@@ -13,8 +13,10 @@ export type EventRequestData = {
   cover: number | string;
   universe?: EventRequestDataUniverse;
   description: unknown;
-  startAt: string;
-  endAt: string;
+  startDate: string;
+  startTime?: string;
+  endDate: string;
+  endTime?: string;
   flyer?: number | string;
   slug: string;
   displayTitle?: string;
@@ -24,6 +26,8 @@ export type EventRequestData = {
   facebookLink?: string;
   programmes?: (number | string)[];
   eventType: EventRequestDataEventType;
+  link?: string;
+  registrationFormUrl?: string;
   locale?: string;
   localizations?: (number | string)[];
 };

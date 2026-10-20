@@ -10,6 +10,6 @@ export type TemoignageRequestDataUniverse = typeof TemoignageRequestDataUniverse
 
 export const TemoignageRequestDataUniverse = {
   yoga: 'yoga',
-  mindfulness: 'mindfulness',
+  meditation: 'meditation',
   dialogue: 'dialogue',
 } as const;

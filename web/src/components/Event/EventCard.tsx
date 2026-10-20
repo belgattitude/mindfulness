@@ -12,6 +12,7 @@ import type { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { DateRangeText } from "@/components/DateRangeText";
+import type { EventPeriod } from "@/lib/date/date.utils";
 import { getStrapiMedia } from "@/lib/strapi";
 import type { StrapiMedia } from "@/lib/strapi/getStrapiMedia";
 
@@ -19,13 +20,11 @@ import { EventDateBadge, EventTags, isOnlineEvent } from "./EventMeta";
 import type { EventStatus } from "./EventMeta";
 
 /** The fields used by the card */
-export interface EventCardEvent {
+export interface EventCardEvent extends EventPeriod {
   slug: string;
   title: string;
   displayTitle?: string | null;
   summary?: string | null;
-  startAt: string;
-  endAt: string;
   cover?: StrapiMedia | null;
   eventType?: string | null;
   location?: string | null;
@@ -70,10 +69,7 @@ export const EventCard: FC<Props> = (props) => {
             src={cover}
           />
         )}
-        <EventDateBadge
-          startAt={event.startAt}
-          className="absolute top-3 left-3"
-        />
+        <EventDateBadge period={event} className="absolute top-3 left-3" />
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
@@ -89,11 +85,7 @@ export const EventCard: FC<Props> = (props) => {
               aria-hidden="true"
               className="text-title-color-500 size-4 flex-none"
             />
-            <DateRangeText
-              startAt={event.startAt}
-              endAt={event.endAt}
-              className="first-letter:capitalize"
-            />
+            <DateRangeText period={event} className="first-letter:capitalize" />
           </li>
           {online ? (
             <li className="flex items-center gap-1.5">
@@ -169,8 +161,7 @@ export const EventCardBackup: FC<Props> = (props) => {
           <Link href={eventUrl}>{event.title}</Link>
         </div>
         <DateRangeText
-          startAt={event.startAt}
-          endAt={event.endAt}
+          period={event}
           className="text-indigo-600 first-letter:capitalize"
         />
         <p className="line-clamp-4 text-base text-gray-700">{event.summary}</p>

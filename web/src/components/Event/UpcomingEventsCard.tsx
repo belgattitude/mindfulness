@@ -54,25 +54,20 @@ export const UpcomingEventsCard: FC<Props> = (props) => {
                 className="group flex gap-4 rounded-lg outline-green-500"
               >
                 <EventDateBadge
-                  startAt={event.startAt}
+                  period={event}
                   className="bg-brand-color-50 ring-brand-color-200 h-fit flex-none shadow-none ring-1"
                 />
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <EventTags
                     eventType={event.eventType}
-                    status={getEventStatus({
-                      startAt: event.startAt,
-                      endAt: event.endAt,
-                      now,
-                    })}
+                    status={getEventStatus(event, now)}
                     className="text-[0.6875rem]"
                   />
                   <h3 className="font-display text-title-color-800 group-hover:text-title-color-600 text-xl leading-tight font-medium transition-colors">
                     {event.displayTitle ?? event.title}
                   </h3>
                   <DateRangeText
-                    startAt={event.startAt}
-                    endAt={event.endAt}
+                    period={event}
                     className="text-xs text-neutral-500 first-letter:capitalize"
                   />
                 </div>

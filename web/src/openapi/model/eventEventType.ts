@@ -12,4 +12,5 @@ export const EventEventType = {
   'stages-et-retraites': 'stages-et-retraites',
   'cours-reguliers': 'cours-reguliers',
   'programmes-et-cycles': 'programmes-et-cycles',
+  'atelier-ponctuel': 'atelier-ponctuel',
 } as const;

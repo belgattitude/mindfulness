@@ -20,7 +20,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-10-20T12:54:21.325Z"
+    "x-generation-date": "2026-10-20T19:03:59.007Z"
   },
   "servers": [
     {
@@ -5743,7 +5743,7 @@
                 "type": "string",
                 "enum": [
                   "yoga",
-                  "mindfulness",
+                  "meditation",
                   "dialogue"
                 ]
               },
@@ -6011,7 +6011,7 @@
             "type": "string",
             "enum": [
               "yoga",
-              "mindfulness",
+              "meditation",
               "dialogue"
             ]
           },
@@ -6116,7 +6116,7 @@
                 "type": "string",
                 "enum": [
                   "yoga",
-                  "mindfulness",
+                  "meditation",
                   "dialogue"
                 ]
               },
@@ -6395,7 +6395,7 @@
             "type": "string",
             "enum": [
               "yoga",
-              "mindfulness",
+              "meditation",
               "dialogue"
             ]
           },
@@ -6846,8 +6846,8 @@
               "title",
               "cover",
               "description",
-              "startAt",
-              "endAt",
+              "startDate",
+              "endDate",
               "slug",
               "online",
               "eventType"
@@ -6875,18 +6875,28 @@
                 "type": "string",
                 "enum": [
                   "yoga",
-                  "mindfulness",
+                  "meditation",
                   "dialogue"
                 ]
               },
               "description": {},
-              "startAt": {
+              "startDate": {
                 "type": "string",
-                "format": "date-time"
+                "format": "date"
               },
-              "endAt": {
+              "startTime": {
                 "type": "string",
-                "format": "date-time"
+                "format": "time",
+                "example": "12:54.000"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "endTime": {
+                "type": "string",
+                "format": "time",
+                "example": "12:54.000"
               },
               "flyer": {
                 "oneOf": [
@@ -6936,8 +6946,15 @@
                 "enum": [
                   "stages-et-retraites",
                   "cours-reguliers",
-                  "programmes-et-cycles"
+                  "programmes-et-cycles",
+                  "atelier-ponctuel"
                 ]
+              },
+              "link": {
+                "type": "string"
+              },
+              "registrationFormUrl": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -7001,8 +7018,8 @@
           "title",
           "cover",
           "description",
-          "startAt",
-          "endAt",
+          "startDate",
+          "endDate",
           "slug",
           "online",
           "eventType"
@@ -7203,18 +7220,28 @@
             "type": "string",
             "enum": [
               "yoga",
-              "mindfulness",
+              "meditation",
               "dialogue"
             ]
           },
           "description": {},
-          "startAt": {
+          "startDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
           },
-          "endAt": {
+          "startTime": {
             "type": "string",
-            "format": "date-time"
+            "format": "time",
+            "example": "12:54.000"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
           },
           "flyer": {
             "type": "object",
@@ -7417,8 +7444,15 @@
             "enum": [
               "stages-et-retraites",
               "cours-reguliers",
-              "programmes-et-cycles"
+              "programmes-et-cycles",
+              "atelier-ponctuel"
             ]
+          },
+          "link": {
+            "type": "string"
+          },
+          "registrationFormUrl": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",

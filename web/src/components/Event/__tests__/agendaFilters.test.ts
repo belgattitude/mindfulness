@@ -23,11 +23,15 @@ describe(parseAgendaSegments, () => {
       universe: "dialogue-conscient",
       eventType: "stages-et-retraites",
     });
+    expect(parseAgendaSegments(["atelier-ponctuel", "yoga"])).toStrictEqual({
+      universe: "yoga",
+      eventType: "atelier-ponctuel",
+    });
   });
 
   it("should reject unknown or repeated segments", () => {
     expect(parseAgendaSegments(["unknown"])).toBeNull();
-    expect(parseAgendaSegments(["yoga", "mindfulness"])).toBeNull();
+    expect(parseAgendaSegments(["yoga", "meditation"])).toBeNull();
     expect(parseAgendaSegments(["yoga", "cours-reguliers", "x"])).toBeNull();
   });
 });
@@ -56,6 +60,9 @@ describe(getAgendaFiltersTitle, () => {
     expect(
       getAgendaFiltersTitle({ universe: "yoga", eventType: "cours-reguliers" })
     ).toBe("Yoga · Cours réguliers");
+    expect(
+      getAgendaFiltersTitle({ universe: null, eventType: "atelier-ponctuel" })
+    ).toBe("Ateliers");
     expect(getAgendaFiltersTitle({ universe: null, eventType: null })).toBe("");
   });
 });

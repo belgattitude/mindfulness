@@ -20,8 +20,10 @@ export interface Event {
   cover: EventCover;
   universe?: EventUniverse;
   description: unknown;
-  startAt: string;
-  endAt: string;
+  startDate: string;
+  startTime?: string;
+  endDate: string;
+  endTime?: string;
   flyer?: EventFlyer;
   slug: string;
   displayTitle?: string;
@@ -31,6 +33,8 @@ export interface Event {
   facebookLink?: string;
   programmes?: Programme[];
   eventType: EventEventType;
+  link?: string;
+  registrationFormUrl?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

@@ -35,7 +35,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
     return { title: "Événement introuvable" };
   }
   const title = event.displayTitle ?? event.title;
-  const dates = getDateRangeStr({ startAt: event.startAt, endAt: event.endAt });
+  const dates = getDateRangeStr(event);
   const description = getTextExcerpt(
     [
       `${dates.charAt(0).toUpperCase()}${dates.slice(1)}.`,

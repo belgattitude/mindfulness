@@ -5,7 +5,7 @@ import { getStrapiURL } from "@/config/strapi.config";
 
 /**
  * Query string serializer used by the orval generated hooks (src/openapi):
- * strapi expects nested objects in brackets, ie: filters[startAt][$gte]=...
+ * strapi expects nested objects in brackets, ie: filters[startDate][$gte]=...
  */
 export const strapiParamsSerializer = (params: object | undefined) =>
   stringify(params, { encodeValuesOnly: true });

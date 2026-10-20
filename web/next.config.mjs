@@ -113,6 +113,17 @@ const nextConfig = {
         destination: `${strapiUrl}/admin`,
         permanent: false,
       },
+      // Mindfulness became meditation, keep the old links working
+      {
+        source: "/activities/mindfulness",
+        destination: "/activities/meditation",
+        permanent: true,
+      },
+      {
+        source: "/agenda/mindfulness/:eventType*",
+        destination: "/agenda/meditation/:eventType*",
+        permanent: true,
+      },
     ];
   },
 
