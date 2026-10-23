@@ -29,6 +29,7 @@
     "@strapi/provider-email-nodemailer": "5.59.0",
     "@strapi/strapi": "5.59.0",
     "better-sqlite3": "13.0.3",
+    "heic-decode": "2.1.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.4",
