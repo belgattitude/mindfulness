@@ -192,6 +192,9 @@ importers:
       better-sqlite3:
         specifier: 13.0.3
         version: 13.0.3
+      heic-decode:
+        specifier: 2.1.0
+        version: 2.1.0
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -7568,6 +7571,10 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
 
+  heic-decode@2.1.0:
+    resolution: {integrity: sha512-0fB3O3WMk38+PScbHLVp66jcNhsZ/ErtQ6u2lMYu/YxXgbBtl+oKOhGQHa4RpvE68k8IzbWkABzHnyAIjR758A==}
+    engines: {node: '>=8.0.0'}
+
   helmet@6.2.0:
     resolution: {integrity: sha512-DWlwuXLLqbrIOltR6tFQXShj/+7Cyp0gLi6uAb8qMdFh/YBBFbKSgQ6nbXmScYd8emMctuthmgIa7tUfo9Rtyg==}
     engines: {node: '>=14.0.0'}
@@ -8182,6 +8189,10 @@ packages:
   ky@1.14.3:
     resolution: {integrity: sha512-9zy9lkjac+TR1c2tG+mkNSVlyOpInnWdSMiue4F+kq8TwJSgv6o8jhLRg8Ho6SnZ9wOYUq/yozts9qQCfk7bIw==}
     engines: {node: '>=18'}
+
+  libheif-js@1.23.5:
+    resolution: {integrity: sha512-umXZPthnWZtF3iG/5mQG+AZ2V6i0UeYpo3z2CkggTEgL8dKmIIwJT6TDuAMuabXa1yTW8uJ1ZAgR+CxNTklYYw==}
+    engines: {node: '>=8.0.0'}
 
   lie@3.3.0:
     resolution: {integrity: sha512-UaiMJzeWRlEujzAuw5LokY1L5ecNQYZKfmyZ9L7wDHb/p5etKaxXhohBcrw0EYby+G/NA52vRSN4N39dxHAIwQ==}
@@ -19206,6 +19217,10 @@ snapshots:
 
   he@1.2.0: {}
 
+  heic-decode@2.1.0:
+    dependencies:
+      libheif-js: 1.23.5
+
   helmet@6.2.0: {}
 
   hex-rgb@4.3.0: {}
@@ -19786,6 +19801,8 @@ snapshots:
   kuler@2.0.0: {}
 
   ky@1.14.3: {}
+
+  libheif-js@1.23.5: {}
 
   lie@3.3.0:
     dependencies:
