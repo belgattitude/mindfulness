@@ -24,10 +24,10 @@
     "typecheck": "tsc -p scripts"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "5.58.0",
-    "@strapi/plugin-users-permissions": "5.58.0",
-    "@strapi/provider-email-nodemailer": "5.58.0",
-    "@strapi/strapi": "5.58.0",
+    "@strapi/plugin-documentation": "5.59.0",
+    "@strapi/plugin-users-permissions": "5.59.0",
+    "@strapi/provider-email-nodemailer": "5.59.0",
+    "@strapi/strapi": "5.59.0",
     "better-sqlite3": "13.0.3",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -36,7 +36,7 @@
     "styled-components": "^6.6.0"
   },
   "devDependencies": {
-    "@dotenvx/dotenvx": "2.38.0",
+    "@dotenvx/dotenvx": "2.38.2",
     "@types/mdast": "4.0.4",
     "@types/node": "26.6.5",
     "execa": "10.2.0",

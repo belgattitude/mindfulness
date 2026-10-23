@@ -3,7 +3,7 @@
 # Build context: the repository root (pnpm monorepo), ie from strapi/:
 #   docker build --file Dockerfile ..
 #
-ARG BUN_VERSION=1.4.3
+ARG BUN_VERSION=1.4.4
 
 #############################################################
 # Stage 1 - Install and build strapi                        #
