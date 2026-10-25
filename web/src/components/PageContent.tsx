@@ -71,8 +71,9 @@ export const PageContent: FC<Props> = (props) => {
             // padding, tight on mobile to give the text the width (see
             // pageContentBleedClassName)
             "px-4 py-6 sm:px-6 md:px-14 md:py-10",
-            // margin, a thin green border kept around on mobile
-            "mx-2 mt-5 mb-2 sm:mx-5 md:mt-10 md:mb-0",
+            // margin, a thin green border kept around on mobile, the same
+            // on top: the header is already a band of its own
+            "mx-2 my-2 sm:mx-5 sm:mt-5 md:mt-10 md:mb-0",
             "marker:text-brand-color-800 marker:mr-0",
             "shadow-lg"
           ),
