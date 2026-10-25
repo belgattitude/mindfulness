@@ -8,11 +8,11 @@ import IconMeditation from "@/public/icons/activities/meditation.svg";
 import IconRetreats from "@/public/icons/activities/retreats.svg";
 import IconYoga from "@/public/icons/activities/yoga.svg";
 
-import { sandrinePortrait, sandrineTagline } from "./sandrinePortrait";
+import { sandrinePortrait } from "./sandrinePortrait";
 
 const offers = [
   { Icon: IconMeditation, text: "Méditation · pleine conscience" },
-  { Icon: IconYoga, text: "Yoga en présentiel ou en ligne" },
+  { Icon: IconYoga, text: "Yoga" },
   { Icon: IconRetreats, text: "Stages et retraites" },
 ] as const;
 
@@ -44,21 +44,25 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
       </div>
 
       <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          <h2 className="font-display text-title-color-800 text-4xl leading-tight font-medium md:text-5xl">
-            Bonjour, je suis{" "}
-            <span className="text-title-color-600 italic">Sandrine</span>
-          </h2>
-          <p className="font-display text-title-color-600 text-xl italic">
-            {sandrineTagline}
+        <h2 className="font-display text-title-color-800 text-4xl leading-tight font-medium md:text-5xl">
+          Bonjour et{" "}
+          <span className="text-title-color-600 italic">Bienvenue</span>
+        </h2>
+
+        <div className="flex flex-col gap-4 text-lg leading-8 text-neutral-700">
+          <p>
+            J&rsquo;ai à cœur de transmettre la méditation et le yoga et être
+            témoin de la puissance transformatrice de ces pratiques. Je suis
+            touchée de voir les personnes goûter à la possibilité de se relier à
+            elles-mêmes, aux autres, à la vie, de façon plus lucide et plus
+            ouverte. De vivre pleinement la vie telle qu&rsquo;elle nous est
+            offerte.
+          </p>
+          <p>
+            Pour celles et ceux que je n&rsquo;ai pas encore eu le plaisir de
+            rencontrer, je vous invite à découvrir mon univers.
           </p>
         </div>
-
-        <p className="text-lg leading-8 text-neutral-700">
-          J&apos;enseigne le yoga et la pleine conscience depuis de nombreuses
-          années. Pour celles et ceux que je n&apos;ai pas encore eu le plaisir
-          de rencontrer, voici quelques pas de mon chemin.
-        </p>
 
         <ul className="flex flex-wrap gap-2">
           {offers.map(({ Icon, text }) => (
@@ -82,10 +86,16 @@ export const AboutCard: FC<{ className?: string }> = (props) => {
           >
             &ldquo;
           </span>
-          <blockquote className="font-display text-title-color-700 text-xl leading-snug italic">
-            Un nuage ne meurt jamais. Pour qu&apos;une larme soit éternelle, il
-            suffit de la déposer dans une rivière.
-          </blockquote>
+          <div className="flex flex-col gap-2">
+            <blockquote className="font-display text-title-color-700 text-xl leading-snug italic">
+              Notre devoir le plus impérieux est peut-être de ne jamais lâcher
+              le fil de la Merveille. Grâce à lui, je sortirai vivante du plus
+              sombre des labyrinthes.
+            </blockquote>
+            <figcaption className="text-title-color-600 text-sm">
+              Christiane Singer
+            </figcaption>
+          </div>
         </figure>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">

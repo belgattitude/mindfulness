@@ -6,6 +6,6 @@ export const sandrinePortrait = {
   objectPosition: "object-[65%_30%]",
 } as const;
 
-/** Shown under the name, on the home page card and on the about page */
+/** Shown under the name on the about page, when its summary is empty */
 export const sandrineTagline =
-  "Pleine conscience et yoga, teintée de nature et sa profondeur.";
+  "Animée par la joie de partager ces pratiques transformatrices";
