@@ -34,7 +34,10 @@ export const ShareButton: FC<Props> = (props) => {
 
   const share = async () => {
     const url = window.location.href;
-    if (typeof navigator.share === "function") {
+    // Desktop share sheets (macOS) also have navigator.share, but their
+    // "Copy" action copies the text along with the url: copy the link instead.
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouchDevice && typeof navigator.share === "function") {
       try {
         await navigator.share({ title, text, url });
       } catch {
