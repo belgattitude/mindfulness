@@ -86,7 +86,7 @@ export const MainFooter: FC<Props> = (props) => {
             </Link>
             <p className="max-w-xs leading-relaxed">
               Méditation, yoga et dialogue conscient. En personne et en ligne,
-              en France et en Belgique.
+              en Belgique et en France.
             </p>
             <div className="flex items-center gap-3">
               <Link

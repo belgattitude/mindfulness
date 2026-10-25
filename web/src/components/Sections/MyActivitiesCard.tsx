@@ -75,7 +75,7 @@ export const MyActivitiesCard: FC<Props> = (props) => {
           Mes activités
         </h2>
         <p className="text-sm text-neutral-600">
-          En personne et en ligne · France / Belgique · Particuliers /
+          En personne et en ligne · Belgique / France · Particuliers /
           Organisations
         </p>
       </div>
