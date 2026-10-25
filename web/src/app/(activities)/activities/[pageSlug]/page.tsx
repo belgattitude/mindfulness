@@ -53,7 +53,7 @@ const ActivityRoute = async (props: Props) => {
   }
 
   return (
-    <div className="mt-5 flex flex-1 lg:mt-1 xl:mt-0">
+    <div className="flex flex-1">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <CustomPage params={pageParams} now={dayjs().toISOString()} />
       </HydrationBoundary>

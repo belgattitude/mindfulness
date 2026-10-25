@@ -13,9 +13,10 @@ export const MainNavHeader: FC<Props> = (props) => {
     <div
       data-test-id="main-nav-header"
       className={cn(
-        // The light is attached to the logo, not to the center of the bar:
-        // it follows it, left on mobile and centered from md
-        "bg-brand-color-400 relative isolate overflow-hidden font-light",
+        // On mobile the bar is too slim for a round light (cut off at the
+        // bottom edge): a wash fading from the logo to the burger instead
+        "bg-brand-color-400 from-brand-color-50/80 bg-linear-to-r to-transparent to-70% md:bg-none",
+        "relative isolate overflow-hidden font-light",
         // A slim bar on mobile (room on the right for the fixed burger),
         // the centered logo and name from md
         "flex items-center px-4 py-3 pr-18 md:justify-center md:p-10",
@@ -28,7 +29,8 @@ export const MainNavHeader: FC<Props> = (props) => {
       >
         <span
           aria-hidden="true"
-          className="from-brand-color-50 pointer-events-none absolute top-1/2 left-1/2 -z-10 size-72 -translate-1/2 bg-radial to-transparent to-70% md:size-[44rem]"
+          // The light follows the logo, centered from md
+          className="from-brand-color-50 pointer-events-none absolute top-1/2 left-1/2 -z-10 hidden size-72 -translate-1/2 bg-radial to-transparent to-70% md:block md:size-[44rem]"
         />
         <MainLogo
           preload={true}
